@@ -25,3 +25,10 @@
 \BOOKMARK [1][-]{section.4.3}{-Leaping Method}{chapter.4}% 25
 \BOOKMARK [2][-]{subsection.4.3.1}{Choosing tau - Leap selection section}{section.4.3}% 26
 \BOOKMARK [1][-]{section.4.4}{Chemical Langevin Method}{chapter.4}% 27
+\BOOKMARK [0][-]{chapter.5}{Deterministic simulations}{}% 28
+\BOOKMARK [1][-]{section.5.1}{Deterministic approximation}{chapter.5}% 29
+\BOOKMARK [1][-]{section.5.2}{Numerical solution of ODEs}{chapter.5}% 30
+\BOOKMARK [2][-]{subsection.5.2.1}{Euler's method}{section.5.2}% 31
+\BOOKMARK [2][-]{subsection.5.2.2}{RUNGE-KUTTA Method}{section.5.2}% 32
+\BOOKMARK [2][-]{subsection.5.2.3}{Midpoint method}{section.5.2}% 33
+\BOOKMARK [2][-]{subsection.5.2.4}{Adaptive methods - Runge-Kutta-Fehlberg}{section.5.2}% 34
