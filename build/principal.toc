@@ -1,1 +1,34 @@
-\babel@toc {english}{}\relax 
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Introduction}{2}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}General introduction}{2}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Network modeling}{3}{section.1.2}% 
+\contentsline {subsubsection}{\numberline {1.2.0.1}Logic models}{3}{subsubsection.1.2.0.1}% 
+\contentsline {subsubsection}{\numberline {1.2.0.2}Petri nets}{3}{subsubsection.1.2.0.2}% 
+\contentsline {subsection}{\numberline {1.2.1}Rewriting systems}{5}{subsection.1.2.1}% 
+\contentsline {subsubsection}{\numberline {1.2.1.1}P systems}{5}{subsubsection.1.2.1.1}% 
+\contentsline {subsubsection}{\numberline {1.2.1.2}MP systems}{5}{subsubsection.1.2.1.2}% 
+\contentsline {subsection}{\numberline {1.2.2}Equation-based approach}{5}{subsection.1.2.2}% 
+\contentsline {subsubsection}{\numberline {1.2.2.1}ODE systems}{5}{subsubsection.1.2.2.1}% 
+\contentsline {subsection}{\numberline {1.2.3}Simulation algorithms}{5}{subsection.1.2.3}% 
+\contentsline {chapter}{\numberline {2}Stochastic Chemical Kinetics}{7}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Rewriting biochemical reactions}{7}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}Reaction propensity}{9}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}Grand probability function}{9}{subsection.2.2.1}% 
+\contentsline {subsection}{\numberline {2.2.2}CME}{10}{subsection.2.2.2}% 
+\contentsline {section}{\numberline {2.3}Stochastic simulation}{10}{section.2.3}% 
+\contentsline {subsection}{\numberline {2.3.1}Probability density function}{10}{subsection.2.3.1}% 
+\contentsline {chapter}{\numberline {3}Implementation of the Stochastic Simulation Algorithms}{12}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}Non-deterministic vs stochastic}{12}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}Exact stochastic simulation algorithms}{12}{section.3.2}% 
+\contentsline {subsection}{\numberline {3.2.1}Enhanced Direct Method}{16}{subsection.3.2.1}% 
+\contentsline {section}{\numberline {3.3}First Reaction Method (FRM)}{16}{section.3.3}% 
+\contentsline {section}{\numberline {3.4}First Family Method}{17}{section.3.4}% 
+\contentsline {section}{\numberline {3.5}Next Reaction Method}{18}{section.3.5}% 
+\contentsline {section}{\numberline {3.6}RSSA}{18}{section.3.6}% 
+\contentsline {chapter}{\numberline {4}Approximation algorithms}{20}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}\textbf {Probability-Weighted Dynamic Monte Carlo Method}}{20}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}Bounded Acceptance Probability RSSA}{22}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}$\tau $-Leaping Method}{22}{section.4.3}% 
+\contentsline {subsection}{\numberline {4.3.1}Choosing tau - Leap selection section}{23}{subsection.4.3.1}% 
+\contentsline {subsubsection}{\numberline {4.3.1.1}\textbf {Postleap $\tau $ Selection}}{23}{subsubsection.4.3.1.1}% 
+\contentsline {section}{\numberline {4.4}\textbf {Chemical Langevin Method}}{23}{section.4.4}% 
