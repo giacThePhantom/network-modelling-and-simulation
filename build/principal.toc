@@ -39,3 +39,7 @@
 \contentsline {subsection}{\numberline {5.2.2}RUNGE-KUTTA Method}{29}{subsection.5.2.2}% 
 \contentsline {subsection}{\numberline {5.2.3}Midpoint method}{30}{subsection.5.2.3}% 
 \contentsline {subsection}{\numberline {5.2.4}Adaptive methods - Runge-Kutta-Fehlberg}{30}{subsection.5.2.4}% 
+\contentsline {chapter}{\numberline {6}Hybrid simulation approaches}{32}{chapter.6}% 
+\contentsline {section}{\numberline {6.1}Reaction-Based System Partitioning}{34}{section.6.1}% 
+\contentsline {section}{\numberline {6.2}HRSSA}{35}{section.6.2}% 
+\contentsline {subsubsection}{\numberline {6.2.0.1}HSimulator}{36}{subsubsection.6.2.0.1}% 
