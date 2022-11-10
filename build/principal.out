@@ -32,3 +32,6 @@
 \BOOKMARK [2][-]{subsection.5.2.2}{RUNGE-KUTTA Method}{section.5.2}% 32
 \BOOKMARK [2][-]{subsection.5.2.3}{Midpoint method}{section.5.2}% 33
 \BOOKMARK [2][-]{subsection.5.2.4}{Adaptive methods - Runge-Kutta-Fehlberg}{section.5.2}% 34
+\BOOKMARK [0][-]{chapter.6}{Hybrid simulation approaches}{}% 35
+\BOOKMARK [1][-]{section.6.1}{Reaction-Based System Partitioning}{chapter.6}% 36
+\BOOKMARK [1][-]{section.6.2}{HRSSA}{chapter.6}% 37
