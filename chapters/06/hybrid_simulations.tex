@@ -1,4 +1,4 @@
-\graphicspath{{chapters/06/images}}
+\graphicspath{{chapters/06/images/}}
 \chapter{Hybrid simulation approaches}
 Hybrid simulation combines the advantages of complementary simulation approaches: a system is partitioned into subsystems that are simulated with different methods.
 Sometimes we need to make a consistent choice for the complete model, but often (especially in biology) the model can incorporate many different situations.
@@ -21,7 +21,9 @@ In this scheme we are trying to map the algorithms that we have already seen tog
 Keep in mind that the availability of species can change along the trajectory.
 It is particularly difficult to make a consistent choice, therefore the hybrid setting is generally preferable in this case.
 
+\begin{figure}
 \includegraphics{regions.png}
+\end{figure}
 
 We need to partition the set of chemical reactions in subgroups in which we find consistent properties.
 Once the groups are established, we should be able to simulate the system in different settings.

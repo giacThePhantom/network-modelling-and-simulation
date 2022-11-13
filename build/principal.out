@@ -1,40 +1,57 @@
-\BOOKMARK [0][-]{chapter.1}{\376\377\000I\000n\000t\000r\000o\000d\000u\000c\000t\000i\000o\000n}{}% 1
-\BOOKMARK [1][-]{section.1.1}{\376\377\000G\000e\000n\000e\000r\000a\000l\000\040\000i\000n\000t\000r\000o\000d\000u\000c\000t\000i\000o\000n}{chapter.1}% 2
-\BOOKMARK [1][-]{section.1.2}{\376\377\000N\000e\000t\000w\000o\000r\000k\000\040\000m\000o\000d\000e\000l\000i\000n\000g}{chapter.1}% 3
-\BOOKMARK [2][-]{subsection.1.2.1}{\376\377\000L\000o\000g\000i\000c\000\040\000m\000o\000d\000e\000l\000s}{section.1.2}% 4
-\BOOKMARK [2][-]{subsection.1.2.2}{\376\377\000P\000e\000t\000r\000i\000\040\000n\000e\000t\000s}{section.1.2}% 5
-\BOOKMARK [2][-]{subsection.1.2.3}{\376\377\000R\000e\000w\000r\000i\000t\000i\000n\000g\000\040\000s\000y\000s\000t\000e\000m\000s}{section.1.2}% 6
-\BOOKMARK [2][-]{subsection.1.2.4}{\376\377\000E\000q\000u\000a\000t\000i\000o\000n\000-\000b\000a\000s\000e\000d\000\040\000a\000p\000p\000r\000o\000a\000c\000h}{section.1.2}% 7
-\BOOKMARK [2][-]{subsection.1.2.5}{\376\377\000S\000i\000m\000u\000l\000a\000t\000i\000o\000n\000\040\000a\000l\000g\000o\000r\000i\000t\000h\000m\000s}{section.1.2}% 8
-\BOOKMARK [0][-]{chapter.2}{\376\377\000S\000t\000o\000c\000h\000a\000s\000t\000i\000c\000\040\000C\000h\000e\000m\000i\000c\000a\000l\000\040\000K\000i\000n\000e\000t\000i\000c\000s}{}% 9
-\BOOKMARK [1][-]{section.2.1}{\376\377\000R\000e\000w\000r\000i\000t\000i\000n\000g\000\040\000b\000i\000o\000c\000h\000e\000m\000i\000c\000a\000l\000\040\000r\000e\000a\000c\000t\000i\000o\000n\000s}{chapter.2}% 10
-\BOOKMARK [1][-]{section.2.2}{\376\377\000R\000e\000a\000c\000t\000i\000o\000n\000\040\000p\000r\000o\000p\000e\000n\000s\000i\000t\000y}{chapter.2}% 11
-\BOOKMARK [1][-]{section.2.3}{\376\377\000C\000h\000e\000m\000i\000c\000a\000l\000\040\000M\000a\000s\000t\000e\000r\000\040\000E\000q\000u\000a\000t\000i\000o\000n}{chapter.2}% 12
-\BOOKMARK [2][-]{subsection.2.3.1}{\376\377\000G\000r\000a\000n\000d\000\040\000p\000r\000o\000b\000a\000b\000i\000l\000i\000t\000y\000\040\000f\000u\000n\000c\000t\000i\000o\000n}{section.2.3}% 13
-\BOOKMARK [2][-]{subsection.2.3.2}{\376\377\000C\000M\000E}{section.2.3}% 14
-\BOOKMARK [1][-]{section.2.4}{\376\377\000S\000t\000o\000c\000h\000a\000s\000t\000i\000c\000\040\000s\000i\000m\000u\000l\000a\000t\000i\000o\000n}{chapter.2}% 15
-\BOOKMARK [2][-]{subsection.2.4.1}{\376\377\000P\000r\000o\000b\000a\000b\000i\000l\000i\000t\000y\000\040\000d\000e\000n\000s\000i\000t\000y\000\040\000f\000u\000n\000c\000t\000i\000o\000n}{section.2.4}% 16
-\BOOKMARK [0][-]{chapter.3}{\376\377\000I\000m\000p\000l\000e\000m\000e\000n\000t\000a\000t\000i\000o\000n\000\040\000o\000f\000\040\000t\000h\000e\000\040\000S\000t\000o\000c\000h\000a\000s\000t\000i\000c\000\040\000S\000i\000m\000u\000l\000a\000t\000i\000o\000n\000\040\000A\000l\000g\000o\000r\000i\000t\000h\000m\000s}{}% 17
-\BOOKMARK [1][-]{section.3.1}{\376\377\000N\000o\000n\000-\000d\000e\000t\000e\000r\000m\000i\000n\000i\000s\000t\000i\000c\000\040\000v\000s\000\040\000s\000t\000o\000c\000h\000a\000s\000t\000i\000c}{chapter.3}% 18
-\BOOKMARK [1][-]{section.3.2}{\376\377\000E\000x\000a\000c\000t\000\040\000s\000t\000o\000c\000h\000a\000s\000t\000i\000c\000\040\000s\000i\000m\000u\000l\000a\000t\000i\000o\000n\000\040\000a\000l\000g\000o\000r\000i\000t\000h\000m\000s}{chapter.3}% 19
-\BOOKMARK [2][-]{subsection.3.2.1}{\376\377\000E\000n\000h\000a\000n\000c\000e\000d\000\040\000D\000i\000r\000e\000c\000t\000\040\000M\000e\000t\000h\000o\000d}{section.3.2}% 20
-\BOOKMARK [1][-]{section.3.3}{\376\377\000F\000i\000r\000s\000t\000\040\000R\000e\000a\000c\000t\000i\000o\000n\000\040\000M\000e\000t\000h\000o\000d\000\040\000\050\000F\000R\000M\000\051}{chapter.3}% 21
-\BOOKMARK [1][-]{section.3.4}{\376\377\000F\000i\000r\000s\000t\000\040\000F\000a\000m\000i\000l\000y\000\040\000M\000e\000t\000h\000o\000d}{chapter.3}% 22
-\BOOKMARK [1][-]{section.3.5}{\376\377\000N\000e\000x\000t\000\040\000R\000e\000a\000c\000t\000i\000o\000n\000\040\000M\000e\000t\000h\000o\000d}{chapter.3}% 23
-\BOOKMARK [1][-]{section.3.6}{\376\377\000R\000S\000S\000A}{chapter.3}% 24
-\BOOKMARK [0][-]{chapter.4}{\376\377\000A\000p\000p\000r\000o\000x\000i\000m\000a\000t\000i\000o\000n\000\040\000a\000l\000g\000o\000r\000i\000t\000h\000m\000s}{}% 25
-\BOOKMARK [1][-]{section.4.1}{\376\377\000P\000r\000o\000b\000a\000b\000i\000l\000i\000t\000y\000-\000W\000e\000i\000g\000h\000t\000e\000d\000\040\000D\000y\000n\000a\000m\000i\000c\000\040\000M\000o\000n\000t\000e\000\040\000C\000a\000r\000l\000o\000\040\000M\000e\000t\000h\000o\000d}{chapter.4}% 26
-\BOOKMARK [1][-]{section.4.2}{\376\377\000B\000o\000u\000n\000d\000e\000d\000\040\000A\000c\000c\000e\000p\000t\000a\000n\000c\000e\000\040\000P\000r\000o\000b\000a\000b\000i\000l\000i\000t\000y\000\040\000R\000S\000S\000A}{chapter.4}% 27
-\BOOKMARK [1][-]{section.4.3}{\376\377\000-\000L\000e\000a\000p\000i\000n\000g\000\040\000M\000e\000t\000h\000o\000d}{chapter.4}% 28
-\BOOKMARK [2][-]{subsection.4.3.1}{\376\377\000C\000h\000o\000o\000s\000i\000n\000g\000\040\000t\000a\000u\000\040\000-\000\040\000L\000e\000a\000p\000\040\000s\000e\000l\000e\000c\000t\000i\000o\000n\000\040\000s\000e\000c\000t\000i\000o\000n}{section.4.3}% 29
-\BOOKMARK [1][-]{section.4.4}{\376\377\000C\000h\000e\000m\000i\000c\000a\000l\000\040\000L\000a\000n\000g\000e\000v\000i\000n\000\040\000M\000e\000t\000h\000o\000d}{chapter.4}% 30
-\BOOKMARK [0][-]{chapter.5}{\376\377\000D\000e\000t\000e\000r\000m\000i\000n\000i\000s\000t\000i\000c\000\040\000s\000i\000m\000u\000l\000a\000t\000i\000o\000n\000s}{}% 31
-\BOOKMARK [1][-]{section.5.1}{\376\377\000D\000e\000t\000e\000r\000m\000i\000n\000i\000s\000t\000i\000c\000\040\000a\000p\000p\000r\000o\000x\000i\000m\000a\000t\000i\000o\000n}{chapter.5}% 32
-\BOOKMARK [1][-]{section.5.2}{\376\377\000N\000u\000m\000e\000r\000i\000c\000a\000l\000\040\000s\000o\000l\000u\000t\000i\000o\000n\000\040\000o\000f\000\040\000O\000D\000E\000s}{chapter.5}% 33
-\BOOKMARK [2][-]{subsection.5.2.1}{\376\377\000E\000u\000l\000e\000r\000'\000s\000\040\000m\000e\000t\000h\000o\000d}{section.5.2}% 34
-\BOOKMARK [2][-]{subsection.5.2.2}{\376\377\000R\000U\000N\000G\000E\000-\000K\000U\000T\000T\000A\000\040\000M\000e\000t\000h\000o\000d}{section.5.2}% 35
-\BOOKMARK [2][-]{subsection.5.2.3}{\376\377\000M\000i\000d\000p\000o\000i\000n\000t\000\040\000m\000e\000t\000h\000o\000d}{section.5.2}% 36
-\BOOKMARK [2][-]{subsection.5.2.4}{\376\377\000A\000d\000a\000p\000t\000i\000v\000e\000\040\000m\000e\000t\000h\000o\000d\000s\000\040\000-\000\040\000R\000u\000n\000g\000e\000-\000K\000u\000t\000t\000a\000-\000F\000e\000h\000l\000b\000e\000r\000g}{section.5.2}% 37
-\BOOKMARK [0][-]{chapter.6}{\376\377\000H\000y\000b\000r\000i\000d\000\040\000s\000i\000m\000u\000l\000a\000t\000i\000o\000n\000\040\000a\000p\000p\000r\000o\000a\000c\000h\000e\000s}{}% 38
-\BOOKMARK [1][-]{section.6.1}{\376\377\000R\000e\000a\000c\000t\000i\000o\000n\000-\000B\000a\000s\000e\000d\000\040\000S\000y\000s\000t\000e\000m\000\040\000P\000a\000r\000t\000i\000t\000i\000o\000n\000i\000n\000g}{chapter.6}% 39
-\BOOKMARK [1][-]{section.6.2}{\376\377\000H\000R\000S\000S\000A}{chapter.6}% 40
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{General introduction}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Network modeling}{chapter.1}% 3
+\BOOKMARK [2][-]{subsection.1.2.1}{Logic models}{section.1.2}% 4
+\BOOKMARK [2][-]{subsection.1.2.2}{Petri nets}{section.1.2}% 5
+\BOOKMARK [2][-]{subsection.1.2.3}{Rewriting systems}{section.1.2}% 6
+\BOOKMARK [2][-]{subsection.1.2.4}{Equation-based approach}{section.1.2}% 7
+\BOOKMARK [2][-]{subsection.1.2.5}{Simulation algorithms}{section.1.2}% 8
+\BOOKMARK [0][-]{chapter.2}{Stochastic Chemical Kinetics}{}% 9
+\BOOKMARK [1][-]{section.2.1}{Rewriting biochemical reactions}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.2}{Reaction propensity}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.3}{Chemical Master Equation}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.3.1}{Grand probability function}{section.2.3}% 13
+\BOOKMARK [2][-]{subsection.2.3.2}{CME}{section.2.3}% 14
+\BOOKMARK [1][-]{section.2.4}{Stochastic simulation}{chapter.2}% 15
+\BOOKMARK [2][-]{subsection.2.4.1}{Probability density function}{section.2.4}% 16
+\BOOKMARK [0][-]{chapter.3}{Implementation of the Stochastic Simulation Algorithms}{}% 17
+\BOOKMARK [1][-]{section.3.1}{Non-deterministic vs stochastic}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.2}{Exact stochastic simulation algorithms}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.2.1}{Enhanced Direct Method}{section.3.2}% 20
+\BOOKMARK [1][-]{section.3.3}{First Reaction Method \(FRM\)}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.4}{First Family Method}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.5}{Next Reaction Method}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.6}{RSSA}{chapter.3}% 24
+\BOOKMARK [0][-]{chapter.4}{Approximation algorithms}{}% 25
+\BOOKMARK [1][-]{section.4.1}{Probability-Weighted Dynamic Monte Carlo Method}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.2}{Bounded Acceptance Probability RSSA}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.3}{-Leaping Method}{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.3.1}{Choosing tau - Leap selection section}{section.4.3}% 29
+\BOOKMARK [1][-]{section.4.4}{Chemical Langevin Method}{chapter.4}% 30
+\BOOKMARK [0][-]{chapter.5}{Deterministic simulations}{}% 31
+\BOOKMARK [1][-]{section.5.1}{Deterministic approximation}{chapter.5}% 32
+\BOOKMARK [1][-]{section.5.2}{Numerical solution of ODEs}{chapter.5}% 33
+\BOOKMARK [2][-]{subsection.5.2.1}{Euler's method}{section.5.2}% 34
+\BOOKMARK [2][-]{subsection.5.2.2}{RUNGE-KUTTA Method}{section.5.2}% 35
+\BOOKMARK [2][-]{subsection.5.2.3}{Midpoint method}{section.5.2}% 36
+\BOOKMARK [2][-]{subsection.5.2.4}{Adaptive methods - Runge-Kutta-Fehlberg}{section.5.2}% 37
+\BOOKMARK [0][-]{chapter.6}{Hybrid simulation approaches}{}% 38
+\BOOKMARK [1][-]{section.6.1}{Reaction-Based System Partitioning}{chapter.6}% 39
+\BOOKMARK [1][-]{section.6.2}{HRSSA}{chapter.6}% 40
+\BOOKMARK [0][-]{chapter.7}{Reali}{}% 41
+\BOOKMARK [1][-]{section.7.1}{Introduction}{chapter.7}% 42
+\BOOKMARK [2][-]{subsection.7.1.1}{Definition of a system}{section.7.1}% 43
+\BOOKMARK [2][-]{subsection.7.1.2}{Determinism, nondeterminism, or stochasticity?}{section.7.1}% 44
+\BOOKMARK [2][-]{subsection.7.1.3}{Computational complexity}{section.7.1}% 45
+\BOOKMARK [2][-]{subsection.7.1.4}{Definition of a model}{section.7.1}% 46
+\BOOKMARK [2][-]{subsection.7.1.5}{Checking the validity of a model}{section.7.1}% 47
+\BOOKMARK [2][-]{subsection.7.1.6}{How to build a model}{section.7.1}% 48
+\BOOKMARK [1][-]{section.7.2}{Optimization problem}{chapter.7}% 49
+\BOOKMARK [2][-]{subsection.7.2.1}{General definition of an optimization problem}{section.7.2}% 50
+\BOOKMARK [2][-]{subsection.7.2.2}{Definition of a minimum}{section.7.2}% 51
+\BOOKMARK [1][-]{section.7.3}{Gradient methods}{chapter.7}% 52
+\BOOKMARK [2][-]{subsection.7.3.1}{Lagrangian Multipliers Theorem}{section.7.3}% 53
+\BOOKMARK [2][-]{subsection.7.3.2}{Definition of a gradient}{section.7.3}% 54
+\BOOKMARK [2][-]{subsection.7.3.3}{Limitations of gradient descent methods}{section.7.3}% 55
+\BOOKMARK [2][-]{subsection.7.3.4}{Discussion}{section.7.3}% 56
+\BOOKMARK [2][-]{subsection.7.3.5}{Gradient approximation with Taylor formula}{section.7.3}% 57
