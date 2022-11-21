@@ -62,3 +62,14 @@
 \contentsline {subsection}{\numberline {7.3.3}Limitations of gradient descent methods}{46}{subsection.7.3.3}% 
 \contentsline {subsection}{\numberline {7.3.4}Discussion}{46}{subsection.7.3.4}% 
 \contentsline {subsection}{\numberline {7.3.5}Gradient approximation with Taylor formula}{46}{subsection.7.3.5}% 
+\contentsline {subsection}{\numberline {7.3.6}Line search}{48}{subsection.7.3.6}% 
+\contentsline {subsubsection}{\numberline {7.3.6.1}Newton's direction}{48}{subsubsection.7.3.6.1}% 
+\contentsline {subsubsection}{\numberline {7.3.6.2}Line search algorithm for function minimization}{49}{subsubsection.7.3.6.2}% 
+\contentsline {subsubsection}{\numberline {7.3.6.3}Quasi Newton's direction}{49}{subsubsection.7.3.6.3}% 
+\contentsline {subsubsection}{\numberline {7.3.6.4}Steepest descent direction}{49}{subsubsection.7.3.6.4}% 
+\contentsline {subsubsection}{\numberline {7.3.6.5}Selecting $\alpha $}{49}{subsubsection.7.3.6.5}% 
+\contentsline {subsubsection}{\numberline {7.3.6.6}Convergence of a method}{50}{subsubsection.7.3.6.6}% 
+\contentsline {subsection}{\numberline {7.3.7}Trust region}{50}{subsection.7.3.7}% 
+\contentsline {subsubsection}{\numberline {7.3.7.1}Trust region steepest descent}{52}{subsubsection.7.3.7.1}% 
+\contentsline {subsubsection}{\numberline {7.3.7.2}Trust region algorithm}{53}{subsubsection.7.3.7.2}% 
+\contentsline {section}{\numberline {7.4}Least squares problems}{53}{section.7.4}% 

@@ -496,3 +496,419 @@ As we already saw, there might be points where the gradient vanishes
 which are not the final destination. Gradient methods may tend to
 overfitting, but they are effective. The main issue is that since we
 approximate the gradient, we do not trust it everywhere.
+
+Gradient methods can be applied to two different categories of problems:
+
+\begin{itemize}
+\tightlist
+\item
+  constrained
+\item
+  unconstrained
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{line search algorithm}: follow a direction
+  \item
+    \textbf{trust region:} create an ****approximation of the problem
+    and solve it in a small trustable region
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{line-search}{%
+\subsection{Line search}\label{line-search}}
+
+\hypertarget{newtons-direction}{%
+\subsubsection{Newton's direction}\label{newtons-direction}}
+
+If we consider Taylor's formula and let $x_k$ be our starting point, let
+$\alpha \in \mathbb{R}^+$ step length and $p$ our direction
+($x_k, p \in R^n$). For $n=1$, we have:
+
+$$
+f(x_k+\alpha p)=f(x_k) + \alpha p f'(x_k) + \frac{\alpha^2p^2}{2} f''(x_k) + r(p^3)
+$$
+
+For simplicity set $\alpha=1$ and truncate the formula:
+
+$$
+f(x_n+p)=f(x_n) + p f'(x_n) + \frac{p^2}{2} f''(x_n) = m_k(p)
+$$
+
+→ instead of minimizing the initial $f$, we minimize the simple
+polynomial $m_k(p)$.
+
+From this equation we can get the direction
+$p = -\frac{f'(x_k)}{f''(x_k)}$, which is called \emph{Newton direction}
+(best direction). When $n>1$,
+$p = -(\nabla^2 f(x_k))^{-1}\nabla f(x_k)$. Finding the inverse of a
+matrix is ``a pain'', not straightforward; this is why we will try to
+approximate this part.
+
+\hypertarget{line-search-algorithm-for-function-minimization}{%
+\subsubsection{Line search algorithm for function
+minimization}\label{line-search-algorithm-for-function-minimization}}
+
+Set $k=0$ and guess an initial point $x_0$ WHILE $||\nabla f(x_k)||>0$
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  compute $p_k=-(\nabla^2f(x_k))^{-1}\nabla f(x_k)$
+\item
+  select $\alpha_k$
+\item
+  update
+  $x_{k+1}=x_k+\alpha_kp_k = x_k -\alpha_k(\nabla^2f(x_k))^{-1}\nabla f(x_k)$
+\item
+  $k=k+1$
+\end{enumerate}
+
+We stop when the gradient is equal to zero, but we do not really have
+zeroes in our computers; therefore, we must apply a threshold
+$\varepsilon$.
+
+At each iteration we have some issues:
+
+\begin{itemize}
+\tightlist
+\item
+  sometimes we require approximation to compute the inverse of a matrix
+\item
+  it is computationally expensive to compute all these gradients
+\end{itemize}
+
+Nevertheless, going in this direction is smart.
+
+We can try to tackle the hardest part, i.e.~$p_k$ computation, by
+approximation.
+
+\hypertarget{quasi-newtons-direction}{%
+\subsubsection{Quasi Newton's direction}\label{quasi-newtons-direction}}
+
+To avoid the computation of $\nabla^2 f$, we build iteratively a
+different matrix $B_k$, such that
+$B_{k+1}\cdot (x_{k+1}-x_k) = \nabla f(x_{k+1})-\nabla f(x_k)$
+{[}condition for the matrix{]}
+
+We are approximating the second derivative as second of the gradient.
+Since we are already computing the gradient, we exploit it to prevent
+extra computations. The difference with respect to standard Newton
+direction is the Hessian, which is not computed here.
+
+\textbf{Quasi-Newton direction}:
+$P_{k+1}=- \alpha B_{k+1}^{-1} \nabla f(x_k+1)$
+
+\hypertarget{steepest-descent-direction}{%
+\subsubsection{Steepest descent
+direction}\label{steepest-descent-direction}}
+
+We proceed in the direction that reduces the gradient the most:
+
+$$
+p= -\alpha \frac{\nabla f}{||\nabla f||}
+$$
+
+In this case we are completely ignoring the second derivative, we only
+focus on the gradient computation. This method converges slowly with
+respect to Newton and Quasi-Newton's direction.
+
+\hypertarget{selecting-alpha}{%
+\subsubsection{\texorpdfstring{Selecting
+$\alpha$}{Selecting }}\label{selecting-alpha}}
+
+Ideally, we want to define $\alpha$ s.t.
+
+$$
+\bar{\alpha}= \arg \min_{\alpha>0} f(x_k+\alpha p)
+$$
+
+This is another optimization problem, ideal situation. To avoid solving
+the optimization, we usually consider $\alpha$ that satisfies :
+
+$$
+f(x_k+\alpha p) \leq f(x_k) + c_1\alpha \nabla f(x_n)^T p_k, c_1 \in (0,1)
+$$
+
+\textbf{Armijo condition:} the reduction should be proportional to
+$\alpha$ and $\nabla f(x_n)^T p_k$
+
+Sometimes thing fails because of parameter choice: it is crucial to
+understand why functions fails and how parameters tuning can affect the
+most crucial steps in the algorithms.
+
+\hypertarget{convergence-of-a-method}{%
+\subsubsection{Convergence of a method}\label{convergence-of-a-method}}
+
+The order of convergence of a method (for us) is a constant $\ell$, such
+that exists the limit:
+
+$$
+\lim_{k \rightarrow \infty  }\frac{||f(x_{k+1})-f(x^*)||}{||f(x_{k})-f(x^*)||^\ell} = L >0
+$$
+
+Where $x^*$ is the solution and the method converges.
+
+We compare the new iteration (numerator) to the old iteration
+(denominator); the limit should go to zero, the exponent is the speed -
+the higher the exponent $\ell$, the faster will the upper term go to
+zero with respect to the bottom one i.e.~faster convergence. The higher
+the exponent, the less iterations are required (in general). For the
+methods that we have previously seen:
+
+\begin{itemize}
+\tightlist
+\item
+  steepest descent: $\ell=1$, linear convergence
+\item
+  quasi-Newton: $\ell \in (1,2)$, superlinear convergence
+\item
+  Newton: $\ell=2$, quadratic convergence
+\end{itemize}
+
+Example: $f(x)=x^4-8x^2+4$
+
+\begin{figure}
+\centering
+\includegraphics{function.png}
+\caption{Desmos  $f(x)=x^4-8x^2+4$}
+\end{figure}
+
+$$
+x_0=3 \\ f'(x) = 4x^3-16x \Rightarrow f'(x)=0 \Rightarrow  x=0, x=\pm 2\\ f''(x)=12x^2-16
+$$
+
+Algorithm: $f'(3)=60, f''(3)=92,$
+
+Let $\alpha=1$:
+
+$$
+p_0= -\frac{60}{92}=-0.65 \\ x_1=3-0.65=2.35 \\ f'(2.35) = 14.31\\ f''(2.35) = 50.27 \\ p_1=-\frac{f'(x_1)}{f''(x_1)} = -0.28\\ x_2=x_1+\alpha p_1 = 2.35-0.28=2.07 \\ f'(x_2) = 2.30 \\ f''(x_2)=35.42\\ p_2 = -0.067
+$$
+
+Let's try the same by applying Steepest Descent method:
+
+$f'(3)=60 \\ x_1 = x_0..$
+$f'(3)=60$
+
+In this case the SDM is way faster, lucky shot. But what if we change
+the starting point? The direction will always be the same,
+i.e.~$p_1 = -1$.
+
+$$
+x_1=2.35-1=1.35\\f'(x_1)=-11.75\\x_2=1.35+1 = 2.35 
+$$
+
+We are doing ping-pong among two points!
+
+The fact that the second derivative progressively shrinks tells us that
+we need to reduce the step, but in this case we are not taking this into
+account. Of course we also have $\alpha$, we should look at Armijo
+condition and change it.
+
+Take into account that each time that we are performing operation on a
+number we lose precision.
+
+\hypertarget{trust-region}{%
+\subsection{Trust region}\label{trust-region}}
+
+{[}picture{]}
+
+Imagine that this is a cut function: our starting point x\_k is in the
+middle. The main idea of the trust region is that we do not follow a
+direction: we approximate the function with a simpler function → Taylor
+approximation. According to how big and reliable the approximation is,
+we will choose a direction.
+
+Last time we approximated the model as:
+
+$$
+m(x_p+\alpha p)=f(x_k)+\alpha p^T \nabla f(x_k)+ \frac{1}{2} \alpha^2p^T B_k p
+$$
+
+$$
+\alpha=1, m_k (p)=f_k+p^T\nabla f_k + \frac{1}{2} p^T B_k p
+$$
+
+\hypertarget{trust-region-steepest-descent}{%
+\subsubsection{Trust region steepest
+descent}\label{trust-region-steepest-descent}}
+
+Define a region such that $||p|| < \delta_k,\delta_k>0$ in which we
+solve the optimization problem (1) instead of the original. Remember
+that $B_k$ can be the Hessian or an approximation; on the other hand, we
+have said that we can also ignore it.
+
+Finding a minimum for $m_k(p)=f_k+p^T\nabla f_k$ means that we are
+looking for:
+
+$$
+\min_p m_k(p)= \min_p (f_k+p^T\nabla f_k)
+$$
+
+Remember that $f_k$ is a constant, so we want to find a direction for
+which $\min_p p^T\nabla f_k$ is minimum. We can rewrite this as:
+
+$$
+p^T\nabla f_k = ||p|| ||\nabla f_k|| \cos \theta
+$$
+
+We minimize for $p$ such that $\cos \theta = -1$ and $||p||=\delta_k$,
+where p s.t. $||p|| \leq \delta_k$ {[}radius of the trust region{]}.
+
+$$
+\min_p p^T\nabla f_k = -\delta_k || \nabla f_k ||
+$$
+
+$$
+p = - \delta_k \frac{\nabla f_k}{||\nabla f_k||}
+$$
+
+This result is exactly the equation from steepest descent. We are
+applying a condition on the region with $\delta_k$. This direction and
+the whole approach is called trust region steepest descent.
+
+We could follow the same idea by applying Newton or Quasi-Newton.
+
+To evaluate if we can really trust our region, we define the
+\textbf{\emph{actual reduction}} as:
+
+$$
+\rho_k = \frac{f(x_k)-f(x_k+p)}{m(x_k)-m(x_k+p)}
+$$
+
+By construction $m(x_k+p) \leq m(x_k)$.
+
+\begin{itemize}
+\tightlist
+\item
+  If $\rho_k < 0$ → reject $p$, we are not improving the real problem.
+  Usually take $\delta_k = \frac{1}{4} \delta_k$
+\item
+  If $\rho_k \simeq 1$ → maybe longer step
+\end{itemize}
+
+$\delta$ value can be tuned according to the needs. The approach is
+similar to RK method seen with Marchetti. Of course we have a grey area
+between 0 and 1, so we define a threshold e.g.~$\rho_k < \eta$ and
+$\rho_k > \eta$.
+
+By default, MATLAB uses a trust region algorithm. Having something
+certifying that we are doing good or bad is a great thing in
+approximation!
+
+\hypertarget{trust-region-algorithm}{%
+\subsubsection{Trust region algorithm}\label{trust-region-algorithm}}
+
+Let
+$\hat{\delta}>0, \delta_0 \in (0,\hat{\delta}), \eta \in (0,\frac{1}{4})$
+
+$k=0, \varepsilon < 0$
+
+REPEAT
+
+obtain $p_k \text{ s.t. } p_k=\arg \min_p m(x_k+p)$
+
+compute $\rho_k$
+
+IF $\rho_k < \frac{1}{4}$
+
+$\delta_{k+1}=\frac{1}{4}\delta_k$
+
+ELSEIF $(\rho_k < \frac{3}{4})$ AND $||p_k||=\delta_k$
+
+$\delta_{k+1}=\min (2\delta_k, \hat{\delta})$
+
+ELSE
+
+$\delta_{k+1}=\delta_{k}$
+
+IF $\rho_k > \eta$
+
+$x_{k+1}= x_{k}+p_{k}$
+
+ELSE
+
+$x_{k+1}= x_{k}$
+
+IF $||\nabla f(x_{k+1})||<0$
+
+BREAK
+
+We stop if the gradient is sufficiently small. Our focus is on computing
+$p_k$. We then evaluate $\rho_k$ to adjust parameters (which is simpler
+from what we have previously seen).
+
+If we apply this algorithm to the example of last lecture, it happens
+that with $x_0=235$ and steepest descent $\rho_0=0.17 < \frac{1}{4}$,
+which tells us to reduce $\delta$. The only thing that changes is $\rho$
+changes.
+
+PROBLEM:
+
+$$
+g(x,y)=x^4+y^4+xy
+$$
+
+\url{https://www.benfrederickson.com/numerical-optimization/} play with
+learning rate, explore the site.
+
+\hypertarget{least-squares-problems}{%
+\section{Least squares problems}\label{least-squares-problems}}
+
+Recall that if $m$ is the model, we quantified the distance between the
+model output and data as:
+
+$$
+m_j(t_i,(x_0,t_0), \theta) = m_{ij}(\theta) - \hat{y}_{ij}, \text{for } i,j \text{ as lesson 2 } 
+$$
+
+$r_{ij}(\theta)$ is called RESIDUAL and we shape it as a vector.
+
+$$
+J_k=J(\theta_k)[\frac{\partial r_I}{\partial\theta_i}], i=1, ...,n, I=1,...n
+$$
+
+Since the time points are given by the data, everything only depends on
+the choice of parameter theta, which is a vector of parameters. We can
+derive the residual according to theta.
+
+Our function to minimize is
+$f(\theta)=\frac{1}{2}\sum^m_{j=1}r_j^2(\theta)$
+
+It will hardly go to zero, as our observations are affected by noise: we
+just need to explain data, not noise. If we have the distance of the
+single point we can see the effect of each parameter by looking at the
+derivative. Here we have that the gradient (Jacobian) will be telling us
+the relationship among model parameters and data.
+
+$$
+\nabla f(\theta)=\sum^m_{j=1}r_j(\theta)\nabla r_j(\theta)= J(\theta)^Tr(\theta)
+$$
+
+The matrix notation is a more convenient way to express this gradient.
+While solving least squares problems we always exploit Taylor
+approximation.
+
+Hessian matrix:
+
+$$
+\nabla^2 f(\theta)=J^T(\theta)J(\theta)+ \sum^m_{j=1}r_j(\theta) \nabla^2 r_j(\theta)
+$$
+
+What's \emph{magical} of this is that we can use $J^T(\theta)J(\theta)$
+as approximation for $B(\theta)$ of our gradient.
+
+If the problem is linear, $r(\theta)=A(\theta)-y$. The objective
+function $f(\theta)=\frac{1}{2} || A\theta-y||^2$ and
+$\nabla f(\theta)=A^T(A\theta-y), \nabla^2 f(\theta)=A^TA$.
+
+If $f$ is convex
+$\Rightarrow \exists \theta^* s.t. \nabla f(\theta^*)=0 - A^TA\theta^*=A^Ty$
+
+We reach a normal equation, linear system (we know how to solve this).
+
+With general functions, this is not so straightforward; what we will do
+is approximating the problem with a solvable linear problem.

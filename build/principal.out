@@ -55,3 +55,6 @@
 \BOOKMARK [2][-]{subsection.7.3.3}{Limitations of gradient descent methods}{section.7.3}% 55
 \BOOKMARK [2][-]{subsection.7.3.4}{Discussion}{section.7.3}% 56
 \BOOKMARK [2][-]{subsection.7.3.5}{Gradient approximation with Taylor formula}{section.7.3}% 57
+\BOOKMARK [2][-]{subsection.7.3.6}{Line search}{section.7.3}% 58
+\BOOKMARK [2][-]{subsection.7.3.7}{Trust region}{section.7.3}% 59
+\BOOKMARK [1][-]{section.7.4}{Least squares problems}{chapter.7}% 60
