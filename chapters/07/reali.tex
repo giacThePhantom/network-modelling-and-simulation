@@ -912,3 +912,336 @@ We reach a normal equation, linear system (we know how to solve this).
 
 With general functions, this is not so straightforward; what we will do
 is approximating the problem with a solvable linear problem.
+
+
+When we try to quantify the distance between the model and our points we can formalize the problem as:
+
+$$
+r_i = m_i(t,\theta) - y_0 \\ f(\theta)= \frac{1}{2} \sum^m_{j=1} r_j^2 (\theta) \\ \nabla f(\theta) = J(\theta)^{T} r (\theta) \\ \nabla f(\theta) = J(\theta)^{T} J (\theta) + \sum^m_{j=1} r_j \theta \nabla^2 r_3 \theta\\
+$$
+
+Last time we already said that we will ignore the sum, for two reasons:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  it contains second order derivatives, painful to compute
+\item
+  the Newton direction is a quasi vector
+\end{enumerate}
+
+So at every iteration $k$ we solve the approximated problem
+
+$$
+J(\theta_k)^TJ(\theta_k)p=-J(\theta_k)r(\theta_k) \\ J_k^TJ_kp=-J_k^T r_k
+$$
+
+This is a linear system which we can solve. In this case, we are
+solving:
+
+$$
+f(\theta_k+p)= \frac{1}{2} ||r(\theta_k+p)||^2 \simeq \frac{1}{2} ||J_kp+r_k||^2
+$$
+
+This is what we called normal equation for a normal least squares
+problem.
+
+Under certain hypotheses the method converges quadratically!
+
+We discussed last time that Newton is quadratic convergent. Of course
+the matrix should not be singular, we need to be able to solve the
+system. We start with a problem in a special form, sum of squares.
+Thanks to this, we can rewrite the problem in a simpler way and perform
+an approximation, leading to solving a linear system at each iteration.
+This approximation guides us rapidly to a solution. We are applying
+linear search, by defining a direction and solving a new problem at each
+iteration. The biggest issue could be the non invertible matrix, but we
+can do something to circumvent the issue.
+
+\hypertarget{the-levenberg-marquardt-method}{%
+\subsection{The Levenberg-Marquardt
+method}\label{the-levenberg-marquardt-method}}
+
+At each iteration, we solve the problem:
+
+$$
+\min_{||p||\leq\delta_k} \frac{1}{2} ||J_kp-r_k||^2
+$$
+
+We can have a solution inside the trust region $\delta_k$ or on the
+border i.e.~not the minimum, but the smallest value we can reach.
+
+\begin{itemize}
+\item
+  case 1: $\beta$ is a solution and $||p||\leq\delta_k$ → DONE
+\item
+  case 2: $||p||=\delta_k$ , then $\bar{p}$ is a solution if and only if
+  $\exists \lambda > 0$:
+
+  $$
+    (J^TJ-\lambda I)=-J^Tr \\ + \lambda(\delta_k-||p||)=0
+    $$
+\end{itemize}
+
+If we can push it a bit further from zero and the problem is still
+solved, we can think of it as a solution. If we are hitting the boundary
+$\lambda(\delta_k-||p||)=0$, we want to move the matrix a bit from
+singularity. We will not use it very much, but it is a well known
+algorithm. It is one of the default MATLAB solvers. The
+Levenberg-Marquardt converges quadratically when we are close to the
+solution, while if the residuals are big it does not perform well.
+
+\hypertarget{solving-a-problem-with-bounds}{%
+\subsection{Solving a problem with
+bounds}\label{solving-a-problem-with-bounds}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  We have seen together that we can exploit the Lagrangian for the
+  equality constraint, but we can have other boundaries. There are other
+  approaches which allow us not to lose our approximation advantage. We
+  can simply do \textbf{\emph{variable transformation}} : instead of
+  changing the problem, we change the variables.
+\end{enumerate}
+
+Example: $x \rightarrow e^x, \mathbb{R} \rightarrow \mathbb{R}_0^?$
+
+{[}other example missing, cannot understand from recording{]}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Another solution could be to include the bound in the
+  \textbf{\emph{trust region}}.
+\end{enumerate}
+
+{[}drawing missing{]}
+
+\emph{Evolutionary algorithms} follow the evolution of the solution: at
+the beginning look for solutions, then add a penalty for the boundaries.
+
+\hypertarget{solving-ass-problem}{%
+\subsection{Solving ass problem}\label{solving-ass-problem}}
+
+How can we be sure that we are looking at a global minimum? We can start
+from another initial point and check whether the solution reaches the
+same minimum.
+
+From local to global → the \textbf{\emph{multi-start approach,}} t is a
+shortcut, but the best way to work.
+
+\hypertarget{gauss-newton-method}{%
+\subsection{Gauss-Newton method}\label{gauss-newton-method}}
+
+Let $N \in \mathbb{N}, \varepsilon > 0, J$ as defined before.
+
+We randomly select N vectors and use
+$\theta^1, \dots, \theta^n \in \mathbb{R}^n$
+
+For each $i=1,\dots,N$ DO
+
+REPEAT
+
+$\bar{J}=J(\theta^i)$
+
+compute $q$ s.t. $\bar{J}^i\bar{J}q=-\bar{J}r(\theta^i)$
+
+compute $\vartheta = \theta^i + q$
+
+compute $\varepsilon = ||\frac{\theta^i-\vartheta}{\theta}||$,
+\emph{relative increase}
+
+update $\theta^i = \vartheta$
+
+IF $\varepsilon<\bar{\varepsilon}$ then BREAK
+
+SAVE $\theta^i$
+
+END
+
+→ no global minimum guarantee!
+
+There are other ways to detect if a minimum is global e.g.~we try to
+divide the space in N different sectors and pick points for each one of
+them, \emph{Latin hypercube} and \emph{orthogonal sampling}. The more we
+do it, the more we acquire confidence, but we will never be sure. In
+addition, we always have to deal with noise, we do not know if the
+minimum is the best or we are overfitting.
+
+Example on MATLAB: if we take only 10 random points we can have a biased
+result. By taking a bigger sample, we should somehow achieve a fuller
+result in the region. Still, we have some holes and repeated points. Are
+there smarter ways to take random points?
+
+\hypertarget{latin-hypercube-sample}{%
+\subsection{Latin hypercube sample}\label{latin-hypercube-sample}}
+
+Get random numbers dividing the interval in m sectors. This is a 2x2
+problem and we need to reason on some aspects: if we take the square
+(0,1),(0,1) out of 100 points we will just have 3/4 there → not
+exploring it very well. If parameters are between 0.1 to 1000 we need to
+better sample.
+
+n = 20, the fewer points we get, the more we see the difference among
+the two methods.
+
+n = 200, still we have missing parts.
+
+n = 2000, thousands of iterations → if we zoom in there is still a lot
+of space
+
+The takehome message is that it is almost impossible to cover all the
+space with points. Luckily these are starting points, if they are close
+to the solution we will have the good direction. Gradient methods are
+expensive, but they are smart.
+
+\hypertarget{matlab}{%
+\subsection{MATLAB}\label{matlab}}
+
+When an optimizer stops, it gives as output the function converged to
+the solution or why it stopped. Termination criteria: gradient,
+incremental step e.g.~is our step too small?, change in x was less of
+certain tolerance, the residual was less than specific tolerance, max
+number of iterations. These conditions are added in order to avoid
+infinite function evaluation.
+
+We first need to define an enzymatic reaction as a set of ODEs. We then
+specify initial concentrations and a given set of rates. Integrate the
+model and plot the simulation results.
+
+The dots are the experimental points, lines are the output of the
+simulation. According to different starting points, we will obtain
+different results; we need to quantify how much the model is distant
+from the real data. The output of the normal simulation is a set of
+points; we can do a linear interpolation for time and values, giving how
+much is each of the simulated variables at the requested time. Once we
+have the values at the right time, we can compute the \emph{residuals}
+through the sum of squares. In some cases we can also look at weighted
+residuals and normalize them; however, zeros are problematic → our
+experimental data goes to zero, we stick to normal SSE.
+
+Our objective function takes the rate, experimental time and values,
+initial and final time. We call the solver (15s as the system is stiff,
+we require a more robust iteration) and get a vector of residuals and
+SSE.
+
+If we compute the residual with s1,s2 and s3 we can easily understand
+which is the better one (matches visual inspection of the plot).
+
+We can then optimize and find the solution with \texttt{lsqnonlin}
+e.g.~SSE1 = 33.6653, resNorm = 38, worse, we should improve initial
+conditions.
+
+{[}Recap from last time{]}
+
+\textbf{MATLAB multi-start} is a wrapper working with different
+algorithms. It will automatically parallelize the problem. It requires
+to insert starting points and tolerance. We therefore define bound,
+create problem and give initial points e.g.~lsqnonlin + objective
+function. The output contains the result of parallel lsqnonlin and
+parameters, somehow similar to what we saw before. We can reduce the
+bounds, but solution 1 is still the best. Main limitation: heavily
+depends on the number of initial points.
+
+\begin{figure}
+\centering
+\includegraphics{multistep.png}
+\caption{MATLAB multi-start lsqnonlin}
+\end{figure}
+
+MATLAB multi-start lsqnonlin
+
+Remarks:
+
+\begin{itemize}
+\tightlist
+\item
+  we did a lot of computations
+\item
+  $s_1$, the initial set of parameters, had values at different orders
+  of magnitude. We really do not know if we are doing well or not.
+\end{itemize}
+
+\hypertarget{stochastic-methods-for-parameter-estimation}{%
+\section{Stochastic methods for parameter
+estimation}\label{stochastic-methods-for-parameter-estimation}}
+
+Stochastic methods are often used when we cannot compute the gradient.
+With the same parameters, stochastic methods can produce dramatically
+different results.
+
+\begin{figure}
+\centering
+\includegraphics{stoch_LV.png}
+\caption{Lotka-Volterra stochastic simulation results. In B we witness
+preys and predators extinction, it is the output of a simulation
+performed with the same model and parameters as A.}
+\end{figure}
+
+Lotka-Volterra stochastic simulation results. In B we witness preys and
+predators extinction, it is the output of a simulation performed with
+the same model and parameters as A.
+
+Instead of following the gradient, we collect information in a manner
+resembling natural selection. Monte Carlo Methods are dated around 1949,
+the name comes from casinos (recalls concept of luck). In order to use
+MCM to do inference, Metropoli and Hastings developed a specific
+algorithm in 1970.
+
+\hypertarget{markov-chain-monte-carlo-mcmc}{%
+\subsection{Markov Chain Monte Carlo
+(MCMC)}\label{markov-chain-monte-carlo-mcmc}}
+
+MCMC is a chain of events where the current state depends on the
+previous one and on the transition probability.
+
+If $x^{(i)}$ is a random variable (stochastic process) and it takes only
+discrete values $\{x_1,\dots,x_s\}$. Let $p(x)$ be the probability
+distribution of $x$. $x^{(i)}$ is a Markov Chain if:
+
+$$
+p(x^{(i)}|x^{(i-1)},\dots,x^{(1)})=T(x^{(i)}|x^{(i-1)})
+$$
+
+Simplest case: a MC is \textbf{homogenous} if $T(x^{(i)})x^{(i-1)}=T$,
+i.e.~the transition matrix is constant.
+
+If we run MCMC long enough, they will hopefully reach a stable point.
+
+Example: 3 states and homogenous transition matrix
+
+$$
+T = \begin{bmatrix}
+0 & 1 & 0\\
+0 & 0.1 & 0.9\\ 0.6 & 0.4 & 0\\
+\end{bmatrix}
+$$
+
+\begin{figure}
+\centering
+\includegraphics{mcmc.png}
+\caption{MCMC example}
+\end{figure}
+
+MCMC example
+
+$$
+\pi_1=\begin{pmatrix}0.5 & 0.2& 0.3 \end{pmatrix}
+$$
+
+The next probability of being in the three states is given by
+
+$$
+\pi_1 \cdot T=\begin{pmatrix}0.3\cdot0.6, & 0.5+0.02+0.12,& 0.18 \end{pmatrix} = \begin{pmatrix}0.18, & 0.64,& 0.18 \end{pmatrix}
+$$
+
+If we do this enough, we will always arrive to a fixed distribution,
+called invariant distribution $\Rightarrow$ we want to build a Markov
+Chain whose invariant distribution is the distribution of our unknown
+parameters.
+
+

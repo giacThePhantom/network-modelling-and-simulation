@@ -73,3 +73,11 @@
 \contentsline {subsubsection}{\numberline {7.3.7.1}Trust region steepest descent}{52}{subsubsection.7.3.7.1}% 
 \contentsline {subsubsection}{\numberline {7.3.7.2}Trust region algorithm}{53}{subsubsection.7.3.7.2}% 
 \contentsline {section}{\numberline {7.4}Least squares problems}{53}{section.7.4}% 
+\contentsline {subsection}{\numberline {7.4.1}The Levenberg-Marquardt method}{55}{subsection.7.4.1}% 
+\contentsline {subsection}{\numberline {7.4.2}Solving a problem with bounds}{55}{subsection.7.4.2}% 
+\contentsline {subsection}{\numberline {7.4.3}Solving ass problem}{55}{subsection.7.4.3}% 
+\contentsline {subsection}{\numberline {7.4.4}Gauss-Newton method}{55}{subsection.7.4.4}% 
+\contentsline {subsection}{\numberline {7.4.5}Latin hypercube sample}{56}{subsection.7.4.5}% 
+\contentsline {subsection}{\numberline {7.4.6}MATLAB}{56}{subsection.7.4.6}% 
+\contentsline {section}{\numberline {7.5}Stochastic methods for parameter estimation}{58}{section.7.5}% 
+\contentsline {subsection}{\numberline {7.5.1}Markov Chain Monte Carlo (MCMC)}{58}{subsection.7.5.1}% 
