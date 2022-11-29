@@ -1,4 +1,4 @@
-\graphicspath{{chapters/03/images}}
+\graphicspath{{chapters/03/images/}}
 \chapter{Implementation of the Stochastic Simulation Algorithms}
 
 \section{Non-deterministic vs stochastic}
@@ -27,7 +27,7 @@ Since we are reasoning in infinitesimal time, each reaction occurs and ends exac
 
 \begin{figure}
   \centering
-  \includegraphics{tree_methods.png}
+  \includegraphics[width=\textwidth]{tree_methods.png}
   \caption{Fig 3.1 Marchetti's book}
 \end{figure}
 
@@ -41,7 +41,7 @@ Fig 3.1 Marchetti's book $a_0$ is the sum of all propensities in the system.
 
   \begin{figure}
     \centering
-    \includegraphics{boundaries.png}
+    \includegraphics[width=0.7\textwidth]{boundaries.png}
     \caption{Fig 3.2}
   \end{figure}
 
@@ -49,7 +49,7 @@ Fig 3.1 Marchetti's book $a_0$ is the sum of all propensities in the system.
   \item Generate another random number $V_2 =U(0,1)$ \item $\tau \sim Exp(a_0)$ \item $\tau = \frac{1}{a_0}ln(\frac{1}{V_2})$
 \end{enumerate}
 
-\includegraphics{direct_method.png}
+\includegraphics[width=\textwidth]{direct_method.png}
 
 This algorithm can be improved by avoiding to recompute all the propensities, taking into account the fact that many reaction will keep the same probabilities over time.
 We can work on the complexity of the for loop through a dependency graph.
@@ -76,11 +76,16 @@ We can generate M random numbers and end up with M $\tau$.
 Then we choose the reaction with minimum $\tau$, which will be the first selected one.
 $\mu= R_{\mu}\text{ st }\tau_{\mu}= \min_{j}\tau_j$
 
-\includegraphics{R_tau.png}
+ \begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{R_tau.png}
+    \caption{R Tau}
+  \end{figure}
 
-Pro: sometimes the search is quicker, simpler to parallelize Cons: we generate a lot of random numbers with respect to the direct method.
+Pro: sometimes the search is quicker, simpler to parallelize. Cons: we generate a lot of random numbers with respect to the direct method.
 After the first step, we need to recompute.
 Even here, there is the possibility to improve the algorithm e.g.~computation of the propensity.
+
 
 \section{First Family Method}
 Tries to combine the good features of the direct method with first reaction method.

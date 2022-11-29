@@ -1,0 +1,1247 @@
+\graphicspath{{chapters/07/images/}}
+\chapter{Reali}
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+The course follows the structure of the article
+\textbf{\emph{Optimization Algorithms for Computational Systems
+Biology.}}
+
+\hypertarget{definition-of-a-system}{%
+\subsection{Definition of a system}\label{definition-of-a-system}}
+
+A system is a set of integrated and interacting \emph{components} or
+\emph{entities} that form a whole with definite boundaries and
+surrounding environment. A system has a goal to achieve by performing
+one or more functions or tasks. Systems can be aggregated into a
+\textbf{\emph{hierarchy}}. A system at a given level of detail can be a
+component at a higher level of detail.
+
+\begin{itemize}
+\tightlist
+\item
+  A \textbf{\emph{complex}} (non-linear) \textbf{\emph{system}} is a
+  system that does not satisfy the principle of superposition, i.e., the
+  behavior of the system cannot be inferred from the behavior of its
+  components.
+\item
+  A \textbf{\emph{dynamical system}} is a system where fixed rules
+  define the time dependencies of the system in a geometrical space.
+  Dynamical systems have a space and time dimension because they change
+  their characteristics over time. If we pick snapshots of the system at
+  different time points, we observe different configurations of the
+  system (data).
+\end{itemize}
+
+A \textbf{\emph{configuration}} or state of the system refers to the
+current condition of the system and stores enough information to predict
+its next move. A state is characterized by the position of its
+components in a geometrical space and by the values of the attributes of
+its components (e.g., concentration or number of each elements
+involved). Systems change their state over time by changing the location
+of some of their components or changing the attributes of some of their
+components.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\emph{steady state}}: some of the attributes of the system are
+  no longer changing in the future.
+\item
+  transient state: time needed to reach the steady state.
+\end{itemize}
+
+\hypertarget{determinism-nondeterminism-or-stochasticity}{%
+\subsection{Determinism, nondeterminism, or
+stochasticity?}\label{determinism-nondeterminism-or-stochasticity}}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{\emph{Deterministic systems}} always react in the same way to
+  the same set of stimuli. These systems are completely determined by
+  the initial state and the input set. The essence of deterministic
+  systems is that each event is causally related to previous events and
+  choices are always resolved in the same way in the same context. When
+  a system generates multiple outcomes from the same input in different
+  observations, the system is \textbf{\emph{nondeterministic}} (we
+  cannot predict the output from the input).
+\item
+  \textbf{\emph{Stochasticity}} is the quality of lacking any
+  predictable order or plan and stochastic systems possess some inherent
+  randomness. It is possible to transform a nondeterministic system into
+  a stochastic one by attaching probabilities to the selection points so
+  that we turn nondeterministic choices into probabilistic choices.
+\end{itemize}
+
+\hypertarget{computational-complexity}{%
+\subsection{Computational
+complexity}\label{computational-complexity}}
+
+Complexity arises when interacting components self-organize to form
+evolving structures that exhibit a hierarchy of emergent system
+properties. An \textbf{\emph{emergent behavior}} can be originated by a
+collection of components that interact in the absence of a centralized
+point of control to produce something that has not been designed or
+programmed in the system construction or evolution. Example: internet,
+ant colonies, consciousness.\\
+\textbf{\emph{Computational complexity}} is the amount of resources,
+measured as a function of the size of the input, needed to execute an
+algorithm.
+
+\begin{itemize}
+\tightlist
+\item
+  Computational space complexity: the amount of memory needed;
+\item
+  Computational time complexity: the number of instructions to be
+  executed.
+\end{itemize}
+
+\hypertarget{definition-of-a-model}{%
+\subsection{Definition of a model}\label{definition-of-a-model}}
+
+A \emph{representation} is a set of symbols used to convey information
+and knowledge about a system. It is either physical as a cell or an
+ecosystem, or artificial as a computer network or an economic market. An
+abstraction is a representation that ignores some aspects of a system
+which are not of interest for the current investigation.
+
+A model is an abstraction of a system. A model has its own interacting
+components that are characterized by the attributes that we want to
+observe. The set of all the attributes in a model is the
+\emph{experimental frame}.
+
+\begin{itemize}
+\item
+  A \emph{dynamic model} aims at predicting the behavior of the system
+  in time/space through what if analysis. What if analysis investigates
+  how a change in some attributes affects the behavior of the modeled
+  system.
+\item
+  A \emph{computational model} is a model that can be manipulated by a
+  computer to observe properties of the corresponding system.
+
+  \begin{figure}
+  \centering
+  \includegraphics[width=0.6\textwidth]{scheme_model.png}
+  \caption{scheme\_model}
+  \end{figure}
+\end{itemize}
+
+\hypertarget{checking-the-validity-of-a-model}{%
+\subsection{Checking the validity of a
+model}\label{checking-the-validity-of-a-model}}
+
+\emph{Validity} is a fundamental property of models and witnesses the
+capacity of a model of making good predictions because the model soundly
+captures the aspects of interest. We need to assess the validity of a
+model before using it to predict the behavior of a system.
+
+Assume that $M$ is a model for the system $S$ and $\underline{M}$ is the
+modeling process. Let $s(t)$ and $m(t)$ be the state of the system and
+of the model at time $t$, and $f_s$ and $f_m$ the state transition
+functions of the system and of the model, respectively. Finally, let
+$I_s(t)$ and $O_s(t)$ be the input and output of the system at time $t$.
+Similarly, we write $I_m(t)$ and $O_m(t)$ for the model.
+
+What we expect is that going from one state to the other we have a
+function (one for the system and one for the model); in a mathematical
+model we integrate the $f_m$ function to known what happens in the
+transition of the model, but we cannot do that in the real setting (the
+transition function $f_s$ is not known) → when dealing with nature, we
+cannot validate models according to the previous definition, so we use
+I/O validity, based on known input and outputs of the system.
+
+The input and output are here generalized concepts: input can be any
+perturbation of the system or of the model and output can be any
+observable property causally related to the input.
+
+A model $M$ is valid for a system $S$ if:
+$f_m(\underline{M}(s(t_0))) = \underline{M}(f_s(s(t_0))) = m(t_1)$
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{validation.png}
+\caption{validation}
+\end{figure}
+
+I/O validity can be checked by using data sets produced by the model and
+observed and measured on the system. An issue in this comparison process
+is \emph{overfitting}:
+
+\begin{itemize}
+\tightlist
+\item
+  a model is well tuned to a specific dataset used to build the model
+\item
+  it performs poorly on other datasets
+\end{itemize}
+
+\textbf{Cross-validation}: check overfitting by testing the model on
+data sets different from the ones used to build and calibrate/train the
+model.
+
+These concepts, even if usually referred to computational models, may
+apply to general models or representations of a system.
+
+\hypertarget{how-to-build-a-model}{%
+\subsection{How to build a model}\label{how-to-build-a-model}}
+
+We need to define objectives:
+
+\begin{itemize}
+\tightlist
+\item
+  what do you want to model?
+\item
+  what do you want to investigate with the model?
+\item
+  what do you expect from the model?
+\item
+  why do you need a model?
+\end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{workflow.png}
+\caption{workflow}
+\end{figure}
+
+After defining the question and gathering data, we need to build the
+model and calibrate it, in order to check if it can recapitulate data.
+If it does not, either we are missing something or we must tune some
+parameters. Different parameters can lead to dramatic changes in
+dynamics. Example: Lotka-Volterra model with different parameter
+conditions:
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{volterra.png}
+\caption{volterra}
+\end{figure}
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\item
+  shows periodic oscillations, same amount of preys and predators
+\item
+  wider peaks and lower predator presence
+\end{enumerate}
+
+\hypertarget{optimization-problem}{%
+\section{Optimization problem}\label{optimization-problem}}
+
+In general, it is a problem in which we try to maximize or minimize
+something. What we want to optimize is a function usually called
+objective function (or cost function). The function depends on a
+variable or a vector of variables), called unknowns or parameters or
+parameter estimates. They may be subject to certain
+constraints(\textless,\textgreater,=).
+
+\hypertarget{general-definition-of-an-optimization-problem}{%
+\subsection{General definition of an optimization
+problem}\label{general-definition-of-an-optimization-problem}}
+
+$\left.\left\{\begin{array}{ll} \max _{x \in \mathbb{R}^n} f(x) & \\ c_i(x)=0 & i=\mathcal{E}\\ f_j(x) \geq 0 & j = I \end{array}\right\} \text { set of indexes }\right] \text { Constraints (equality and inequality) }$
+
+The model (for us) is a function that gives a certain interval/time,
+initial conditions and parameters, returns the variables at that time.
+(Assume deterministic description)
+
+$m: \mathbb{R} \times \mathbb{R}^{(n+1)} \times \mathbb{R}^m \rightarrow \mathbb{R}^N$
+
+where n+1 accounts for the dimension of variables and time.
+
+$$
+\left(t_1,\left(\vec{x}_0, t_0\right), \theta\right)
+\longmapsto \vec{x}_1 $$
+
+Initial conditions in Lotka-Volterra: $((20,5), 0)$. $\theta$ represents
+parameters e.g.~in Lotka-Volterra, $a,b,\beta,\alpha$.
+
+Now, assume that we have $k$ observations:
+
+$(t_i ,\vec{y}_i), i=1, \ldots k$ , where
+$t_i \in \mathbb{R}^+, \vec{y}_i \in \mathbb{R}^\ell$
+
+$y$ in theory can be a subset, $\ell<N$ : this happens a lot in complex
+systems, we may not observe all variables! For simplicity, we can assume
+$\ell=N$. Assuming that we can compute the following:
+
+$*m\left(t_1,\left(\vec{x}_0, t_0\right), \theta\right) \in \mathbb{R}^{N} =_{\text{drop initial point notation}} m(t_i,\theta)*$
+
+We can compute distance: \emph{$d_i=\vec{y}_i-m(t_i, \theta)$}
+
+We can choose any type of distance (Euclidean, max\ldots). What we do is
+calculate point-wise the distance between the model and `true' labels.
+It is quite common to use the \textbf{\emph{Euclidean distance}}:
+$*d \varepsilon =\sqrt{\sum_{i=1}^k(\vec{y}_i,-m(t_i, \theta))^2}$
+$\rightarrow d{\varepsilon}-\sqrt{\sum_{i=1}^{K} \sum_{j=1}^{N} \left(y_{ij}-m_j\left(t_i, \theta\right)\right)^2}$*
+Sometimes we need need to add weights, which multiply each component in
+the distances. We are putting together many outputs from the same model,
+so we might want to scale everything to make it more comparable.
+Furthermore, variables might be in different units of measurement,
+leading to biased results.
+
+Observations:
+
+\begin{itemize}
+\tightlist
+\item
+  we do not want to reach ``zero'' when minimizing. Indeed, if the
+  residual error $=0$, we are $100 \%$ sure that we are overfitting the
+  data.
+\item
+  we need to really understand the data to construct the model
+\item
+  we are manipulating $\theta$ in the space of the parameters, but we
+  modify the output in the space of the observations: we are connecting
+  abstract values to observations - like parameters for maximum
+  likelihood.
+\end{itemize}
+
+Weights are multiplicative factors, sometimes we might wish to
+\emph{transform} the distance.
+
+\textbf{Least squares algorithm}
+
+$d{\varepsilon}=\sqrt{\sum \sum W_{ij}\left(y_{ij}-m_j\left(t_i, \theta\right)\right)}$
+
+LECTURE 2
+
+Our problem is to minimize/maximize a function.
+
+Assume
+
+$$
+\min f(x), x \in \mathbb{R}^n
+$$
+
+\hypertarget{definition-of-a-minimum}{%
+\subsection{Definition of a minimum}\label{definition-of-a-minimum}}
+
+A point $x^*$ is called \textbf{minimum} if
+$\exists \varepsilon > 0 : \forall x : || x- x^* || < \varepsilon$
+
+$$
+\Rightarrow f(x) \geq f(x^*) \\ 
+$$
+
+{[}For the maximum $f(x) \leq f(x^*)${]}
+
+The minimum is \textbf{\emph{global}} if $\forall x \in \mathbb{R}^n$
+(or in our domain) $f(x) \geq f(x^*)$. In general it is not easy to
+determine global minimum/maximum, especially if we have a lot of
+dimensions.
+
+To find minima or maxima, we should impose $f'(x)=0$.
+
+We call a \textbf{\emph{stationary point}}, a
+$\bar{x} \text{ s.t.} f'(\bar{x})=0$.
+
+\hypertarget{gradient-methods}{%
+\section{Gradient methods}\label{gradient-methods}}
+
+When we integrate to find ODE solutions, we do not obtain a function as
+a solution, just points.
+
+In our optimization problem we do not know $f$ and $f'$(only sometimes
+we do), so we are required to use numerical approximation. The idea of
+looking at $f'$ and set $f'=0$ is still at the base of gradient methods.
+
+If the problem contains constraints, how do we solve it? In this case
+the problem is:
+
+$$\left\{\begin{array}{ll}
+\max f(x) &  \\
+g_i(x)=0, & i \in \mathcal{I} \\
+x \in \mathbb{R}^N
+\end{array}\right.$$
+
+Let $\mathcal{I}= 1,...,m$. The traditional way to solve this problem is
+to translate this system to another function. The Lagrangian function is
+used to take into account the constraints.
+
+\hypertarget{lagrangian-function}{%
+\subsubsection{Lagrangian function}\label{lagrangian-function}}
+
+We define the \textbf{\emph{Lagrangian function}} as
+$L: \mathbb{R}^n \times \mathbb{R}^m \rightarrow \mathbb{R}$ s.t.
+
+$$
+L(x)= f(x) + \lambda g(x) = f(x) + \sum_{j=1}^m \lambda_j g_j(x)
+$$
+
+\hypertarget{lagrangian-multipliers-theorem}{%
+\subsection{Lagrangian Multipliers
+Theorem}\label{lagrangian-multipliers-theorem}}
+
+If $x^*$ is a stationary point for (Lagrangian function), then
+$\exists \lambda^*$ s.t. $(x^* \lambda^*)$ is a stationary point for L. It
+is a necessary condition (not sufficient, only one direction).
+
+This is a ``bigger'' problem, from
+$\mathbb{R}^N \rightarrow \mathbb{R}^N \times \mathbb{R}^m$ . But still,
+I can search solutions using stationary points. We can generalize the
+idea to $g_i(x) \leq 0,$ constraints
+
+Remember that stationary points are not necessarily minima and maxima.
+We check whether a stationary point is a max/min through second
+derivations or evaluate the function in ``other'' points.
+
+\hypertarget{definition-of-a-gradient}{%
+\subsection{Definition of a
+gradient}\label{definition-of-a-gradient}}
+
+Let $f: \mathbb{R}^N \rightarrow \mathbb{R}$ a differentiable function,
+we call gradient of $f$
+
+$\nabla f: \mathbb{R}^N \rightarrow \mathbb{R}^N$ sit.
+$\nabla f_i=\frac{\partial}{\partial x_i} f(x)_i$ and
+$\nabla f(x) =\left[\begin{array}{c}\frac{\partial}{\partial x_1} f(x) \\ \vdots \\ \frac{y}{\partial x_N} f(x)\end{array}\right]$
+We look for points for which the derivative vanishes
+$x^* : \nabla f(x^*)=0$
+
+TRY at
+home:$f(x, y)=(1-x)^2+100\left(y-x^2\right)^2 \\ f(x, y)=-(y+47) \sin \left(\sqrt{\left.\mid \frac{x}{2}+(y+47)\right|}-\right. x \cdot \sin \left(\sqrt{\left.\mid x-(y+47\right)|}\right).$
+
+These two functions are used to test optimization algorithms. The first
+is \textbf{Rosenbrock's function,} the second the \textbf{Eggholder
+function}. Solving analytically these problems is hard.
+
+We cannot apply gradient methods for stochastic simulations, since the
+function is not continuous.
+
+\hypertarget{limitations-of-gradient-descent-methods}{%
+\subsection{Limitations of gradient descent
+methods}\label{limitations-of-gradient-descent-methods}}
+
+One of the major limitations of these algorithms is that we are focusing
+on local minima, we never know if the distance is minimum. Furthermore,
+sometimes we want to optimize more variables and it might not be optimal
+to perfectly fit the solution to both of them → trade-off.
+
+\hypertarget{discussion}{%
+\subsection{Discussion}\label{discussion}}
+
+If we have an equality constraint we are only considering the points
+meeting the boundary (red). In an inequality constraint, we consider
+everything inside the red circle (yellow area). Generally, constraints
+reduce our search space; the Lagrangian tells us that the minimum point
+with some multipliers will give a solution of the Lagrangian, which is
+one function. If we find the solutions, we do not know if they are
+solutions of the original conditions, but they are ideal candidates that
+can then be checked.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{example.png}
+\caption{Blue = function, red = constraint}
+\end{figure}
+
+Blue = function, red = constraint
+
+For performing an evaluation of the distance we should integrate the
+model, which is computationally expensive. To do one integration we must
+perform a lot of computations. Our measure of computational cost is the
+number of times we have to simulate the model (per iteration).
+
+In most cases, we do not know the gradient, therefore we should
+approximate it using the Taylor formula.
+
+\hypertarget{gradient-approximation-with-taylor-formula}{%
+\subsection{Gradient approximation with Taylor
+formula}\label{gradient-approximation-with-taylor-formula}}
+
+$(a,b) \in \mathbb{R}, x_0 \in (a,b)$
+
+Let $f_i(a,b) \rightarrow \mathbb{R}$ be differentiable $(n-1)$ times in
+$(a,b)$ and $f^{(n)}$ is continuous in $x_0$. Then let $x \in (a,b)$ ,
+we have:
+
+$$
+f(x)=f\left(x_0\right)+f^{\prime}\left(x_0\right)\left(x-x_0\right)+f''(x_0)\frac{(x-x_0)^2}{2!}+ ...+ f^{(n)}(x_0)\frac{(x-x_0)^n}{n!} + R_n(x) \text{ s.t.} \lim_{x \rightarrow x_0} \frac{R_n(x)}{(x-x_0)^n} =0 
+$$
+
+We focus on the first terms
+$f(x)=f\left(x_0\right)+f^{\prime}\left(x_0\right)\left(x-x_0\right)+R_2(x)=0 \\ f^{\prime}\left(x_0\right)=\frac{f(x)-f\left(x_0\right)}{x-x_0}+\left(\frac{R_2(x)}{\left(x-x_0\right)}-R_1(x)\right.$
+
+! sistemare, R\_1(x) può approssimare il ratio di R\_2(x)
+
+We can also use this trick for $N>1$
+
+Let $f: \mathbb{R}^N \rightarrow \mathbb{R}$ and
+$e_i=(0, \ldots, 0,1,0,\ldots,0)$
+
+Let's consider $x_1 x+\varepsilon e_i, x-\varepsilon e_i$ ; we are only
+moving along one direction.
+
+In this
+case:$f\left(x+\varepsilon e_i\right)=f(x)+\varepsilon \frac{\partial f}{\partial x_i}(x)+\frac{1}{2} \varepsilon^2 \frac{\partial^2 f}{\partial x_i{ }^2}(x)+R_3(x) \\ f\left(x-\varepsilon e_i\right)=f(x)-\varepsilon \frac{\partial f}{\partial x_i}(x)+\frac{1}{2} \varepsilon^2 \frac{\partial^2 f}{\partial x_i{ }^2}(x)+R_3(x) \\ \Rightarrow f\left(x+\varepsilon e_i\right)-f\left(x-\varepsilon e_i\right)=+2 \varepsilon \frac{\partial f}{\partial x_i}(x)+R_3(x) \\ \Rightarrow \frac{\partial f}{\partial x_i}(x)=\frac{f\left(x+\varepsilon e_i\right)-f\left(x-\varepsilon e_i\right)}{2 \varepsilon}+R_2(x)$
+
+We have computed an approximation of the first derivative with improved
+accuracy.
+
+Consider that this only applies to one derivative, we have to perform
+this at least twice → 2 function evaluation for each $i \Rightarrow 2W$.
+In order to obtain a decent gradient, we require a lot of computations,
+but they are fast (quite low number of iterations). We will see other
+methods, which are somehow more precise, but also heavier.
+
+We can always check $\Delta f=0$ or not to understand if we are done!
+
+As we already saw, there might be points where the gradient vanishes
+which are not the final destination. Gradient methods may tend to
+overfitting, but they are effective. The main issue is that since we
+approximate the gradient, we do not trust it everywhere.
+
+Gradient methods can be applied to two different categories of problems:
+
+\begin{itemize}
+\tightlist
+\item
+  constrained
+\item
+  unconstrained
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{line search algorithm}: follow a direction
+  \item
+    \textbf{trust region:} create an ****approximation of the problem
+    and solve it in a small trustable region
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{line-search}{%
+\subsection{Line search}\label{line-search}}
+
+\hypertarget{newtons-direction}{%
+\subsubsection{Newton's direction}\label{newtons-direction}}
+
+If we consider Taylor's formula and let $x_k$ be our starting point, let
+$\alpha \in \mathbb{R}^+$ step length and $p$ our direction
+($x_k, p \in R^n$). For $n=1$, we have:
+
+$$
+f(x_k+\alpha p)=f(x_k) + \alpha p f'(x_k) + \frac{\alpha^2p^2}{2} f''(x_k) + r(p^3)
+$$
+
+For simplicity set $\alpha=1$ and truncate the formula:
+
+$$
+f(x_n+p)=f(x_n) + p f'(x_n) + \frac{p^2}{2} f''(x_n) = m_k(p)
+$$
+
+→ instead of minimizing the initial $f$, we minimize the simple
+polynomial $m_k(p)$.
+
+From this equation we can get the direction
+$p = -\frac{f'(x_k)}{f''(x_k)}$, which is called \emph{Newton direction}
+(best direction). When $n>1$,
+$p = -(\nabla^2 f(x_k))^{-1}\nabla f(x_k)$. Finding the inverse of a
+matrix is ``a pain'', not straightforward; this is why we will try to
+approximate this part.
+
+\hypertarget{line-search-algorithm-for-function-minimization}{%
+\subsubsection{Line search algorithm for function
+minimization}\label{line-search-algorithm-for-function-minimization}}
+
+Set $k=0$ and guess an initial point $x_0$ WHILE $||\nabla f(x_k)||>0$
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  compute $p_k=-(\nabla^2f(x_k))^{-1}\nabla f(x_k)$
+\item
+  select $\alpha_k$
+\item
+  update
+  $x_{k+1}=x_k+\alpha_kp_k = x_k -\alpha_k(\nabla^2f(x_k))^{-1}\nabla f(x_k)$
+\item
+  $k=k+1$
+\end{enumerate}
+
+We stop when the gradient is equal to zero, but we do not really have
+zeroes in our computers; therefore, we must apply a threshold
+$\varepsilon$.
+
+At each iteration we have some issues:
+
+\begin{itemize}
+\tightlist
+\item
+  sometimes we require approximation to compute the inverse of a matrix
+\item
+  it is computationally expensive to compute all these gradients
+\end{itemize}
+
+Nevertheless, going in this direction is smart.
+
+We can try to tackle the hardest part, i.e.~$p_k$ computation, by
+approximation.
+
+\hypertarget{quasi-newtons-direction}{%
+\subsubsection{Quasi Newton's direction}\label{quasi-newtons-direction}}
+
+To avoid the computation of $\nabla^2 f$, we build iteratively a
+different matrix $B_k$, such that
+$B_{k+1}\cdot (x_{k+1}-x_k) = \nabla f(x_{k+1})-\nabla f(x_k)$
+{[}condition for the matrix{]}
+
+We are approximating the second derivative as second of the gradient.
+Since we are already computing the gradient, we exploit it to prevent
+extra computations. The difference with respect to standard Newton
+direction is the Hessian, which is not computed here.
+
+\textbf{Quasi-Newton direction}:
+$P_{k+1}=- \alpha B_{k+1}^{-1} \nabla f(x_k+1)$
+
+\hypertarget{steepest-descent-direction}{%
+\subsubsection{Steepest descent
+direction}\label{steepest-descent-direction}}
+
+We proceed in the direction that reduces the gradient the most:
+
+$$
+p= -\alpha \frac{\nabla f}{||\nabla f||}
+$$
+
+In this case we are completely ignoring the second derivative, we only
+focus on the gradient computation. This method converges slowly with
+respect to Newton and Quasi-Newton's direction.
+
+\hypertarget{selecting-alpha}{%
+\subsubsection{\texorpdfstring{Selecting
+$\alpha$}{Selecting }}\label{selecting-alpha}}
+
+Ideally, we want to define $\alpha$ s.t.
+
+$$
+\bar{\alpha}= \arg \min_{\alpha>0} f(x_k+\alpha p)
+$$
+
+This is another optimization problem, ideal situation. To avoid solving
+the optimization, we usually consider $\alpha$ that satisfies :
+
+$$
+f(x_k+\alpha p) \leq f(x_k) + c_1\alpha \nabla f(x_n)^T p_k, c_1 \in (0,1)
+$$
+
+\textbf{Armijo condition:} the reduction should be proportional to
+$\alpha$ and $\nabla f(x_n)^T p_k$
+
+Sometimes thing fails because of parameter choice: it is crucial to
+understand why functions fails and how parameters tuning can affect the
+most crucial steps in the algorithms.
+
+\hypertarget{convergence-of-a-method}{%
+\subsubsection{Convergence of a method}\label{convergence-of-a-method}}
+
+The order of convergence of a method (for us) is a constant $\ell$, such
+that exists the limit:
+
+$$
+\lim_{k \rightarrow \infty  }\frac{||f(x_{k+1})-f(x^*)||}{||f(x_{k})-f(x^*)||^\ell} = L >0
+$$
+
+Where $x^*$ is the solution and the method converges.
+
+We compare the new iteration (numerator) to the old iteration
+(denominator); the limit should go to zero, the exponent is the speed -
+the higher the exponent $\ell$, the faster will the upper term go to
+zero with respect to the bottom one i.e.~faster convergence. The higher
+the exponent, the less iterations are required (in general). For the
+methods that we have previously seen:
+
+\begin{itemize}
+\tightlist
+\item
+  steepest descent: $\ell=1$, linear convergence
+\item
+  quasi-Newton: $\ell \in (1,2)$, superlinear convergence
+\item
+  Newton: $\ell=2$, quadratic convergence
+\end{itemize}
+
+Example: $f(x)=x^4-8x^2+4$
+
+\begin{figure}
+\centering
+\includegraphics[width=0.45\textwidth]{function.png}
+\caption{Desmos  $f(x)=x^4-8x^2+4$}
+\end{figure}
+
+$$
+x_0=3 \\ f'(x) = 4x^3-16x \Rightarrow f'(x)=0 \Rightarrow  x=0, x=\pm 2\\ f''(x)=12x^2-16
+$$
+
+Algorithm: $f'(3)=60, f''(3)=92,$
+
+Let $\alpha=1$:
+
+$$
+p_0= -\frac{60}{92}=-0.65 \\ x_1=3-0.65=2.35 \\ f'(2.35) = 14.31\\ f''(2.35) = 50.27 \\ p_1=-\frac{f'(x_1)}{f''(x_1)} = -0.28\\ x_2=x_1+\alpha p_1 = 2.35-0.28=2.07 \\ f'(x_2) = 2.30 \\ f''(x_2)=35.42\\ p_2 = -0.067
+$$
+
+Let's try the same by applying Steepest Descent method:
+
+$f'(3)=60 \\ x_1 = x_0..$
+$f'(3)=60$
+
+In this case the SDM is way faster, lucky shot. But what if we change
+the starting point? The direction will always be the same,
+i.e.~$p_1 = -1$.
+
+$$
+x_1=2.35-1=1.35\\f'(x_1)=-11.75\\x_2=1.35+1 = 2.35 
+$$
+
+We are doing ping-pong among two points!
+
+The fact that the second derivative progressively shrinks tells us that
+we need to reduce the step, but in this case we are not taking this into
+account. Of course we also have $\alpha$, we should look at Armijo
+condition and change it.
+
+Take into account that each time that we are performing operation on a
+number we lose precision.
+
+\hypertarget{trust-region}{%
+\subsection{Trust region}\label{trust-region}}
+
+{[}picture{]}
+
+Imagine that this is a cut function: our starting point $x\_k$ is in the
+middle. The main idea of the trust region is that we do not follow a
+direction: we approximate the function with a simpler function → Taylor
+approximation. According to how big and reliable the approximation is,
+we will choose a direction.
+
+Last time we approximated the model as:
+
+$$
+m(x_p+\alpha p)=f(x_k)+\alpha p^T \nabla f(x_k)+ \frac{1}{2} \alpha^2p^T B_k p
+$$
+
+$$
+\alpha=1, m_k (p)=f_k+p^T\nabla f_k + \frac{1}{2} p^T B_k p
+$$
+
+\hypertarget{trust-region-steepest-descent}{%
+\subsubsection{Trust region steepest
+descent}\label{trust-region-steepest-descent}}
+
+Define a region such that $||p|| < \delta_k,\delta_k>0$ in which we
+solve the optimization problem (1) instead of the original. Remember
+that $B_k$ can be the Hessian or an approximation; on the other hand, we
+have said that we can also ignore it.
+
+Finding a minimum for $m_k(p)=f_k+p^T\nabla f_k$ means that we are
+looking for:
+
+$$
+\min_p m_k(p)= \min_p (f_k+p^T\nabla f_k)
+$$
+
+Remember that $f_k$ is a constant, so we want to find a direction for
+which $\min_p p^T\nabla f_k$ is minimum. We can rewrite this as:
+
+$$
+p^T\nabla f_k = ||p|| ||\nabla f_k|| \cos \theta
+$$
+
+We minimize for $p$ such that $\cos \theta = -1$ and $||p||=\delta_k$,
+where p s.t. $||p|| \leq \delta_k$ {[}radius of the trust region{]}.
+
+$$
+\min_p p^T\nabla f_k = -\delta_k || \nabla f_k ||
+$$
+
+$$
+p = - \delta_k \frac{\nabla f_k}{||\nabla f_k||}
+$$
+
+This result is exactly the equation from steepest descent. We are
+applying a condition on the region with $\delta_k$. This direction and
+the whole approach is called trust region steepest descent.
+
+We could follow the same idea by applying Newton or Quasi-Newton.
+
+To evaluate if we can really trust our region, we define the
+\textbf{\emph{actual reduction}} as:
+
+$$
+\rho_k = \frac{f(x_k)-f(x_k+p)}{m(x_k)-m(x_k+p)}
+$$
+
+By construction $m(x_k+p) \leq m(x_k)$.
+
+\begin{itemize}
+\tightlist
+\item
+  If $\rho_k < 0$ → reject $p$, we are not improving the real problem.
+  Usually take $\delta_k = \frac{1}{4} \delta_k$
+\item
+  If $\rho_k \simeq 1$ → maybe longer step
+\end{itemize}
+
+$\delta$ value can be tuned according to the needs. The approach is
+similar to RK method seen with Marchetti. Of course we have a grey area
+between 0 and 1, so we define a threshold e.g.~$\rho_k < \eta$ and
+$\rho_k > \eta$.
+
+By default, MATLAB uses a trust region algorithm. Having something
+certifying that we are doing good or bad is a great thing in
+approximation!
+
+\hypertarget{trust-region-algorithm}{%
+\subsubsection{Trust region algorithm}\label{trust-region-algorithm}}
+
+Let
+$\hat{\delta}>0, \delta_0 \in (0,\hat{\delta}), \eta \in (0,\frac{1}{4})$
+
+$k=0, \varepsilon < 0$
+
+REPEAT
+
+obtain $p_k \text{ s.t. } p_k=\arg \min_p m(x_k+p)$
+
+compute $\rho_k$
+
+IF $\rho_k < \frac{1}{4}$
+
+$\delta_{k+1}=\frac{1}{4}\delta_k$
+
+ELSEIF $(\rho_k < \frac{3}{4})$ AND $||p_k||=\delta_k$
+
+$\delta_{k+1}=\min (2\delta_k, \hat{\delta})$
+
+ELSE
+
+$\delta_{k+1}=\delta_{k}$
+
+IF $\rho_k > \eta$
+
+$x_{k+1}= x_{k}+p_{k}$
+
+ELSE
+
+$x_{k+1}= x_{k}$
+
+IF $||\nabla f(x_{k+1})||<0$
+
+BREAK
+
+We stop if the gradient is sufficiently small. Our focus is on computing
+$p_k$. We then evaluate $\rho_k$ to adjust parameters (which is simpler
+from what we have previously seen).
+
+If we apply this algorithm to the example of last lecture, it happens
+that with $x_0=235$ and steepest descent $\rho_0=0.17 < \frac{1}{4}$,
+which tells us to reduce $\delta$. The only thing that changes is $\rho$
+changes.
+
+PROBLEM:
+
+$$
+g(x,y)=x^4+y^4+xy
+$$
+
+\url{https://www.benfrederickson.com/numerical-optimization/} play with
+learning rate, explore the site.
+
+\hypertarget{least-squares-problems}{%
+\section{Least squares problems}\label{least-squares-problems}}
+
+Recall that if $m$ is the model, we quantified the distance between the
+model output and data as:
+
+$$
+m_j(t_i,(x_0,t_0), \theta) = m_{ij}(\theta) - \hat{y}_{ij}, \text{for } i,j \text{ as lesson 2 } 
+$$
+
+$r_{ij}(\theta)$ is called RESIDUAL and we shape it as a vector.
+
+$$
+J_k=J(\theta_k)[\frac{\partial r_I}{\partial\theta_i}], i=1, ...,n, I=1,...n
+$$
+
+Since the time points are given by the data, everything only depends on
+the choice of parameter theta, which is a vector of parameters. We can
+derive the residual according to theta.
+
+Our function to minimize is
+$f(\theta)=\frac{1}{2}\sum^m_{j=1}r_j^2(\theta)$
+
+It will hardly go to zero, as our observations are affected by noise: we
+just need to explain data, not noise. If we have the distance of the
+single point we can see the effect of each parameter by looking at the
+derivative. Here we have that the gradient (Jacobian) will be telling us
+the relationship among model parameters and data.
+
+$$
+\nabla f(\theta)=\sum^m_{j=1}r_j(\theta)\nabla r_j(\theta)= J(\theta)^Tr(\theta)
+$$
+
+The matrix notation is a more convenient way to express this gradient.
+While solving least squares problems we always exploit Taylor
+approximation.
+
+Hessian matrix:
+
+$$
+\nabla^2 f(\theta)=J^T(\theta)J(\theta)+ \sum^m_{j=1}r_j(\theta) \nabla^2 r_j(\theta)
+$$
+
+What's \emph{magical} of this is that we can use $J^T(\theta)J(\theta)$
+as approximation for $B(\theta)$ of our gradient.
+
+If the problem is linear, $r(\theta)=A(\theta)-y$. The objective
+function $f(\theta)=\frac{1}{2} || A\theta-y||^2$ and
+$\nabla f(\theta)=A^T(A\theta-y), \nabla^2 f(\theta)=A^TA$.
+
+If $f$ is convex
+$\Rightarrow \exists \theta^* s.t. \nabla f(\theta^*)=0 - A^TA\theta^*=A^Ty$
+
+We reach a normal equation, linear system (we know how to solve this).
+
+With general functions, this is not so straightforward; what we will do
+is approximating the problem with a solvable linear problem.
+
+
+When we try to quantify the distance between the model and our points we can formalize the problem as:
+
+$$
+r_i = m_i(t,\theta) - y_0 \\ f(\theta)= \frac{1}{2} \sum^m_{j=1} r_j^2 (\theta) \\ \nabla f(\theta) = J(\theta)^{T} r (\theta) \\ \nabla f(\theta) = J(\theta)^{T} J (\theta) + \sum^m_{j=1} r_j \theta \nabla^2 r_3 \theta\\
+$$
+
+Last time we already said that we will ignore the sum, for two reasons:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  it contains second order derivatives, painful to compute
+\item
+  the Newton direction is a quasi vector
+\end{enumerate}
+
+So at every iteration $k$ we solve the approximated problem
+
+$$
+J(\theta_k)^TJ(\theta_k)p=-J(\theta_k)r(\theta_k) \\ J_k^TJ_kp=-J_k^T r_k
+$$
+
+This is a linear system which we can solve. In this case, we are
+solving:
+
+$$
+f(\theta_k+p)= \frac{1}{2} ||r(\theta_k+p)||^2 \simeq \frac{1}{2} ||J_kp+r_k||^2
+$$
+
+This is what we called normal equation for a normal least squares
+problem.
+
+Under certain hypotheses the method converges quadratically!
+
+We discussed last time that Newton is quadratic convergent. Of course
+the matrix should not be singular, we need to be able to solve the
+system. We start with a problem in a special form, sum of squares.
+Thanks to this, we can rewrite the problem in a simpler way and perform
+an approximation, leading to solving a linear system at each iteration.
+This approximation guides us rapidly to a solution. We are applying
+linear search, by defining a direction and solving a new problem at each
+iteration. The biggest issue could be the non invertible matrix, but we
+can do something to circumvent the issue.
+
+\hypertarget{the-levenberg-marquardt-method}{%
+\subsection{The Levenberg-Marquardt
+method}\label{the-levenberg-marquardt-method}}
+
+At each iteration, we solve the problem:
+
+$$
+\min_{||p||\leq\delta_k} \frac{1}{2} ||J_kp-r_k||^2
+$$
+
+We can have a solution inside the trust region $\delta_k$ or on the
+border i.e.~not the minimum, but the smallest value we can reach.
+
+\begin{itemize}
+\item
+  case 1: $\beta$ is a solution and $||p||\leq\delta_k$ → DONE
+\item
+  case 2: $||p||=\delta_k$ , then $\bar{p}$ is a solution if and only if
+  $\exists \lambda > 0$:
+
+  $$
+    (J^TJ-\lambda I)=-J^Tr \\ + \lambda(\delta_k-||p||)=0
+    $$
+\end{itemize}
+
+If we can push it a bit further from zero and the problem is still
+solved, we can think of it as a solution. If we are hitting the boundary
+$\lambda(\delta_k-||p||)=0$, we want to move the matrix a bit from
+singularity. We will not use it very much, but it is a well known
+algorithm. It is one of the default MATLAB solvers. The
+Levenberg-Marquardt converges quadratically when we are close to the
+solution, while if the residuals are big it does not perform well.
+
+\hypertarget{solving-a-problem-with-bounds}{%
+\subsection{Solving a problem with
+bounds}\label{solving-a-problem-with-bounds}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  We have seen together that we can exploit the Lagrangian for the
+  equality constraint, but we can have other boundaries. There are other
+  approaches which allow us not to lose our approximation advantage. We
+  can simply do \textbf{\emph{variable transformation}} : instead of
+  changing the problem, we change the variables.
+\end{enumerate}
+
+Example: $x \rightarrow e^x, \mathbb{R} \rightarrow \mathbb{R}_0^?$
+
+{[}other example missing, cannot understand from recording{]}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Another solution could be to include the bound in the
+  \textbf{\emph{trust region}}.
+\end{enumerate}
+
+{[}drawing missing{]}
+
+\emph{Evolutionary algorithms} follow the evolution of the solution: at
+the beginning look for solutions, then add a penalty for the boundaries.
+
+\hypertarget{solving-ass-problem}{%
+\subsection{Solving ass problem}\label{solving-ass-problem}}
+
+How can we be sure that we are looking at a global minimum? We can start
+from another initial point and check whether the solution reaches the
+same minimum.
+
+From local to global → the \textbf{\emph{multi-start approach,}} t is a
+shortcut, but the best way to work.
+
+\hypertarget{gauss-newton-method}{%
+\subsection{Gauss-Newton method}\label{gauss-newton-method}}
+
+Let $N \in \mathbb{N}, \varepsilon > 0, J$ as defined before.
+
+We randomly select N vectors and use
+$\theta^1, \dots, \theta^n \in \mathbb{R}^n$
+
+For each $i=1,\dots,N$ DO
+
+REPEAT
+
+$\bar{J}=J(\theta^i)$
+
+compute $q$ s.t. $\bar{J}^i\bar{J}q=-\bar{J}r(\theta^i)$
+
+compute $\vartheta = \theta^i + q$
+
+compute $\varepsilon = ||\frac{\theta^i-\vartheta}{\theta}||$,
+\emph{relative increase}
+
+update $\theta^i = \vartheta$
+
+IF $\varepsilon<\bar{\varepsilon}$ then BREAK
+
+SAVE $\theta^i$
+
+END
+
+→ no global minimum guarantee!
+
+There are other ways to detect if a minimum is global e.g.~we try to
+divide the space in N different sectors and pick points for each one of
+them, \emph{Latin hypercube} and \emph{orthogonal sampling}. The more we
+do it, the more we acquire confidence, but we will never be sure. In
+addition, we always have to deal with noise, we do not know if the
+minimum is the best or we are overfitting.
+
+Example on MATLAB: if we take only 10 random points we can have a biased
+result. By taking a bigger sample, we should somehow achieve a fuller
+result in the region. Still, we have some holes and repeated points. Are
+there smarter ways to take random points?
+
+\hypertarget{latin-hypercube-sample}{%
+\subsection{Latin hypercube sample}\label{latin-hypercube-sample}}
+
+Get random numbers dividing the interval in m sectors. This is a 2x2
+problem and we need to reason on some aspects: if we take the square
+(0,1),(0,1) out of 100 points we will just have 3/4 there → not
+exploring it very well. If parameters are between 0.1 to 1000 we need to
+better sample.
+
+$n = 20$, the fewer points we get, the more we see the difference among
+the two methods.
+
+$n = 200$, still we have missing parts.
+
+$n = 2000$, thousands of iterations → if we zoom in there is still a lot
+of space
+
+The takehome message is that it is almost impossible to cover all the
+space with points. Luckily these are starting points, if they are close
+to the solution we will have the good direction. Gradient methods are
+expensive, but they are smart.
+
+\hypertarget{matlab}{%
+\subsection{MATLAB}\label{matlab}}
+
+When an optimizer stops, it gives as output the function converged to
+the solution or why it stopped. Termination criteria: gradient,
+incremental step e.g.~is our step too small?, change in x was less of
+certain tolerance, the residual was less than specific tolerance, max
+number of iterations. These conditions are added in order to avoid
+infinite function evaluation.
+
+We first need to define an enzymatic reaction as a set of ODEs. We then
+specify initial concentrations and a given set of rates. Integrate the
+model and plot the simulation results.
+
+The dots are the experimental points, lines are the output of the
+simulation. According to different starting points, we will obtain
+different results; we need to quantify how much the model is distant
+from the real data. The output of the normal simulation is a set of
+points; we can do a linear interpolation for time and values, giving how
+much is each of the simulated variables at the requested time. Once we
+have the values at the right time, we can compute the \emph{residuals}
+through the sum of squares. In some cases we can also look at weighted
+residuals and normalize them; however, zeros are problematic → our
+experimental data goes to zero, we stick to normal SSE.
+
+Our objective function takes the rate, experimental time and values,
+initial and final time. We call the solver (15s as the system is stiff,
+we require a more robust iteration) and get a vector of residuals and
+SSE.
+
+If we compute the residual with $s_1$,$s_2$ and $s_3$ we can easily understand
+which is the better one (matches visual inspection of the plot).
+
+We can then optimize and find the solution with \texttt{lsqnonlin}
+e.g.~$SSE1 = 33.6653$, $resNorm = 38$, worse, we should improve initial
+conditions.
+
+{[}Recap from last time{]}
+
+\textbf{MATLAB multi-start} is a wrapper working with different
+algorithms. It will automatically parallelize the problem. It requires
+to insert starting points and tolerance. We therefore define bound,
+create problem and give initial points e.g.~lsqnonlin + objective
+function. The output contains the result of parallel lsqnonlin and
+parameters, somehow similar to what we saw before. We can reduce the
+bounds, but solution 1 is still the best. Main limitation: heavily
+depends on the number of initial points.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.45\textwidth]{multistep.png}
+\caption{MATLAB multi-start lsqnonlin}
+\end{figure}
+
+MATLAB multi-start lsqnonlin
+
+Remarks:
+
+\begin{itemize}
+\tightlist
+\item
+  we did a lot of computations
+\item
+  $s_1$, the initial set of parameters, had values at different orders
+  of magnitude. We really do not know if we are doing well or not.
+\end{itemize}
+
+\hypertarget{stochastic-methods-for-parameter-estimation}{%
+\section{Stochastic methods for parameter
+estimation}\label{stochastic-methods-for-parameter-estimation}}
+
+Stochastic methods are often used when we cannot compute the gradient.
+With the same parameters, stochastic methods can produce dramatically
+different results.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{stoch_LV.png}
+\caption{Lotka-Volterra stochastic simulation results. In B we witness
+preys and predators extinction, it is the output of a simulation
+performed with the same model and parameters as A.}
+\end{figure}
+
+Lotka-Volterra stochastic simulation results. In B we witness preys and
+predators extinction, it is the output of a simulation performed with
+the same model and parameters as A.
+
+Instead of following the gradient, we collect information in a manner
+resembling natural selection. Monte Carlo Methods are dated around 1949,
+the name comes from casinos (recalls concept of luck). In order to use
+MCM to do inference, Metropoli and Hastings developed a specific
+algorithm in 1970.
+
+\hypertarget{markov-chain-monte-carlo-mcmc}{%
+\subsection{Markov Chain Monte Carlo
+(MCMC)}\label{markov-chain-monte-carlo-mcmc}}
+
+MCMC is a chain of events where the current state depends on the
+previous one and on the transition probability.
+
+If $x^{(i)}$ is a random variable (stochastic process) and it takes only
+discrete values $\{x_1,\dots,x_s\}$. Let $p(x)$ be the probability
+distribution of $x$. $x^{(i)}$ is a Markov Chain if:
+
+$$
+p(x^{(i)}|x^{(i-1)},\dots,x^{(1)})=T(x^{(i)}|x^{(i-1)})
+$$
+
+Simplest case: a MC is \textbf{homogenous} if $T(x^{(i)})x^{(i-1)}=T$,
+i.e.~the transition matrix is constant.
+
+If we run MCMC long enough, they will hopefully reach a stable point.
+
+Example: 3 states and homogenous transition matrix
+
+$$
+T = \begin{bmatrix}
+0 & 1 & 0\\
+0 & 0.1 & 0.9\\ 0.6 & 0.4 & 0\\
+\end{bmatrix}
+$$
+
+\begin{figure}
+\centering
+\includegraphics[width=0.45\textwidth]{mcmc.png}
+\caption{MCMC example}
+\end{figure}
+
+MCMC example
+
+$$
+\pi_1=\begin{pmatrix}0.5 & 0.2& 0.3 \end{pmatrix}
+$$
+
+The next probability of being in the three states is given by
+
+$$
+\pi_1 \cdot T=\begin{pmatrix}0.3\cdot0.6, & 0.5+0.02+0.12,& 0.18 \end{pmatrix} = \begin{pmatrix}0.18, & 0.64,& 0.18 \end{pmatrix}
+$$
+
+If we do this enough, we will always arrive to a fixed distribution,
+called invariant distribution $\Rightarrow$ we want to build a Markov
+Chain whose invariant distribution is the distribution of our unknown
+parameters.
+
+
