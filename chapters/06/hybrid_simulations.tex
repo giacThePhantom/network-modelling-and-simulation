@@ -22,14 +22,14 @@ Keep in mind that the availability of species can change along the trajectory.
 It is particularly difficult to make a consistent choice, therefore the hybrid setting is generally preferable in this case.
 
 \begin{figure}
-\includegraphics{regions.png}
+\includegraphics[width=0.6\textwidth]{regions.png}
 \end{figure}
 
 We need to partition the set of chemical reactions in subgroups in which we find consistent properties.
 Once the groups are established, we should be able to simulate the system in different settings.
 The main assumption in the tau leaping method is that the propensity of the reaction will not change dramatically during the macrostep; if we apply this concept to the hybrid setting we will see that this is an issue, as groups are not disjoined.
 
-\includegraphics{scheme.png}
+\includegraphics[width=\textwidth]{scheme.png}
 
 \section{Reaction-Based System Partitioning}
 In order to divide reactions into group we can set up a threshold, which could be computed over the product of the propensity of the state and the simulation step.
@@ -95,7 +95,7 @@ We have the possibility to define simulation length and time sampling i.e.~sampl
 
 \begin{figure}
   \centering
-  \includegraphics{HRSSA_oregonator.png}
+  \includegraphics[width=0.6\textwidth]{HRSSA_oregonator.png}
   \caption{HSimulator HRSSA Oregonator}
 \end{figure}
 

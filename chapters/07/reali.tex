@@ -125,7 +125,7 @@ observe. The set of all the attributes in a model is the
 
   \begin{figure}
   \centering
-  \includegraphics{scheme_model.png}
+  \includegraphics[width=0.6\textwidth]{scheme_model.png}
   \caption{scheme\_model}
   \end{figure}
 \end{itemize}
@@ -163,8 +163,8 @@ $f_m(\underline{M}(s(t_0))) = \underline{M}(f_s(s(t_0))) = m(t_1)$
 
 \begin{figure}
 \centering
-\includegraphics{validation.png}
-\caption{validiation}
+\includegraphics[width=\textwidth]{validation.png}
+\caption{validation}
 \end{figure}
 
 I/O validity can be checked by using data sets produced by the model and
@@ -205,7 +205,7 @@ We need to define objectives:
 
 \begin{figure}
 \centering
-\includegraphics{workflow.png}
+\includegraphics[width=0.3\textwidth]{workflow.png}
 \caption{workflow}
 \end{figure}
 
@@ -218,7 +218,7 @@ conditions:
 
 \begin{figure}
 \centering
-\includegraphics{volterra.png}
+\includegraphics[width=\textwidth]{volterra.png}
 \caption{volterra}
 \end{figure}
 
@@ -437,7 +437,7 @@ can then be checked.
 
 \begin{figure}
 \centering
-\includegraphics{example.png}
+\includegraphics[width=\textwidth]{example.png}
 \caption{Blue = function, red = constraint}
 \end{figure}
 
@@ -672,7 +672,7 @@ Example: $f(x)=x^4-8x^2+4$
 
 \begin{figure}
 \centering
-\includegraphics{function.png}
+\includegraphics[width=0.45\textwidth]{function.png}
 \caption{Desmos  $f(x)=x^4-8x^2+4$}
 \end{figure}
 
@@ -716,7 +716,7 @@ number we lose precision.
 
 {[}picture{]}
 
-Imagine that this is a cut function: our starting point x\_k is in the
+Imagine that this is a cut function: our starting point $x\_k$ is in the
 middle. The main idea of the trust region is that we do not follow a
 direction: we approximate the function with a simpler function → Taylor
 approximation. According to how big and reliable the approximation is,
@@ -1086,12 +1086,12 @@ problem and we need to reason on some aspects: if we take the square
 exploring it very well. If parameters are between 0.1 to 1000 we need to
 better sample.
 
-n = 20, the fewer points we get, the more we see the difference among
+$n = 20$, the fewer points we get, the more we see the difference among
 the two methods.
 
-n = 200, still we have missing parts.
+$n = 200$, still we have missing parts.
 
-n = 2000, thousands of iterations → if we zoom in there is still a lot
+$n = 2000$, thousands of iterations → if we zoom in there is still a lot
 of space
 
 The takehome message is that it is almost impossible to cover all the
@@ -1129,11 +1129,11 @@ initial and final time. We call the solver (15s as the system is stiff,
 we require a more robust iteration) and get a vector of residuals and
 SSE.
 
-If we compute the residual with s1,s2 and s3 we can easily understand
+If we compute the residual with $s_1$,$s_2$ and $s_3$ we can easily understand
 which is the better one (matches visual inspection of the plot).
 
 We can then optimize and find the solution with \texttt{lsqnonlin}
-e.g.~SSE1 = 33.6653, resNorm = 38, worse, we should improve initial
+e.g.~$SSE1 = 33.6653$, $resNorm = 38$, worse, we should improve initial
 conditions.
 
 {[}Recap from last time{]}
@@ -1149,7 +1149,7 @@ depends on the number of initial points.
 
 \begin{figure}
 \centering
-\includegraphics{multistep.png}
+\includegraphics[width=0.45\textwidth]{multistep.png}
 \caption{MATLAB multi-start lsqnonlin}
 \end{figure}
 
@@ -1176,7 +1176,7 @@ different results.
 
 \begin{figure}
 \centering
-\includegraphics{stoch_LV.png}
+\includegraphics[width=\textwidth]{stoch_LV.png}
 \caption{Lotka-Volterra stochastic simulation results. In B we witness
 preys and predators extinction, it is the output of a simulation
 performed with the same model and parameters as A.}
@@ -1223,7 +1223,7 @@ $$
 
 \begin{figure}
 \centering
-\includegraphics{mcmc.png}
+\includegraphics[width=0.45\textwidth]{mcmc.png}
 \caption{MCMC example}
 \end{figure}
 
