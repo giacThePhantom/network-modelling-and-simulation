@@ -66,3 +66,7 @@
 \BOOKMARK [2][-]{subsection.7.4.6}{MATLAB}{section.7.4}% 66
 \BOOKMARK [1][-]{section.7.5}{Stochastic methods for parameter estimation}{chapter.7}% 67
 \BOOKMARK [2][-]{subsection.7.5.1}{Markov Chain Monte Carlo \(MCMC\)}{section.7.5}% 68
+\BOOKMARK [2][-]{subsection.7.5.2}{Sampling a distribution}{section.7.5}% 69
+\BOOKMARK [2][-]{subsection.7.5.3}{Rejection sampling algorithm}{section.7.5}% 70
+\BOOKMARK [2][-]{subsection.7.5.4}{Metropolis Hastings}{section.7.5}% 71
+\BOOKMARK [2][-]{subsection.7.5.5}{Random walk MCMC}{section.7.5}% 72

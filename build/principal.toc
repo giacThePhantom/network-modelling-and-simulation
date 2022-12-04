@@ -81,3 +81,12 @@
 \contentsline {subsection}{\numberline {7.4.6}MATLAB}{49}{subsection.7.4.6}% 
 \contentsline {section}{\numberline {7.5}Stochastic methods for parameter estimation}{50}{section.7.5}% 
 \contentsline {subsection}{\numberline {7.5.1}Markov Chain Monte Carlo (MCMC)}{50}{subsection.7.5.1}% 
+\contentsline {subsection}{\numberline {7.5.2}Sampling a distribution}{52}{subsection.7.5.2}% 
+\contentsline {subsection}{\numberline {7.5.3}Rejection sampling algorithm}{53}{subsection.7.5.3}% 
+\contentsline {subsection}{\numberline {7.5.4}Metropolis Hastings}{53}{subsection.7.5.4}% 
+\contentsline {subsubsection}{\numberline {7.5.4.1}MH algorithm}{54}{subsubsection.7.5.4.1}% 
+\contentsline {subsubsection}{\numberline {7.5.4.2}Visualization of MCMC}{54}{subsubsection.7.5.4.2}% 
+\contentsline {subsubsection}{\numberline {7.5.4.3}How to link data and MH}{55}{subsubsection.7.5.4.3}% 
+\contentsline {subsection}{\numberline {7.5.5}Random walk MCMC}{55}{subsection.7.5.5}% 
+\contentsline {subsubsection}{\numberline {7.5.5.1}Algorithm RW-MCMC ( C known)}{55}{subsubsection.7.5.5.1}% 
+\contentsline {subsubsection}{\numberline {7.5.5.2}Diagnostics}{56}{subsubsection.7.5.5.2}% 
