@@ -2,8 +2,8 @@
 \chapter{Approximation algorithms}
 Can we assume that in any condition the stochastic simulation bottleneck is a problem? It depends.
 If we are in a condition in which all species are present in low number and it takes a lot to cure, the stochastic simulation is not really a bottleneck.
-We might have an issue if we wish to simulate for a long time, multiplicative factors.
-At the moment, it is not feasible to compute exact a stochastic simulations to all the models we need to observe, in particular for huge number of species and reaction, therefore there is a huge research in developing alternative strategies that allow to compute the system in an \emph{accurate} way (lose correctness) with lower computational cost and time.
+We might have an issue if we wish to simulate for a long time, as we require multiplicative factors.
+At the moment, it is not feasible to compute an exact stochastic simulations for all the models that we need to observe, in particular for a huge number of species and reactions. Therefore, there is a huge research in developing alternative strategies that allow to compute the system in an \emph{accurate} way (lose correctness) with lower computational cost and time.
 Why should we decide to use approximations in simulations?
 
 \begin{enumerate}
@@ -12,16 +12,20 @@ Why should we decide to use approximations in simulations?
   \item reality is affected by error, so even when we are using exact stochastic simulation algorithms we should consider a small degree of approximation.
     A certain deal of error could aid in retrieving a more realistic result.
 \end{enumerate}
-
+\noindent
 In chapter 3 all the algorithms were belonging to exact stochastic simulation setting, so the result is the same.
-Instead in this case, each algorithm approximates in a different way, assume different approximation → not a consistent set.
-We should observe that of the three main computational strategies presented here, there is one which is much more popular with respect to other.
+Instead in this case, each algorithm (Figure \ref{fig:SSA_tree}) approximates in a different way,  we assume different approximations → not a consistent set.
+We should observe that of the three main computational strategies presented here, there is one which is much more popular with respect to the others.
 The $\tau$ leaping method is well known and has been further developed, so we will be focusing on it.
 
 \begin{figure}
-  \centering \includegraphics{SSA_tree.png}
+  \centering 
+  \includegraphics[width=0.5\textwidth]{SSA_tree.png}
+  \caption{}
+    \label{fig:SSA_tree}
 \end{figure}
 
+\noindent
 Before introducing the algorithm, let's try to think about the possible bottlenecks which could prevent us from having a fast algorithm.
 We could improve:
 
@@ -31,10 +35,13 @@ We could improve:
     For instance, the probability-weighted Monte Carlo is particularly promising in situations in which we have huge differences in propensities among reactions.
 \end{itemize}
 
-\section{\texorpdfstring{\textbf{Probability-Weighted Dynamic Monte Carlo Method}}{Probability-Weighted Dynamic Monte Carlo Method}}
-The probability-weighted dynamic Monte Carlo method (PW-DMC) is an approximation approach for improving computational efficiency of stochastic simulation of reaction networks where some reactions have propensities significantly larger than other reactions.
+\section{Probability-Weighted Dynamic Monte Carlo Method}
+The probability-weighted dynamic Monte Carlo method (PW-DMC) is an approximation approach for improving the computational efficiency of stochastic simulations of reaction networks where some reactions have propensities significantly larger than other reactions.
 The principle of this algorithm is a sort of modification of the probability distribution NRM through \emph{weighted sampling}.
 The idea is to introduce a bias weight value on the propensity, in order to take into the account the number of times in which the reaction is executed.
+\\
+\\
+\noindent
 We will have a lower amount of iterations at the price of applying reactions a different number of times according to the probability.
 The weight is a multiplicative factor of the stoichiometric coefficient.
 $\mu$ is the smallest reaction index $\mu$ such that: $$ \sum^{\mu}_{j=1}a^w_j \geq r_1 a^w_0 $$ Second, PW-DMC has to correct the firing time $\tau$ of reaction $R_\mu$ because it is selected through the weighted sampling.
@@ -65,23 +72,34 @@ We are grouping a mixture of events, which can be defined as a \emph{macrostep}.
 If $\tau$ is big, the number of iterations will be low and the complexity will decrease.
 We should constraint the error in such a way that we are aware of its value as a constant.
 Which could be a high-level property of tau to apply macrostep without a crude error in the simulation? We should impose certain logics on $\tau$.
-{[}lo schermo non va{]}``vabbè, let me see.
-Ragazzi non facciamo più niente, nel senso, cosa devo fare?Sono arrabbiatino!\ldots{[}funziona{]}La forza? It's possible that? Ahahah''
+\\
+\\
+\noindent
 We want to limit the bias on the propensity.
-This translates in tau selection satisfying the so-called ``\textbf{leap condition}'': There exists a leap $\tau > 0$ such that the change in propensity $a_j$ of each reaction $R_j$ with $j = 1,...,M$ during the time interval $[t,t +\tau)$ is negligibly small.
+This translates in tau selection satisfying the so-called ``\textbf{leap condition}'': 
+\\
+\\
+\noindent
+There exists a leap $\tau > 0$ such that the change in propensity $a_j$ of each reaction $R_j$ with $j = 1,...,M$ during the time interval $[t,t +\tau)$ is negligibly small.
 Negligibly small means lower than some threshold.
+\\
+\\
+\noindent
 By applying a proper reasoning we reach the following formula, in which we derive the update of the state.
 Once we have selected $\tau$, we will evolve the system by adding to he current state a certain amount of firing for each one of the reactions in the system {[}for each reaction j from 1 to m we apply a certain amount of time{]}.
 $$ X(t+\tau)=\mathbf{x}+\sum_{j=1}^{M}k_j\mathbf{v}_j =\mathbf{x}+\sum_{j=1}^{M}Poi(a_j(x)\tau)\mathbf{v}_j $$
 $k_j$ will be generated through a Poisson distribution, which will depend over the specific propensity multiplied by the size of the step.
 The algorithm is applying any of the reactions per a specific amount of time.
-Pros: we are allowed to work with higher $\tau$ with respect to exact stochastic simulations.
-Cons: if we only have rare events, the algorithm will not be the best solution (as it will try to apply all reactions at all the times).
+\begin{itemize}
+\item Pros: we are allowed to work with higher $\tau$ with respect to exact stochastic simulations.
+\item Cons: if we only have rare events, the algorithm will not be the best solution (as it will try to apply all reactions at all the times).
+\end{itemize}
+\noindent
 Given however that in any system there are at least some reactions with high propensity, at the very end we still gain a huge speed-up.
 
 \subsection{Choosing tau - Leap selection section}
 
-\subsubsection{\texorpdfstring{\textbf{Postleap $\tau$ Selection}}{Postleap Selection}}
+\subsubsection{Postleap Selection}
 Choose a $\tau$ from a Poisson distribution and see if it is fine for the simulation.
 We start from a predefined arbitrary $\tau$ (small), then we have a trial procedure.
 The algorithm will compare the difference in the propensity before and after, to assess whether $\tau$ is of the right size.
@@ -93,18 +111,23 @@ While performing $\tau$-leaping, we will need to make sure that a negative scena
 The real amount of time executing k should be computed as the mean from k generated from Poisson distribution and the availability of the reactants {[}non chiaro{]}.
 We can bridge $\tau$-leaping with exact stochastic simulation when we have only rare events.
 
-\section{\texorpdfstring{\textbf{Chemical Langevin Method}}{Chemical Langevin Method}}
+\section{Chemical Langevin Method}
 We can use the Normal distribution instead of Poisson, and scale it with mean and variance with another Normal formula based on a (0,1) distribution, obtaining a simplified method.
 We will not have main events, but main \emph{drivers} in the system.
 Stochasticity is strongly approximated, we are moving to an idea of average, real numbers.
 This will be the starting point for the deterministic simulation.
+\\
+\\
+\noindent
 \textbf{COPASI} is a well-known simulator.
 It exploits Gillespie's algorithm and $\tau$-leaping algorithm.
-IN general, any simulator offers many algorithms, so we should be able to choose the best computational approach → calibrating the model.
+In general, any simulator offers many algorithms, so we should be able to choose the best computational approach → calibrating the model.
 The stochastic rate provides us the speed, we require to derive it with some methods; all simulations algorithm compute deterministically or stochastically a speed for the reaction, computed over parameters of the model e.g.~the rates.
 The rates, as the initial values, are not free-lunch, they can be derived through experiments.
 Often times, we work with models with not fully known parameters; in the second module we will explore solutions for \emph{estimating the parameters} (reverse engineering approach).
-During the last lecture, we focused on $\tau$-leaping.
+\\
+\\
+\noindent
 \textbf{\emph{Adaptive algorithms}} select a delta and change it adaptively during the simulation in order to reach the best results, for instance post leap $\tau$ selection.
 \textbf{Chemical Langevin Method} allows to modify the evolution of the system; the update formula depends on the propensity, but allows to distinguish a totally deterministic part from the stochastic one.
 This algorithm also has an important difference with previously seen strategies: we do not have integers, we will be provided with a real number adding some noise.

@@ -5,7 +5,7 @@
 To cope with the inherent multi-physics and multi-scale natures of biochemical reactions, different levels of simulation detail have been adopted to investigate their dynamical behavior:
 
 \begin{itemize}
-  \item \textbf{molecular dynamics} (MD): microscopic level - keeps track of the structures, positions, velocities as well as possible collisions of all molecules in the system.
+  \item \textbf{molecular dynamics} (MD): microscopic level - keeps track of the structures, positions, velocities, as well as possible collisions of all molecules in the system.
      The MD simulation requires a very detailed knowledge of molecules in both time and space and a lot of computational power.
   \item \textbf{Brownian dynamics} (BD): focuses on the dynamics of each individual species, but skips the molecular structure information.
      The movement of a species is described as a random walk (or Brownian walk) among point-like structures.
@@ -17,27 +17,26 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
     The deterministic simulation is fast; however, its underlying assumption inherently oversimplifies biological reactions in which populations of molecular species are continuous variables and their changes due to single reaction firings are assumed to be negligible.
     The correctness of deterministic simulation is severely affected when stochasticity plays an important role in the dynamical behavior of biochemical reactions.
   \item \textbf{stochastic simulation:} a mesoscopic approach to provide a probabilistic description of the time evolution of biochemical reactions.
-    It keeps track of a discrete count for the population, but abstracts all the detailed position and velocity information, of each species.
+    It keeps track of a discrete count for the population, but abstracts all the detailed position and velocity information of each species.
     Each reaction in the network is assigned a non-negative chance to fire and to drive the system to a new state.
     The probability that a reaction occurs in a time interval is derived from the reaction kinetics.
     Each stochastic simulation step will select a reaction to fire according to its probability.
 \end{itemize}
 
+\noindent
 Although the stochastic simulation is faster than the MD/BD approach, it is often computationally demanding for simulating large biological systems.
-First, biochemical reactions, due to their multiscale nature, are separated by different time scales in which some fast reactions will occur at rates greater than other reactions.
-The fast reactions occur frequently and drive the system very fast into a stable state.
-The dynamical behavior of biochemical reactions, after the short fluctuation time at the beginning, will be determined by the dynamics of the slow reactions; however, most of the time the simulation samples the fast reactions to realize the dynamics which is not the expected behavior.
-Second, the population of some species involved in reactions may be larger than others by many orders of magnitude.
-The fluctuations of these species, when involving reactions fire, are less significant.
-Keeping track of large population species is obviously less efficient since a coarse-grained simulation method can be applied without loss of total simulation accuracy.
-Because of the inherent dynamics in biochemical reactions, a model can combine and mix all of these aspects in a very complicated manner.
-Third, due to the stochastic behavior in a single simulation, many simulation runs must be performed to ensure a statistical accuracy and this requires a high computational effort.
-These issues raise a computational challenge for developing and implementing efficient stochastic simulation methods.
+\begin{enumerate}
+\item biochemical reactions, due to their multiscale nature, are separated by different time scales in which some fast reactions will occur at rates greater than other reactions. The dynamical behavior of biochemical reactions, after the short fluctuation time at the beginning, will be determined by the dynamics of the slow reactions; however, most of the time the simulation samples the fast reactions to realize the dynamics which is not the expected behavior.
+\item the population of some species involved in reactions may be larger than others by many orders of magnitude i.e.  the fluctuations of some species are more or less significant. Keeping track of large population species is obviously less efficient, since a coarse-grained simulation method can be applied without loss of total simulation accuracy. A model can combine and mix all of these aspects e.g. the fast reactions occur frequently and drive the system very fast into a stable state.
+\item due to the stochastic behavior in a single simulation, many simulation runs must be performed to ensure a statistical accuracy and this requires a high computational effort. These issues raise a computational challenge for developing and implementing efficient stochastic simulation methods.
+\end{enumerate}
 
 \section{Network modeling}
 
+[ missing lecture 2 ] 
+
   \subsection{Logic models}
-  Recap from previous theory lecture: What is the main issues in using logic modeling with multiple levels? The update formulae need to be defined for each level, tricky extension procedure.
+  Recap from the previous theory lecture: what is the main issue in using logic modeling with multiple levels? The update formulae need to be defined for each level, tricky extension procedure.
 
   \subsection{Petri nets}
   \textbf{Petri nets} are specific networks introduced in 1960s, with the idea to describe \emph{communication processes} (computer science field).
@@ -51,15 +50,19 @@ These issues raise a computational challenge for developing and implementing eff
     \item \textbf{\emph{transitions}}: possibility to move one or more tokens to other places
   \end{itemize}
 
+\noindent
   In order to model a chemical reaction, we can associate places to variables, transitions to chemical transformations and tokens to molecules.
+  \\
 
   \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.7\textwidth]{petri_nets.png}
+    \includegraphics[width=0.5\textwidth]{petri_nets.png}
     \caption{PetriNets\_SimaoEtAl.pdf}
+    \label{fig:petri}
   \end{figure}
 
-  PetriNets\_SimaoEtAl.pdf In the example we have numbers inserted in places.
+\noindent
+  Figure \ref{fig:petri}: in the example we have numbers inserted in places.
   The network will evolve according to the transitions applied.
   A transition can be \emph{enabled} or not to fire.
   E.g. there is one token in \(p_1\), so we know that \(t_1\) and \(t_2\) are enabled.
@@ -68,7 +71,8 @@ These issues raise a computational challenge for developing and implementing eff
 
   \begin{enumerate}
     \def\labelenumi{(\alph{enumi})}
-    \item shows the initial marking before firing the enable transition t; (b) shows the marking after transition labeled reaction 1 fires.
+    \item shows the initial marking before firing the enable transition t; 
+    \item shows the marking after transition labeled reaction 1 fires.
       Places: hydrogen, oxygen and water.
       We can represent the stoichiometry of the reaction through the numbers on the edges and the numbers to the tokens.
     \end{enumerate}
@@ -77,22 +81,26 @@ These issues raise a computational challenge for developing and implementing eff
     \centering
     \includegraphics[width=0.7\textwidth]{/example_petri.png}
     \caption{Review\_ModelingComplexBiologicalSystems.pdf}
+    \label{fig:expetri}
   \end{figure}
 
-  Review\_ModelingComplexBiologicalSystems.pdf.
-  Pros: we have no constraint on the data type, not strictly boolean values.
-  They allow to extend the number of items which can be associated to a model.
-  Cons: there is no fixed rule for applying transitions.
-  Furthermore, we are not encoding the reaction's complexity (all transitions are equally probable, but it is possible to weight the edges).
+\noindent
+  Figure \ref{fig:expetri}
+  \begin{itemize}
+  \item Pros: we have no constraint on the data type, not strictly boolean values. They allow to extend the number of items which can be associated to a model.
+  \item Cons: there is no fixed rule for applying transitions. Furthermore, we are not encoding the reaction's complexity (all transitions are equally probable, but it is possible to weight the edges).
+  \end{itemize}
+  
+  \noindent
   Having a dynamics based on the integers can be quite useful, as if we consider single chemical events we are working with discrete data.
   The exact stochastic algorithm works with integers.
   In differential equations instead we need real numbers.
   Also the discretization of the time step might not be a limitation, since time can be discretized in reality.
-  A huge approximation of the system is performed on time → we do not have any clue of how much time is passing from one step to the other.
-  We are assuming that all the reactions take the same (unknown) amount of time.
-  The main limitation of network models is the \textbf{approximation of time}, we have no clue on the time required for the reaction.
-  \textbf{Basic elements of a hybrid Petri net} By upgrading the notation we can achieve more accurate representations:
-
+  The main limitation of network models is the \textbf{approximation of time},  as we are assuming that all the reactions take the same (unknown) amount of time.
+  \\
+  \\
+  \noindent
+ By upgrading the notation we can achieve more accurate representations:
   \begin{itemize}
     \item add inhibitory and test transitions.
     \item differentiate between discrete and continuous transitions.
@@ -102,16 +110,16 @@ These issues raise a computational challenge for developing and implementing eff
 
     \subsubsection{P systems}
     Popular rewriting systems are \textbf{\emph{P systems}}, which are also called membrane systems.
-    They are computational environment inspired to the structure and membranes.
+    They are computational environments inspired to the structure of membranes.
     In particular, they define a hierarchy of membranes partitioning the space in different areas - similarly to a cell.
-    In each regions we can allocate entities and apply transformation rules.
+    In each region we can allocate entities and apply transformation rules.
     The rewriting rules change the value of each letter.
     The pedix \(_{in4}\) gives more details on the reaction.
-    This kind of systems tend to use \emph{non-determinism}, they try to explore the full set of possibilities.
+    These kind of systems tend to use \emph{non-determinism}, they try to explore the full set of possibilities.
 
     \subsubsection{MP systems}
     The difference with standard P system is the association of functions to each reaction.
-    In this way we can model the complexity of the reaction, since in the model we apply all possible reaction, which will produce an amount given by the function.
+    In this way we can reconstruct the complexity of the reaction, since in the model we apply all possible reaction - which will produce an amount given by the function.
 
   \subsection{Equation-based approach}
 
@@ -120,9 +128,7 @@ These issues raise a computational challenge for developing and implementing eff
     \(A+E \underset{k_2}{\overset{k_1}{\rightleftharpoons}}A \mid E \stackrel{k_3}{\longrightarrow}B+E\)
 
   \subsection{Simulation algorithms}
-  For simulating we need a specification of stoichiometric matrix, a vector of integers (initial values) and stochastic rate.
-  We will arrive to a formula with which we can compute the probability.
-  ! reaction probability function is required for defining probability.
+  For simulating we need the specification of a stoichiometric matrix, a vector of integers (initial values) and a stochastic rate.
   \textbf{Exact simulation algorithms} are computationally intensive, but provide the most accurate solution.
   Stepwise, we will try to define faster strategies with the aim of compromising accurate dynamics and feasible solutions.
   It is also possible to rely on a mixture of technologies to focus on different results.
@@ -133,6 +139,7 @@ These issues raise a computational challenge for developing and implementing eff
     \item use more sophisticated algorithms
   \end{itemize}
 
+  \noindent
   The \emph{stoichiometric matrix} tells us how the system evolves if one of the two functions is applied, but it is not enough for computing a simulation.
   There can be many reactions that arrive to the same definition of stoichiometric matrix.
   If we want to compute a dynamics we need to develop a series of states; at each step we require two ingredients:
@@ -142,7 +149,8 @@ These issues raise a computational challenge for developing and implementing eff
     \item \(\mu\): choose the reaction by considering the probability of execution of each reaction at the step
   \end{itemize}
 
-  \textbf{Reaction propensity:} function needed for the derivation of probability.
+\subsubsection{Reaction propensity}
+  The reaction propensity is a function needed for the derivation of probability.
   The higher the propensity, the higher will be the strength of the reaction.
   Naturally, we will have a higher probability when a higher propensity is observed, but the two quantities are something different.
   The propensity is a property of the reaction, probability is a property of a reaction in the system (we need to take into account also other reactions) Instead of performing an in depth analysis of probability, we will choose a stochastic approach.

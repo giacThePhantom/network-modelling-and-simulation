@@ -5,61 +5,81 @@
 Assumption: we are using the same model and parameters.
 
 \begin{itemize}
-  \item Deterministic system: no randomness, we always obtain the same result.
-  \item Non-deterministic system: there is some degree of uncertainty on different runs.
+  \item \textbf{Deterministic system}: no randomness, we always obtain the same result.
+  \item \textbf{Non-deterministic system}: there is some degree of uncertainty on different runs.
 
   \begin{itemize}
-    \item Exact stochastic simulation: satisfying some hypotheses, the system will behave just like a biological system.
+    \item \textbf{Exact stochastic simulation}: satisfying some hypotheses, the system will behave just like a biological system.
       We are in a probabilistic setting.
       The fact that we are able to compute the probability function does not make this method deterministic, we have uncertainty.
-      Theoretically, we could have no idea about reaction execution in a stochastic setting; in the case of exact stochastic simulation we reach a high level of accuracy thanks to the probability function.
+      Theoretically, we could have no idea about reaction execution in a stochastic setting; in the case of exact stochastic simulation, we reach a high level of accuracy thanks to the probability function.
   \end{itemize}
 \end{itemize}
 
+\noindent
 Why do many computational environments employ a non-deterministic approach? Quite often we require to find the compromise between time and complexity.
-Non-deterministic polynomial time algorithms: we do not have an efficient solution, but it seems possible to find it.
+In non-deterministic polynomial time algorithms we do not have an efficient solution, but it seems possible to find it.
 A non-deterministic setting allows us to understand whether an algorithm can be solved in polynomial time (stepwise guessing).
 Alan Turing realized that it was required to categorize algorithms with specific rules in order to compare them → Turing machine.
-
-\section{Exact stochastic simulation algorithms}
-The direct method of Gillespie defined a couple of formulae able to understand how the system will execute in terms of time ($\tau$) and reactions ($\mu$).
-Since we are reasoning in infinitesimal time, each reaction occurs and ends exactly at time $\tau$, hence we cannot have multiple reactions firing simultaneously.
-
+\\
+\\
+\noindent
+A summary of the main exact stochastic simulation algorithms is reported in figure \ref{fig:tree}.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{tree_methods.png}
   \caption{Fig 3.1 Marchetti's book}
+  \label{fig:tree}
 \end{figure}
 
-Fig 3.1 Marchetti's book $a_0$ is the sum of all propensities in the system.
+\section{Direct method}
+Gillespie's direct method defines a couple of formulae able to understand how the system will execute in terms of time ($\tau$) and reactions ($\mu$).
+Since we are reasoning in infinitesimal time, each reaction occurs and ends exactly at time $\tau$, hence we cannot have multiple reactions firing simultaneously.
+\\
+\\
+\noindent
+ $a_0$ is the sum of all propensities in the system.
 
 \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
   \item We sample one random number from the distribution $a_0 = \sum_{j=1}^{M}{a_j}\rightarrow V_1=U(0,1)$
   \item Scale it to the maximum $V_1 \cdot a_0 =U(0,a_0)$
-  \item See where this number will point over the different propensities
+  \item See where this number will point over the different propensities ( Figure \ref{fig:boundaries}).
 
   \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{boundaries.png}
     \caption{Fig 3.2}
+    \label{fig:boundaries}
   \end{figure}
 
-    Fig 3.2
   \item Generate another random number $V_2 =U(0,1)$ \item $\tau \sim Exp(a_0)$ \item $\tau = \frac{1}{a_0}ln(\frac{1}{V_2})$
 \end{enumerate}
 
-\includegraphics[width=\textwidth]{direct_method.png}
 
-This algorithm can be improved by avoiding to recompute all the propensities, taking into account the fact that many reaction will keep the same probabilities over time.
-We can work on the complexity of the for loop through a dependency graph.
+ \begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{direct_method.png}
+    \caption{DM algorithm}
+    \label{fig:DM_algo}
+  \end{figure}
+ 
+ \noindent
+The algorithm (Figure \ref{fig:DM_algo}) can be improved by avoiding to recompute all the propensities, taking into account the fact that many reactions will keep the same probabilities over time.
+We can work on the complexity of the for loop through a \emph{dependency graph}.
 
-  \subsection{Enhanced Direct Method}
-  Our aim is to group reactions modifying at the same time in order to update propensities e.g. ~all reactions involving the same components.
-  Let's specify this concept in a formal way: For each reaction $*R_j$* with $j = 1,...,M$, define $Reactants(R_j)={S_i|S_i \ \text{is a reactant of }R_j}$, and $Products(R_j) = {S_i|S_i \text{ is a product of }R_j}$.
+  \section{Enhanced Direct Method}
+  Our aim is to group all the reactions that are modifying at the same time, in order to update only meaningful propensities e.g. all reactions involving the same components.
+  Let's specify this concept in a formal way: 
+  \\
+  \\
+  \noindent
+  For each reaction $*R_j$* with $j = 1,...,M$, define $Reactants(R_j)={S_i|S_i \ \text{is a reactant of }R_j}$, and $Products(R_j) = {S_i|S_i \text{ is a product of }R_j}$.
   A \textbf{reaction dependency graph}\ldots{}.
+  
   We tend to have an improvement in time complexity when the graph is not highly connected, while the space complexity is higher (since we need to generate a data structure).
-  \textbf{Improvements for direct method:} \textbf{\emph{Sort}}: find the smallest index for which we can satisfy the condition for $\mu$.
+  \subsection{Improvements for the direct method} 
+  \textbf{\emph{Sort}}: find the smallest index for which we can satisfy the condition for $\mu$.
   On average, it is more efficient to keep reactions with highest probability at the beginning, such that we can easily match indexes to requirement.
   How can we compute the number of firings? We can set an oder beforehand based on previous knowledge or run a pre-simulation with a non-optimized algorithm (we still have a speed up since we are working with a smaller setting).
   We cannot directly compute the propensity right away, as it heavily depends on the dynamics of the system, the state can change.
@@ -69,7 +89,7 @@ We can work on the complexity of the for loop through a dependency graph.
   As the dependency graph, here the issue is time complexity.
 
 \section{First Reaction Method (FRM)}
-Instead of computing one $\tau$, compute a $\tau$ for each reaction.
+Instead of computing one $\tau$, compute a $\tau$ for each reaction (Figure \ref{fig:tau}).
 Example: $\tau_1 = Exp(a_1)=1/a_1ln(1/V_1)$.
 We are assuming that no other reactions are firing in the middle.
 We can generate M random numbers and end up with M $\tau$.
@@ -78,27 +98,36 @@ $\mu= R_{\mu}\text{ st }\tau_{\mu}= \min_{j}\tau_j$
 
  \begin{figure}
     \centering
-    \includegraphics[width=0.5\textwidth]{R_tau.png}
+    \includegraphics[width=0.3\textwidth]{R_tau.png}
     \caption{R Tau}
+    \label{fig:tau}
   \end{figure}
 
-Pro: sometimes the search is quicker, simpler to parallelize. Cons: we generate a lot of random numbers with respect to the direct method.
-After the first step, we need to recompute.
-Even here, there is the possibility to improve the algorithm e.g.~computation of the propensity.
+\begin{itemize}
+\item Pro: sometimes the search is quicker, simpler to parallelize. 
+\item Cons: we generate a lot of random numbers with respect to the direct method.
+\end{itemize}
 
+After the first step, we need to recompute. Even here, there is the possibility to improve the algorithm e.g.computation of the propensity.
 
 \section{First Family Method}
-Tries to combine the good features of the direct method with first reaction method.
+Tries to combine the good features of the direct method with the first reaction method.
 The idea is to reach an implementation which can be partially parallelizable: divide the reaction in ``families'' or groups.
 The idea is to divide the reaction in n groups $r_1,…r_n$ and families e.g.~3 families.
-We should associate a theoretical propensity to each group, i.e.~the sum of the propensity in the family $a^1=\sum_{j\in f_1}a_j$.
+We should associate a theoretical propensity to each group, i.e. the sum of the propensity in the family $a^1=\sum_{j\in f_1}a_j$.
 $FRM= \tau_1= \frac{1}{e^1}ln(\frac{1}{r_1})$, we do not know which one of the reactions will be applied.
+\\
+\\
+\noindent
 In order to decide, we apply the direct reaction method formula for selecting the index.
 Given that we are working with a subset, we will scale over the sum, the $a_0$ of the group.
 It is true that we are generating random numbers, but over the number of the families → reduction.
 This time we have n families + 1 random number to select the family.
 Danger: if we have big disequilibrium in propensity, we might end up selecting always one of the families.
 We can parallelize by linking families to CPU.
+\\
+\\
+\noindent
 Last time, we were introducing Next Reaction Method, which can be considered as an evolution, trying to apply the same reasoning as FRM in a more efficient way (by applying an efficient handling of random numbers).
 If we are able to do so we will need to compute less random numbers.
 DM → $2 \cdot n_{steps}$ FRM → $M \cdot n_{steps}$ FFM → $(n_{families}+ 1)n_{steps}$ NRM → $M+n_{steps}$.
@@ -115,17 +144,18 @@ Why do we need to recompute time points? Two issues:
   E.g.$R_2:A \rightarrow B$, $R_1 : A \rightarrow B$ , the two reactions depend on each other.
 \end{enumerate}
 
+\noindent
 $\tau$ is modelling the instant in which the reaction is assumed to fire, it is just an event.
 We can subtract the time for passing to following reactions, but we must also update the propensity.
 $a_1 \rightarrow a_1^{new}$, we have three possibilities:
 
 \begin{enumerate}
   \def\labelenumi{\arabic{enumi}.}
-  \item $a_1 = a_1^{new}$$R_2$ is not affecting the propensity, i.e.~reactant is not modified by $R_2$, so $R_1$ remains unchanged.
+  \item $a_1 = a_1^{new}$. $R_2$ is not affecting the propensity, i.e.~reactant is not modified by $R_2$, so $R_1$ remains unchanged.
   \item $a_2^{new}> a_1$. $R_2$ has been applied, something has changed and the firing prob of $R_1$ is increasing.
     Therefore, $\tau_1$ needs to be updated, we expect it to be smaller → rescaling through the ratio of the propensities e.g. ~$(\tau_1-\tau_2) \cdot \frac{a_1}{a_1^{new}}$ \item $a_1^{new}< a_2$ higher $\tau_1$
 \end{enumerate}
-
+\noindent
 We should not think of another event, we are just updating the same event through the formula! The algorithm was developed in the 2000s, there are a lot of improvements related to technology advancements.
 In addition to rescaling formula, there are other improvements to keep the complexity of the algorithm as low as possible:
 
@@ -135,12 +165,15 @@ In addition to rescaling formula, there are other improvements to keep the compl
   \item searching the reaction: minimum is linear over the number of reactions.
     \textbf{Binary heap}: decrease to logarithmic scale, select winner in constant time.
 \end{itemize}
-
+\noindent
 Gibson 2000: original paper Thanh 2014: latest algorithm.
 
 \section{RSSA}
 The Rejection-based Simulation Algorithm seems to be an approximation, but everything is exact.
 It tries to reduce computation complexity, but instead of limiting the amount of random numbers, it focuses on another bottleneck: the computation of the reaction propensity.
+\\
+\\
+\noindent
 The computational problem becomes more complex if we do not rely on mass action.
 The RSSA Algorithm therefore tries to reduce the number of times in which we compute the reaction propensity.
 We will need a placeholder and at the same time to keep the computation exact.
@@ -152,11 +185,15 @@ Therefore, the bounds will be computed as:
   \item lower $X = X - X \cdot \delta$ \item upper $X = X + X \cdot \delta$
 \end{itemize}
 
+\noindent
 Given that the events of the reaction are modifying a few molecules per time, we can assume that for a certain amount of steps we will remain inside the same range of variability.
 We are trying to obtain a propensity computed over bounds; by doing so, we can apply the same computation for a higher number of steps, as we only need to recompute the propensity outside of the fluctuation interval.
 We can also compute the upper bound for the sum of the propensities $\bar{a}_0$.
 $a_1$ will be in the middle, but we do not want to compute it.
 It seems like working with these bounds does not lead to an exact simulation: we need to avoid as much as possible the exact computation of the propensities.
+\\
+\\
+\noindent
 Indeed, in the vast majority of cases we will have the possibility to choose the reaction without the real propensity.
 We will perform some computations and, given the presence of bounds, we will do some mistakes; the algorithm will evaluate the results and eventually reject them (rejection-based algorithm).
 For doing so, the algorithm generates the events with the upper bound of the propensity $\bar{a}_0$.
@@ -164,6 +201,9 @@ By using an upper bound $\tau$ will be lower, so we will generate more events wi
 We apply a sort of Gillespie, we replace the standard propensity with the upper bound and choose the reaction as in the direct method.
 How can we understand whether an event is real or fake? In the case in which $\bar{a}_0 = a_0$ we are in the standard Gillespie.
 We should apply a similar reasoning as NRM for scaling for checking the validity of candidate reactions.
+\\
+\\
+\noindent
 Let's imagine that we are selecting $R_2$: we should generate another random number, scale it over the bound and understand if we are in the exceeding (fake) or inside (real) area.
 
 \begin{itemize}
@@ -176,4 +216,5 @@ Let's imagine that we are selecting $R_2$: we should generate another random num
 
 \end{itemize}
 
+\noindent
 The higher the fluctuation interval, the higher the uncertainty but lower the complexity → find the right compromise with some heuristics on $\delta$ value.
