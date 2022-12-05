@@ -16,20 +16,29 @@ In highly abundant species, the contribution of noise is reduced.
   \item low number species and slow reactions → exact stochastic simulation
   \item high numbered species and fast reactions → approximation
 \end{itemize}
-
-In this scheme we are trying to map the algorithms that we have already seen together, we are still not creating an hybrid method.
+\noindent
+In the scheme in Figure \ref{fig:regions} we are trying to map the algorithms that we have already seen together, we are still not creating an hybrid method.
 Keep in mind that the availability of species can change along the trajectory.
 It is particularly difficult to make a consistent choice, therefore the hybrid setting is generally preferable in this case.
 
 \begin{figure}
-\includegraphics[width=0.6\textwidth]{regions.png}
+  \centering
+  \includegraphics[width=0.5\textwidth]{regions.png}
+  \caption{}
+  \label{fig:regions}
 \end{figure}
-
-We need to partition the set of chemical reactions in subgroups in which we find consistent properties.
+\noindent
+We need to partition the set of chemical reactions in subgroups in which we find consistent properties (Figure \ref{fig:scheme}).
 Once the groups are established, we should be able to simulate the system in different settings.
 The main assumption in the tau leaping method is that the propensity of the reaction will not change dramatically during the macrostep; if we apply this concept to the hybrid setting we will see that this is an issue, as groups are not disjoined.
 
-\includegraphics[width=\textwidth]{scheme.png}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{scheme.png}
+  \caption{}
+  \label{fig:scheme}
+\end{figure}
 
 \section{Reaction-Based System Partitioning}
 In order to divide reactions into group we can set up a threshold, which could be computed over the product of the propensity of the state and the simulation step.
@@ -46,7 +55,7 @@ If we want to be able to appropriately generate time, we should move considering
 We can consider the zero crossing of an equation as following (the log of the random number is a negative quantity):
 
 $$\int_t^{t+\tau}a_0^s (X(t')) dt' = - \ln(r)$$
-
+\noindent
 Instead of deciding $\tau$ at the beginning, the time will be computed along the approximation; when the quantity will be equal to zero, the approximation will stop and restart.
 We can consider this as a sort of traffic light: an event is generated, green light, we can move one.
 The real issue is that even if we have an equation to find the right time, being able to compute this requirement exactly with a computational strategy is a problem.
@@ -58,7 +67,7 @@ In addition computing the integral is computationally challenging.
   \item non trivial complexity, integrals tend to be approximated by computers
   \item the zero crossing is affected by approximation error
 \end{enumerate}
-
+\noindent
 If we use deterministic simulation for simulating fast reactions, we can add another equation to understand when it is the time to stop during the simulation.
 We start from the logarithm of the random number and proceed with numerical integration.
 
@@ -78,9 +87,18 @@ We have two main issues in this strategy:
   \item by considering an upper bound we will generate more events
   \item the bounds should be satisfied, therefore along the simulations we will need to check the consistency over the fluctuation interval of the state
 \end{enumerate}
-
+\noindent
 We have no need of computing the integral, we work with fluctuation intervals and link the generation of $\tau$ over this quantity, with the only difference that we only consider the upper bound and not the current value.
-Pseudocode: we start from a while loop, we compute the fluctuation interval, the bounds of the propensity (same as RSSA) and move forward with $\tau$ computation.
+\\
+\\
+\noindent
+Pseudocode (Figure \ref{fig:HRSSA}): we start from a while loop, we compute the fluctuation interval, the bounds of the propensity (same as RSSA) and move forward with $\tau$ computation.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.5\textwidth]{HRSSA.png}
+  \caption{HRSSA algorithm}
+  \label{fig:HRSSA}
+\end{figure}
 When we reach $\tau$ we decide to apply or not the reaction through random number generation.
 The main issue is how to compute the reaction partitioning, in this case the algorithm divide into slow and fast.
 Since we are working with bounds, we substitute the real propensity with the lower bound for performing the partitioning.
@@ -97,11 +115,12 @@ We have the possibility to define simulation length and time sampling i.e.~sampl
   \centering
   \includegraphics[width=0.6\textwidth]{HRSSA_oregonator.png}
   \caption{HSimulator HRSSA Oregonator}
+  \label{fig:oregonator}
 \end{figure}
-
-Oregonator HRSSA: the algorithm applies the stochastic approach by starting from the deterministic setting.
+\noindent
+\textbf{Oregonator HRSSA:} (Figure \ref{fig:oregonator})  the algorithm applies the stochastic approach by starting from the deterministic setting.
 In the advanced options we can insert additional specifications{]}.
 If we apply steady state conditions (simulation length = 5, time sampling = 0.
 0001), we observe a flat signal; the issue is that the stochastic simulation is applied to the subset of slow reactions.
 If we change the parameters for deciding if something is fast or slow, we should see a change in the behaviour.
-``Un giorno o l'altro mi ammazzerò, ne sono certo'' By working with smaller variables, we see something remarkable: noise is heavily present.
+By working with smaller variables, we see something remarkable: noise is heavily present.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.9)  29 NOV 2022 11:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.3.9)  5 DEC 2022 15:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -825,7 +825,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 er (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.40 ...}RUNGE-KUTTA Method}{27}{subsection.5.2.2}
+l.45 ...}Deterministic simulations}{25}{chapter.5}
                                                   % [1
 
 ])
@@ -838,102 +838,214 @@ Chapter 1.
 [3
 
 ]
-<chapters/01/images/petri_nets.png, id=376, 691.58376pt x 550.055pt>
+Underfull \hbox (badness 10000) in paragraph at lines 53--56
+
+ []
+
+<chapters/01/images/petri_nets.png, id=422, 691.58376pt x 550.055pt>
 File: chapters/01/images/petri_nets.png Graphic file (type png)
 <use chapters/01/images/petri_nets.png>
 Package pdftex.def Info: chapters/01/images/petri_nets.png  used on input line 
-58.
-(pdftex.def)             Requested size: 303.53267pt x 241.42064pt.
-
+59.
+(pdftex.def)             Requested size: 216.81pt x 172.43732pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<chapters/01/images//example_petri.png, id=378, 907.39pt x 353.32pt>
+<chapters/01/images//example_petri.png, id=425, 907.39pt x 353.32pt>
 File: chapters/01/images//example_petri.png Graphic file (type png)
 <use chapters/01/images//example_petri.png>
 Package pdftex.def Info: chapters/01/images//example_petri.png  used on input l
-ine 78.
+ine 82.
 (pdftex.def)             Requested size: 303.53267pt x 118.18637pt.
-[4] [5 <./chapters/01/images/petri_nets.png> <./chapters/01/images//example_pet
-ri.png>]) (./chapters/02/stochastic_chemical_kinetics.tex [6] [7]
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 94--104
+
+ []
+
+[5 <./chapters/01/images/petri_nets.png> <./chapters/01/images//example_petri.p
+ng>]) (./chapters/02/stochastic_chemical_kinetics.tex [6] [7]
 Chapter 2.
 
-LaTeX Warning: Command \texttimes invalid in math mode on input line 41.
+Underfull \hbox (badness 10000) in paragraph at lines 5--26
+
+ []
 
 
-LaTeX Warning: Command \texttimes invalid in math mode on input line 41.
+Underfull \hbox (badness 10000) in paragraph at lines 5--26
 
-Missing character: There is no Ö in font cmr10!
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--41
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--41
+
+ []
+
 [8
 
-] [9] [10]
-<chapters/02/images/SSA_algo.png, id=433, 924.45375pt x 499.8675pt>
+]
+
+LaTeX Warning: Command \texttimes invalid in math mode on input line 54.
+
+
+LaTeX Warning: Command \texttimes invalid in math mode on input line 54.
+
+Missing character: There is no Ö in font cmr10!
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 77--86
+
+ []
+
+<chapters/02/images/massaction.png, id=485, 707.64375pt x 380.42125pt>
+File: chapters/02/images/massaction.png Graphic file (type png)
+<use chapters/02/images/massaction.png>
+Package pdftex.def Info: chapters/02/images/massaction.png  used on input line 
+92.
+(pdftex.def)             Requested size: 216.81pt x 116.55363pt.
+[10 <./chapters/02/images/massaction.png>]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 113.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `subscript' on input line 113.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 113.
+
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 146--157
+
+ []
+
+<chapters/02/images/SSA_algo.png, id=501, 924.45375pt x 499.8675pt>
 File: chapters/02/images/SSA_algo.png Graphic file (type png)
 <use chapters/02/images/SSA_algo.png>
-Package pdftex.def Info: chapters/02/images/SSA_algo.png  used on input line 12
-7.
+Package pdftex.def Info: chapters/02/images/SSA_algo.png  used on input line 16
+0.
 (pdftex.def)             Requested size: 303.53267pt x 164.1254pt.
-) (./chapters/03/implementation_stochastic.tex [11 <./chapters/02/images/SSA_al
-go.png>] [12]
+) (./chapters/03/implementation_stochastic.tex [12 <./chapters/02/images/SSA_al
+go.png>]
 Chapter 3.
-<chapters/03/images/tree_methods.png, id=445, 873.2625pt x 552.0625pt>
+<chapters/03/images/tree_methods.png, id=510, 873.2625pt x 552.0625pt>
 File: chapters/03/images/tree_methods.png Graphic file (type png)
 <use chapters/03/images/tree_methods.png>
 Package pdftex.def Info: chapters/03/images/tree_methods.png  used on input lin
 e 30.
 (pdftex.def)             Requested size: 433.62pt x 274.12679pt.
-<chapters/03/images/boundaries.png, id=446, 701.62125pt x 289.08pt>
-File: chapters/03/images/boundaries.png Graphic file (type png)
-<use chapters/03/images/boundaries.png>
-Package pdftex.def Info: chapters/03/images/boundaries.png  used on input line 
-44.
-(pdftex.def)             Requested size: 303.53267pt x 125.06506pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 19--34
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--42
+
+ []
+
 [13
 
 ] [14 <./chapters/03/images/tree_methods.png>]
-<chapters/03/images/direct_method.png, id=458, 1008.76875pt x 564.1075pt>
+<chapters/03/images/boundaries.png, id=522, 701.62125pt x 289.08pt>
+File: chapters/03/images/boundaries.png Graphic file (type png)
+<use chapters/03/images/boundaries.png>
+Package pdftex.def Info: chapters/03/images/boundaries.png  used on input line 
+51.
+(pdftex.def)             Requested size: 303.53267pt x 125.06506pt.
+<chapters/03/images/direct_method.png, id=523, 1008.76875pt x 564.1075pt>
 File: chapters/03/images/direct_method.png Graphic file (type png)
 <use chapters/03/images/direct_method.png>
 Package pdftex.def Info: chapters/03/images/direct_method.png  used on input li
-ne 52.
-(pdftex.def)             Requested size: 433.62pt x 242.48402pt.
+ne 62.
+(pdftex.def)             Requested size: 303.53267pt x 169.73279pt.
 
-Overfull \hbox (15.0pt too wide) in paragraph at lines 52--53
-[][] 
+Underfull \hbox (badness 10000) in paragraph at lines 72--79
+
  []
 
 [15 <./chapters/03/images/boundaries.png> <./chapters/03/images/direct_method.p
 ng>]
-<chapters/03/images/R_tau.png, id=471, 251.94125pt x 289.08pt>
+<chapters/03/images/R_tau.png, id=540, 251.94125pt x 289.08pt>
 File: chapters/03/images/R_tau.png Graphic file (type png)
 <use chapters/03/images/R_tau.png>
-Package pdftex.def Info: chapters/03/images/R_tau.png  used on input line 81.
-(pdftex.def)             Requested size: 216.81pt x 248.77156pt.
+Package pdftex.def Info: chapters/03/images/R_tau.png  used on input line 101.
+(pdftex.def)             Requested size: 130.08731pt x 149.26381pt.
 
 
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 93.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 116.
 
-[16] [17 <./chapters/03/images/R_tau.png>] [18])
-(./chapters/04/approximation_algorithms.tex [19]
-Chapter 4.
-<chapters/04/images/SSA_tree.png, id=498, 438.63875pt x 687.56876pt>
-File: chapters/04/images/SSA_tree.png Graphic file (type png)
-<use chapters/04/images/SSA_tree.png>
-Package pdftex.def Info: chapters/04/images/SSA_tree.png  used on input line 22
-.
-(pdftex.def)             Requested size: 438.63766pt x 687.56708pt.
 
-Overfull \hbox (5.01767pt too wide) in paragraph at lines 22--23
- [][] 
+Underfull \hbox (badness 10000) in paragraph at lines 114--137
+
  []
 
 
-LaTeX Warning: Float too large for page by 109.40709pt on input line 23.
+Underfull \hbox (badness 10000) in paragraph at lines 114--137
+
+ []
+
+[16 <./chapters/03/images/R_tau.png>] [17]
+Underfull \hbox (badness 10000) in paragraph at lines 172--183
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 188--208
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 188--208
+
+ []
+
+[18]) (./chapters/04/approximation_algorithms.tex [19]
+Chapter 4.
+<chapters/04/images/SSA_tree.png, id=567, 438.63875pt x 687.56876pt>
+File: chapters/04/images/SSA_tree.png Graphic file (type png)
+<use chapters/04/images/SSA_tree.png>
+Package pdftex.def Info: chapters/04/images/SSA_tree.png  used on input line 23
+.
+(pdftex.def)             Requested size: 216.81pt x 339.85973pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 39--47
+
+ []
 
 [20
 
-] [21 <./chapters/04/images/SSA_tree.png>] [22])
-(./chapters/05/deterministic_simulations.tex [23] [24]
+] [21 <./chapters/04/images/SSA_tree.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 67--90
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--90
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--90
+
+ []
+
+[22]) (./chapters/05/deterministic_simulations.tex
+Underfull \hbox (badness 10000) in paragraph at lines 115--2
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--2
+
+ []
+
+[23] [24]
 Chapter 5.
 
 LaTeX Warning: Command \textrightarrow invalid in math mode on input line 4.
@@ -941,129 +1053,244 @@ LaTeX Warning: Command \textrightarrow invalid in math mode on input line 4.
 
 LaTeX Warning: Command \textrightarrow invalid in math mode on input line 4.
 
-<chapters/05/images/reaction_ODEs.png, id=526, 1143.27126pt x 457.71pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 3--11
+
+ []
+
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 11.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--18
+
+ []
+
+<chapters/05/images/reaction_ODEs.png, id=594, 1143.27126pt x 457.71pt>
 File: chapters/05/images/reaction_ODEs.png Graphic file (type png)
 <use chapters/05/images/reaction_ODEs.png>
 Package pdftex.def Info: chapters/05/images/reaction_ODEs.png  used on input li
-ne 14.
-(pdftex.def)             Requested size: 433.62pt x 173.59637pt.
-<chapters/05/images/reaction_rates.png, id=527, 1143.27126pt x 457.71pt>
+ne 21.
+(pdftex.def)             Requested size: 216.81pt x 86.79819pt.
+<chapters/05/images/reaction_rates.png, id=596, 1143.27126pt x 457.71pt>
 File: chapters/05/images/reaction_rates.png Graphic file (type png)
 <use chapters/05/images/reaction_rates.png>
 Package pdftex.def Info: chapters/05/images/reaction_rates.png  used on input l
-ine 23.
-(pdftex.def)             Requested size: 433.62pt x 173.59637pt.
-
-LaTeX Warning: Command \textellipsis invalid in math mode on input line 39.
-
+ine 32.
+(pdftex.def)             Requested size: 216.81pt x 86.79819pt.
 [25
 
-] [26 <./chapters/05/images/reaction_ODEs.png> <./chapters/05/images/reaction_r
-ates.png>]
+ <./chapters/05/images/reaction_ODEs.png>]
 
-LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 6
-1.
+LaTeX Warning: Command \textellipsis invalid in math mode on input line 51.
 
+[26 <./chapters/05/images/reaction_rates.png>]
 
-LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 6
-1.
-
-Missing character: There is no · in font cmr10!
-
-LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 6
-2.
+LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 7
+4.
 
 
-LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 6
-2.
+LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 7
+4.
 
 Missing character: There is no · in font cmr10!
 
-LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 6
-9.
+LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 7
+5.
 
 
-LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 6
-9.
+LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 7
+5.
 
 Missing character: There is no · in font cmr10!
+
+LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 8
+3.
+
+
+LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 8
+3.
+
+Missing character: There is no · in font cmr10!
+
+Overfull \hbox (6.82483pt too wide) detected at line 83
+\OML/cmm/m/it/10 K\OT1/cmr/m/n/10 1 = \OML/cmm/m/it/10 F\OT1/cmr/m/n/10 (\OML/c
+mm/m/it/10 t[]; \OT1/cmr/m/n/10 [\OML/cmm/m/it/10 X[]\OT1/cmr/m/n/10 ])[] \OML/
+cmm/m/it/10 K\OT1/cmr/m/n/10 2 = \OML/cmm/m/it/10 F\OT1/cmr/m/n/10 (\OML/cmm/m/
+it/10 t[] \OT1/cmr/m/n/10 + 2\OML/cmm/m/it/10 h; \OT1/cmr/m/n/10 [\OML/cmm/m/it
+/10 X[]\OT1/cmr/m/n/10 ] + \OML/cmm/m/it/10 h\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 
+K[]\OT1/cmr/m/n/10 )[] \OML/cmm/m/it/10 K\OT1/cmr/m/n/10 3 = \OML/cmm/m/it/10 F
+\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 t[] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 h\OT1/
+cmr/m/n/10 2\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 [\OML/cmm/m/it/10 X[]\OT1/cmr/m/
+n/10 ] + \OML/cmm/m/it/10 h\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 K[]\OT1/cmr/m/n/10
+ )[] \OML/cmm/m/it/10 K\OT1/cmr/m/n/10 4 = \OML/cmm/m/it/10 F\OT1/cmr/m/n/10 (\
+OML/cmm/m/it/10 t[]; \OT1/cmr/m/n/10 [\OML/cmm/m/it/10 X[]\OT1/cmr/m/n/10 ] + \
+OML/cmm/m/it/10 hK[]\OT1/cmr/m/n/10 )
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 87--100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--116
+
+ []
+
 [27]
-<chapters/05/images/discretization.png, id=545, 751.80875pt x 325.215pt>
+<chapters/05/images/discretization.png, id=617, 751.80875pt x 325.215pt>
 File: chapters/05/images/discretization.png Graphic file (type png)
 <use chapters/05/images/discretization.png>
 Package pdftex.def Info: chapters/05/images/discretization.png  used on input l
-ine 103.
+ine 126.
 (pdftex.def)             Requested size: 433.62pt x 187.57776pt.
-) (./chapters/06/hybrid_simulations.tex [28] [29 <./chapters/05/images/discreti
-zation.png>]
+) (./chapters/06/hybrid_simulations.tex [28 <./chapters/05/images/discretizatio
+n.png>]
 Chapter 6.
-<chapters/06/images/regions.png, id=556, 553.06625pt x 425.59pt>
+<chapters/06/images/regions.png, id=626, 553.06625pt x 425.59pt>
 File: chapters/06/images/regions.png Graphic file (type png)
 <use chapters/06/images/regions.png>
-Package pdftex.def Info: chapters/06/images/regions.png  used on input line 25.
+Package pdftex.def Info: chapters/06/images/regions.png  used on input line 26.
 
-(pdftex.def)             Requested size: 260.17464pt x 200.20265pt.
-<chapters/06/images/scheme.png, id=557, 615.29875pt x 336.25626pt>
+(pdftex.def)             Requested size: 216.81pt x 166.83662pt.
+<chapters/06/images/scheme.png, id=628, 615.29875pt x 336.25626pt>
 File: chapters/06/images/scheme.png Graphic file (type png)
 <use chapters/06/images/scheme.png>
-Package pdftex.def Info: chapters/06/images/scheme.png  used on input line 32.
-(pdftex.def)             Requested size: 433.62pt x 236.97346pt.
+Package pdftex.def Info: chapters/06/images/scheme.png  used on input line 38.
+(pdftex.def)             Requested size: 216.81pt x 118.4816pt.
+[29
 
-Overfull \hbox (15.0pt too wide) in paragraph at lines 32--33
-[][] 
+] [30 <./chapters/06/images/regions.png> <./chapters/06/images/scheme.png>]
+<chapters/06/images/HRSSA.png, id=643, 566.115pt x 729.72626pt>
+File: chapters/06/images/HRSSA.png Graphic file (type png)
+<use chapters/06/images/HRSSA.png>
+Package pdftex.def Info: chapters/06/images/HRSSA.png  used on input line 98.
+(pdftex.def)             Requested size: 216.81pt x 279.47012pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 90--107
+
  []
 
-[30
-
-] [31 <./chapters/06/images/regions.png> <./chapters/06/images/scheme.png>]
-[32]
-<chapters/06/images/HRSSA_oregonator.png, id=578, 646.415pt x 476.78125pt>
+[31]
+<chapters/06/images/HRSSA_oregonator.png, id=652, 646.415pt x 476.78125pt>
 File: chapters/06/images/HRSSA_oregonator.png Graphic file (type png)
 <use chapters/06/images/HRSSA_oregonator.png>
 Package pdftex.def Info: chapters/06/images/HRSSA_oregonator.png  used on input
- line 98.
+ line 116.
 (pdftex.def)             Requested size: 260.17464pt x 191.89496pt.
-) (./chapters/07/reali.tex [33 <./chapters/06/images/HRSSA_oregonator.png>]
+) (./chapters/07/reali.tex [32 <./chapters/06/images/HRSSA.png>] [33 <./chapter
+s/06/images/HRSSA_oregonator.png>]
 Chapter 7.
 [34
 
 ]
-<chapters/07/images/scheme_model.png, id=594, 503.8825pt x 422.57875pt>
+Underfull \hbox (badness 10000) in paragraph at lines 80--92
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 105--117
+
+ []
+
+<chapters/07/images/scheme_model.png, id=671, 503.8825pt x 422.57875pt>
 File: chapters/07/images/scheme_model.png Graphic file (type png)
 <use chapters/07/images/scheme_model.png>
 Package pdftex.def Info: chapters/07/images/scheme_model.png  used on input lin
-e 128.
+e 130.
 (pdftex.def)             Requested size: 260.17464pt x 218.19469pt.
- [35]
-<chapters/07/images/validation.png, id=602, 691.58376pt x 319.1925pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 138--172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 138--172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 138--172
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 138--172
+
+ []
+
+[35]
+<chapters/07/images/validation.png, id=676, 691.58376pt x 319.1925pt>
 File: chapters/07/images/validation.png Graphic file (type png)
 <use chapters/07/images/validation.png>
 Package pdftex.def Info: chapters/07/images/validation.png  used on input line 
-166.
+175.
 (pdftex.def)             Requested size: 433.62pt x 200.13771pt.
-<chapters/07/images/workflow.png, id=603, 286.06876pt x 621.32124pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 190--199
+
+ []
+
+[36 <./chapters/07/images/scheme_model.png>]
+<chapters/07/images/workflow.png, id=684, 286.06876pt x 621.32124pt>
 File: chapters/07/images/workflow.png Graphic file (type png)
 <use chapters/07/images/workflow.png>
-Package pdftex.def Info: chapters/07/images/workflow.png  used on input line 20
-8.
+Package pdftex.def Info: chapters/07/images/workflow.png  used on input line 21
+9.
 (pdftex.def)             Requested size: 130.08731pt x 282.54044pt.
-<chapters/07/images/volterra.png, id=604, 761.84625pt x 301.125pt>
+<chapters/07/images/volterra.png, id=685, 761.84625pt x 301.125pt>
 File: chapters/07/images/volterra.png Graphic file (type png)
 <use chapters/07/images/volterra.png>
-Package pdftex.def Info: chapters/07/images/volterra.png  used on input line 22
-1.
+Package pdftex.def Info: chapters/07/images/volterra.png  used on input line 23
+2.
 (pdftex.def)             Requested size: 433.62pt x 171.3903pt.
- [36 <./chapters/07/images/scheme_model.png>] [37 <./chapters/07/images/validat
-ion.png> <./chapters/07/images/workflow.png>] [38 <./chapters/07/images/volterr
-a.png>] [39] [40]
-<chapters/07/images/example.png, id=649, 1057.9525pt x 449.68pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 255--262
+
+ []
+
+[37 <./chapters/07/images/validation.png>] [38 <./chapters/07/images/workflow.p
+ng> <./chapters/07/images/volterra.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 292--303
+
+ []
+
+[39]
+Underfull \hbox (badness 10000) in paragraph at lines 359--368
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 393--405
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 410--427
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 410--427
+
+ []
+
+[40]
+<chapters/07/images/example.png, id=717, 1057.9525pt x 449.68pt>
 File: chapters/07/images/example.png Graphic file (type png)
 <use chapters/07/images/example.png>
-Package pdftex.def Info: chapters/07/images/example.png  used on input line 440
+Package pdftex.def Info: chapters/07/images/example.png  used on input line 450
 .
 (pdftex.def)             Requested size: 433.62pt x 184.30823pt.
 
-Overfull \hbox (18.91435pt too wide) detected at line 466
+Overfull \hbox (18.91435pt too wide) detected at line 475
 \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 ) = \OML/c
 mm/m/it/10 f [] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 f[] [] [] \OT1/cmr/m/n/10 + 
 \OML/cmm/m/it/10 f[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 )[] + 
@@ -1072,15 +1299,73 @@ L/cmm/m/it/10 x[]\OT1/cmr/m/n/10 )[] + \OML/cmm/m/it/10 R[]\OT1/cmr/m/n/10 (\OM
 L/cmm/m/it/10 x\OT1/cmr/m/n/10 )[] [] [] = 0
  []
 
-[41 <./chapters/07/images/example.png>] [42] [43]
-<chapters/07/images/function.png, id=683, 566.115pt x 548.0475pt>
+[41 <./chapters/07/images/example.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 480--493
+
+ []
+
+
+Overfull \hbox (406.33354pt too wide) detected at line 493
+\OML/cmm/m/it/10 f [] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML
+/cmm/m/it/10 x\OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 "[]\OT1/cmr/m/n/10 (\OML/cmm
+/m/it/10 x\OT1/cmr/m/n/10 ) + []\OML/cmm/m/it/10 "[][]\OT1/cmr/m/n/10 (\OML/cmm
+/m/it/10 x\OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 R[]\OT1/cmr/m/n/10 (\OML/cmm/m/i
+t/10 x\OT1/cmr/m/n/10 )[] \OML/cmm/m/it/10 f [] \OT1/cmr/m/n/10 = \OML/cmm/m/it
+/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^^@ 
+\OML/cmm/m/it/10 "[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 ) + []\O
+ML/cmm/m/it/10 "[][]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 ) + \OML
+/cmm/m/it/10 R[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 )[]  \OMS/cm
+sy/m/n/10 ) \OML/cmm/m/it/10 f [] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 f [] \O
+T1/cmr/m/n/10 = +2\OML/cmm/m/it/10 "[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/c
+mr/m/n/10 ) + \OML/cmm/m/it/10 R[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m
+/n/10 )[]  \OMS/cmsy/m/n/10 ) []\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n
+/10 ) = [] + \OML/cmm/m/it/10 R[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/
+n/10 )
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 493--520
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 493--520
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 493--520
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 493--520
+
+ []
+
+[42]
+Underfull \hbox (badness 10000) in paragraph at lines 584--592
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 607--618
+
+ []
+
+[43]
+Underfull \hbox (badness 10000) in paragraph at lines 669--679
+
+ []
+
+<chapters/07/images/function.png, id=744, 566.115pt x 548.0475pt>
 File: chapters/07/images/function.png Graphic file (type png)
 <use chapters/07/images/function.png>
-Package pdftex.def Info: chapters/07/images/function.png  used on input line 67
-5.
+Package pdftex.def Info: chapters/07/images/function.png  used on input line 69
+4.
 (pdftex.def)             Requested size: 195.12767pt x 188.90097pt.
 
-Overfull \hbox (299.36398pt too wide) detected at line 689
+Overfull \hbox (299.36398pt too wide) detected at line 708
 \OML/cmm/m/it/10 p[] \OT1/cmr/m/n/10 = \OMS/cmsy/m/n/10 ^^@[] \OT1/cmr/m/n/10 =
  \OMS/cmsy/m/n/10 ^^@\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 65[] \O
 ML/cmm/m/it/10 x[] \OT1/cmr/m/n/10 = 3 \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 0\O
@@ -1100,35 +1385,284 @@ m/it/10 x[]\OT1/cmr/m/n/10 ) = 2\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 30[] \OML/cmm
 /m/n/10 ^^@\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 067
  []
 
-[44 <./chapters/07/images/function.png>] [45]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 855.
+[44 <./chapters/07/images/function.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 738--747
+
+ []
 
 
-(/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
+Underfull \hbox (badness 10000) in paragraph at lines 760--769
+
+ []
+
+[45]
+Underfull \hbox (badness 10000) in paragraph at lines 790--804
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 790--804
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 865--883
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 865--883
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 865--883
+
+ []
+
+[46]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 888.
+
+ (/usr/local/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [46] [47]
-[48] [49]
-<chapters/07/images/multistep.png, id=734, 390.45876pt x 328.22626pt>
+)
+Underfull \hbox (badness 10000) in paragraph at lines 905--919
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 941--952
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 941--952
+
+ []
+
+[47]
+Underfull \hbox (badness 10000) in paragraph at lines 979--995
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1030--1042
+
+ []
+
+[48]
+Underfull \hbox (badness 10000) in paragraph at lines 1083--1100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1083--1100
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1115--1124
+
+ []
+
+[49]
+Underfull \hbox (badness 10000) in paragraph at lines 1128--1171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1128--1171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1128--1171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1128--1171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1128--1171
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1172--1184
+
+ []
+
+<chapters/07/images/multistep.png, id=784, 390.45876pt x 328.22626pt>
 File: chapters/07/images/multistep.png Graphic file (type png)
 <use chapters/07/images/multistep.png>
 Package pdftex.def Info: chapters/07/images/multistep.png  used on input line 1
-152.
+187.
 (pdftex.def)             Requested size: 195.12767pt x 164.02757pt.
-<chapters/07/images/stoch_LV.png, id=735, 768.8725pt x 311.1625pt>
+<chapters/07/images/stoch_LV.png, id=785, 768.8725pt x 311.1625pt>
 File: chapters/07/images/stoch_LV.png Graphic file (type png)
 <use chapters/07/images/stoch_LV.png>
-Package pdftex.def Info: chapters/07/images/stoch_LV.png  used on input line 11
-79.
+Package pdftex.def Info: chapters/07/images/stoch_LV.png  used on input line 12
+12.
 (pdftex.def)             Requested size: 433.62pt x 175.48903pt.
- [50 <./chapters/07/images/multistep.png>]
-<chapters/07/images/mcmc.png, id=744, 340.27126pt x 242.9075pt>
+[50]
+Underfull \hbox (badness 10000) in paragraph at lines 1219--1230
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1243--1255
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1243--1255
+
+ []
+
+<chapters/07/images/mcmc.png, id=791, 340.27126pt x 242.9075pt>
 File: chapters/07/images/mcmc.png Graphic file (type png)
 <use chapters/07/images/mcmc.png>
-Package pdftex.def Info: chapters/07/images/mcmc.png  used on input line 1226.
+Package pdftex.def Info: chapters/07/images/mcmc.png  used on input line 1265.
 (pdftex.def)             Requested size: 195.12767pt x 139.29636pt.
- [51 <./chapters/07/images/stoch_LV.png> <./chapters/07/images/mcmc.png>])
+[51 <./chapters/07/images/multistep.png>] [52 <./chapters/07/images/stoch_LV.pn
+g> <./chapters/07/images/mcmc.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1289--1316
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1289--1316
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1289--1316
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1289--1316
+
+ []
+
+[53]
+<chapters/07/images/distribution.png, id=811, 416.55624pt x 381.425pt>
+File: chapters/07/images/distribution.png Graphic file (type png)
+<use chapters/07/images/distribution.png>
+Package pdftex.def Info: chapters/07/images/distribution.png  used on input lin
+e 1356.
+(pdftex.def)             Requested size: 216.81pt x 198.52838pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1377--1389
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1377--1389
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1393--1404
+
+ []
+
+[54 <./chapters/07/images/distribution.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1433--1444
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1433--1444
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1453--1469
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1453--1469
+
+ []
+
+
+Overfull \hbox (23.7269pt too wide) in paragraph at lines 1473--1478
+[]$\T1/cmtt/m/n/10 http : / / chi-[]feng . github . io / mcmc-[]demo / app . ht
+ml ? algorithm = RandomWalkMH & target = banana$[] \T1/cmr/m/n/10 Green:
+ []
+
+[55]
+Underfull \hbox (badness 10000) in paragraph at lines 1535--1544
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1547--1554
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1570--1584
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1570--1584
+
+ []
+
+[56]
+Underfull \hbox (badness 10000) in paragraph at lines 1622--1632
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1622--1632
+
+ []
+
+<chapters/07/images/diag_1.png, id=831, 461.725pt x 494.84875pt>
+File: chapters/07/images/diag_1.png Graphic file (type png)
+<use chapters/07/images/diag_1.png>
+Package pdftex.def Info: chapters/07/images/diag_1.png  used on input line 1686
+.
+(pdftex.def)             Requested size: 260.17464pt x 278.83499pt.
+<chapters/07/images/diag_2.png, id=832, 527.9725pt x 594.22pt>
+File: chapters/07/images/diag_2.png Graphic file (type png)
+<use chapters/07/images/diag_2.png>
+Package pdftex.def Info: chapters/07/images/diag_2.png  used on input line 1694
+.
+(pdftex.def)             Requested size: 260.17464pt x 292.82056pt.
+<chapters/07/images/diag_3.png, id=833, 461.725pt x 494.84875pt>
+File: chapters/07/images/diag_3.png Graphic file (type png)
+<use chapters/07/images/diag_3.png>
+Package pdftex.def Info: chapters/07/images/diag_3.png  used on input line 1706
+.
+(pdftex.def)             Requested size: 260.17464pt x 278.83499pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1709--1730
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1709--1730
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1709--1730
+
+ []
+
+[57] [58 <./chapters/07/images/diag_1.png>] [59 <./chapters/07/images/diag_2.pn
+g>] [60 <./chapters/07/images/diag_3.png>])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 26.
- [52]
+ [61]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 26.
  (./build/principal.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 26.
@@ -1138,51 +1672,53 @@ Package rerunfilecheck Info: File `principal.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 26.
  ) 
 Here is how much of TeX's memory you used:
- 13079 strings out of 492616
- 195812 string characters out of 6129482
- 319155 words of memory out of 5000000
- 16513 multiletter control sequences out of 15000+600000
- 29898 words of font info for 79 fonts, out of 8000000 for 9000
+ 13119 strings out of 492616
+ 196130 string characters out of 6129482
+ 318412 words of memory out of 5000000
+ 16536 multiletter control sequences out of 15000+600000
+ 30514 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,12n,43p,656b,473s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,12n,43p,653b,476s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}
 {/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<
 /usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></
-usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></u
-sr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
-r/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr
-/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/l
-ocal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/loc
-al/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local
-/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/t
-exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texl
-ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive
-/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/20
-19/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2019/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2019/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2019/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2019/texmf-d
-ist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2019/tex
-mf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2019
-/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2
-019/texmf-dist/fonts/type1/public/cm-super/sfbi1000.pfb></usr/local/texlive/201
-9/texmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/local/texlive/2019/
-texmf-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2019/te
-xmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2019/texm
-f-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2019/texmf-
-dist/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2019/texmf-di
-st/fonts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2019/texmf-dist
-/fonts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2019/texmf-dist/f
-onts/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2019/texmf-dist/fon
-ts/type1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2019/texmf-dist/fonts
-/type1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2019/texmf-dist/fonts/t
-ype1/public/cm-super/sfti1000.pfb></usr/local/texlive/2019/texmf-dist/fonts/typ
-e1/public/cm-super/sftt1000.pfb>
-Output written on ./build/principal.pdf (53 pages, 5033659 bytes).
+usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></us
+r/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr
+/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/
+local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/l
+ocal/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/loc
+al/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local
+/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/t
+exlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/tex
+live/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texli
+ve/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/
+2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/201
+9/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2019/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2019/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2019/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2019/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2019/texmf-dist/
+fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2019/texmf-d
+ist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2019/tex
+mf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2019/
+texmf-dist/fonts/type1/public/cm-super/sfbi1000.pfb></usr/local/texlive/2019/te
+xmf-dist/fonts/type1/public/cm-super/sfbx0900.pfb></usr/local/texlive/2019/texm
+f-dist/fonts/type1/public/cm-super/sfbx1000.pfb></usr/local/texlive/2019/texmf-
+dist/fonts/type1/public/cm-super/sfbx1200.pfb></usr/local/texlive/2019/texmf-di
+st/fonts/type1/public/cm-super/sfbx1440.pfb></usr/local/texlive/2019/texmf-dist
+/fonts/type1/public/cm-super/sfbx2074.pfb></usr/local/texlive/2019/texmf-dist/f
+onts/type1/public/cm-super/sfbx2488.pfb></usr/local/texlive/2019/texmf-dist/fon
+ts/type1/public/cm-super/sfrm0700.pfb></usr/local/texlive/2019/texmf-dist/fonts
+/type1/public/cm-super/sfrm0900.pfb></usr/local/texlive/2019/texmf-dist/fonts/t
+ype1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2019/texmf-dist/fonts/typ
+e1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1
+/public/cm-super/sfti1000.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/p
+ublic/cm-super/sftt1000.pfb>
+Output written on ./build/principal.pdf (62 pages, 6106951 bytes).
 PDF statistics:
- 913 PDF objects out of 1000 (max. 8388607)
- 772 compressed objects within 8 object streams
- 224 named destinations out of 1000 (max. 500000)
- 660 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1030 PDF objects out of 1200 (max. 8388607)
+ 865 compressed objects within 9 object streams
+ 234 named destinations out of 1000 (max. 500000)
+ 762 words of extra memory for PDF output out of 10000 (max. 10000000)
 

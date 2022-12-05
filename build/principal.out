@@ -9,60 +9,69 @@
 \BOOKMARK [0][-]{chapter.2}{Stochastic Chemical Kinetics}{}% 9
 \BOOKMARK [1][-]{section.2.1}{Rewriting biochemical reactions}{chapter.2}% 10
 \BOOKMARK [1][-]{section.2.2}{Reaction propensity}{chapter.2}% 11
-\BOOKMARK [1][-]{section.2.3}{Chemical Master Equation}{chapter.2}% 12
-\BOOKMARK [2][-]{subsection.2.3.1}{Grand probability function}{section.2.3}% 13
-\BOOKMARK [2][-]{subsection.2.3.2}{CME}{section.2.3}% 14
-\BOOKMARK [1][-]{section.2.4}{Stochastic simulation}{chapter.2}% 15
-\BOOKMARK [2][-]{subsection.2.4.1}{Probability density function}{section.2.4}% 16
-\BOOKMARK [0][-]{chapter.3}{Implementation of the Stochastic Simulation Algorithms}{}% 17
-\BOOKMARK [1][-]{section.3.1}{Non-deterministic vs stochastic}{chapter.3}% 18
-\BOOKMARK [1][-]{section.3.2}{Exact stochastic simulation algorithms}{chapter.3}% 19
-\BOOKMARK [2][-]{subsection.3.2.1}{Enhanced Direct Method}{section.3.2}% 20
-\BOOKMARK [1][-]{section.3.3}{First Reaction Method \(FRM\)}{chapter.3}% 21
-\BOOKMARK [1][-]{section.3.4}{First Family Method}{chapter.3}% 22
-\BOOKMARK [1][-]{section.3.5}{Next Reaction Method}{chapter.3}% 23
-\BOOKMARK [1][-]{section.3.6}{RSSA}{chapter.3}% 24
-\BOOKMARK [0][-]{chapter.4}{Approximation algorithms}{}% 25
-\BOOKMARK [1][-]{section.4.1}{Probability-Weighted Dynamic Monte Carlo Method}{chapter.4}% 26
-\BOOKMARK [1][-]{section.4.2}{Bounded Acceptance Probability RSSA}{chapter.4}% 27
-\BOOKMARK [1][-]{section.4.3}{-Leaping Method}{chapter.4}% 28
-\BOOKMARK [2][-]{subsection.4.3.1}{Choosing tau - Leap selection section}{section.4.3}% 29
-\BOOKMARK [1][-]{section.4.4}{Chemical Langevin Method}{chapter.4}% 30
-\BOOKMARK [0][-]{chapter.5}{Deterministic simulations}{}% 31
-\BOOKMARK [1][-]{section.5.1}{Deterministic approximation}{chapter.5}% 32
-\BOOKMARK [1][-]{section.5.2}{Numerical solution of ODEs}{chapter.5}% 33
-\BOOKMARK [2][-]{subsection.5.2.1}{Euler's method}{section.5.2}% 34
-\BOOKMARK [2][-]{subsection.5.2.2}{RUNGE-KUTTA Method}{section.5.2}% 35
-\BOOKMARK [2][-]{subsection.5.2.3}{Midpoint method}{section.5.2}% 36
-\BOOKMARK [2][-]{subsection.5.2.4}{Adaptive methods - Runge-Kutta-Fehlberg}{section.5.2}% 37
-\BOOKMARK [0][-]{chapter.6}{Hybrid simulation approaches}{}% 38
-\BOOKMARK [1][-]{section.6.1}{Reaction-Based System Partitioning}{chapter.6}% 39
-\BOOKMARK [1][-]{section.6.2}{HRSSA}{chapter.6}% 40
-\BOOKMARK [0][-]{chapter.7}{Reali}{}% 41
-\BOOKMARK [1][-]{section.7.1}{Introduction}{chapter.7}% 42
-\BOOKMARK [2][-]{subsection.7.1.1}{Definition of a system}{section.7.1}% 43
-\BOOKMARK [2][-]{subsection.7.1.2}{Determinism, nondeterminism, or stochasticity?}{section.7.1}% 44
-\BOOKMARK [2][-]{subsection.7.1.3}{Computational complexity}{section.7.1}% 45
-\BOOKMARK [2][-]{subsection.7.1.4}{Definition of a model}{section.7.1}% 46
-\BOOKMARK [2][-]{subsection.7.1.5}{Checking the validity of a model}{section.7.1}% 47
-\BOOKMARK [2][-]{subsection.7.1.6}{How to build a model}{section.7.1}% 48
-\BOOKMARK [1][-]{section.7.2}{Optimization problem}{chapter.7}% 49
-\BOOKMARK [2][-]{subsection.7.2.1}{General definition of an optimization problem}{section.7.2}% 50
-\BOOKMARK [2][-]{subsection.7.2.2}{Definition of a minimum}{section.7.2}% 51
-\BOOKMARK [1][-]{section.7.3}{Gradient methods}{chapter.7}% 52
-\BOOKMARK [2][-]{subsection.7.3.1}{Lagrangian Multipliers Theorem}{section.7.3}% 53
-\BOOKMARK [2][-]{subsection.7.3.2}{Definition of a gradient}{section.7.3}% 54
-\BOOKMARK [2][-]{subsection.7.3.3}{Limitations of gradient descent methods}{section.7.3}% 55
-\BOOKMARK [2][-]{subsection.7.3.4}{Discussion}{section.7.3}% 56
-\BOOKMARK [2][-]{subsection.7.3.5}{Gradient approximation with Taylor formula}{section.7.3}% 57
-\BOOKMARK [2][-]{subsection.7.3.6}{Line search}{section.7.3}% 58
-\BOOKMARK [2][-]{subsection.7.3.7}{Trust region}{section.7.3}% 59
-\BOOKMARK [1][-]{section.7.4}{Least squares problems}{chapter.7}% 60
-\BOOKMARK [2][-]{subsection.7.4.1}{The Levenberg-Marquardt method}{section.7.4}% 61
-\BOOKMARK [2][-]{subsection.7.4.2}{Solving a problem with bounds}{section.7.4}% 62
-\BOOKMARK [2][-]{subsection.7.4.3}{Solving ass problem}{section.7.4}% 63
-\BOOKMARK [2][-]{subsection.7.4.4}{Gauss-Newton method}{section.7.4}% 64
-\BOOKMARK [2][-]{subsection.7.4.5}{Latin hypercube sample}{section.7.4}% 65
-\BOOKMARK [2][-]{subsection.7.4.6}{MATLAB}{section.7.4}% 66
-\BOOKMARK [1][-]{section.7.5}{Stochastic methods for parameter estimation}{chapter.7}% 67
-\BOOKMARK [2][-]{subsection.7.5.1}{Markov Chain Monte Carlo \(MCMC\)}{section.7.5}% 68
+\BOOKMARK [2][-]{subsection.2.2.1}{Mass action propensity}{section.2.2}% 12
+\BOOKMARK [2][-]{subsection.2.2.2}{The propensity of a reaction}{section.2.2}% 13
+\BOOKMARK [2][-]{subsection.2.2.3}{Reaction propensity for reactions \040Rj with mass action kinetics}{section.2.2}% 14
+\BOOKMARK [1][-]{section.2.3}{Chemical Master Equation}{chapter.2}% 15
+\BOOKMARK [2][-]{subsection.2.3.1}{Grand probability function}{section.2.3}% 16
+\BOOKMARK [2][-]{subsection.2.3.2}{CME}{section.2.3}% 17
+\BOOKMARK [1][-]{section.2.4}{Stochastic simulation}{chapter.2}% 18
+\BOOKMARK [2][-]{subsection.2.4.1}{Probability density function}{section.2.4}% 19
+\BOOKMARK [0][-]{chapter.3}{Implementation of the Stochastic Simulation Algorithms}{}% 20
+\BOOKMARK [1][-]{section.3.1}{Non-deterministic vs stochastic}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.2}{Direct method}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.3}{Enhanced Direct Method}{chapter.3}% 23
+\BOOKMARK [2][-]{subsection.3.3.1}{Improvements for the direct method}{section.3.3}% 24
+\BOOKMARK [1][-]{section.3.4}{First Reaction Method \(FRM\)}{chapter.3}% 25
+\BOOKMARK [1][-]{section.3.5}{First Family Method}{chapter.3}% 26
+\BOOKMARK [1][-]{section.3.6}{Next Reaction Method}{chapter.3}% 27
+\BOOKMARK [1][-]{section.3.7}{RSSA}{chapter.3}% 28
+\BOOKMARK [0][-]{chapter.4}{Approximation algorithms}{}% 29
+\BOOKMARK [1][-]{section.4.1}{Probability-Weighted Dynamic Monte Carlo Method}{chapter.4}% 30
+\BOOKMARK [1][-]{section.4.2}{Bounded Acceptance Probability RSSA}{chapter.4}% 31
+\BOOKMARK [1][-]{section.4.3}{-Leaping Method}{chapter.4}% 32
+\BOOKMARK [2][-]{subsection.4.3.1}{Choosing tau - Leap selection section}{section.4.3}% 33
+\BOOKMARK [1][-]{section.4.4}{Chemical Langevin Method}{chapter.4}% 34
+\BOOKMARK [0][-]{chapter.5}{Deterministic simulations}{}% 35
+\BOOKMARK [1][-]{subsection.5.0.1}{Continuum hypothesis}{chapter.5}% 36
+\BOOKMARK [1][-]{section.5.1}{Deterministic approximation}{chapter.5}% 37
+\BOOKMARK [1][-]{section.5.2}{Numerical solution of ODEs}{chapter.5}% 38
+\BOOKMARK [2][-]{subsection.5.2.1}{Euler's method}{section.5.2}% 39
+\BOOKMARK [2][-]{subsection.5.2.2}{RUNGE-KUTTA Method}{section.5.2}% 40
+\BOOKMARK [2][-]{subsection.5.2.3}{Midpoint method}{section.5.2}% 41
+\BOOKMARK [2][-]{subsection.5.2.4}{Adaptive methods - Runge-Kutta-Fehlberg}{section.5.2}% 42
+\BOOKMARK [0][-]{chapter.6}{Hybrid simulation approaches}{}% 43
+\BOOKMARK [1][-]{section.6.1}{Reaction-Based System Partitioning}{chapter.6}% 44
+\BOOKMARK [1][-]{section.6.2}{HRSSA}{chapter.6}% 45
+\BOOKMARK [0][-]{chapter.7}{Reali}{}% 46
+\BOOKMARK [1][-]{section.7.1}{Introduction}{chapter.7}% 47
+\BOOKMARK [2][-]{subsection.7.1.1}{Definition of a system}{section.7.1}% 48
+\BOOKMARK [2][-]{subsection.7.1.2}{Determinism, nondeterminism, or stochasticity?}{section.7.1}% 49
+\BOOKMARK [2][-]{subsection.7.1.3}{Computational complexity}{section.7.1}% 50
+\BOOKMARK [2][-]{subsection.7.1.4}{Definition of a model}{section.7.1}% 51
+\BOOKMARK [2][-]{subsection.7.1.5}{Checking the validity of a model}{section.7.1}% 52
+\BOOKMARK [2][-]{subsection.7.1.6}{How to build a model}{section.7.1}% 53
+\BOOKMARK [1][-]{section.7.2}{Optimization problem}{chapter.7}% 54
+\BOOKMARK [2][-]{subsection.7.2.1}{General definition of an optimization problem}{section.7.2}% 55
+\BOOKMARK [2][-]{subsection.7.2.2}{Definition of a minimum}{section.7.2}% 56
+\BOOKMARK [1][-]{section.7.3}{Gradient methods}{chapter.7}% 57
+\BOOKMARK [2][-]{subsection.7.3.1}{Lagrangian Multipliers Theorem}{section.7.3}% 58
+\BOOKMARK [2][-]{subsection.7.3.2}{Definition of a gradient}{section.7.3}% 59
+\BOOKMARK [2][-]{subsection.7.3.3}{Limitations of gradient descent methods}{section.7.3}% 60
+\BOOKMARK [2][-]{subsection.7.3.4}{Discussion}{section.7.3}% 61
+\BOOKMARK [2][-]{subsection.7.3.5}{Gradient approximation with Taylor formula}{section.7.3}% 62
+\BOOKMARK [2][-]{subsection.7.3.6}{Line search}{section.7.3}% 63
+\BOOKMARK [2][-]{subsection.7.3.7}{Trust region}{section.7.3}% 64
+\BOOKMARK [1][-]{section.7.4}{Least squares problems}{chapter.7}% 65
+\BOOKMARK [2][-]{subsection.7.4.1}{The Levenberg-Marquardt method}{section.7.4}% 66
+\BOOKMARK [2][-]{subsection.7.4.2}{Solving a problem with bounds}{section.7.4}% 67
+\BOOKMARK [2][-]{subsection.7.4.3}{Solving global minimum problem}{section.7.4}% 68
+\BOOKMARK [2][-]{subsection.7.4.4}{Gauss-Newton method}{section.7.4}% 69
+\BOOKMARK [2][-]{subsection.7.4.5}{Latin hypercube sample}{section.7.4}% 70
+\BOOKMARK [2][-]{subsection.7.4.6}{MATLAB}{section.7.4}% 71
+\BOOKMARK [1][-]{section.7.5}{Stochastic methods for parameter estimation}{chapter.7}% 72
+\BOOKMARK [2][-]{subsection.7.5.1}{Markov Chain Monte Carlo \(MCMC\)}{section.7.5}% 73
+\BOOKMARK [2][-]{subsection.7.5.2}{Sampling a distribution}{section.7.5}% 74
+\BOOKMARK [2][-]{subsection.7.5.3}{Rejection sampling algorithm}{section.7.5}% 75
+\BOOKMARK [2][-]{subsection.7.5.4}{Metropolis Hastings}{section.7.5}% 76
+\BOOKMARK [2][-]{subsection.7.5.5}{Random walk MCMC}{section.7.5}% 77
