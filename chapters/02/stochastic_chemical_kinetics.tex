@@ -318,8 +318,8 @@ The dynamical behaviour is described by the chemical master equation or CME.
       Then substituting the definition of the probability of a reaction firing and the probability of a reaction non firing just computed into the grand probability function:
 
       \begin{align*}
-        \mathbb{P}\{\vec{x}, t+dt|\vec{x}_0, t_0\} =& \sum\limits_{j=1}^M\mathbb{P}\{\vec{x}-\vec{v}_j, t|\vec{x}_0, t_0\}(a_j(\vec{x}-\vec{v}_j)ddt + o(dt)) +\\
-                                                    &+\mathbb{P}\{\vec{x}, t|\vec{x}_0, t_0\}\left(1-\sum\limits_{j=1}^Ma_j(\vec{x})dt+o(dt)
+        \mathbb{P}\{\vec{x}, t+dt|\vec{x}_0, t_0\} =& \sum\limits_{j=1}^M\mathbb{P}\{\vec{x}-\vec{v}_j, t|\vec{x}_0, t_0\}(a_j(\vec{x}-\vec{v}_j)dt + o(dt)) +\\
+                                                    &+\mathbb{P}\{\vec{x}, t|\vec{x}_0, t_0\}\left(1-\sum\limits_{j=1}^Ma_j(\vec{x})dt+o(dt)\right)
       \end{align*}
 
       Subtracting $\mathbb{P}\{\vec{x}, t|\vec{x}_0, t_0\}$ from both sides, dividing by $dt$ and considering the limit $dt\rightarrow 0$, the chemical master equation is obtained:
@@ -349,30 +349,174 @@ When applying the CME, all the possible state of the system are explored.
 With a stochastic simulation only one possible trajectory of the system are computed (to obtain the total description many simulations have to be run).
 The stochastic simulation works because only an idea of the most probable conditions of the system is needed.
 A stochastic simulation is faster than a real experiment and it can be run on a personal computer (also thousands of simulations can be performed).
+One of the crucial points of a stochastic simulation is that there is a need to be able to sample from this probability distribution  function given the fact that the computer has few ways of generating something that is stochastic.
+The easiest way to do so is through a random number generator.
 
   \subsection{Probability density function}
-  The mathematical basis of a stochastic simulation is the reaction probability density function (pdf).
-  $p(\tau, \mu |\vec{x}, t)d\tau$ is the probability that a reaction $R_\mu$ fires in the next infinitesimal time interval $[t+\tau,t+\tau+d\tau)$, given the state $X(t) = \vec{x}$ at time $t$.
-  \\
-  \\
-  \noindent
+  Stochastic simulations are an alternative approach to solve CME by producing possible realization of the grand probability function.
+  It only explores possible states in the state space each time, so they can handle the biochemical reactions with very high-dimensional state space.
+  The mathematical basis of a stochastic simulation is the reaction probability density function pdf:
+
+  $$p(\tau, \mu|\vec{x}, t)$$
+
+  Which is defined such that $p(\tau, \mu |\vec{x}, t)d\tau$ is the probability that a reaction $R_\mu$ fires in the next infinitesimal time interval $[t+\tau,t+\tau+d\tau[$, given the state $X(t) = \vec{x}$ at time $t$.
+  The pdf $p(\tau, \mu|\vec{x}, t)$ is a joint distribution of two variables showing the index $\mu$ of the reaction firing $R_\mu$ at time $\tau$ of the firing respectively, knowing that the system is at state $X(t)$ at time $t$.
+  The reaction index $\mu$ will vary from $1\le\mu\le M$, while the next time $\tau$ will vary from $0\le \tau\le\infty$.
+
 
     \subsubsection{Computing the probability density function}
-    These probabilities can be computed by considering the idea of propensity.
-    The propensity is a formula on the state of the system which depends on some of the variables that are in the system that allows to provide a quantitative information that can be used to derive the probabilities.
-    The propensity is not a probability: propensity is not in a range from $0$ to $1$ and it is a property of a reaction while the probability is a property of the system.
-    One of the crucial points of a stochastic simulation is that there is a need to be able to sample from this probability distribution  function given the fact that the computer has few ways of generating something that is stochastic.
-    The easiest way to do so is through a random number generator.
-    The pseudocode in figure \ref{fig:SSA} implements this procedure.
+    The probability $p(\tau, \mu|\vec{x}, t)dt$ can be computed as the product of:
 
-    \begin{figure}
-      \centering
-      \includegraphics[width=\textwidth]{SSA_algo.png}
-      \caption{SSA}
-      \label{fig:SSA}
-    \end{figure}
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item The probability that no reaction fires in the time interval $[t, t+\tau[$.
+        \item The probability that a reaction $R_\mu$ fires in the next infinitesimal interval $[t+\tau, t+\tau+d\tau[$.
+      \end{itemize}
+    \end{multicols}
 
-    The result of a SSA run is a \emph{trajectory}, which shows the evolution of the biological system over time.
-    The trajectory is a collection of states $\emph{X}(\emph{t})$ that denotes the state of the system at any time $0 \leq \emph{t}\geq \emph{Tmax}$.
-    It should be emphasized that because SSA is a discrete event simulation algorithm, the state changes only at discrete time instants when reactions fire.
-    The state between two reaction firings is a constant.
+    Let:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item $\mathbb{P}\{\text{No reaction fires }\in[t,t+\tau[\}$ be the probability that no reaction fires in the time interval $[t, t+\tau[$.
+        \item $\mathbb{P}\{R_\mu\text{ fires }\in[t+\tau, t+\tau+d\tau[\}$ be the probability that reaction $R_\mu$ fires in the next infinitesimal time interval $[t+\tau, t+\tau+d\tau[$.
+      \end{itemize}
+    \end{multicols}
+
+    Then:
+
+    $$p(\tau, \mu|\vec{x}, t) d\tau = \mathbb{P}\{\text{No reaction fires }\in[t,t+\tau[\}\mathbb{P}\{R_\mu\text{ fires }\in[t+\tau, t+\tau+d\tau\}$$
+
+    To compute the probability that no reaction fires the time interval is divided into $k$ non overlapping sub interval of length $\epsilon = \frac{k}{\tau}$.
+    The probability that no reaction fires in the i-th interval $[t+(i-1)\epsilon, t+i\epsilon[\forall i=1,\dots,k$ is:
+
+    $$\mathbb{P}\{\text{No reaction fires }\in[t+(i-1)\epsilon, t+i\epsilon[\} = 1-\sum\limits_{j=1}^Ma_j(\vec{x})\epsilon+o(\epsilon)$$
+
+    Hence the probability that no reaction fires in $[t, t+\tau[$ is the product of the probabilities that no reaction fires in $k$ non-overlapping intervals:
+
+    \begin{align*}
+      \mathbb{P}\{\text{No reaction fires }\in[t,t+\tau[\} &= \prod\limits_{i=1}^k\mathbb{P}\{\text{No reaction fires }\in[t+(i-1)\epsilon, t+i\epsilon[\}=\\
+                                                           &=\prod\limits_{i=1}^k\left(1-\sum\limits_{j=1}^Ma_j(\vec{x})\epsilon+o(\epsilon)\right)=\\
+                                                           &=\left(1-\sum\limits_{j=1}^Ma_j(\vec{x})\epsilon+o(\epsilon)\right)^k=\\
+                                                           &=(1-a_0(\vec{x})\epsilon+o(\epsilon))^k
+    \end{align*}
+
+    Where $a_0(\vec{x})$ is the total propensity defined as:
+
+    $$a_0(\vec{x}) = \sum\limits_{j=1}^Ma_j(\vec{x})$$
+
+    In the limit case where $k\rightarrow\infty$:
+
+    \begin{align*}
+      \mathbb{P}\{\text{No reaction fires }\in[t,t+\tau[\} &= \lim\limits_{k\rightarrow\infty}(1-a_0(\vec{x})\epsilon+o(\epsilon))^k =
+                                                           &=\lim\limits_{k\rightarrow\infty}\left(1-\frac{a_0(\vec{x})k\epsilon+ko(\epsilon)}{k}\right)^k=\\
+                                                           &=\lim\limits_{k\rightarrow\infty}\left(1-\frac{a_0(\vec{x})\tau+\tau(\frac{o(\epsilon)}{\epsilon}}{k}\right)^k=\\
+                                                           &=e^{-a_0(\vec{x})\tau}
+    \end{align*}
+
+    The last step is true because:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item $\frac{o(\epsilon)}{\epsilon}\rightarrow 0$ when $k\rightarrow\infty$.
+        \item $\lim\limits_{k\rightarrow\infty}\left(1-\frac{a_0(\vec{x})\tau}{k}\right)^k = e^{-a_0(\vec{x})\tau}$.
+      \end{itemize}
+    \end{multicols}
+
+    The probability that a reaction fires, following the definition of the reaction propensity is computed by:
+
+    $$\mathbb{P}\{R_\mu\text{ fires }\in[t+\tau, t+\tau+d\tau[\} = a_\mu(\vec{x})d\tau+o(d\tau)$$
+
+    Now plugging everything in the definition of the probability:
+
+    $$p(\tau, \mu|\vec{x}, t)d\tau = e^{-a_0(\vec{x})\tau}(a_\mu(\vec{x})d\tau+o(d\tau))$$
+
+    Dividing both sides by $d\tau$ and taking the limit $d\tau\rightarrow\infty$ and remembering that $\frac{o(d\tau)}{d\tau} \rightarrow 0$, the pdf will have the formula:
+
+    $$p(\tau, \mu|\vec{x},t) = a_\mu(\vec{x})e^{-a_o(\vec{x}\tau)}$$
+
+    Which is the joint probability density function of the next reaction index $\mu$ and the next firing time $\tau$ over their domains.
+    This can be verified as:
+
+    $$\int_0^\infty d\tau\sum\limits_{\mu=1}^Mp(\tau, \mu|\vec{x}, t) = \sum\limits_{\mu=1}^Ma_\mu(\vec{x})\int_0^\infty d\tau e^{-a_0(\vec{x})\tau} = 1$$
+
+    The pdf depends on the propensities of all reaction as well as on all species.
+
+  \subsection{Stochastic simulation algorithm}
+
+  $$p(\tau, \mu|\vec{x},t) = a_\mu(\vec{x})e^{-a_o(\vec{x}\tau)}$$
+
+  Is the framework for a class of exact Monte Carlo simulation techniques originating from the stochastic simulation algorithm or SSA.
+  It is a discrete event simulation: the state is updated by a random selected reaction $R_\mu$ and a discrete time $\tau$ sampled from the pdf.
+  It exactly generates $\mu$ of the reaction and the firing time $\tau$ without introducing approximation in sampling the pdf.
+  A general sketch of the SSA procedure is outlined in algorithm \ref{algo:ssa-sketch}.
+
+  \input{chapters/02/algorithms/01_ssa-sketch}
+
+  For each iteration in the while loop the algorithm computes the propensity $a_j$ for each reaction and the total propensity.
+  The next reaction $R_\mu$ and its firing time $\tau$ are sampled from the pdf, a step that may need the generation of randomly distributed random numbers.
+  The state is updated and the time is advanced to $t=t+\tau$.
+  The loop is repeated until $t>T_{\max}$.
+  The propensities are updated at each iteration to reflect changes in the populations of species caused by reaction firings, but this can be skipped by employing an appropriate sampling technique.
+  The result of the algorithm is a trajectory, that shows the evolution of the biological system over time.
+  This is a collection of states $X(t)$ that denotes the state of the system at any time $0\le t\le T_{max}$.
+  It should be emphasized that because SSA is a discrete event simulation algorithm, the state changes only at discrete time instants when reactions fire.
+  The state between two reaction firings is a constant.
+
+\section{Simulation output analysis}
+The trajectory obtained from a SSA run represents a possible realization of the grand probability $\mathbb{P}\{\vec{x},t|\vec{x}_0, t_0\}$.
+Many independent run started with the same initial conditions are needed to have a reasonable statistical estimation.
+
+  \subsection{Confidence interval estimation}
+  Let $K$ be the number of simulation and $\vec{X}^r$, with $r = 1, \dots, K$ be a realization of the state $\vec{X}$ obtained at time $t$ by the r-th independent run of SSA.
+  The statistical properties can be derived from the ensemble of the trajectories, that are ensured to approach the exact solution of the CME as $K\rightarrow\infty$.
+  Let $\langle \vec{X}\rangle$ be the sample mean and $s^2$ the unbiased variance.
+  They are computed as:
+
+  $$\langle\vec{X}\rangle = \frac{\sum\limits_{r=1}^K\vec{X}^r}{K}\qquad s^2=\frac{\sum\limits_{r=1}^K(\vec{X}^r-\langle\vec{x}\rangle)^2}{K=1}$$
+
+  The sample mean and variance will approach the mean and variance of the random variable $\vec{X}$ when $K$ tends to infinity:
+
+  $$\mathbb{E}[\vec{X}] = \lim\limits_{K\rightarrow\infty}\langle\vec{X}\rangle\qquad Var[\vec{X}] = \lim\limits_{K\rightarrow\infty}s^2$$
+
+  The convergence of the estimation is measured by the size of the confidence interval as the number of simulation runs is limited:
+
+  $$d = \frac{zs}{\sqrt{K}}$$
+
+  Where $z$ is a confidence interval, denoting the percentage of the range of estimated values expected to include the true value.
+  When it is fixed, the probability that the mean lies in the interval $[\langle\vec{x}\rangle-d, \langle\vec{x}\rangle+d]$ is $2\phi(z)-1$, where $\phi$ is the cumulative distribution function or cdf of the normal distribution $norm(0,1)$.
+  The required number of simulation runs to achieve a specified confidence interval size can be computed:
+
+  $$K = \frac{z^2s^2}{d^2}$$
+
+  $K$ depends reciprocally on the square of the confidence interval size $d$ and on the sample variance $s^2$, which is unknown.
+  One approach to circumvent this problem is to perform first a small number of trial runs to estimate $s_{trial}^2$, which is applied to compute the number of simulation runs necessary:
+
+  $$K = \frac{z^2s_{trial}^2}{d^2}$$
+
+  \subsection{Probability distribution equation}
+  Bistability is a form of multistablity where two separated stable equilibrium points are separated by an unstable equilibrium, the average population of species might not provide enough information for their dynamical behaviour.
+  The probability distribution must be used to quantitatively analyse the simulation results.
+  The probability distribution can be estimated by using the histogram or empirical distribution function of the samples.
+  It is ensured to converge to the exact probability distribution given a large number of simulation runs $K$.
+  The following assumes $X$ to be a scalar value, but it can be easily extended to the general case.
+  To compute the histogram the state $X$ at time $t$ obtained by $K$ simulation runs of SSA is supposed to be bounded into an interval $[X_{\min}, X_{\max}]$, chosen arbitrarily.
+  Then the interval is divided into $B$ bins, such that the i-th bin $I_i$ is defined as the subinterval:
+
+  $$\left[X_{\min}+\frac{(i-1)L}{B}, X_{\min}+\frac{iL}{B}\right]$$
+
+  Where $L=X_{\max}-X_{\min}$.
+  The histogram $h_X$ of state $X$ is then defined as:
+
+  $$h_X(I_i) = \frac{B}{KL}\sum\limits_{r=1}^K\mathcal{X}(X^r,I_i)$$
+
+  Where $X^r$ is the realization of $X$ by the r-th simulation and $\mathcal{X}(X^r, I_i)$ is defined as:
+
+  $$\mathcal{X}(X^r, I_i) = \begin{cases}1 &X^r\in I_i\\0 & otherwise\end{cases}$$
+
+  The histogram therefore gives the average probability of $X$ in interval $I_i$.
+  Let now $p_X$ be the probability distribution of state $X$.
+  When $K\rightarrow\infty$ and $B\rightarrow\infty$, $I_i$ reduces to a point and $h_X$ converges to $p_X$ at this point.
+  Formally:
+
+  $$p_X = \lim\limits_{K,B\rightarrow\infty}h_X$$
