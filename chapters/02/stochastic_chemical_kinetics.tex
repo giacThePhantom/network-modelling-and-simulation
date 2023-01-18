@@ -96,13 +96,15 @@ The dynamical behaviour is described by the chemical master equation or CME.
 
     \subsubsection{Well-mixed reaction volume}
     A well-mixed reaction volume is a reaction volume in which all the molecular species are homogeneously distributed and spatially indistinguishable.
+    This is legitimate as non-reactive conditions are much more frequent than reactive ones.
     The biochemical reaction system with well-mixed volume thus satisfies the spatial homogeneity condition, where spatial distribution of molecular species can be ignored.
     Chemical species under the well-mixed assumption at a thermal equilibrium are uniformly distributed in the volume $V$ and their velocities are thermally randomized according to the Maxwell-Boltzmann distribution.
 
     \subsubsection{Formal representation}
     The state of a spatially homogeneous biological system is determined by the population of each species, while the position and velocity of each individual molecule are ignored.
     Let $X_i(t)$ be the population of species $S_i$ at a particular time $t$.
-    The N- vector $X(t) = (X_1(t),...,X_N(t))$, which determines the population of each species, constitutes the system state at the time $t$.
+    The N-vector $X(t) = (X_1(t),...,X_N(t))$, which determines the population of each species, constitutes the system state at the time $t$.
+    Chemical species interact through $M$ reactions $R_1, \dots, R_M$.
     A general reaction $R_j$ has a general scheme:
 
     $$v^-_{j1}S_1+...+v^-_{jN}S_N \rightarrow v^+_{j1}S_1+...+v^-_{jN}S_N$$
@@ -117,12 +119,14 @@ The dynamical behaviour is described by the chemical master equation or CME.
       \end{itemize}
     \end{multicols}
 
-    For each reaction $R_j$, the net change in the population of species $S_i$ involved in the reaction is equal to $v^+_{ji}- v^-_{ji}$, which can be positive, negative or zero.
-    The net changes by all reactions are described by a stoichiometry matrix $\mathbf{v}$ of size $M × N$.
-    The \emph{j}th row $\mathbf{v}_j$ of the stoichiometry matrix expresses the changes caused by reaction $R_j$ and it is called the state change vector.
-    Different system can lead to the same stoichiometric matrix.
+    A reactant species that affects the speed of a reaction but is not consumed by it is called a catalyst.
+    The sum of stoichiometric coefficients of reactants of a reaction $R_j$i s called reaction order.
+    For each reaction $R_j$, the net change in the population of species $S_i$ involved in the reaction is equal to $v^+_{ji}-v^-_{ji}$, which can be positive, negative or zero.
 
     \subsubsection{Stoichiometric matrix}
+    The net changes by all reactions are described by a stoichiometry matrix $\vec{v}$ of size $M × N$.
+    The \emph{j}th row $\vec{v}_j$ of the stoichiometry matrix expresses the changes caused by reaction $R_j$ and it is called the state change vector.
+    Different system can lead to the same stoichiometric matrix.
     To describe a reaction two matrices are required:
 
     \begin{multicols}{2}
@@ -135,8 +139,18 @@ The dynamical behaviour is described by the chemical master equation or CME.
     $$ V^- = \begin{bmatrix}1 & 1 & 0 \\ 0 & 1&1 \\ 1&0&1 \end{bmatrix}, V^+ = \begin{bmatrix}0 & 2 & 0 \\ 0 & 0&2 \\ 2&0&0 \end{bmatrix}, V = \begin{bmatrix}1 & 1 & 0 \\ 0 & -1&1 \\ 1&0&-1 \end{bmatrix}\\ V = V^+ + V^- $$
 
     Suppose that at a time $t$ the state, or number of molecules in that given moment is $X(t)$.
-    It is further assumed that the next reaction scheduled to fire at the next time $t + \tau$ is $R _\mu$, mill move the system accordingly to a new state $X(t + \tau)$.
-    $\mathbf{x}$ is a simple notation to represent $X(t)$.
+    It is further assumed that the next reaction scheduled to fire at the next time $t + \tau$ is $R _\mu$, which move the system accordingly to a new state $X(t + \tau)$.
+    $\vec{x}$ is a simple notation to represent $X(t)$.
+    Two important assumptions are made for the transition from state $X(t)$ to state $X(t+\tau)$:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item No changes occur in the system state during the time interval $[t, t+\tau[$, before the next reaction fires.
+        \item The reaction occurs instantly after it is initiated.
+      \end{itemize}
+    \end{multicols}
+
+    These are called the Markov property.
     So the evolution of the system in a time step will be:
 
     $$ X(t+\tau) = X(t)+v_\mu $$
@@ -157,34 +171,63 @@ The dynamical behaviour is described by the chemical master equation or CME.
     The propensity $a_j$ of a reaction $R_j$ is defined such that $a_j(x)dt$ is probability that a reaction $R_j$ fires in the next infinitesimal time interval $[t, t+dt[$, given the state $X(t) = \vec{x}$ at time $t$.
   In a chemical setting, the probability of execution of one reaction will be proportional to the viability of the reactant.
 
+    \subsubsection{Value of the propensity}
+    The propensity $a_j(X(T))$ is a function of the state $X(t)$.
+    The fact that $a_j$ of a reaction depends on time $t$ happens implicitly through the Marcokian assumptions.
+    At a particular time $t$, the value of the propensity $a_j(X(T))$ is a deterministic quantity.
+    The propensity value of a reaction in state $X(t)$ is often used as a measure of how fast the reaction proceeds to move to a new state.
+    Let $\mathcal{P}\{R_j\text{ fires }\in [t,t+dt[\}$ be the probability that reaction $R_j$ fires in the time interval.
+    Given the state $X(t)=\vec{x}$ at time $t$, then:
+
+    $$\mathcal{P}\{R_j\text{ fires }\in [t,t+dt[\} = a_j(\vec{x})dt + o(dt)$$
+
+    Where $o(dt)$ expresses that it asymptotically approaches zero faster than $dt$: $\lim\limits_{dt\rightarrow 0} \frac{o(dt)}{dt} = 0$.
+    In other words the probability that there are more than one firing of $R_j$ in the time step i in order of $o(dt)$ and so it is negligible.
+    The propensity of a reaction is an intrinsic property of the reaction and is linked to the phenomenon that the reaction is going to represent.
+    The probability will depend on the propensity of the reaction and the other reactions that are competing for the same reactant.
+    The propensity is not affected by the products.
+
+    $$a_1 (0) = c_1 h_1 (x(0))$$
+
+    $$h_2(x(0)) = \begin{pmatrix}100 \\ 1 \end{pmatrix}\begin{pmatrix}50 \\ 1 \end{pmatrix}\begin{pmatrix}30 \\ 0 \end{pmatrix}$$
+
+    $$x(0+ \tau) = x(0) + V_1 = \begin{bmatrix}99 &51& 30 \end{bmatrix}$$
+
+    $$x(0) = \begin{bmatrix}100 &50& 30 \end{bmatrix}$$
+
+    Since the combination is being computed $a^2$ will not be taken into account as in the canonical law of mass action.
+
+
     \subsubsection{Mass action propensity}
-    The mass action propensity is the expression of the direct proportionality.
-    It is computed by multiplying the rate of the reaction by the counts of the number of distinct combinations of reactants.
-    The mass action propensity formula is reported in figure \ref{fig:massaction}.
+    A precise formula for the propensity function $a_j$ is dependent on the kinetics and a specific assumption about how the reaction occurs physically.
+    This is referred as the fundamental premise of the stochastic chemical kinetics.
+    For the standard mass action kinetics, the propensity $a_j$ of reaction $R_j$ is proportional to a stochastic reaction rate $c_j$ and the number of its reactants.
+    So given current state $X(t)$ at time $t$:
 
-    \begin{figure}[H]
-       \centering
-       \includegraphics[width=0.5\textwidth]{massaction.png}
-       \caption{Mass action propensity}
-       \label{fig:massaction}
-    \end{figure}
+    $$a_j(X(t)) = c_jh_j(X(t))$$
 
-  \subsection{The propensity of a reaction}
-  The propensity of a reaction is an intrinsic property of the reaction and is linked to the phenomenon that the reaction is going to represent.
-  The probability will depend on the propensity of the reaction and the other reactions that are competing for the same reactant.
-  The propensity is not affected by the products.
+    Where $c_j$ is the stochastic reaction rate and $h_j(X(t))$ counts the number of distinct combination of reactants:
 
-  $$a_1 (0) = c_1 h_1 (x(0))$$
+    $$h_j(X(t)) = \prod\limits_i\binom{X_i(t)}{v_{ji}^-} = \prod\limits_i\frac{X_i(t)!}{v_{ij}^0!(X_i(t)-v_{ij}^-)!}$$
 
-  $$h_2(x(0)) = \begin{pmatrix}100 \\ 1 \end{pmatrix}\begin{pmatrix}50 \\ 1 \end{pmatrix}\begin{pmatrix}30 \\ 0 \end{pmatrix}$$
+    In the case of a synthesis reaction, where the stoichiometric coefficient of its reactants is $0$ is set to $h_j(X(t)) = 1$.
 
-  $$x(0+ \tau) = x(0) + V_1 = \begin{bmatrix}99 &51& 30 \end{bmatrix}$$
+      \paragraph{The stochastic rate}
+      The stochastic rate $c_j$ denotes the average probability per unit time that a particular combination of reactant molecules of reaction $R_j$ reacts in the volume $V$ and depends on the reaction type.
+      In the case of a unimolecular reaction is independent of the volume size, while in the case of a bimolecular one it will be inversely proportional of it.
+      The rate is constant provided that:
 
-  $$x(0) = \begin{bmatrix}100 &50& 30 \end{bmatrix}$$
-
-  Since the combination is being computed $a^2$ will not be taken into account as in the canonical law of mass action.
+      \begin{multicols}{2}
+        \begin{itemize}
+          \item The volume $V$ is constant.
+          \item The volume is well-mixed.
+          \item The volume is thermally homogeneous.
+        \end{itemize}
+      \end{multicols}
 
     \subsubsection{Reaction propensity for reactions $ R_j$ with mass action kinetics}
+    From now $X_i$ will be used in place of $X_i(t)$, when $t$ is irrelevant or clear from the context.
+    Some reaction will be described by mass action kinetics by:
 
     \begin{itemize}
       \item Synthesis reaction ($\emptyset$ → products): the number of combinations $ h_j = 1 $ and propensity $ a_j =c_j $
@@ -195,20 +238,111 @@ The dynamical behaviour is described by the chemical master equation or CME.
       \item Termolecular reaction ($2S_i + S_k$ → products): the number of combinations $ h_j = \frac{1}{2}X_i(X_i -1)X_k$ and propensity $ a_j = \frac{1}{2}c_jX_i(X_i -1)X_k $.
     \end{itemize}
 
+    \subsubsection{Complex reaction kinetics}
+    Complex reaction kinetics can be used.
+    The propensity $a_j$ will show a complicated, non-linear dependence on the chemical species and may contain more than one rate constant.
+
+      \paragraph{Michaelis-Menten kinetics}
+      The Michaelsi-Menten kinetics is used to approximate the mechanism of enzymatic reaction.
+      Consider an enzymatic reaction $R_j$ with form:
+
+      $$S_i+S_k \rightarrow S_i + S_j$$
+
+      Where:
+
+      \begin{multicols}{2}
+        \begin{itemize}
+          \item $S_k$ is the substrate.
+          \item $S_i$ is the enzyme.
+        \end{itemize}
+      \end{multicols}
+
+      The reaction propensity will be defined as:
+
+      $$a_j = \frac{V_{\max}}{K_M+x_k}X_iX_k$$
+
+      Where:
+
+      \begin{multicols}{2}
+        \begin{itemize}
+          \item $V_{\max}$ is the maximum rate such that the substrate $S_k$ is saturated.
+          \item  $K_m$  or Michaelis constant is the substrate conscentration at which the reaction rate is half of $V_{\max}$.
+        \end{itemize}
+      \end{multicols}
 
   \subsection{Chemical Master Equation}
-  The CME is the theoretical approach allowing to derive the complete set of probabilities of all the possible states of the system.
+  The chemical master equation or CME is the theoretical approach allowing to derive the complete set of probabilities of all the possible states of the system.
+  Suppose that the biochemical reaction system starts with an initial state $X(t_0) = \vec{x}_0$.
+  Let $t>t_0$ and the system at state $X(t)=\vec{x}$,
+  The purpose of the stochastic chemical kinetics is to infer the probability:
+
+  $$\mathbb{P}\{\vec{x},t|\vec{x}_0, t_0\}$$
 
     \subsubsection{Grand probability function}
-    $\mathbb{P}\{\mathbf{x},t|\mathbf{x}_0,t_o\}$ is the probability that the system state is $X(t) = \mathbf{x}$ at time $t$, given the initial state $X(t_0) = \mathbf{x}_0$ at time $t_0$.
-    By applying the chemical master equation, a set of differential equations for this probability is obtained, which theoretically provides the complete set of any of the states of the system.
+    The probability function or grand probability:
 
-    \subsubsection{CME}
+    $$\mathbb{P}\{\vec{x},t|\vec{x}_0,t_o\}$$
 
-    $$\frac{\mathbb{P}\{\mathbf{x},t|\mathbf{x}_0,t_o\}}{dt}= \sum_{j=1}^{M}(a_j(\mathbf{x}-\mathbf{v}_j)\mathbb{P}\{\mathbf{x},t|\mathbf{x}_0,t_o\})- \mathbb{P}\{\mathbf{x},t|\mathbf{x}_0,t_o\}\sum^M_{j=1}a_j(\mathbf{x})$$
+    Is the probability that the system state is $X(t) = \vec{x}$ at time $t$, given the initial state $X(t_0) = \vec{x}_0$ at time $t_0$.
+    It is called so because it gives the probabilities of all reachable states of the system at time $t$ given the initial state.
+    Knowing it all the statistical properties can be computed for every species at any time.
 
-    However, for computing all these probabilities in a complex system, the number of equations will increase and be practically useless.
-    The idea is to avoid deriving everything with the chemical master equation but trying to apply another approach that is the one provided by the stochastic simulation.
+    \subsubsection{Deriving the chemical master equation}
+    To derive the time evolution of the grand probability, consider an infinitesimal time interval $[t, t+ dt[$ so that there is at most one reaction in that interval.
+    Suppose that at time $t+dt$ the system state is $X(t+dt) = \vec{x}$.
+    There are two cases in order to reach the state $\vec{x}$ in the time-step given the current time:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item At time $t$ the state is $X(t) = \vec{x}-\vec{v}_j$ and reaction $R_j$ fires in the next time step leading to $X(t+dt) = \vec{x}$.
+        \item At time $t$ the state is already $X(t)=\vec{x}$ and no reaction fires in the time step.
+      \end{itemize}
+    \end{multicols}
+
+      Then the grand probability can be written as:
+
+      \begin{align*}
+        \mathbb{P}\{\vec{x}, t+dt|\vec{x}_0, t_0\} =& \sum\limits_{j=1}^M\mathbb{P}\{R_j\text{ fires }\in[t, t+dt[\}\mathbb{P}\{\vec{x}-\vec{v}_j, t|\vec{x}_0, t_0\} +\\
+                                                    &+\mathbb{P}\{\text{No reaction fires }\in[t, t+dt[\}\mathbb{P}\{\vec{x}, t|\vec{x}_0, t_0\}
+      \end{align*}
+
+      Note that when the state vector $\vec{x}-\vec{v}$ gives negative populations, the probability $\mathbb{P}\{\vec{x}-\vec{v}_j, t|\vec{x}_0, t_0\}$ is zero because the populations of species must be positive.
+      Now, the probability that no reaction fires in the time-step can be computed as:
+
+      \begin{align*}
+        \mathbb{P}\{\text{No reaction fires }\in[t,t+dt[\} &=\prod\limits_{j=1}^M(1-\mathbb{P}\{R_j\text{ fires }\in[t, t+dt[\}) =\\
+                                                           &=\prod\limits_{j=1}^M(1-a_j(\vec{x})dt+o(dt))=\\
+                                                           &=1-\prod\limits_{j=1}^M a_j(\vec{x})dt+o(dt)
+      \end{align*}
+
+      Then substituting the definition of the probability of a reaction firing and the probability of a reaction non firing just computed into the grand probability function:
+
+      \begin{align*}
+        \mathbb{P}\{\vec{x}, t+dt|\vec{x}_0, t_0\} =& \sum\limits_{j=1}^M\mathbb{P}\{\vec{x}-\vec{v}_j, t|\vec{x}_0, t_0\}(a_j(\vec{x}-\vec{v}_j)ddt + o(dt)) +\\
+                                                    &+\mathbb{P}\{\vec{x}, t|\vec{x}_0, t_0\}\left(1-\sum\limits_{j=1}^Ma_j(\vec{x})dt+o(dt)
+      \end{align*}
+
+      Subtracting $\mathbb{P}\{\vec{x}, t|\vec{x}_0, t_0\}$ from both sides, dividing by $dt$ and considering the limit $dt\rightarrow 0$, the chemical master equation is obtained:
+
+    $$\frac{\mathbb{P}\{\vec{x},t|\vec{x}_0,t_0\}}{dt}= \sum_{j=1}^{M}(a_j(\vec{x}-\vec{v}_j)\mathbb{P}\{\vec{x},t|\vec{x}_0,t_0\})- \mathbb{P}\{\vec{x},t|\vec{x}_0,t_o\}\sum^M_{j=1}a_j(\vec{x})$$
+
+    The chemical master equation is a collection of differential equations in which each of them represents the probability of each possible state of the system at time $t$.
+    It provides a complete description of the time evolution of the grand probability:
+
+    $$\mathbb{P}\{\vec{x}, t|\vec{x}_0, t_0\}$$
+
+
+    \subsubsection{Limitations of the chemical master equation}
+    The chemical master equation allows to compute the probabilities of all possible states at any time, however directly solving it require a lot of computational challenges:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item An analytical or numerical approach to solve CME in general is non-trivial to find.
+        \item There is a huge number of differential equations: $a^N$, where $N$ is the number of species and $a$ is the values of the population of each species.
+      \end{itemize}
+    \end{multicols}
+
+    So it can be seen how the number of differential equations increases exponentially, making the state space explode in dimension, preventing direct approaches in solving CMEs.
 
 \section{Stochastic simulation}
 When applying the CME, all the possible state of the system are explored.
@@ -218,7 +352,7 @@ A stochastic simulation is faster than a real experiment and it can be run on a 
 
   \subsection{Probability density function}
   The mathematical basis of a stochastic simulation is the reaction probability density function (pdf).
-  $p(\tau, \mu |\mathbf{x}, t)d\tau$ is the probability that a reaction $R_\mu$ fires in the next infinitesimal time interval $[t+\tau,t+\tau+d\tau)$, given the state $X(t) = \mathbf{x}$ at time $t$.
+  $p(\tau, \mu |\vec{x}, t)d\tau$ is the probability that a reaction $R_\mu$ fires in the next infinitesimal time interval $[t+\tau,t+\tau+d\tau)$, given the state $X(t) = \vec{x}$ at time $t$.
   \\
   \\
   \noindent
