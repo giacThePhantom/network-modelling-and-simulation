@@ -1,36 +1,38 @@
 \graphicspath{{chapters/03/images/}}
 \chapter{Implementation of the Stochastic Simulation Algorithms}
 
-\section{Non-deterministic vs stochastic}
-Assumption: we are using the same model and parameters.
+\section{Introduction}
 
-\begin{itemize}
-  \item \textbf{Deterministic system}: no randomness, we always obtain the same result.
-  \item \textbf{Non-deterministic system}: there is some degree of uncertainty on different runs.
+  \subsection{Non-deterministic vs stochastic}
+  Working under the assumption of using the same model and parameters:
 
-  \begin{itemize}
-    \item \textbf{Exact stochastic simulation}: satisfying some hypotheses, the system will behave just like a biological system.
-      We are in a probabilistic setting.
-      The fact that we are able to compute the probability function does not make this method deterministic, we have uncertainty.
-      Theoretically, we could have no idea about reaction execution in a stochastic setting; in the case of exact stochastic simulation, we reach a high level of accuracy thanks to the probability function.
-  \end{itemize}
-\end{itemize}
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item A deterministic system does not show randomness and the same result is always obtained.
+      \item A non-deterministic system shows some degree of uncertainty: different runs have different results.
+    \end{itemize}
+  \end{multicols}
 
-\noindent
-Why do many computational environments employ a non-deterministic approach? Quite often we require to find the compromise between time and complexity.
-In non-deterministic polynomial time algorithms we do not have an efficient solution, but it seems possible to find it.
-A non-deterministic setting allows us to understand whether an algorithm can be solved in polynomial time (stepwise guessing).
-Alan Turing realized that it was required to categorize algorithms with specific rules in order to compare them → Turing machine.
-\\
-\\
-\noindent
-A summary of the main exact stochastic simulation algorithms is reported in figure \ref{fig:tree}.
-\begin{figure}
-  \centering
-  \includegraphics[width=\textwidth]{tree_methods.png}
-  \caption{Fig 3.1 Marchetti's book}
-  \label{fig:tree}
-\end{figure}
+    \subsubsection{Exact stochastic simulation}
+    In an exact stochastic simulation, if some hypotheses are satisfied the system will behave like the biological one.
+    Although the probability function could be computed, this does not make the method deterministic: uncertainty is intrinsic in the model.
+    Theoretically there is no insight on the execution of the reactions in a stochastic setting, but a high level of accuracy can be reached thanks to the probability function.
+
+  \noindent
+  Why do many computational environments employ a non-deterministic approach? Quite often we require to find the compromise between time and complexity.
+  In non-deterministic polynomial time algorithms we do not have an efficient solution, but it seems possible to find it.
+  A non-deterministic setting allows us to understand whether an algorithm can be solved in polynomial time (stepwise guessing).
+  Alan Turing realized that it was required to categorize algorithms with specific rules in order to compare them → Turing machine.
+  \\
+  \\
+  \noindent
+  A summary of the main exact stochastic simulation algorithms is reported in figure \ref{fig:tree}.
+  \begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{tree_methods.png}
+    \caption{Fig 3.1 Marchetti's book}
+    \label{fig:tree}
+  \end{figure}
 
 \section{Direct method}
 Gillespie's direct method defines a couple of formulae able to understand how the system will execute in terms of time ($\tau$) and reactions ($\mu$).
@@ -63,22 +65,22 @@ Since we are reasoning in infinitesimal time, each reaction occurs and ends exac
     \caption{DM algorithm}
     \label{fig:DM_algo}
   \end{figure}
- 
+
  \noindent
 The algorithm (Figure \ref{fig:DM_algo}) can be improved by avoiding to recompute all the propensities, taking into account the fact that many reactions will keep the same probabilities over time.
 We can work on the complexity of the for loop through a \emph{dependency graph}.
 
   \section{Enhanced Direct Method}
   Our aim is to group all the reactions that are modifying at the same time, in order to update only meaningful propensities e.g. all reactions involving the same components.
-  Let's specify this concept in a formal way: 
+  Let's specify this concept in a formal way:
   \\
   \\
   \noindent
   For each reaction $*R_j$* with $j = 1,...,M$, define $Reactants(R_j)={S_i|S_i \ \text{is a reactant of }R_j}$, and $Products(R_j) = {S_i|S_i \text{ is a product of }R_j}$.
   A \textbf{reaction dependency graph}\ldots{}.
-  
+
   We tend to have an improvement in time complexity when the graph is not highly connected, while the space complexity is higher (since we need to generate a data structure).
-  \subsection{Improvements for the direct method} 
+  \subsection{Improvements for the direct method}
   \textbf{\emph{Sort}}: find the smallest index for which we can satisfy the condition for $\mu$.
   On average, it is more efficient to keep reactions with highest probability at the beginning, such that we can easily match indexes to requirement.
   How can we compute the number of firings? We can set an oder beforehand based on previous knowledge or run a pre-simulation with a non-optimized algorithm (we still have a speed up since we are working with a smaller setting).
@@ -104,7 +106,7 @@ $\mu= R_{\mu}\text{ st }\tau_{\mu}= \min_{j}\tau_j$
   \end{figure}
 
 \begin{itemize}
-\item Pro: sometimes the search is quicker, simpler to parallelize. 
+\item Pro: sometimes the search is quicker, simpler to parallelize.
 \item Cons: we generate a lot of random numbers with respect to the direct method.
 \end{itemize}
 

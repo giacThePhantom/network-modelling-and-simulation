@@ -69,9 +69,11 @@
 \contentsline {subsection}{\numberline {2.4.1}Confidence interval estimation}{22}{subsection.2.4.1}%
 \contentsline {subsection}{\numberline {2.4.2}Probability distribution equation}{23}{subsection.2.4.2}%
 \contentsline {chapter}{\numberline {3}Implementation of the Stochastic Simulation Algorithms}{24}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Non-deterministic vs stochastic}{24}{section.3.1}%
+\contentsline {section}{\numberline {3.1}Introduction}{24}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Non-deterministic vs stochastic}{24}{subsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.1}Exact stochastic simulation}{24}{subsubsection.3.1.1.1}%
 \contentsline {section}{\numberline {3.2}Direct method}{24}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Enhanced Direct Method}{26}{section.3.3}%
+\contentsline {section}{\numberline {3.3}Enhanced Direct Method}{27}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Improvements for the direct method}{27}{subsection.3.3.1}%
 \contentsline {section}{\numberline {3.4}First Reaction Method (FRM)}{27}{section.3.4}%
 \contentsline {section}{\numberline {3.5}First Family Method}{28}{section.3.5}%
