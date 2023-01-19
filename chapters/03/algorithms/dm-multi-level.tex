@@ -1,0 +1,49 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Direct method with multi level search}
+
+\caption{\protect\TitleFunction{}}
+
+\Input: a biochemical reaction network of $M$ reactions in which each reaction $R_j$, $j=1, \dots, M$ is accompanied with the state change vector $\vec{v}_j$ and the propensity $a_j$, the initial state $\vec{x}_0$ at time $0$ and the simulation ending time $T_{\max}$\;
+
+\Output: a trajectory of the biochemical reaction network, which is a collection of states $X(t)$ for time $0\le t\le T_{\max}$\;
+
+build the reaction dependency graph $G$\;
+partition $M$ reactions into $L$ groups $\{G_1, \dots, G_L\}$\;
+
+\ForEach{$G_l$}{
+	$a^l = 0$\;
+	\ForEach{$R_j\in G_l$}{
+		compute $a_j$\;
+		$a^l = a^l+a_j$\;
+	}
+	$a_0 = a_0+a^l$\;
+}
+$t = 0$\;
+$\vec{X} = \vec{x}_0$\;
+\While{$t<T_{\max}$}{
+	generate two random numbers $r_1,r_2\sim norm(0,1)$\;
+	select $G_\alpha$ with the smallest index $\alpha$ such that $\sum\limits_{l=1}^\alpha a^l\ge r_1a_0$\;
+	$r_1 = \frac{r_1 a_0 -\sum\limits_{l=1}^{\alpha-1}a^l}{a^\alpha}$\;
+	select $R_\mu$ with the smallest index $\mu$ such that $\sum\limits_{\substack{k=1\\G_\alpha=\{R_j, \dots, R_{j+n}\}}}^\mu a_k\ge r_1a^\alpha$\;
+	$\tau = \frac{1}{a_0}\ln\frac{1}{r_2}$\;
+	$\vec{X} = \vec{X}+\vec{v}_\mu$\;
+	$t=t+\tau$\;
+	\ForEach{$R_j\in Dependents(R_\mu)$}{
+		compute $a_j^{new}$\;
+		$a^l = a^l + (a_j^{new}-a_j)$\;
+		$a_j = a_j^{new}$\;
+	}
+}
+
+\label{algo:dm-multi-level}
+\end{algorithm}

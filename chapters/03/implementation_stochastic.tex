@@ -18,16 +18,15 @@
     Although the probability function could be computed, this does not make the method deterministic: uncertainty is intrinsic in the model.
     Theoretically there is no insight on the execution of the reactions in a stochastic setting, but a high level of accuracy can be reached thanks to the probability function.
 
-  \noindent
-  Why do many computational environments employ a non-deterministic approach? Quite often we require to find the compromise between time and complexity.
-  In non-deterministic polynomial time algorithms we do not have an efficient solution, but it seems possible to find it.
-  A non-deterministic setting allows us to understand whether an algorithm can be solved in polynomial time (stepwise guessing).
-  Alan Turing realized that it was required to categorize algorithms with specific rules in order to compare them → Turing machine.
-  \\
-  \\
-  \noindent
+  \subsection{Advantages of a non-deterministic approach}
+  The reasoning behind the employment of a non-deterministic approach lies in the fact that to model a biological system there is a need to compromise between time and complexity.
+  In non-deterministic polynomial time algorithms don't have an efficient solution, but it seems possible to find it.
+  A non-deterministic setting allows us to understand whether an algorithm can be solved in polynomial time by step-wise guessing.
+
+  \subsection{Categories of the exact simulation algorithms}
   A summary of the main exact stochastic simulation algorithms is reported in figure \ref{fig:tree}.
-  \begin{figure}
+
+  \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{tree_methods.png}
     \caption{Fig 3.1 Marchetti's book}
@@ -35,60 +34,307 @@
   \end{figure}
 
 \section{Direct method}
-Gillespie's direct method defines a couple of formulae able to understand how the system will execute in terms of time ($\tau$) and reactions ($\mu$).
-Since we are reasoning in infinitesimal time, each reaction occurs and ends exactly at time $\tau$, hence we cannot have multiple reactions firing simultaneously.
-\\
-\\
-\noindent
- $a_0$ is the sum of all propensities in the system.
+Gillespie's direct method defines a couple of formulae able to understand how the system will execute in terms of time $\tau$ and reactions $\mu$.
+Since each time step is infinitesimal each reaction occurs and ends exactly at time $\tau$, hence there cannot be multiple reactions firing simultaneously.
+Let $a_0$ be the sum of all propensities in the system, then the algorithm works as follow:
 
 \begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \item We sample one random number from the distribution $a_0 = \sum_{j=1}^{M}{a_j}\rightarrow V_1=U(0,1)$
-  \item Scale it to the maximum $V_1 \cdot a_0 =U(0,a_0)$
+  \item Sample one random number from the distribution $a_0 = \sum_{j=1}^{M}{a_j}\rightarrow V_1=U(0,1)$.
+  \item Scale it to the maximum $V_1 \cdot a_0 =U(0,a_0)$.
   \item See where this number will point over the different propensities ( Figure \ref{fig:boundaries}).
 
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.7\textwidth]{boundaries.png}
-    \caption{Fig 3.2}
-    \label{fig:boundaries}
-  \end{figure}
+    \begin{figure}[H]
+      \centering
+      \includegraphics[width=\textwidth]{boundaries.png}
+      \caption{Fig 3.2}
+      \label{fig:boundaries}
+    \end{figure}
 
-  \item Generate another random number $V_2 =U(0,1)$ \item $\tau \sim Exp(a_0)$ \item $\tau = \frac{1}{a_0}ln(\frac{1}{V_2})$
+  \item Generate another random number $V_2 =U(0,1)$ \item $\tau \sim Exp(a_0)$ \item $\tau = \frac{1}{a_0}ln(\frac{1}{V_2})$.
 \end{enumerate}
 
+  \subsection{Mathematical discussion}
+  Gillespie's direct method is used to sample the pdf $p(\tau, \mu|\vec{x},t)$.
+  The direct method partitions the joint probability density function into the product of two one-variable probability functions, one for $\tau$ and one for $\mu$ that can be sampled independently.
+  The pdf can be factorized by the chain rule of probability as:
 
- \begin{figure}
-    \centering
-    \includegraphics[width=0.7\textwidth]{direct_method.png}
-    \caption{DM algorithm}
-    \label{fig:DM_algo}
-  \end{figure}
+  $$p(\tau, \mu|\vec{x},t) = p_1(\tau|\vec{x},t)p_2(\mu|\vec{x},t)$$
 
- \noindent
-The algorithm (Figure \ref{fig:DM_algo}) can be improved by avoiding to recompute all the propensities, taking into account the fact that many reactions will keep the same probabilities over time.
-We can work on the complexity of the for loop through a \emph{dependency graph}.
+  Where:
 
-  \section{Enhanced Direct Method}
-  Our aim is to group all the reactions that are modifying at the same time, in order to update only meaningful propensities e.g. all reactions involving the same components.
-  Let's specify this concept in a formal way:
-  \\
-  \\
-  \noindent
-  For each reaction $*R_j$* with $j = 1,...,M$, define $Reactants(R_j)={S_i|S_i \ \text{is a reactant of }R_j}$, and $Products(R_j) = {S_i|S_i \text{ is a product of }R_j}$.
-  A \textbf{reaction dependency graph}\ldots{}.
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item $p_1$ is the probability density function of the firing time $\tau$.
+      \item $p_2$ is the probability density function of the reaction with index $\mu$ that fires at $t+\tau$.
+    \end{itemize}
+  \end{multicols}
 
-  We tend to have an improvement in time complexity when the graph is not highly connected, while the space complexity is higher (since we need to generate a data structure).
-  \subsection{Improvements for the direct method}
-  \textbf{\emph{Sort}}: find the smallest index for which we can satisfy the condition for $\mu$.
-  On average, it is more efficient to keep reactions with highest probability at the beginning, such that we can easily match indexes to requirement.
-  How can we compute the number of firings? We can set an oder beforehand based on previous knowledge or run a pre-simulation with a non-optimized algorithm (we still have a speed up since we are working with a smaller setting).
-  We cannot directly compute the propensity right away, as it heavily depends on the dynamics of the system, the state can change.
-  It is required to compute some heuristics to sort the reaction order → standard Gillespie.
-  It is also possible to apply a \textbf{\emph{multi-level search}}.
-  We group the reactions and select again a reaction in the group.
-  As the dependency graph, here the issue is time complexity.
+  So that $p_1(\tau|\vec{x},t)d\tau$ is the probability that a reaction will fire in the next time interval $[t+\tau, t+\tau+d\tau[$.
+  This marginal probability is obtained by summing the probability $p(\tau, \mu|\vec{x},t)d\tau$ over the domain of all possible values of reaction index $\mu$:
+
+  $$p(\tau|\vec{x},t) = \sum\limits_{\mu=1}^Mp(\tau, \mu|\vec{x},t) = \sum\limits_{\mu=1}^Ma_\mu e^{a_0\tau} = a_0e^{-a_0\tau}$$
+
+  Where $a_0$ is the total propensity.
+  Plugging this and recalling the formula of the joint pdf:
+
+  $$p_2(\mu|\tau,\vec{x},t) = \frac{p(\tau,\mu|\vec{x},t)}{p_1(\tau|\vec{x},t)} = \frac{a_\mu}{a_0}$$
+
+  It can be seen how $p_2$ is independent of $\tau$, so it can be written as:
+
+  $$p_2(\mu|\vec{x},t) = p_2(\mu|\tau,\vec{x},t) = \frac{a_\mu}{a_0}$$
+
+  To verify that these two equation are part of the pdf:
+
+  $$\int_0^{\infty}p_1(\tau|\vec{x},t)d\tau = \int_0^{\infty}a_0e^{-a_0\tau}d\tau = 1 \qquad\land\qquad \sum\limits_{\mu=1}^Mp_2(\mu|\vec{x},t) = \sum\limits_{\mu=1}^M\frac{a_\mu}{a_0} = 1$$
+
+  The direct method uses $p_1(\tau|\vec{x},t)$ to sample the firing time $\tau$ and $p_2(\mu|\vec{x},t)$ to sample the reaction index $\mu$.
+  Since the two pdfs are independent the firing time and the reaction index can be sampled independently, so that the order of sampling does not effect the exactness of the direct method.
+  The generated firing time $\tau$ and the next reaction firing $R_\mu$ are ensured to have the pdf $p(\tau,\mu|\vec{x},t)$ specified by the stochastic simulation algorithm, so that the generated trajectories are exact.
+
+    \subsubsection{Choice of the reaction}
+    The selection of the next reaction index $\mu$ has probability $\frac{a_\mu}{a_0}$.
+    Given $M$ discrete probabilities $\frac{a_j}{a_0}$ with $j = 1,\dots, M$, the choice of the next reaction index:
+
+    \begin{align*}
+      \mu &= \arg\min\limits_{\mu\in j=1,\dots,M}\sum\limits_{j=1}^M\frac{a_j}{a_0}\ge r_1 =\\
+        &= \arg\min\limits_{\mu\in j=1,\dots,M}\sum\limits_{j=1}^Ma_j\ge r_1a_0
+    \end{align*}
+
+    Where $r_1$ is a uniformly distributed random number $norm(0,1)$.
+    To select the next reaction firing $R_\mu$, the direct methods accumulates the sum $\sum\limits_{j=1}^\mu a_j$ until it finds the smallest index $\mu$ that satisfies that inequality.
+
+    \subsubsection{Selection of the firing time}
+    For the reaction of the firing time $\tau$, consider its pdf $p_1(\tau|\vec{x},t)$.
+    It can be noted ho it is an exponential distribution with rate $a_0$.
+    So the firing time can be generated as:
+
+    $$\tau = \frac{1}{a_0}\ln\frac{1}{r_2}$$
+
+    Where $r_2$ is a uniformly distributed random number $norm(0,1)$.
+
+  \subsection{The algorithm}
+  The independent sampling of the firing time and of the reaction index are the basis of each simulation step of the direct method, outlined in algorithm \ref{algo:dm}.
+
+  \input{chapters/03/algorithms/dm}
+
+  Lines $10$-$12$ implement the sampling of the joint reaction probability density function of the next reaction firing and its firign time.
+  The simulation needs two random number, the first is used to select the next reaction firing with probability $\frac{a_\mu}{a_0}$, while the second for the firing tiem.
+  The state is then advanced to the new one and the time is moved to $t+\tau$.
+
+    \subsubsection{Time complexity}
+    The computational cost for the generation of random numbers, the firing time and the update of simulation time are constant.
+    Moreover the update of the state can be considered constant as only a few species are involved in a reaction.
+    Because of this the computational cost of the algorithm arises due to:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item The computation of reaction propensities due to state changes at lines $7$-$9$.
+        \item The selection of the next reaction firing at line $11$.
+      \end{itemize}
+    \end{multicols}
+
+    The direct method computes $M$ reaction propensities for each simulation step, so the time complexity for this step is of $O(M)$.
+    The search for the next reaction in the worst case requires to sum up all the $M$ reaction propensities, making the cost for searching the next reaction firing $O(M)$.
+    Summing up the time complexity for each simulation step of the direct method is $O(M)$.
+
+  \subsection{Enhanced direct method}
+  The enhanced direct method EDM reduces the number of propensity computation for each simulation iteration, recomputing only the propensity of reactions that change.
+  The detection of changes in the reaction propensity is based on the fact that the propensity of a reaction changes only when the population of the reactants involved in the reaction changes only then the population of the reactants involved are changed by the reaction firing.
+  Only the propensity of reaction that have reactant population changed are recomputed.
+  This is decided by analysing the dependency relationship between reactions.
+
+    \subsubsection{Reaction dependency graph}
+    A reaction $R_j$ is dependent on a reaction $R_\mu$ if its propensity $a_j$ is changed when $R_\mu$ fires.
+    This relationship is collected and presented in a reaction dependency graph.
+
+      \paragraph{Some definitions}
+
+        \subparagraph{Reactants and products set}
+        For each reaction $R_j$, with $j = 1,\dots M$, define:
+
+        $$Reactants(R_j) = \{S_i|S_i\text{ is a reactant of }R_j\}\qquad\land\qquad Products(R_j) = \{S_i|S_i\text{ is a product of }R_j\}$$
+
+        \subparagraph{Affects set}
+        The set of species involved in the computation of the propensity $a_j$ of a reaction $R_j$ is:
+
+        $$Affects(R_j) = \{S_i|a_j\text{ changes if population of }S_i\text{ changes}\}$$
+
+        \subparagraph{Mass action kinetics}
+        For mass action kinetics, because the mass action propensity $a_j$ of reaction $R_j$ is proportional to its reactants:
+
+        $$Affects(R_j) = Reactants(R_j)$$
+
+        \subparagraph{AffectedBy set}
+        The set of species whose population changes by firing reaction $R_j$ is:
+
+        $$AffectedBy(R_j) = \{S_i|\text{Population of }S_i\text{ is changed if firing }R_j\}$$
+
+        \subparagraph{Population of AffectedBy}
+        For each reaction $R_j$ it is:
+
+        $$AffectedBy(R_j)\subseteq Reactants(R_j)\cup Products(R_j)$$
+
+        This is because $AffectedBy(R_j)$ includes species that are consumed and produced by reaction $R_j$ excluding any species whose population is conserved.
+
+      \paragraph{Definition of the reaction dependency graph}
+      Let $\mathcal{R}$ be the set of reactions in the biochemical reaction network.
+      The reaction dependency graph $G(V, E)$ is a directed graph with the vertex set $V = \mathcal{R}$ and the edge set $E$ contains directed edges $e(R_j, R_k)$ from a reaction $R_j$ to another reaction $R_k$ if:
+
+      $$AffectedBy(R_j)\cap Affects(R_k)\neq\emptyset$$
+
+      All self-edges $e(R_j, R_j)$ belong to $E$.
+
+      \paragraph{Dependent reactions}
+      The set of reactions that are dependent on reaction $R_j$ by the reaction dependency graph $G$ is defined such that:
+
+      $$Dependents(R_j) = \{R_k|\exists\text{ a directed edge }e(R_j,R_k)\in G\}$$
+
+      The reaction dependency graph $G$ determines the reaction for which propensities must be recomputed after firing.
+      The number of reaction in the $Dependents$ set is equal to the out-degree of the reaction in the dependency graph.
+
+    \subsubsection{Algorithm}
+    In the EDM algorithm the reaction dependency graph is the first thing built.
+    This will be a static structure independent on the time evolution of the system and will be stored with a cost $O(M^2)$.
+    The computation of propensity of all the reaction is performed only at the beginning of the simulation.
+    For each iteration the selection is the same as in DM, then the new propensity for each reaction $R_j\in Dependents(R_\mu)$ is computed.
+    The algorithm is presented in \ref{algo:edm}.
+
+    \input{chapters/03/algorithms/edm}
+
+    In this way the propensity updates become local.
+    Let $D$ be the average number of reactions depending in a reaction, the cost of the propensity update for a simulation loop becomes $O(D)$, considering that $D<M$, so the propensity update in EDM is more efficient than in DM.
+
+  \subsection{Improvements for Direct Method}
+
+    \subsubsection{Direct method with sorted reaction}
+    The principle of the direct method with sorted reaction is to reduce the search depth of the direct method by re-indexing reactions, reducing the search depth of reactions that happens more frequently, improving simulation performance.
+
+      \paragraph{Optimized direct method}
+      The optimized direct method reduces the average search depth of the next reaction firing.
+      This is done because in many biochemical networks, some reactions fire much more frequently tan others.
+
+        \subparagraph{Average search depth}
+        The average search depth $S_m$ is the average number of operation performed for the selection of the next reaction firing:
+
+        $$S_M = \frac{\sum\limits_{j=1}^Mjn_j}{\sum\limits_{j=1}^Mn_j}$$
+
+        Where:
+
+        \begin{multicols}{2}
+          \begin{itemize}
+            \item $j$ is the search index of reaction $R_j$.
+            \item $n_j$ is the number of times that $R_j$ fires during the simulation.
+          \end{itemize}
+        \end{multicols}
+
+        These two values are not known so to order the reactions $\langle n_j\rangle$ the average estimation of $n_j$ is used to order reaction.
+        This is computed by some short pre-simulation runs.
+
+        \subparagraph{Algorithm}
+        Optimized direct method is implemented as in algorithm \ref{algo:odm}.
+
+        \input{chapters/03/algorithms/odm}
+
+        \subparagraph{Discussion}
+        In the case of a fixed number of bits the sum of the biggest propensities placed in the front of the search list may be not enough to account for the rest: the reactions with very small propensity will never fire.
+        Moreover the pre-simulation introduces an additional computational burden to the simulation.
+        Moreover ODM assumes that the reaction order determined by the pre-simulation runs will characterize the long-term reaction behaviour, which could not be true.
+
+      \paragraph{Sorting direct method}
+      The sorting direct method SDM is a variant of ODM that does not use pre-simulation runs by maintaining an approximately sorted order of reaction.
+      The ordering is built dynamically during the simulation run: the index of a reaction whenever it is selected to fire is dynamically bubbled up one step ahead in the reaction list.
+      The reactions that have just occurred are put towards the top of the search list.
+
+        \subparagraph{Algorithm}
+        The sorting direct method is implemented as in algorithm \ref{algo:sdm}.
+
+        \input{chapters/03/algorithms/sdm}
+
+        \subparagraph{Discussion}
+        The swapping step adds overhead to each simulation step, but it is negligible.
+        SDM is thus suited to deal with the simulation of networks where the propensities change sharply.
+
+    \subsubsection{Direct method with Multi-level search}
+    The mani bottleneck of DM is that the search for next reaction firing is slow in large reaction models.
+    The multi-level search is an effort to reduce the time complexity of DM for large systems.
+    The search problem is divided into smaller sub-problem partitioning the $M$ reactions into $L$ groups $G_1, \dots, G_L$.
+    Each group $G_l$ contains $k_l$ reactions.
+    Let $a^l$ be the sum of propensities of reactions in group $G_l$:
+
+    $$a^l = \sum\limits_{R_j\in G_l}a_j$$
+
+    It is obvious that:
+
+    $$a_0 = \sum\limits_{l=1}^L a^l$$
+
+    The selection of the next reaction firing is in two steps.
+    First a group $G_\alpha$ is selected with probability $\frac{a^\alpha}{a_0}$.
+    Then the next reaction firing $R_\mu$ is selected with probability $\frac{a_\mu}{a^\alpha}$ conditioning on the selected group $G_\alpha$.
+
+      \paragraph{Exactness of the multi level search}
+      The next reaction $R_\mu$ in the group $G_\alpha$ that is selected by the multi-level search has probability $\frac{a_\mu}{a_0}$.
+      Let $\mathbb{P}\{R_\mu\}$ be the probability of selecting the reaction $R_\mu$.
+      This can be expanded as:
+
+      $$\mathbb{P}\{R_\mu\} = \mathbb{P}\{G_\alpha\}\mathbb{P}\{R_\mu|G_\alpha\} = \frac{a^\alpha}{a_0}\frac{a_\mu}{a^\alpha} = \frac{a_\mu}{a_0}$$
+
+      \paragraph{Implementation}
+      An implementation to select the group index and the reaction index requires two random numbers:
+
+      $$\alpha = \arg\min\limits_{\alpha\in l = 1, \dots, L}\sum\limits_{l=1}^\alpha a^l\ge r_1a_0$$
+
+      And:
+
+      $$\mu = \arg\min\limits_{\mu\in k = 1, \dots, M}\sum\limits_{\substack{k=1\\G_\alpha = \{R_j, \dots, R_{j+k\alpha}\}}}^\mu a_k\ge r_2 a^\alpha$$
+
+      The need  for $r_2$ can be avoided by recycling $r_1$:
+
+      $$\frac{r_1 a_0 -\sum\limits_{l=1}^{\alpha-1}a^l}{a^\alpha}$$
+
+      Is a uniformly distributed random number.
+      SO $r_1$ is rescaled to select the next reaction firing in the group.
+
+      \paragraph{Algorithm}
+      The direct method with multi-level search is implemented as in algorithm \ref{algo:dm-multi-level}.
+
+      \input{chapters/03/algorithms/dm-multi-level}
+
+      \paragraph{Discussion}
+      To analyse the time complexity of the multi-level search assume that $M$ reactions are partitioned into $L = \left[\frac{M}{k}\right]$ groups and each group contains $k_l=k$ reactions.
+      The time complexity has two parts:
+
+      \begin{multicols}{2}
+        \begin{itemize}
+          \item Searching for a group $O\left(\frac{M}{k}\right)$.
+          \item Searching for a reaction within the group $O(k)$.
+        \end{itemize}
+      \end{multicols}
+
+      The total time complexity is then
+
+      $$O\left(\frac{M}{k}\right) + O(k) = O(\max\left\{\frac{M}{k}, k\right\})$$
+
+      The total time is minimized by taking $k = c\sqrt{M}$, so that the minimal time complexity per reaction event is $O(\sqrt{M})$.
+      The multi-level search can be further expanded partitioning the groups into sub-groups, introducing the multi-dimensional search method.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{First Reaction Method (FRM)}
 Instead of computing one $\tau$, compute a $\tau$ for each reaction (Figure \ref{fig:tau}).
