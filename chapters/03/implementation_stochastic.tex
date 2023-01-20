@@ -470,6 +470,135 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
         To account for many small changes a cumulative sum of all the propensity changes $s_j$ since the last rebuilt is computes and compared against the acceptance threshold to decide whether to rebuild the tree.
 
     \subsubsection{Direct method with composition-rejection search}
+    The composition-rejection CR search employs the partitioning of reaction into groups, but the selection of the next reaction is performed through an acceptance-rejection sampling.
+    The reactions are partitioned into $L$ groups so that $R_j\in G_l$ if $a_j$ satisfies $2^{u_l-1}\le a_j\le 2^{u_l}$ in which $u_l$ is selected such that $u_l=\lceil \log_2(a_j)\rceil$.
+    If $a_{\min}$ and $a_{\max}$, the global minimum and maximum propensities, are known, then $L = \left\lceil\log_2\left(\frac{a_{\max}}{a_{\min}}\right)\right\rceil$ for the whole simulation.
+    These two bounds on $a$ can be estimated through physical reasoning.
+    Where this is not possible $L$ must be increased during the simulation.
+
+      \paragraph{Search for the next reaction}
+      Let $a^l = \sum\limits_{R_j\in G_l}a_j$ be the sum of the propensity in group $G_l$.
+      The total propensity $a_0$ can be computed as:
+
+      $$a_0 = \sum\limits_{l=1}^La^l$$
+
+      The search is composed of two steps.
+
+        \subparagraph{First step}
+        In the first step a group $G_\alpha$ is selected with probability $\frac{a^l}{a_0}$.
+        This can be performed accumulating values $a^l$ until the smallest index $\alpha$ is found such that:
+
+        $$\sum\limits_{l=1}^\alpha a^l\ge r_1a_0$$
+
+        The tree-based search can be applied to select the group.
+
+        \subparagraph{Second step}
+        The second step is done through an acceptance-rejection sampling with the chosen envelope $2^{u_\alpha}$.
+        A random and uniform reaction index $\mu\in G_\alpha$ is computed: $\mu = [r_2|G_\alpha|]$, where $|G_\alpha|$ is the size of $G_\alpha$ and $r_2$ is a random number.
+        The selected reaction is tested to accept with probability $\frac{a_\mu}{2^{u_\alpha}}$: a random number $r_3$ is generated and compared against $\frac{a_\mu}{2^{u_\alpha}}$.
+        $r_2$ can be recycled noting that $r_3 = r_2|G_\alpha|-\mu$ is uniformly distributed in $[0,1]$.
+        If $\frac{a_\mu}{2^{u_\alpha}}\le r_3$ holds, $R_\mu$ is accepted to fire.
+        Otherwise the reaction is rejected and a new random reaction index is generated and the check is performed again.
+        This is repeated until there is an accepted $R_\mu$.
+        The acceptance probability is bound to $\frac{1}{2}$: $\frac{a_\mu}{2^{u_\alpha}}\ge \frac{1}{2}$ by definition.
+
+      \paragraph{Algorithm}
+      An implementation of this method is found in algorithm \ref{algo:dm-cr}
+      The rejection test is repeated on average two times: the acceptance rate is bounded by $\frac{1}{2}$.
+      Moreover after a reaction firing the propensity must be updated and it could be that a new reaction falls outside of the current bound, so it must be moved to an appropriate group.
+
+      \input{chapters/03/algorithms/dm-cr.tex}
+
+      \paragraph{Discussion}
+      The selected base $2$ in the partition can be chosen arbitrarily, with the dimension of groups and the number of rejections increasing with the base.
+      Moreover efficient data structures are needed to implement the movement of reactions between groups: this should support dynamic memory allocation operation.
+      In addition a hash table should be used to support fast lookup of a reaction in a group.
+      For adding a reaction to a group, the group size is increased and the reaction is added at the end of the group.
+      When deleting a reaction, the reaction at the end of the group replaces it and the group size is decremented.
+      After each of this two operations, the hash table is updated.
+
+        \subparagraph{Computational cost}
+        The computational cost is composed by the search for the group, proportional to the number of groups $O(L)$ and the costo for selecting the next reaction, which is constant.
+        Because the average number of rejection tests is bound by $2$, the time is $O(L)$ and is independent of the number of reactions $M$.
+        If $L\ll M$ and is bounded by a small constant the search for the next reaction firing is $O(1)$.
+
+  \subsection{Partial-propensity direct method}
+  The partial propensity direct method PDM requires that reactions must be elementary and their propensities follow the mass action kinetics.
+  Mass action propensities are factorized and the partial propensities related to common reactants are grouped to facilitate the selection of the next reaction firing.
+  Let $\pi_j^i$ the partial propensity of a reaction $R_j$ with respect to reactant $S_i$, this is defined as the propensity per molecule of reactant $S_i$.
+
+    \subsubsection{Partial propensities of elementary reactions}
+
+    \begin{itemize}
+      \item Synthesis reaction ($\emptyset$ → products): propensity $ a_j =c_j $ and partial propensity $\pi_j^0 = c_j$.
+      \item Unimolecular reaction ($ S_i$ → products): propensity $ a_j = c_jX_i $ and partial propensity $\pi_j^i=c_j$.
+      \item Bimolecular reaction ($ S_i + S_k$ → products): propensity $ a_j = c_jX_iX_k $ and partial propensity $\pi_j^i = c_jX_k$ and $\pi_j^{(k)} = c_jX_i$.
+      \item Dimerization reaction ($2S_i$ → products): propensity $ a_j = \frac{1}{2}c_jX_i(X_i -1) $ and partial propensity $\pi_j^i = \frac{1}{2}c_j(X_i-1)$.
+    \end{itemize}
+
+    \subsubsection{Storing the partial propensities}
+    The partial propensities related to a species $S_i$ are grouped into  a group $\Pi_i$, such that the structure:
+
+    $$\Pi = \{\Pi_i\}_{i=0}^N$$
+
+    Stores all of them and is a matrix implemented as an array of arrays.
+    It has $N+1$ rows in which the i-th row stores the partial propensities related to species $S_i$, while the 0-th row stores all the partial propensities for synthesis reactions.
+    In the case of a bimolecular reaction one of the two partial propensities has to be dropped.
+
+      \paragraph{Minimizing updates}
+      To minimize updates the partial propensities are stored with respect to the reactant involved in a larger number of reaction: before building $\Pi$, the species are re-indexed such that for each pair of them $S_i$ and $S_k$, $i<k$ if the number of reactions involving $S_i$ is greater than $S_k$.
+      Then PDM stores partial propensity of a bimolecular reaction with respect to the reactant with smaller index.
+
+    \subsubsection{Group-sum array}
+    The sum $\Lambda_i = \Sigma_j\Pi_{i,j}$ gives the sum of partial propensities of reactions $R_j$ sharing common reactant $S_i$.
+    This is the group-sum array and is used to store the sum of partial propensities in group.
+    $\Omega_i = X_i\Lambda_i$, where $X_i$ is the population of $S_i$ will be the sum of propensities of reaction having species $S_i$ as the common reactant.
+    The array $\Omega = \{\Omega_i\}_{i=0}^N$ to store the sum of propensities of gropus.
+    The total propensity is computed as:
+
+    $$a_0 = \sum\limits_{i=0}^N\Omega_i$$
+
+    \subsubsection{Reaction lookup}
+    A reaction is identified by the group index $i$ and the element $j$ in a group $\Pi_i$.
+    To facilitate the lookup of a reaction given the element $j$, a lookup table $\mathbf{L}$ is used to store the reaction indices of corresponding partial propensities in $\Pi$.
+    It has the same structure as $\Pi$ ans is implemented as an array of arrays.
+    The index of reaction with element index $j$ in group $i$ of $\Pi$ is identified as $\mathbf{L}_{ij}$, moreover three additional lookup table are used to facilitate the update of $\Pi$, $\Lambda$ and $\Omega$ after a reaction firing:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item $\mathbf{U}^{(1)}$ is an array of $M$ arrays in which array $j$ contains the indices of species involved in $R_j$.
+        \item $\mathbf{U}^{(2)}$ is an array of $M$ arrays in which the array $j$ contains the amount of change in population of the corresponding species in $\mathbf{U}^{(1)}$.
+        \item $\mathbf{U}^{(3)}$ is an array of $N$ arrays in which array $k$ contains pairs of group indices and element indices of all entry in $\Pi$ that depend on species $k$.
+          Each element in the row $k$ is a pair denoting the partial propensity $\Pi_{i,j}$ dependent in $X_k$.
+      \end{itemize}
+    \end{multicols}
+
+    \subsubsection{Selecting the reaction firing}
+    PDM selects $R_\mu$ in two steps.
+    Let $r_1$ b a uniformly distributed random number in $norm(0,1)$.
+
+      \paragraph{First step}
+      Search for the group index $p$, with $0\le p\le N$:
+
+      $$p = \arg\min\limits_{i\in p}\sum\limits_{i=0}^p\Omega_i\ge r_1a_0$$
+
+      \paragraph{Second step}
+      Search for an element index $q$, with $q\ge 1$ such that:
+
+      $$q = \arg\min\limits_{i\in q}\left(X_p\sum\limits_{j=1}^q\Pi_{p,j}+\sum\limits_{i=0}^p\Omega_i-\Omega_p\right)\ge r_1a_0$$
+
+      Or:
+      $$q = \arg\min\limits_{i\in q}\Pi_{o,j}\ge \Psi$$
+
+      Where:
+
+      $$\Psi = \frac{r_1a_0-\sum\limits_{i=0}^p\Omega_i+\Omega_p}{X_p}$$
+
+      Then $p$ and $q$ are used to retrieve the reaction firing index $\mu = \mathbf{L}_{p,q}$.
+
+
+
+
 
 
 
