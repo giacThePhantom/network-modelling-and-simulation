@@ -1,0 +1,33 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{Insert}{insert}
+\SetKwFunction{TitleFunction}{build\_huffman\_tree}
+
+\caption{\protect\TitleFunction{position}}
+\label{algo:huffman}
+
+\Input: an array TREE with $2M-1$ elements where elements from $M$ to $2M-1$ are filled with $M$ reaction propensities\;
+
+\Output: The Huffman tree represented by the array TREE.\;
+
+build binary heap $H$ with elements $(M, w_1),\dots, (2M-1, w_M)$ ordered according to $W_j$\;
+\For{$position = M-1$ \To $1$}{
+	extract top element $(p, w_p)$ from $H$\;
+	extract top element $(q, w_q)$ from $H$\;
+	$TREE[position].VALUE = TREE[p].VALUE + TREE[q].VALUE$\;
+	$TREE[position].LEFT = p$\;
+	$TREE[position].RIGHT = q$\;
+	\Insert{position, $w_p+w_q$} into $H$\;
+	$TREE[p].PARENT = position$\;
+	$TREE[q].PARENT = position$\;
+}
+\end{algorithm}

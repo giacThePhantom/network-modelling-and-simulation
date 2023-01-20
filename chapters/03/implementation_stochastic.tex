@@ -317,6 +317,162 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
       The total time is minimized by taking $k = c\sqrt{M}$, so that the minimal time complexity per reaction event is $O(\sqrt{M})$.
       The multi-level search can be further expanded partitioning the groups into sub-groups, introducing the multi-dimensional search method.
 
+    \subsubsection{Direct method with tree-based search}
+    The tree-based search refines the multi-level search.
+    The finest partitioning of reaction is when the lowest level has at most two reaction creating a binary tree structure.
+    Each node has two children or zero and the leaves hold reaction propensity, while internal node hold the sums of the values in their child nodes.
+    The root of the tree holds $a_0$.
+
+      \paragraph{Dimension of a complete tree}
+      A complete binary tree with $M$ leaves has $2M-1$ nodes.
+      Let $P$ be the number of internal nodes.
+      In a complete tree each internal node has two children, hence the number of edges is $2P$.
+      Also the edges are $M+P-1$, so $P = M-1$, so in conclusion the number of nodes is $P+M = 2M-1$.
+
+      \paragraph{Implementation of the tree}
+      The tree can be implemented by an array with $2M-1$ elements.
+      The number of reaction $M$ has to be even, and if it is not a dummy node with propensity $0$ is added to the end of the array.
+      Algorithm \ref{algo:build-tree} outlines how the tree is built: it happens recursively from the leaves to the root, observing that a node in $i$ will have children in position $2i$ and $2i+1$.
+
+      \input{chapters/03/algorithms/tree-build}
+
+      \paragraph{Tree-based search}
+      The tree-based search for the next reaction firing $R_\mu$ given $s = ra_0$ starts by selecting the next branch of the tree by comparing the search value $s$ with the value stored in the left child of the current node.
+      Then the search selects the left branch if the value is less than the one stored in the left child of the node, otherwise the search chooses the right branch.
+      If the right branch is selected the search value is subtracted by the value stored in the current node.
+      This proceeds recursively until it reaches a leaf and the reaction stored in that leaf is returned with the correct probability $\frac{a_\mu}{a_0}$.
+      This procedure is outlined in \ref{algo:search-tree}.
+
+      \input{chapters/03/algorithms/tree-search}
+
+      \paragraph{Updating the tree}
+      The system is updated after the selected reaction fires.
+      The nodes of the tree will update their propensity value.
+      For each reaction depending on the reaction firing according to the dependency graph $G$, its new propensity is computed and the difference is propagated for every of their paths.
+      To optimize this implementation, reactions dependent on each other should be placed as close as possible on the tree.
+      This procedure is outlined in algorithm \ref{algo:update-tree}.
+
+      \input{chapters/03/algorithms/tree-update}
+
+      \paragraph{Algorithm}
+      The whole procedure is implemented in the algorithm \ref{algo:dm-tree}.
+
+      \input{chapters/03/algorithms/dm-tree}
+
+      \paragraph{Discussion}
+      The search and updated are related to the height of the tree, logarithmic in the number of reactions.
+      So the total computational cost for each reaction event is $O(\log(M))$.
+
+      \paragraph{Tree with optimal height}
+      The computational cost for selecting the next reaction firing in a complete tree is not the optimal average-case performance.
+      Let $C$ be a tree structure.
+
+        \subparagraph{Average number of comparison}
+        The average number of comparison performed during the search in tree $C$ is:
+
+        $$T_m(C) = \sum\limits_{j=1}^Mw_jD_j$$
+
+        Where:
+
+        \begin{multicols}{2}
+          \begin{itemize}
+            \item $M$ is the total number of reactions in the leaves.
+            \item $D_j$ is the depth of leaf $R_j$.
+            \item $w_j$ is a weight related to the probability that reaction $R_j$ is selected to fire.
+          \end{itemize}
+        \end{multicols}
+
+        \subparagraph{Complete tree}
+        When the tree $C$ is complete the depth $D_j$ is the same for all $j$.
+        This leads to the fact that picking a fast reaction requires the same computational power of picking a slow one, leading to a non-optimal $T_M(C)$.
+
+        \subparagraph{Huffman tree}
+        The minimization of $T_M(C)$ leads to the construction of the Huffman tree.
+        The leaves in this type of tree with large propensity values will be closer than the leaves with small values.
+        This is built by merging trees in a forest, populated initially by trees with one node.
+        At each step the two trees with roots $p$ and $q$ having the smallest weight $w_p$ and $w_q$ are merged creating the new root $pq$ with weight $w_{pq} = w_p+w_q$.
+        The process stops when only one tree is found such that $D_{pq} +1 = D_q=D_q$, where $p, q, pq$ are the nodes involved in a merge such hat:
+
+        \begin{align*}
+          T_M(C) &= \sum\limits_{\substack{j=1\\j\neq p,q}}^Mw_jD_j +w_pD_q =\\
+                 &= \left(\sum\limits_{\substack{j=1\\j\neq p,q}}^Mw_jD_j + w_{pq}D_{pq}\right) + w_{pq}=\\
+                 &= T_{M-1}(C)+w_{pq}
+        \end{align*}
+
+        This derivation allows to determine that the Huffman tree gives the minimum value of $T_M(C)$.
+        This is proven by induction on $M$.
+        Consider the base case with $M=2$, this is easy to check.
+        By the inductive hypothesis, the Huffman tree for $M-1$ gives the optimum value for $T_{M-1}(C)$.
+        Suppose by contradiction that the Huffman tree for $M$ is not optimal, so there is some tree having the total number of comparison $T'_{M}(C)$ such that $T'_M(C)<T_M(C)$.
+        Without loss of generality the smallest weights are placed at the lowest level.
+        Let $p$ and $q$ be the nodes with the smallest weights and label their parent $pq$.
+        Using the derivation this gives:
+
+        $$T'_{M-1}(C) +w_{pq}< T_{M-1}(C)+w_{pq}$$
+
+        Then $T_{M-1}'(C)< T_{M-1}(C)$, contradicting the inductive hypothesis.
+
+        \subparagraph{Building the Huffman tree}
+        To build a Huffman tree an array with size $2M-1$ is considered and each node has two children.
+        However $M$ does not need to be even.
+        The leaves are between $M$ and $2M-1$.
+        Each element in the array points to its left and right child and an additional field parent points to the parent of the node.
+        To extract the nodes with minimal weights a binary heap is used, such that each element is $(i,w_i)$, where $i$ is the index of a node in the tree and the weight $w_i$ is used as the key for ordering the heap.
+        A heap is a tree-based data structure that satisfies the heap property: the key of a parent node is smaller than the key of its child nodes.
+        The implementation for this procedure is presented in algorithm \ref{algo:huffman}
+
+        \input{chapters/03/algorithms/huffman}
+
+        The same binary search and propagation update are applied to search and update the propensities of the reactions.
+
+        \subparagraph{Selecting the weight}
+        The weight function $w_j$ can be the propensity function $a_j$ because it allows to reduce the time spent to find the next reaction, however reaction firing could make the tree no longer optimal, so it should be rebuilt.
+        To balance the expensive operation of re-building with the non-optimal tree, the non-optimal tree is used for some number of steps.
+        The choice for this step number only affect performance and not exactness.
+        There are two approaches to do so:
+
+        \begin{multicols}{2}
+          \begin{itemize}
+            \item Fixed time tree rebuilding.
+            \item Adaptive time tre rebuilding.
+          \end{itemize}
+        \end{multicols}
+
+        \subparagraph{Fixed time tree rebuilding}
+        In fixed time tree rebuilding the tree structure is built every $k$ steps.
+        To predict the changes in the reaction propensities during the $k$ steps the weights can be modified assigning a higher weight to those reaction that are more likely to change.\\
+
+          \textbf{Conflicts and Favours set}
+          For a reaction $R_j$ define:
+
+          $$Conflicts(R_j) = \{R_k|(R_j\in Dependents(R_k))\land(Reactants(R_k)\cap Reactants(R_j)\neq\emptyset)\}$$
+
+          $$Favors(R_j) = \{R_k|(R_j\in Dependents(R_k))\land (Products(R_k)\cap Reactants(R_j)\neq\emptyset)\}$$
+
+          \textbf{Dependency graph}
+          In terms of the dependency graph:
+
+          $$|Conflicts(R_j)| + |Favours(R_j)| = in\ degree\ of\ R_j$$
+
+          \textbf{Estimating changes of propensity}
+          After a reaction firing, the probability that $R_j$ will increase or decrease is estimated as $\frac{|Conflicts(R_j)}{M}$ or $\frac{|Favours(R_j)}{M}$.
+          For $k$ simulation steps, the estimated weight of reaction $R_j$ is:
+
+          $$w_j(a_j, k) = a_j + \alpha_1 k\frac{|Favours(R_j)|}{M} + \alpha_2 k\frac{|Conflicts(R_j)|}{M}$$
+
+          Where $\alpha_1$ and $\alpha_2$ are parameters denoting the amount of average change.
+
+        \subparagraph{Adaptive time tree rebuilding}
+        In adaptive time tree rebuilding the tree is rebuilt when a significant change has occurred.
+        To detect the abrupt change in propensities a predefined value $\delta$, the acceptance threshold defines the largest change which does not require an immediate tree rebuilding.
+        The difference in propensity after a reaction $R_j$ firing is $c_j = a_j^{new}-a_j$.
+        If $c_j \ge \delta$ the Huffman tree should be rebuilt.
+        To account for many small changes a cumulative sum of all the propensity changes $s_j$ since the last rebuilt is computes and compared against the acceptance threshold to decide whether to rebuild the tree.
+
+    \subsubsection{Direct method with composition-rejection search}
+
+
+
 
 
 

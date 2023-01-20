@@ -12,6 +12,7 @@
 \SetKwFunction{TitleFunction}{Direct method with multi level search}
 
 \caption{\protect\TitleFunction{}}
+\label{algo:dm-multi-level}
 
 \Input: a biochemical reaction network of $M$ reactions in which each reaction $R_j$, $j=1, \dots, M$ is accompanied with the state change vector $\vec{v}_j$ and the propensity $a_j$, the initial state $\vec{x}_0$ at time $0$ and the simulation ending time $T_{\max}$\;
 
@@ -20,6 +21,8 @@
 build the reaction dependency graph $G$\;
 partition $M$ reactions into $L$ groups $\{G_1, \dots, G_L\}$\;
 
+$t = 0$\;
+$\vec{X} = \vec{x}_0$\;
 \ForEach{$G_l$}{
 	$a^l = 0$\;
 	\ForEach{$R_j\in G_l$}{
@@ -28,8 +31,6 @@ partition $M$ reactions into $L$ groups $\{G_1, \dots, G_L\}$\;
 	}
 	$a_0 = a_0+a^l$\;
 }
-$t = 0$\;
-$\vec{X} = \vec{x}_0$\;
 \While{$t<T_{\max}$}{
 	generate two random numbers $r_1,r_2\sim norm(0,1)$\;
 	select $G_\alpha$ with the smallest index $\alpha$ such that $\sum\limits_{l=1}^\alpha a^l\ge r_1a_0$\;
@@ -45,5 +46,4 @@ $\vec{X} = \vec{x}_0$\;
 	}
 }
 
-\label{algo:dm-multi-level}
 \end{algorithm}

@@ -1,0 +1,33 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{search\_tree}
+
+\caption{\protect\TitleFunction{position, s}}
+\label{algo:search-tree}
+
+\Input: A complete binary tree represented by the array TREE, and integer position and a search value $s$\;
+
+\Output: The leaf of the complete binary tree which stores the next reaction firing.\;
+
+\If{position $\ge$}{
+	\Return position\;
+}
+\ElseIf{$TREE[2\cdot position]\ge s$}{
+	\TitleFunction{$2\cdot position$, $s$}\;
+}
+\Else{
+	$s = TREE[position] - s$\;
+	\TitleFunction{$2\cdot position+1$, s}\;
+}
+
+
+\end{algorithm}

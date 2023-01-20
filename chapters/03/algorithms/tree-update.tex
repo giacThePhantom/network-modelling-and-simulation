@@ -1,0 +1,26 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{update\_tree}
+
+\caption{\protect\TitleFunction{position, c}}
+\label{algo:update-tree}
+
+\Input: A complete binary tree represented by the array TREE.\;
+
+\Output: The complete binary tree updated by the reaction firing.\;
+
+$TREE[position] = TREE[position] + C$\;
+\If{position is not root}{
+	\TitleFunction{$\left\lfloor\frac{i}{2}\right\rfloor$, $c$}\;
+}
+
+\end{algorithm}

@@ -1,0 +1,28 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{build\_tree}
+
+\caption{\protect\TitleFunction{position}}
+\label{algo:build-tree}
+
+\Input: an array TREE with $2M-1$ elements where elements from $M$ to $2M-1$ are filled with $M$ reaction propensities and a starting position.\;
+
+\Output: The complete binary tree represented by the array TREE.\;
+
+\If{position $<M$}{
+	\TitleFunction{$2\cdot$position}\;
+	\TitleFunction{$2\cdot$position$+1$}\;
+	$TREE[position] = TREE[2\cdot position] + TREE[2\cdot position +1]$\;
+}
+
+
+\end{algorithm}
