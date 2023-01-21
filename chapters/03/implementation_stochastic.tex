@@ -596,6 +596,30 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
 
       Then $p$ and $q$ are used to retrieve the reaction firing index $\mu = \mathbf{L}_{p,q}$.
 
+    \subsubsection{Exactness of PDM}
+    The next reaction firing $R_\mu$ is selected by PDM having probability $\frac{a_\mu}{a_0}$.
+    The selection of the reaction is performed by DM as:
+
+    $$\mu = \arg\min\limits_{\mu\in j}\sum\limits_{j=1}^\mu s_j\ge r_1a_0$$
+
+    PDM identifies a reaction by a pair $(p,q)$ where $p$ is the group index and $q$ the element index in $\Pi$ by $\mu = \mathbf{L}_{p,q}$, then the equation can be re-written as:
+
+    $$(p,q) = \arg\min_{p\in i\land q\in j}\sum\limits_{i=0}^p\sum\limits_{j}a_{\mathbf{L}_{p,j}}\ge r_1 a_0$$
+
+    That can be broken down in:
+
+    $$p = \arg\min\limits_{p\in i}\sum\limits_{i=0}^p\sum\limits_j a_{\mathbf{L}_{i, j}}\ge r_1a_0$$
+
+    $$q = \arg\min\limits_{q\in j}\sum\limits_{i=0}^p\sum\limits_j a_{\mathbf{L}_{i, j}} + \sum\limits_{j=1}^q a_{\mathbf{L}_{p,j}}\ge r_1 a_0$$
+
+    Plugging into this two the definitions of $\Omega$ and $\Pi$ they are equivalent to the one for the PDM seen before.
+
+    \subsubsection{Algorithm}
+    PDM is implemented as in algorithm \ref{algo:pdm}.
+
+    \input{chapters/03/algorithms/pdm}
+
+
 
 
 

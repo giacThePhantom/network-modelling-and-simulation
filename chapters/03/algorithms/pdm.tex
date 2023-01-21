@@ -1,0 +1,65 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Partial-Propensity Direct Method (PDM)}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:pdm}
+
+\Input: a biochemical reaction network of $M$ reactions in which each reaction $R_j$, $j=1, \dots, M$ is accompanied with the state change vector $\vec{v}_j$ and the propensity $a_j$, the initial state $\vec{x}_0$ at time $0$ and the simulation ending time $T_{\max}$ with mass action kinetics\;
+
+\Output: a trajectory of the biochemical reaction network, which is a collection of states $X(t)$ for time $0\le t\le T_{\max}$\;
+
+$t = 0$\;
+$\vec{X} = \vec{x}_0$\;
+
+build $\Pi$, $\Lambda$, $\Omega$ and $\mathbf{L}$, $\mathbf{U}^{(1)}$, $\mathbf{U}^{(2)}$ and $\mathbf{U}^{(3)}$\;
+
+$a_0 = 0$\;
+
+\ForEach{$i \in \Omega$}{
+	$a_0 = a_0 +\Omega_i$\;
+}
+
+\While{$t<T_{\max}$}{
+	generate two random numbers $r_1,r_2\sim norm(0,1)$\;
+	select the smallest group index $p$ such that $\sum\limits_{i=0}^p\Omega_i\ge r_1a_0$\;
+	$\Psi = \frac{r_1a_0-\sum\limits_{i=0}^p\Omega_i+\Omega_p}{X_p}$\;
+	select $R_\mu$ with the smallest index $q$ such that $\sum\limits_{j=1}^q \Pi_{p,j}\ge \Psi$\;
+	$\mu = \mathbf{L}_{p,q}$\;
+	$\tau = \frac{1}{a_0}\ln\frac{1}{r_2}$\;
+	$\Delta a = 0$\;
+	\ForEach{$k\in \mathbf{U}_\mu^{(1)}$}{
+		$l = \mathbf{U}_{\mu, k}^{(1)}$\;
+		$X_l = X_l + \mathbf{U}_{\mu, k}^{(2)}$\;
+		\ForEach{$m\in\mathbf{U}_l^{(3)}$}{
+			$(i,j) = \mathbf{U}_{l.m}^{(3)}$\;
+			$\mu' = \mathbf{L}_{i,j}$\;
+			\If{$l\neq i$}{
+				$\Pi_{i,j} = \Pi_{i,j} + c_{\mu'}\mathbf{U}_{\mu,k}^{(2)}$\;
+				$\Lambda_i = \Lambda_i + c_{\mu'}\mathbf{U}_{\mu, k}^{(2)}$\;
+			}
+			\ElseIf{$l = i$}{
+				$\Pi_{i, j} = \Pi_{i, j} + \frac{1}{2}c_{\mu'}\mathbf{U}_{\mu, k}^{(2)}$\;
+				$\Lambda_i = \Lambda_i + \frac{1}{2}c_{\mu'}\mathbf{U}_{\mu, k}^{(2)}$\;
+			}
+			$\Omega_{temp} = \Omega_i$\;
+			$\Omega_i = X_i\Lambda_i$\;
+			$\Delta a = \delta a + \Omega_i -\Omega_{temp}$\;
+		}
+		$\Delta a = \Delta a + X_k\Lambda_l - \Omega_l$\;
+		$\Omega_l = X_l\Lambda_l$\;
+	}
+	$a_0 = a_0 + \Delta a$\;
+	$t=t+\tau$\;
+}
+
+\end{algorithm}
