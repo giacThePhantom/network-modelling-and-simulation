@@ -111,11 +111,11 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1.1}Exact stochastic simulation}{24}{subsubsection.3.1.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Advantages of a non-deterministic approach}{24}{subsection.3.1.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1.3}Categories of the exact simulation algorithms}{24}{subsection.3.1.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Fig 3.1 Marchetti's book\relax }}{25}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:tree}{{3.1}{25}{Fig 3.1 Marchetti's book\relax }{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Main stochastic simulation algorithm.\relax }}{25}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:tree}{{3.1}{25}{Main stochastic simulation algorithm.\relax }{figure.caption.4}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Direct method}{25}{section.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Fig 3.2\relax }}{26}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:boundaries}{{3.2}{26}{Fig 3.2\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Boundaries on the propensities.\relax }}{26}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:boundaries}{{3.2}{26}{Boundaries on the propensities.\relax }{figure.caption.5}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.2.1}Mathematical discussion}{26}{subsection.3.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1.1}Choice of the reaction}{27}{subsubsection.3.2.1.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1.2}Selection of the firing time}{27}{subsubsection.3.2.1.2}\protected@file@percent }
@@ -203,134 +203,184 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.5.7}Algorithm}{45}{subsubsection.3.2.5.7}\protected@file@percent }
 \@writefile{loa}{\contentsline {algocf}{\numberline {13}{\ignorespaces \TitleFunction {}\relax }}{46}{algocf.13}\protected@file@percent }
 \newlabel{algo:pdm}{{13}{46}{Algorithm}{algocf.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces R Tau\relax }}{47}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:tau}{{3.3}{47}{R Tau\relax }{figure.caption.6}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}First Reaction Method (FRM)}{47}{section.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.4}First Family Method}{47}{section.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.5}Next Reaction Method}{48}{section.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.6}RSSA}{48}{section.3.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Approximation algorithms}{50}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.2.5.7.1}Discussion}{47}{paragraph.3.2.5.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{\numberline {3.2.5.7.1.1}Time complexity}{47}{subparagraph.3.2.5.7.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{\numberline {3.2.5.7.1.2}Limitations}{47}{subparagraph.3.2.5.7.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.5.8}Partial propensity direct method with composition-rejection search}{47}{subsubsection.3.2.5.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.2.5.8.1}Selection of the next reaction firing}{47}{paragraph.3.2.5.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{\numberline {3.2.5.8.1.1}Selecting group index}{47}{subparagraph.3.2.5.8.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{\numberline {3.2.5.8.1.2}Selecting element index}{48}{subparagraph.3.2.5.8.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.2.5.8.2}Algorithm}{48}{paragraph.3.2.5.8.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {14}{\ignorespaces \TitleFunction {}\relax }}{48}{algocf.14}\protected@file@percent }
+\newlabel{algo:pdm-cr}{{14}{48}{Algorithm}{algocf.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}First reaction method}{49}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Tentative time}{49}{subsection.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Exactness of the first reaction method}{50}{subsection.3.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Algorithm}{51}{subsection.3.3.3}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {15}{\ignorespaces \TitleFunction {}\relax }}{51}{algocf.15}\protected@file@percent }
+\newlabel{algo:frm}{{15}{51}{Algorithm}{algocf.15}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3.1}Time complexity}{51}{subsubsection.3.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}First family method}{52}{subsection.3.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4.1}Next reaction event}{52}{subsubsection.3.3.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.3.4.1.1}Selection of the family}{52}{paragraph.3.3.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.3.4.1.2}Selection of the reaction}{52}{paragraph.3.3.4.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.4.2}Algorithm}{52}{subsubsection.3.3.4.2}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {16}{\ignorespaces \TitleFunction {}\relax }}{53}{algocf.16}\protected@file@percent }
+\newlabel{algo:ffm}{{16}{53}{Algorithm}{algocf.16}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.3.4.2.1}Discussion}{53}{paragraph.3.3.4.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{\numberline {3.3.4.2.1.1}Performance}{53}{subparagraph.3.3.4.2.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{\numberline {3.3.4.2.1.2}Comparison with DM and FRM}{53}{subparagraph.3.3.4.2.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.4}Next reaction method}{53}{section.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.1}Absolute tentative time}{54}{subsection.3.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1.1}Distribution of the residual time}{54}{subsubsection.3.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1.2}Relationship between absolute and relative tentative time}{54}{subsubsection.3.4.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1.3}Computing the absolute time}{55}{subsubsection.3.4.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.4.1.3.1}Computing the new tentative time}{55}{paragraph.3.4.1.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1.4}Conclusion}{56}{subsubsection.3.4.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.2}Data structures}{56}{subsection.3.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.3}Algorithm}{56}{subsection.3.4.3}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {17}{\ignorespaces \TitleFunction {}\relax }}{57}{algocf.17}\protected@file@percent }
+\newlabel{algo:nrm}{{17}{57}{Algorithm}{algocf.17}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3.1}Discussion}{57}{subsubsection.3.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.4.3.1.1}Time complexity}{57}{paragraph.3.4.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.4.3.1.2}Inactive reaction}{57}{paragraph.3.4.3.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4.4}Modified next reaction method}{58}{subsection.3.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.4.1}Poisson process}{58}{subsubsection.3.4.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.4.4.1.1}$Y(t)$ is a Poisson distribution}{58}{paragraph.3.4.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.4.4.1.2}The time to the next event is an exponential distribution}{58}{paragraph.3.4.4.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.4.2}Unit Poisson process}{59}{subsubsection.3.4.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.4.3}Random time change representation}{59}{subsubsection.3.4.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.4.4}Internal time}{59}{subsubsection.3.4.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.4.4.4.1}Computing the tentative time}{59}{paragraph.3.4.4.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.4.4.4.2}Updating the firing time}{60}{paragraph.3.4.4.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.4.5}Algorithm}{60}{subsubsection.3.4.4.5}\protected@file@percent }
+\@writefile{loa}{\contentsline {algocf}{\numberline {18}{\ignorespaces \TitleFunction {}\relax }}{61}{algocf.18}\protected@file@percent }
+\newlabel{algo:mnrm}{{18}{61}{Algorithm}{algocf.18}{}}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {3.4.4.5.1}Discussion}{61}{paragraph.3.4.4.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.5}Next Reaction Method}{61}{section.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.6}RSSA}{62}{section.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Approximation algorithms}{64}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Probability-Weighted Dynamic Monte Carlo Method}{50}{section.4.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces \relax }}{51}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:SSA_tree}{{4.1}{51}{\relax }{figure.caption.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4.2}Bounded Acceptance Probability RSSA}{52}{section.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.3}$\tau $-Leaping Method}{52}{section.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Choosing tau - Leap selection section}{53}{subsection.4.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1.1}Postleap Selection}{53}{subsubsection.4.3.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.4}Chemical Langevin Method}{53}{section.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Deterministic simulations}{55}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Probability-Weighted Dynamic Monte Carlo Method}{64}{section.4.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces \relax }}{65}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:SSA_tree}{{4.1}{65}{\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Bounded Acceptance Probability RSSA}{66}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}$\tau $-Leaping Method}{66}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Choosing tau - Leap selection section}{67}{subsection.4.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1.1}Postleap Selection}{67}{subsubsection.4.3.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Chemical Langevin Method}{67}{section.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Deterministic simulations}{69}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.0.1}Continuum hypothesis}{55}{subsection.5.0.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Table 4.4 Marchetti's book\relax }}{55}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:rec_ODE}{{5.1}{55}{Table 4.4 Marchetti's book\relax }{figure.caption.8}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Table 4.5 Marchetti's book\relax }}{56}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:rec_rates}{{5.2}{56}{Table 4.5 Marchetti's book\relax }{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Deterministic approximation}{56}{section.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}Numerical solution of ODEs}{56}{section.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Euler's method}{57}{subsection.5.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}RUNGE-KUTTA Method}{57}{subsection.5.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}Midpoint method}{57}{subsection.5.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}Adaptive methods - Runge-Kutta-Fehlberg}{57}{subsection.5.2.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces  Figure 4.9 Marchetti's book\relax }}{58}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:discretization}{{5.3}{58}{Figure 4.9 Marchetti's book\relax }{figure.caption.10}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Hybrid simulation approaches}{59}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.0.1}Continuum hypothesis}{69}{subsection.5.0.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Table 4.4 Marchetti's book\relax }}{69}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:rec_ODE}{{5.1}{69}{Table 4.4 Marchetti's book\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Table 4.5 Marchetti's book\relax }}{70}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:rec_rates}{{5.2}{70}{Table 4.5 Marchetti's book\relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Deterministic approximation}{70}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}Numerical solution of ODEs}{70}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Euler's method}{71}{subsection.5.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}RUNGE-KUTTA Method}{71}{subsection.5.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}Midpoint method}{71}{subsection.5.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.4}Adaptive methods - Runge-Kutta-Fehlberg}{71}{subsection.5.2.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces  Figure 4.9 Marchetti's book\relax }}{72}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:discretization}{{5.3}{72}{Figure 4.9 Marchetti's book\relax }{figure.caption.9}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Hybrid simulation approaches}{73}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}Reaction-Based System Partitioning}{59}{section.6.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces \relax }}{60}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:regions}{{6.1}{60}{\relax }{figure.caption.11}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces \relax }}{60}{figure.caption.12}\protected@file@percent }
-\newlabel{fig:scheme}{{6.2}{60}{\relax }{figure.caption.12}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}HRSSA}{61}{section.6.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces HRSSA algorithm\relax }}{62}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:HRSSA}{{6.3}{62}{HRSSA algorithm\relax }{figure.caption.13}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.0.1}HSimulator}{62}{subsubsection.6.2.0.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces HSimulator HRSSA Oregonator\relax }}{63}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:oregonator}{{6.4}{63}{HSimulator HRSSA Oregonator\relax }{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Reali}{64}{chapter.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}Reaction-Based System Partitioning}{73}{section.6.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.1}{\ignorespaces \relax }}{74}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:regions}{{6.1}{74}{\relax }{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6.2}{\ignorespaces \relax }}{74}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:scheme}{{6.2}{74}{\relax }{figure.caption.11}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}HRSSA}{75}{section.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.3}{\ignorespaces HRSSA algorithm\relax }}{76}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:HRSSA}{{6.3}{76}{HRSSA algorithm\relax }{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {6.2.0.1}HSimulator}{76}{subsubsection.6.2.0.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6.4}{\ignorespaces HSimulator HRSSA Oregonator\relax }}{77}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:oregonator}{{6.4}{77}{HSimulator HRSSA Oregonator\relax }{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Reali}{78}{chapter.7}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{loa}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}Introduction}{64}{section.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.1}Definition of a system}{64}{subsection.7.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.2}Determinism, nondeterminism, or stochasticity?}{64}{subsection.7.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.3}Computational complexity}{65}{subsection.7.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.4}Definition of a model}{65}{subsection.7.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.5}Checking the validity of a model}{65}{subsection.7.1.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces From a model to methods\relax }}{66}{figure.caption.15}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.6}How to build a model}{66}{subsection.7.1.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces validation\relax }}{67}{figure.caption.16}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}Optimization problem}{67}{section.7.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.1}General definition of an optimization problem}{67}{subsection.7.2.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.3}{\ignorespaces Workflow\relax }}{68}{figure.caption.17}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.4}{\ignorespaces Volterra\relax }}{68}{figure.caption.18}\protected@file@percent }
-\newlabel{fig:Volterra}{{7.4}{68}{Volterra\relax }{figure.caption.18}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.2}Definition of a minimum}{69}{subsection.7.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.3}Gradient methods}{70}{section.7.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.0.1}Lagrangian function}{70}{subsubsection.7.3.0.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.1}Lagrangian Multipliers Theorem}{70}{subsection.7.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.2}Definition of a gradient}{70}{subsection.7.3.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.5}{\ignorespaces Blue = function, red = constraint\relax }}{71}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:ex}{{7.5}{71}{Blue = function, red = constraint\relax }{figure.caption.19}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.3}Limitations of gradient descent methods}{71}{subsection.7.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.4}Gradient approximation with Taylor formula}{71}{subsection.7.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.5}Line search}{72}{subsection.7.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.1}Newton's direction}{72}{subsubsection.7.3.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.2}Line search algorithm for function minimization}{73}{subsubsection.7.3.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.3}Quasi Newton's direction}{73}{subsubsection.7.3.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.4}Steepest descent direction}{73}{subsubsection.7.3.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.5}Selecting $\alpha $}{73}{subsubsection.7.3.5.5}\protected@file@percent }
-\newlabel{selecting-alpha}{{7.3.5.5}{73}{\texorpdfstring {Selecting $\alpha $}{Selecting }}{subsubsection.7.3.5.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.6}{\ignorespaces Desmos $f(x)=x^4-8x^2+4$\relax }}{74}{figure.caption.20}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.6}Convergence of a method}{74}{subsubsection.7.3.5.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.6}Trust region}{75}{subsection.7.3.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.6.1}Trust region steepest descent}{75}{subsubsection.7.3.6.1}\protected@file@percent }
-\newlabel{trust-region-steepest-descent}{{7.3.6.1}{75}{Trust region steepest descent}{subsubsection.7.3.6.1}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.6.2}Trust region algorithm}{76}{subsubsection.7.3.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.4}Least squares problems}{77}{section.7.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.1}The Levenberg-Marquardt method}{78}{subsection.7.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.2}Solving a problem with bounds}{78}{subsection.7.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.3}Solving global minimum problem}{79}{subsection.7.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.4}Gauss-Newton method}{79}{subsection.7.4.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.5}Latin hypercube sample}{79}{subsection.7.4.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.6}MATLAB}{79}{subsection.7.4.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.7}{\ignorespaces MATLAB multi-start lsqnonlin\relax }}{80}{figure.caption.21}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.8}{\ignorespaces Lotka-Volterra stochastic simulation results. In B we witness preys and predators extinction, it is the output of a simulation performed with the same model and parameters as A.\relax }}{81}{figure.caption.22}\protected@file@percent }
-\newlabel{fig:res}{{7.8}{81}{Lotka-Volterra stochastic simulation results. In B we witness preys and predators extinction, it is the output of a simulation performed with the same model and parameters as A.\relax }{figure.caption.22}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7.5}Stochastic methods for parameter estimation}{81}{section.7.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.1}Markov Chain Monte Carlo (MCMC)}{81}{subsection.7.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.9}{\ignorespaces MCMC example\relax }}{82}{figure.caption.23}\protected@file@percent }
-\newlabel{fig:MCMCexample}{{7.9}{82}{MCMC example\relax }{figure.caption.23}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7.10}{\ignorespaces Example: bimodal distribution\relax }}{83}{figure.caption.24}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.2}Sampling a distribution}{83}{subsection.7.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.3}Rejection sampling algorithm}{83}{subsection.7.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.4}Metropolis Hastings}{84}{subsection.7.5.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.4.1}MH algorithm}{84}{subsubsection.7.5.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.4.2}Visualization of MCMC}{85}{subsubsection.7.5.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.4.3}How to link data and MH}{85}{subsubsection.7.5.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.5}Random walk MCMC}{86}{subsection.7.5.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.5.1}Algorithm RW-MCMC ( C known)}{86}{subsubsection.7.5.5.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.11}{\ignorespaces Diagnostic 1\relax }}{87}{figure.caption.25}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.5.2}Diagnostics}{87}{subsubsection.7.5.5.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.12}{\ignorespaces Diagnostic 2\relax }}{88}{figure.caption.26}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.13}{\ignorespaces Diagnostic 3\relax }}{88}{figure.caption.27}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.6}Heuristics and the genetic algorithm}{89}{section.7.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.1}The genetic algorithm}{89}{subsection.7.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.1}Chromosome encoding}{90}{subsubsection.7.6.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.2}Generation of an initial population}{90}{subsubsection.7.6.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.3}Fitness evaluation}{90}{subsubsection.7.6.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.4}Parent selection}{90}{subsubsection.7.6.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.5}Reproduction}{90}{subsubsection.7.6.1.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.6}Mutation}{90}{subsubsection.7.6.1.6}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.14}{\ignorespaces From Reali et al 2017 - GA procedure example\relax }}{91}{figure.caption.28}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.15}{\ignorespaces From Reali et al 2017 - GA pseudocode\relax }}{91}{figure.caption.29}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.2}Genetic algorithm pseudocode}{92}{subsection.7.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.2.1}Cons}{92}{subsubsection.7.6.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.2.2}Pros}{92}{subsubsection.7.6.2.2}\protected@file@percent }
-\gdef \@abspage@last{93}
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}Introduction}{78}{section.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.1}Definition of a system}{78}{subsection.7.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.2}Determinism, nondeterminism, or stochasticity?}{78}{subsection.7.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.3}Computational complexity}{79}{subsection.7.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.4}Definition of a model}{79}{subsection.7.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.5}Checking the validity of a model}{79}{subsection.7.1.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces From a model to methods\relax }}{80}{figure.caption.14}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1.6}How to build a model}{80}{subsection.7.1.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.2}{\ignorespaces validation\relax }}{81}{figure.caption.15}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}Optimization problem}{81}{section.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.1}General definition of an optimization problem}{81}{subsection.7.2.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.3}{\ignorespaces Workflow\relax }}{82}{figure.caption.16}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.4}{\ignorespaces Volterra\relax }}{82}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:Volterra}{{7.4}{82}{Volterra\relax }{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.2}Definition of a minimum}{83}{subsection.7.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.3}Gradient methods}{84}{section.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.0.1}Lagrangian function}{84}{subsubsection.7.3.0.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.1}Lagrangian Multipliers Theorem}{84}{subsection.7.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.2}Definition of a gradient}{84}{subsection.7.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.5}{\ignorespaces Blue = function, red = constraint\relax }}{85}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:ex}{{7.5}{85}{Blue = function, red = constraint\relax }{figure.caption.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.3}Limitations of gradient descent methods}{85}{subsection.7.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.4}Gradient approximation with Taylor formula}{85}{subsection.7.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.5}Line search}{86}{subsection.7.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.1}Newton's direction}{86}{subsubsection.7.3.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.2}Line search algorithm for function minimization}{87}{subsubsection.7.3.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.3}Quasi Newton's direction}{87}{subsubsection.7.3.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.4}Steepest descent direction}{87}{subsubsection.7.3.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.5}Selecting $\alpha $}{87}{subsubsection.7.3.5.5}\protected@file@percent }
+\newlabel{selecting-alpha}{{7.3.5.5}{87}{\texorpdfstring {Selecting $\alpha $}{Selecting }}{subsubsection.7.3.5.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.6}{\ignorespaces Desmos $f(x)=x^4-8x^2+4$\relax }}{88}{figure.caption.19}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.5.6}Convergence of a method}{88}{subsubsection.7.3.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3.6}Trust region}{89}{subsection.7.3.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.6.1}Trust region steepest descent}{89}{subsubsection.7.3.6.1}\protected@file@percent }
+\newlabel{trust-region-steepest-descent}{{7.3.6.1}{89}{Trust region steepest descent}{subsubsection.7.3.6.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.6.2}Trust region algorithm}{90}{subsubsection.7.3.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.4}Least squares problems}{91}{section.7.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.1}The Levenberg-Marquardt method}{92}{subsection.7.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.2}Solving a problem with bounds}{92}{subsection.7.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.3}Solving global minimum problem}{93}{subsection.7.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.4}Gauss-Newton method}{93}{subsection.7.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.5}Latin hypercube sample}{93}{subsection.7.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4.6}MATLAB}{93}{subsection.7.4.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.7}{\ignorespaces MATLAB multi-start lsqnonlin\relax }}{94}{figure.caption.20}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.8}{\ignorespaces Lotka-Volterra stochastic simulation results. In B we witness preys and predators extinction, it is the output of a simulation performed with the same model and parameters as A.\relax }}{95}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:res}{{7.8}{95}{Lotka-Volterra stochastic simulation results. In B we witness preys and predators extinction, it is the output of a simulation performed with the same model and parameters as A.\relax }{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.5}Stochastic methods for parameter estimation}{95}{section.7.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.1}Markov Chain Monte Carlo (MCMC)}{95}{subsection.7.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.9}{\ignorespaces MCMC example\relax }}{96}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:MCMCexample}{{7.9}{96}{MCMC example\relax }{figure.caption.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7.10}{\ignorespaces Example: bimodal distribution\relax }}{97}{figure.caption.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.2}Sampling a distribution}{97}{subsection.7.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.3}Rejection sampling algorithm}{97}{subsection.7.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.4}Metropolis Hastings}{98}{subsection.7.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.4.1}MH algorithm}{98}{subsubsection.7.5.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.4.2}Visualization of MCMC}{99}{subsubsection.7.5.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.4.3}How to link data and MH}{99}{subsubsection.7.5.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5.5}Random walk MCMC}{100}{subsection.7.5.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.5.1}Algorithm RW-MCMC ( C known)}{100}{subsubsection.7.5.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.11}{\ignorespaces Diagnostic 1\relax }}{101}{figure.caption.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.5.5.2}Diagnostics}{101}{subsubsection.7.5.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.12}{\ignorespaces Diagnostic 2\relax }}{102}{figure.caption.25}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.13}{\ignorespaces Diagnostic 3\relax }}{102}{figure.caption.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.6}Heuristics and the genetic algorithm}{103}{section.7.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.1}The genetic algorithm}{103}{subsection.7.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.1}Chromosome encoding}{104}{subsubsection.7.6.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.2}Generation of an initial population}{104}{subsubsection.7.6.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.3}Fitness evaluation}{104}{subsubsection.7.6.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.4}Parent selection}{104}{subsubsection.7.6.1.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.5}Reproduction}{104}{subsubsection.7.6.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.1.6}Mutation}{104}{subsubsection.7.6.1.6}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.14}{\ignorespaces From Reali et al 2017 - GA procedure example\relax }}{105}{figure.caption.27}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.15}{\ignorespaces From Reali et al 2017 - GA pseudocode\relax }}{105}{figure.caption.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6.2}Genetic algorithm pseudocode}{106}{subsection.7.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.2.1}Cons}{106}{subsubsection.7.6.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.6.2.2}Pros}{106}{subsubsection.7.6.2.2}\protected@file@percent }
+\gdef \@abspage@last{107}

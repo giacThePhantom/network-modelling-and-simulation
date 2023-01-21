@@ -619,6 +619,469 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
 
     \input{chapters/03/algorithms/pdm}
 
+      \paragraph{Discussion}
+
+        \subparagraph{Time complexity}
+        The time complexity of the search for the next reaction firing has two parts:
+
+        \begin{multicols}{2}
+          \begin{itemize}
+            \item Selecting the group, which in the worst case travels $N+1$ groups, in time $O(N)$.
+            \item Selecting the element in the group, which is proportional to the number of reactions sharing the same reactant.
+              This is model dependent and bounded by a small constant.
+              For elementary reactions the worst case is $N$, so the cost for this step is $O(N)$.
+          \end{itemize}
+        \end{multicols}
+
+        In total the time complexity for the search for the next reaction firing in PDM is $O(N)$.
+
+        \subparagraph{Limitations}
+        The major limitation of PDM is that it works for a class of reactions involving at most two reactants with factorisable reaction propensities.
+        For models with high-order reactions the propensity is not factorizable and they must be broken down into elementary reactions and the propensity computation has to be modified.
+
+  \subsubsection{Partial propensity direct method with composition-rejection search}
+  The partial propensity direct method with composition-rejection search PDM-CR is a variant of PDM where the selection of $p$ and $q$ are done through the composition-rejection approach.
+  $`M$ is grouped into $L$ groups such that $G_l$ stores group index $i$ such that $2^{u_l-1}\le \Omega_i< 2^{u_l}$ with $u_l = \lceil\log_2(\Omega_i)\rceil$.
+  The sum of propensities in $G_l$ is:
+
+  $$a^l = \sum\limits_{i\in G_l}\Omega_i$$
+
+  For $\Pi$ each $i$ row is partitioned into $K_i$ groups such that $Q_k^i$ stores element index $j$ such that $2^{v_k^i-1}\le\Pi_{i,j}<2^{v_k^i}$ with $v_k^i = \lceil\log_2(\Pi_{i,j})\rceil$.
+  The sum of partial propensity in $Q_k^i$ is:
+
+  $$b_i^k = \sum\limits_{j\in Q_k^i}\Pi_{i,j}$$
+
+  For each row of $\Pi$ the relation $\sum\limits_{k=1}^{K_i}b_i^k = \sum\limits_{j}\Pi_{i,j} = \Lambda_i$ holds.
+
+    \paragraph{Selection of the next reaction firing}
+    The selection of the next $R_\mu$ consists of two CR searches: the first selects the group index $p$ and the second the element index $q$.
+
+      \subparagraph{Selecting group index}
+      To select the group index $p$ two random numbers $r_1,r_2\sim norm(0,1)$ are sampled.
+      Then a group $G_\alpha$ is selected with probability $\frac{a^\alpha}{a_0}$ with $a_0 = \sum\limits_{l=1}^La^l = \sum\limits_{i=0}^N\Omega_i$ accumulating $a^l$ until the smallest $\alpha$ is found such that:
+
+      $$\sum l = 1^\alpha a^l\ge r_1a_0$$
+
+      Then $r_2$ is used to accept the group index $p$ in $G_\alpha$ through an acceptance-rejection test with probability $\frac{\Omega_p}{2^{u_\alpha}}$.
+
+      \subparagraph{Selecting element index}
+      Once $p$ has been selected $q$ is selected through a second CR search.
+      This requires two random numbers $r_3,r_4\sim norm(0,1)$.
+      A group $Q_\beta^p$ is selected with probability $\frac{b_p^\beta}{\Lambda_p}$ by a linear search.
+      Then the element index $q$ in the groups is selected through an acceptance-rejection test with probability $\frac{\Pi_{p,q}}{2^{v_\beta^p}}$.
+
+    \paragraph{Algorithm}
+    The PDM-CR implementation is outlined in algorithm \ref{algo:pdm-cr}
+
+    \input{chapters/03/algorithms/pdm-cr}
+
+\section{First reaction method}
+The first reaction method FRM is an alternative method to implement the Monte Carlo step of SSA.
+The next reaction firing $R_\mu$ and firing time $\tau$ are exact, so they are ensured to be distributed by the pdf $p(\tau, \mu|\vec{x},t)$.
+
+  \subsection{Tentative time}
+  In FRM the reaction selected to fire is the one with the smallest tentative time.
+  The tentative time is the firing time of the reaction assuming that no other reaction fires before.
+  Let $\tau_j$ be the tentative time to the firing of $R_j$ assuming that no other reaction fires before.
+  Let $p(\tau_j|\vec{x}, t)$ be the pdf of $\tau_j$ such that $p(\tau_j|\vec{x},t)d\tau_j$ gives the probability that $R_j$ fires in the next infinitesimal time interval $[t+\tau_j, t+\tau_j+d\tau_j[$ assuming that no other reaction fires before.
+  The formula of $p(\tau_j|\vec{x},t)$, noting that there is only one $R_j$ involved in the calculation is:
+
+  $$p(\tau_j|\vec{x},t) = a_je^{-a_j\tau_j}$$
+
+  From this the tentative time can be generated applying the inverse transforming method:
+
+  $$\tau_j = \frac{1}{a_j}\ln\left(\frac{1}{r_j}\right)$$
+
+  Where $r_j\sim norm(0,1)$.
+
+  \subsection{Exactness of the first reaction method}
+  Let $R_\mu$ be the reaction having the smallest tentative time $\tau = \min\limits_{j=1}^M\{\tau_j\}$ where each $\tau_j$ with $j = 1, \dots, M$ is distributed according to the pdf $p(\tau_j| \vec{x}, t) = a_je^{-a_j\tau_j}$.
+  Let $\tilde{p}(\tau, \mu|\vec{x}, t)d\tau$ be the probability that $R_\mu$ fires at time $\tau$, then:
+
+  $$\tilde{p}(\tau,\mu|\vec{x},t) = a_\mu e^{-a_0\tau}$$
+
+  The probability of $R_\mu$ which has the smallest time $\tau = \min\limits_{j=1}^M\{\tau_j\}$ to fire at time $\tau$ is:
+
+  $$\tilde{p}(\tau,\mu|\vec{x},t)d\tau = \mathbb{P}\{\tau<\tau_\mu<\tau+d\tau\}\mathbb{P}\{\tau_j>\tau\forall j\neq\mu\}$$
+
+  Where:
+
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item $\mathbb{P}\{\tau<\tau_\mu<\tau+d\tau\}$ is the probability that $R_\mu$ with smallest tentative fire $\tau_\mu$ fires in $[\tau, \tau+d\tau[$.
+      \item $\mathbb{P}\{\tau_j>\tau\forall j\neq\mu\}$ is the probability that $\tau_j$ of $R_j$ is greater than $\tau$.
+    \end{itemize}
+  \end{multicols}
+
+  The first probability is directly derived from the definition of $\tau_\mu$ as:
+
+  $$\mathbb{P}\{\tau<\tau_\mu<\tau+d\tau\} = a_\mu e^{-a\mu\tau}d\tau$$
+
+  The second one is derived as follows:
+
+  \begin{align*}
+    \mathbb{P}\{\tau_j<\tau\forall j\neq\mu\} &= \mathbb{P}\left\{\frac{1}{a_j}\ln\left(\frac{1}{r_j}\right)\forall i\neq\mu\right\}=\\
+                                              &=\mathbb{P}\{r_j<e^{-a_j\tau}\forall j\neq \mu\}=\\
+                                              &=\prod\limits_{i=1\land j\neq\mu}^M\mathbb{P}\{r_j<e^{-a_j\tau}\}=\\
+                                              &=\prod\limits_{i=1\land j\neq\mu}^M e^{-a_j\tau}
+  \end{align*}
+
+  In which the generation of $\tau_j$ is considered, and the third step follows from the fact that $r_j$s are all independent and identically distributed random numbers.
+  The last holds because the probability that a uniformly distribute random number from a unit interval is less than a number is equal to that number.
+  Now, plugging the last to into $\tilde{p}$ and recalling the definition of total propensity, the probability distribution of the next reaction firing is:
+
+  $$\tilde{p}(\tau,\mu|\vec{x},t) = a_\mu e^{-a_\mu\tau}\left(\prod\limits_{j=1\land j\neq\mu}e^{-a_j\tau}\right) = a_\mu e^{-a_0\tau}$$
+
+  \subsection{Algorithm}
+  An implementation of the steps of FRM is presented in algorithm \ref{algo:frm}.
+  For each simulation iteration $M$ uniformly distributed random numbers $r_j$ are generated and used to compute the tentative time $\tau_j$ for all reactions.
+  Then the reaction with the smallest time is selected to fire.
+  Once the reaction has fired, the time and state are updated accordingly.
+
+  \input{chapters/03/algorithms/frm}
+
+    \subsubsection{Time complexity}
+    The time complexity is due to:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item Computing the tentative time of reactions.
+          This, for $M$ reaction, is done in $O(M)$ time.
+        \item Searching for the reaction with the smallest tentative time.
+          This is also $O(M)$ as they can be linearly compared as they are generated.
+      \end{itemize}
+    \end{multicols}
+
+    The time complexity is thus $O(M)$ for a time step and this algorithm is easy to parallelize.
+    However it is often slower than DM because a large number of random numbers are required at each iterations.
+    FRM is therefore slower than DM if the number of reactions $M\ge 2$.
+
+  \subsection{First family method}
+  The first family method FFM is a generalization of DM and FRM methods.
+  It partitions $M$ reactions into $L$ families.
+  Each $F_l$ contains $k_l$ reactions, that can be different between families.
+  $L$ and $k_l$ are tunable parameters.
+  Note that because the partition is complete $\sum\limits_{l=1}^Lk_l = M$.
+
+    \subsubsection{Next reaction event}
+    The next reaction event in FFM is a pair $(\alpha, \mu)$ denoting $R_\mu$ in family $F_\alpha$.
+    The selection is performed in two steps:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item Selection of the family.
+        \item Selection of the reaction.
+      \end{itemize}
+    \end{multicols}
+
+      \paragraph{Selection of the family}
+      The selection is performed in two steps: a family with the smallest tentative time is selected.
+      The tentative time of $F_l$ is generated from an exponential distribution with rate equal to the sum of reaction propensities in the family.
+      Let $a^l = \sum\limits_{R_j\in F_l}a_j$ be the sum of propensities, then the tentative time will be computed as:
+
+      $$\tau_l = \frac{1}{a^l}\ln\left(\frac{1}{r_l}\right)$$
+
+      Where $r_l\sim norm(0,1)$.
+
+      \paragraph{Selection of the reaction}
+      Let $F_\alpha$ be the family with the smallest tentative time: $\tau = \min\limits_{l=1}^L\{\tau_l\}$.
+      Conditioning on the selected $F_\alpha$, $R_\mu$ is selected with probability $\frac{a_\mu}{a^l}$.
+      A DM search is applied to find the next reaction:
+
+      $$\mu = \arg\min\limits_{k\in F_\alpha}\sum\limits_{\substack{k=j\\F_\alpha = \{R_j, \dots, R_{j+k\alpha}\}}}^\mu a_k\ge ra^\alpha$$
+
+      Where $r\sim norm(0,1)$.
+
+    \subsubsection{Algorithm}
+    An implementation of the FFM is presented in algorithm \ref{algo:ffm}.
+    For each simulation step, $L$ random number are required to compute the tentative times and an additional one is used to select the next reaction firing.
+
+    \input{chapters/03/algorithms/ffm}
+
+      \paragraph{Discussion}
+
+        \subparagraph{Performance}
+        It can be seen how $L+1$ random number are generated by FFM, so it has better performance than FRM when the number of reactions $M\gg L$ thanks to the smaller number of random number generation.
+        This algorithm is still parallelizable for the families.
+
+        \subparagraph{Comparison with DM and FRM}
+        DM and FRM are special cases of FFM obtained by tuning $L$ and $k_l$.
+        If $L=1$ the algorithm is reduced to the DM.
+        If $L=M$ and $k_l=1$ the algorithm reduces to FRM.
+        Great attention has to be posed to the propensity of the families: if one is much greater than the other the algorithm could choose only that family.
+
+\section{Next reaction method}
+The next reaction method NRM improves FRM:
+
+\begin{multicols}{2}
+  \begin{itemize}
+    \item Avoids recomputing propensities of all reaction after a firing.
+      It recomputes the propensity $a_j$ of $R_j$ only if it actually changes extracting them from a reaction dependency graph $G$.
+    \item Switches to absolute tentative time instead of relative and reuses the time when appropriate.
+      For each simulation step it generates the new time for the reaction firing, while the other are updated and reused, reducing the number of random number used in the simulation.
+    \item it employs efficient data structures to store and retrieve putative firing time of reaction, making the selection of the next reaction fast and efficient.
+  \end{itemize}
+\end{multicols}
+
+  \subsection{Absolute tentative time}
+  Let $\tau_j$ be the tentative time to the firing of $R_j$ with pdf $p(\tau_j|vec{x},t) = a_je^{-a_j\tau_j}$.
+  Let $\tau_m = \min\limits_{k=1}^M\tau_j$.
+  The residual $\tau_j-\tau_m$ is transformed for all $j\neq\mu$ to compute the new tentative time for $R_j$.
+
+    \subsubsection{Distribution of the residual time}
+    $\tau_j-\tau_\mu$ is exponentially distributed with rate $a_j$: let $X$ be a random variable with an exponential density function:
+
+    $$f(x) = \begin{cases}\lambda e^{-\lambda x} & x\ge 0\\ 0 &x < 0\end{cases}$$
+
+    Where $\lambda>0$ is a parameter, then, $\forall s >t\ge 0$:
+
+    $$\mathbb{P}\{X>s|X>t\} = \mathbb{P}\{X>s-t\}$$
+
+    Expanding the left-hand side:
+
+    \begin{align*}
+      \mathbb{P}\{X>s|X>t\} &= \frac{\mathbb{P}\{X>s\land X>t\}}{\mathbb{P}\{X>t\}} = \frac{\mathbb{P}\{X>s\}}{\mathbb{P}\{X>t\}} = \frac{1-\mathbb{P}\{X|le s\}}{1-\mathbb{P}\{X\le t\}} =\\
+                            &=\frac{1-\int_{-\infty}^sf(x)dx}{1-\int_{-\infty}^tf(x)dx} = \frac{1-\int_0^s\lambda e^{-\lambda x}dx}{1-\int_0^t\lambda e^{-\lambda x}dx} = \frac{e^{-\lambda s}}{e^{-\lambda t}}=\\
+                            &=e^{-\lambda(s-t)}
+    \end{align*}
+
+    And the right-hand side:
+
+
+    \begin{align*}
+      \mathbb{P}\{X>s-t\} &= 1-\mathbb{P}\{X\le s-t\} = 1-\int_{-\infty}^{s-t}f(x)dx =\\
+                          &= 1-\int_{0}^{s-t}\lambda e^{-\lambda x}dx = e^{-\lambda(s-t)}
+    \end{align*}
+
+    Obtaining the required equality.
+
+    \subsubsection{Relationship between absolute and relative tentative time}
+    Let $t_j$ the absolute tentative time: the time from the start of the simulation to the firing of $R_j$.
+    The relationship between the absolute and tentative time is:
+
+    $$t_j = t+\tau+j$$
+
+    Where $t$ is the current simulation time.
+    The reaction with the smallest absolute time is the reaction with the smallest relative time because $t$ is fixed.
+    However using it NRM does not need the random number necessary to generate the new tentative times.
+
+    \subsubsection{Computing the absolute time}
+    Let $R_\mu$ the reaction with smallest $t_\mu$.
+    After it fires and $t$ is advanced to $t_\mu$, the new times for reactions have to be generated.
+    For $R_\mu$ a new tentative time is generated from an exponential distribution $t_\mu^{new} = e^{a^{new}_\mu}$ and the absolute time is updated to:
+
+    $$t_\mu^{new} + t_\mu + \tau_\mu^{new}$$
+
+    For each $R_j$ with $j\neq\mu$, let $a_j^{new}$ and $\tau_j^{new}$ be the new propensity value and new relative time.
+    In the case that $R_j$ does not depend on $R_\mu$ and the propensity of the reaction does not change by firing, the difference $\tau_j-\tau_m = t_j-t_\mu$ can be used as the new relative tentative time $\tau_j^{new}$ of the reaction, so that the absolute time does not change:
+
+    $$t_j^{new} = \tau_{j}^{new} + t_\mu = t_j-t_\mu+t_\mu = t_j$$
+
+    If $R_j\in Depenents(R_\mu)$ and $j\neq\mu$, the propensity $a_j$ changes to $a_j^{new}$.
+    A new relative tentative time, an exponential random number with rate $a_j^{new}$ has to be computed.
+
+      \paragraph{Computing the new tentative time}
+      Let $X$ be a random variable with exponential density function:
+
+      $$f_X(x) = \begin{cases}\lambda e^{-\lambda x} & x\ge 0\\ 0 &x < 0\end{cases}$$
+
+      Where $\lambda>0$ is a parameter.
+      Let $Y$ be a random variable such that $Y=cX$, where $c>0$ is a constant, then the probability density function of $Y$ is:
+
+      $$f_Y(x) = \begin{cases}\frac{\lambda}{x} e^{-\frac{\lambda}{c} x} & x\ge 0\\ 0 &x < 0\end{cases}$$
+
+      Let $F_Y(x)$ be the cdf of $Y$, then:
+
+      \begin{align*}
+        f_Y(x) &= \frac{dF_y(x)}{dx} = \frac{d\mathbb{P}\{Y\le x\}}{dx} = \frac{d\mathbb{P}\{cX\le x\}}{dx} = \frac{d\mathbb{P}\left\{X\le \frac{x}{c}\right\}}{dx} = \\
+               &= \frac{d\left(\int_{-\infty}^{\frac{x}{c}}f_X(s)ds\right)}{dx}
+      \end{align*}
+
+      If $x<0$, then $f_Y(x) = 0$.
+      If $x\ge 0$:
+
+      \begin{align*}
+        f_Y(x) &= \frac{d\left(\int_0^{\frac{x}{c}}\lambda e^{-\lambda s}ds\right)}{dx} = \frac{d\left(1-e^{-\frac{\lambda}{c}x}\right)}{dx}=\\
+               &= \frac{\lambda}{c}e^{-\frac{\lambda}{c}}
+      \end{align*}
+
+      This ensures that:
+
+      $$\tau_j^{new} = \frac{a_j}{a_j^{new}}(t_j-t_\mu)$$
+
+      Is exponentially distributed with rate $a_j^{new}$ as desired, so the new value for the absolute tentative time for $R_j$ is:
+
+      $$t_j^{new} = \tau_j^{new} + t_\mu = \frac{a_j}{a_j^{new}}(t_j-t_\mu)+t_\mu$$
+
+    \subsubsection{Conclusion}
+    In conclusion NRM does not generate new random numbers to compute the new times for all the reactions: the old time is reused to compute the new one.
+
+  \subsection{Data structures}
+  To speed up the selection of the minimum $t_\mu$, NRM employs a binary heap to index the absolute putative times $t_j$ of reactions $R_j$.
+  Each node is a pair $(t_j, R_j)$ in which $t_j$ is a key that prioritize the node.
+  It maintains a partial order between nodes: the parent have a smaller time than its child.
+  The selection of the reaction with smallest time is constant: it is on the top of the heap.
+  The heap is has to be updated for each reaction whose time is changed.
+  To do this the node containing the reaction is updated with the new time and is swept up and down to maintaining the order of the heap.
+  This costs $O(\log(M))$.
+
+  \subsection{Algorithm}
+  An implementation of the next reaction method is presented in algorithm \ref{algo:nrm}.
+
+  \input{chapters/03/algorithms/nrm}
+
+    \subsubsection{Discussion}
+
+      \paragraph{Time complexity}
+      The computation cost of NRM scales as the logarithm of $M$.
+      For each simulation step, the extraction of the smallest time, advancing the simulation to the new time and updating the state are constant.
+      The update cost in the for dominates the total cost.
+      It iterates over all the dependent reaction to calculate their new times and perform the heap update, for one reaction this costs $O(\log(M))$.
+      Let $D$ be the average number of reaction that are dependent on the reaction firing, then the total cost of update is $O(D\log(M))$.
+      If $D$ is small and is bounded by a constant, then the total cost is $O(\log(M))$.
+      Moreover only one random number is necessary for each simulation step, so the number of random numbers used by NRM is optimal.
+
+      \paragraph{Inactive reaction}
+      When a reaction is inactive $a_j = 0$ before firing $R_\mu$ and becomes active after the reaction, the new time of $R_j$ will be $t_j^{new} = t_\mu$, which is not possible.
+      A solution for the implementation of this step is to generate a new putative time $\tau_j^{new}$ by sampling $e^{a_j^{new}}$ rather than applying the transformation.
+
+  \subsection{Modified next reaction method}
+  The modified next reaction method MNRM is a variant of NRM where the firing time of reaction are represented as independent Poisson processes with rates given by their integrated propensities.
+
+    \subsubsection{Poisson process}
+    Let $Y(t), t\ge 0$ be a process that counts the number of events by time $t$.
+    $Y(t)$ is a Poisson process with rate $\lambda>0$ if:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item $Y(0) = 0$.
+        \item $Y(t)$ has the stationary increment property: $\forall [t,t+\Delta t], Y(t)-Y(t+\Delta t)$ has the same distribution as $Y(\Delta t)$.
+        \item $Y(t)$ has the independent increment property: $\forall [t,t+\Delta t]\land [t',t'+\Delta t']$ such that $[t,t+\Delta t]\cap [t', t'+\Delta t']=\emptyset$, $Y(\Delta t)$ is independent of $Y(\Delta t')$.
+        \item The probability of observing one event in the infinitesimal $[t, t+dt[$ is $\mathbb{P}\{Y(t+dt)-Y(t) = 1\} = \lambda dt + o(dt)$
+      \end{itemize}
+    \end{multicols}
+
+    Now let $Y(t)$ be a Poisson process with rate $\lambda$, then:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item The distribution $Y(t), t\ge 0$ is a Poisson distribution $poi(\lambda t)$.
+        \item The time to the next event of the Poisson process is an exponential distribution $exp(\lambda)$.
+      \end{itemize}
+    \end{multicols}
+
+      \paragraph{$Y(t)$ is a Poisson distribution}
+      To prove the first claim let $\mathbb{P}\{Y(t)=k\}$ be the probability that there are $k$ events in $[0,t]$.
+      Suppose that this is divided into intervals $[\frac{(i-1)t}{n},\frac{it}{n}]$ of length $\frac{t}{n}$ such that there is at most one event in each subinterval.
+      The number of events in $[0,t]$ is the sum of the events observed in the subintervals.
+      By definition of $Y(t)$, the probability of observing an event in the subinterval is $\frac{\lambda t}{n}$.
+      The probability $\mathbb{P}\{Y(t) = k\}$ follows a binomial distribution with success probability $\frac{\lambda t}{n}$:
+
+      $$\mathbb{P}\{Y(t) = k\} = \binom{n}{k}\left(\frac{\lambda t}{n}\right)^k\left(1-\frac{\lambda i}{n}\right)^{n-k} = \frac{n!}{k!(n-k)!}\left(\frac{\lambda t}{n}\right)^k\left(1-\frac{\lambda i}{n}\right)^{n-k}$$
+
+      Expanding the factorial and taking the limit $n\rightarrow\infty$:
+
+      \begin{align*}
+        \mathbb{P}\{Y(t) = k\} &= \lim\limits_{n\rightarrow\infty}\frac{n}{n}\frac{n-1}{n}\cdots\frac{n-k-1}{n}\left(1-\frac{\lambda t}{n}\right)^{-k}\frac{(\lambda t)^k}{k!}\left(1-\frac{\lambda t}{n}\right)^n =\\
+                               & = \frac{(\lambda t)^ke^{-\lambda t}}{k!}
+      \end{align*}
+
+      Considering that $\lim\limits_{n\rightarrow\infty} \left(1-\frac{\lambda t}{n}\right)^n = e^{-\lambda t}$.
+      In conclusion then the probability $\mathbb{P}\{Y(t) =k\}$ denotes a Poisson distribution $poi(\lambda t)$.
+
+      \paragraph{The time to the next event is an exponential distribution}
+      Let $T$ be the time to the next event of the Poisson process $Y(t)$.
+      By definition of the Poisson process, it only needs to consider the time to the first event after $0$.
+      Let $F_T$ be the cdf of $T$:
+
+      $$F_T(t) = \mathbb{P}\{T\le t\} = \mathbb{P}\{Y(t)\ge 1\} = 1-\mathbb{P}\{Y(t) = 0\} = 1-\frac{(\lambda t)^0e^{-\lambda t}}{0!} = 1-e^{-\lambda t}$$
+
+      Considering that $\mathbb{P}\{Y(t)\ge 1\}=\mathbb{P}\{T\le t\}$.
+      This shows that the time $T$ to the next event follows an exponential distribution $exp(\lambda)$.
+
+    \subsubsection{Unit Poisson process}
+    The Poisson process with rate $1$ is called a unit Poisson process.
+    If $Y(t)$ denotes a unit Poisson process, then $T(\lambda t)$ is a Poisson process with rate $\lambda$.
+
+    \subsubsection{Random time change representation}
+    Let $C_j(t)$ be the number of times that $R_j$ fires up to $t$.
+    $C(t)$ satisfies the conditions of the Poisson process.
+    The probability that $R_k$ fires in $[t,t+dt[$ by definition of $a_j$ is:
+
+    $$\mathbb{P}\{C_j(t+dt)-C_j(t) = 1|X(s),s\le t\} = a_j(X(t))dt + o(dt)$$
+
+    $C_j(t)$ denotes a Poisson process with rate $a_j(X(T))$.
+    Let $Y_j(t)$ be an independent unit Poisson process.
+    $C_j(t)$ is represented in MNRM in term of $Y_j(t)$.
+    It can be noted how:
+
+    $$C_j(t) = Y_j\left(int_0^t a_j(X(s))ds\right)$$
+
+    Or the random time change RTC representation.
+
+    \subsubsection{Internal time}
+    The internal time $I_j$ of $Y)k$ associated with $R_j$ is:
+
+    $$I_j(t) = \int_0^ta_j(X(s))ds$$
+
+    $I_j(t)$ given $t$ shows the amount of time that $Y_j$ passed before it expires due to the firing of $R_j$.
+    Each reaction can be seen as carrying its own internal clock, with a rate given by the integration of the propensity.
+    There are $M+1$ time frames in which the first is the physical time $t$ and the last $M$ are for $M$ Poisson processes $Y_j$.
+    The internal time is a dimensionless quantity.
+
+      \paragraph{Computing the tentative time}
+      Let $t$ be the current time, the system state is $X(t) = \vec{x}$.
+      The propensity $a_j$ and the internal time is $T_j = I_j(t)$.
+      The internal time at time $t=0$ is $I_j(0) = 0$.
+      Let $P_j$ be the next internal event time of $Y_j$ with corresponding physical time $t_j>t$, $P_j = I_j(t)$.
+      The relationship between $T_j$ and $P_j$ is:
+
+      $$P_j = I_j(t_j) = I_j(t) + a_j(t_j-t) = T_j+a_j\tau_j$$
+
+      Where $\tau_j = t_j-t$ is the relative time to the firing of $R_j$.
+      The amount of internal time to the firing is $a_j\tau_j$.
+      Because $Y_j$ is a unit Poisson process, the time to the next firing follows a distribution $exp(1)$: the amount $P_j-T_j$ is an exponentially distributed random number with rate $1$.
+      If the current internal time $T_j$ and the next internal time $P_j$ are tracked, the tentative time to the firing, given that no other reaction fires before is:
+
+      $$\tau_i = \frac{P_j-T_j}{a_j}$$
+
+      The selection with minimum $\tau_\mu$ will be selected to fire.
+
+      \paragraph{Updating the firing time}
+      Suppose that the reaction $R_\mu$ fires at time $t_\mu = t+\tau_\mu$.
+      The next internal event time $P_j$ of $Y_\mu$ must be generated because it expired, the new time is computed as:
+
+      $$\tau_i = \frac{P_j-T_j}{a_j}$$
+
+      For reaction $R_j$, with $j\neq\mu$, the updated internal time of process $Y_j$ at time $t+\tau_\mu$ is:
+
+      $$I_j(t+\tau_\mu) = I_j(t) + a_j\tau_\mu$$
+
+      Let $a_j^{new}$ be the new propensity and $\tau_j^{new}$ be the new tentative time to firing $R_j$ after the firing of $R_\mu$.
+      $a_j^{new}\tau_j^{new}$ is the remaining amount of internal time to the next firing of $Y_j$.
+      Because the processes are independent, the next internal event time $P_j$ of $Y)j$ does not change:
+
+      $$P_j = I_j(t+\tau_\mu) + a_j^{new}\tau_j^{new} = I_j(t) + a_j\tau_\mu + a_j^{new}\tau_j^{new}$$
+
+      Comparing it with the other computation of $P_j$:
+
+      $$\tau_j^{new} = \frac{a_j}{a_j^{new}}(\tau_j-\tau_\mu) = \frac{a_j}{a_j^{new}}(t_j-t_\mu)$$
+
+      Then the absolute time to the next firing of $R_j$:
+
+      $$t_j^{new} = t_\mu + \tau_j^{new} = \frac{a_j}{a_j^{new}}(\tau_j-\tau_\mu)+t_\mu$$
+
+      Which is the transformation used by NRM: the selection of the next reaction firing is exact.
+
+    \subsubsection{Algorithm}
+    An implementation of MNRM is outlined in algorithm \ref{algo:mnrm}.
+
+    \input{chapters/03/algorithms/mnrm}
+
+      \paragraph{Discussion}
+      The simulation of MNRM is equivalent to NRM.
+      MNRM explicitly works with internal time arising from the RTC representation, while NRM works with physical time.
+      This makes MNRM more flexible to handle complex propensity function and helps make a smooth connection between exact stochastic simulation and the class of Poisson approximation, like the $\tau$-leaping algorithm.
 
 
 
@@ -645,48 +1108,18 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
 
 
 
-\section{First Reaction Method (FRM)}
-Instead of computing one $\tau$, compute a $\tau$ for each reaction (Figure \ref{fig:tau}).
-Example: $\tau_1 = Exp(a_1)=1/a_1ln(1/V_1)$.
-We are assuming that no other reactions are firing in the middle.
-We can generate M random numbers and end up with M $\tau$.
-Then we choose the reaction with minimum $\tau$, which will be the first selected one.
-$\mu= R_{\mu}\text{ st }\tau_{\mu}= \min_{j}\tau_j$
 
- \begin{figure}
-    \centering
-    \includegraphics[width=0.3\textwidth]{R_tau.png}
-    \caption{R Tau}
-    \label{fig:tau}
-  \end{figure}
 
-\begin{itemize}
-\item Pro: sometimes the search is quicker, simpler to parallelize.
-\item Cons: we generate a lot of random numbers with respect to the direct method.
-\end{itemize}
 
-After the first step, we need to recompute. Even here, there is the possibility to improve the algorithm e.g.computation of the propensity.
 
-\section{First Family Method}
-Tries to combine the good features of the direct method with the first reaction method.
-The idea is to reach an implementation which can be partially parallelizable: divide the reaction in ``families'' or groups.
-The idea is to divide the reaction in n groups $r_1,…r_n$ and families e.g.~3 families.
-We should associate a theoretical propensity to each group, i.e. the sum of the propensity in the family $a^1=\sum_{j\in f_1}a_j$.
-$FRM= \tau_1= \frac{1}{e^1}ln(\frac{1}{r_1})$, we do not know which one of the reactions will be applied.
-\\
-\\
-\noindent
-In order to decide, we apply the direct reaction method formula for selecting the index.
-Given that we are working with a subset, we will scale over the sum, the $a_0$ of the group.
-It is true that we are generating random numbers, but over the number of the families → reduction.
-This time we have n families + 1 random number to select the family.
-Danger: if we have big disequilibrium in propensity, we might end up selecting always one of the families.
-We can parallelize by linking families to CPU.
-\\
-\\
-\noindent
-Last time, we were introducing Next Reaction Method, which can be considered as an evolution, trying to apply the same reasoning as FRM in a more efficient way (by applying an efficient handling of random numbers).
-If we are able to do so we will need to compute less random numbers.
+
+
+
+
+
+
+
+
 DM → $2 \cdot n_{steps}$ FRM → $M \cdot n_{steps}$ FFM → $(n_{families}+ 1)n_{steps}$ NRM → $M+n_{steps}$.
 If we take a look at the difference among methods, it is not very clear which is the winner - even though NRM seems to be one of the most optimized, it is usually the most efficient in requiring less random numbers.
 Of course everything has a price, we need to add computations.
