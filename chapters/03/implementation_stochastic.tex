@@ -1083,6 +1083,26 @@ The next reaction method NRM improves FRM:
       MNRM explicitly works with internal time arising from the RTC representation, while NRM works with physical time.
       This makes MNRM more flexible to handle complex propensity function and helps make a smooth connection between exact stochastic simulation and the class of Poisson approximation, like the $\tau$-leaping algorithm.
 
+\section{Rejection Based stochastic simulation algorithm}
+The rejection based stochastic simulation algorithm or RSSA is an exact simulation algorithm that tries to reduce the number of propensity updates during the simulation.
+Each simulation iteration selects a $R_\mu$ with probability $\frac{a_\mu}{a_0}$ and its firing time is exponentially distributed according to $a_0$.
+The selection of the next reaction firing in RSSA is an acceptance-rejection sampling technique that allows to skip the propensity updates in most of the iterations.
+They are recomputed only when necessary.
+Because of this it is useful for reaction in which propensities are complex.
+
+  \subsection{Fluctuation interval}
+  For each species $S_i$ RSSA abstracts its exact population $X_i(t)$ with a fluctuation interval $[\underline{X_i}, \overline{X_i}]$.
+  The interval can be chosen arbitrarily around the current population without affecting the correctness of the algorithm.
+  The fluctuation interval can be defined as:
+
+  $$[\underline{X_i}, \overline{X_i}] = [(1-\delta_i)X_i(t), (1+\delta_i)X_i(t)]$$
+
+  Where $\delta_i$ is the parameter called fluctuation rate.
+  A good choice for real biological model is from $10$ to $20\%$ of current population of species.
+  Considering abstraction interpretation terminology, $X(t)$ is called the concrete state, while $[\underline{X},\overline{X}]$ is the abstract stae.
+  For each species holds:
+
+  $$\underline{X}\le X(t)\le \overline{X}$$
 
 
 
@@ -1120,43 +1140,8 @@ The next reaction method NRM improves FRM:
 
 
 
-DM → $2 \cdot n_{steps}$ FRM → $M \cdot n_{steps}$ FFM → $(n_{families}+ 1)n_{steps}$ NRM → $M+n_{steps}$.
-If we take a look at the difference among methods, it is not very clear which is the winner - even though NRM seems to be one of the most optimized, it is usually the most efficient in requiring less random numbers.
-Of course everything has a price, we need to add computations.
-NRM is the most efficient in random number generation, while FRM is the one consuming the most.
 
-\section{Next Reaction Method}
-Why do we need to recompute time points? Two issues:
 
-\begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \item multiple reactions can be executed at the same time → the reaction propensities might change \item we are computing $\tau$ over propensities, but the propensities were computed on initial reaction settings.
-  E.g.$R_2:A \rightarrow B$, $R_1 : A \rightarrow B$ , the two reactions depend on each other.
-\end{enumerate}
-
-\noindent
-$\tau$ is modelling the instant in which the reaction is assumed to fire, it is just an event.
-We can subtract the time for passing to following reactions, but we must also update the propensity.
-$a_1 \rightarrow a_1^{new}$, we have three possibilities:
-
-\begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \item $a_1 = a_1^{new}$. $R_2$ is not affecting the propensity, i.e.~reactant is not modified by $R_2$, so $R_1$ remains unchanged.
-  \item $a_2^{new}> a_1$. $R_2$ has been applied, something has changed and the firing prob of $R_1$ is increasing.
-    Therefore, $\tau_1$ needs to be updated, we expect it to be smaller → rescaling through the ratio of the propensities e.g. ~$(\tau_1-\tau_2) \cdot \frac{a_1}{a_1^{new}}$ \item $a_1^{new}< a_2$ higher $\tau_1$
-\end{enumerate}
-\noindent
-We should not think of another event, we are just updating the same event through the formula! The algorithm was developed in the 2000s, there are a lot of improvements related to technology advancements.
-In addition to rescaling formula, there are other improvements to keep the complexity of the algorithm as low as possible:
-
-\begin{itemize}
-  \item we avoid generating too many random numbers
-  \item reaction dependency graph (introduced for Direct Method): recompute the propensity of the reaction only if it is needed
-  \item searching the reaction: minimum is linear over the number of reactions.
-    \textbf{Binary heap}: decrease to logarithmic scale, select winner in constant time.
-\end{itemize}
-\noindent
-Gibson 2000: original paper Thanh 2014: latest algorithm.
 
 \section{RSSA}
 The Rejection-based Simulation Algorithm seems to be an approximation, but everything is exact.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.19)  21 JAN 2023 15:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.19)  21 JAN 2023 23:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -724,13 +724,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 178--181
 
  []
 
-<chapters/01/images//petri_nets.png, id=587, 691.58376pt x 550.055pt>
+<chapters/01/images//petri_nets.png, id=592, 691.58376pt x 550.055pt>
 File: chapters/01/images//petri_nets.png Graphic file (type png)
 <use chapters/01/images//petri_nets.png>
 Package pdftex.def Info: chapters/01/images//petri_nets.png  used on input line
  184.
 (pdftex.def)             Requested size: 216.81pt x 172.43732pt.
-<chapters/01/images///example_petri.png, id=590, 907.39pt x 353.32pt>
+<chapters/01/images///example_petri.png, id=595, 907.39pt x 353.32pt>
 File: chapters/01/images///example_petri.png Graphic file (type png)
 <use chapters/01/images///example_petri.png>
 Package pdftex.def Info: chapters/01/images///example_petri.png  used on input 
@@ -768,7 +768,7 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )) [21] [22])
 (./chapters/03/implementation_stochastic.tex [23]
 Chapter 3.
-<chapters/03/images//tree_methods.png, id=730, 873.2625pt x 552.0625pt>
+<chapters/03/images//tree_methods.png, id=735, 873.2625pt x 552.0625pt>
 File: chapters/03/images//tree_methods.png Graphic file (type png)
 <use chapters/03/images//tree_methods.png>
 Package pdftex.def Info: chapters/03/images//tree_methods.png  used on input li
@@ -777,7 +777,7 @@ ne 31.
 [24
 
 ]
-<chapters/03/images//boundaries.png, id=739, 701.62125pt x 289.08pt>
+<chapters/03/images//boundaries.png, id=744, 701.62125pt x 289.08pt>
 File: chapters/03/images//boundaries.png Graphic file (type png)
 <use chapters/03/images//boundaries.png>
 Package pdftex.def Info: chapters/03/images//boundaries.png  used on input line
@@ -819,17 +819,17 @@ d with Composition-Rejection
 (./chapters/03/algorithms/ffm.tex) [52] [53] [54] [55]
 (./chapters/03/algorithms/nrm.tex) [56] [57] [58] [59]
 (./chapters/03/algorithms/mnrm.tex) [60] [61]
-Underfull \hbox (badness 10000) in paragraph at lines 1162--1173
+Underfull \hbox (badness 10000) in paragraph at lines 1147--1158
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1178--1198
+Underfull \hbox (badness 10000) in paragraph at lines 1163--1183
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1178--1198
+Underfull \hbox (badness 10000) in paragraph at lines 1163--1183
 
  []
 
@@ -1567,13 +1567,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 1920--1928
 
 ) [106] (./build/principal.aux)
 Package rerunfilecheck Info: File `principal.out' has not changed.
-(rerunfilecheck)             Checksum: 0D2AC3F41DA73AD599F2687695A90571;19302.
+(rerunfilecheck)             Checksum: 45C184821B55E37F40A7B6E4F5F523C6;19609.
  ) 
 Here is how much of TeX's memory you used:
- 17799 strings out of 478238
- 287639 string characters out of 5850455
- 606611 words of memory out of 5000000
- 34843 multiletter control sequences out of 15000+600000
+ 17796 strings out of 478238
+ 287638 string characters out of 5850455
+ 606614 words of memory out of 5000000
+ 34844 multiletter control sequences out of 15000+600000
  494924 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  65i,21n,66p,686b,732s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1608,10 +1608,10 @@ type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm
 e/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fo
 nts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts/type1/publi
 c/cm-super/sftt1000.pfb>
-Output written on ./build/principal.pdf (107 pages, 6633637 bytes).
+Output written on ./build/principal.pdf (107 pages, 6632906 bytes).
 PDF statistics:
  2059 PDF objects out of 2073 (max. 8388607)
  1806 compressed objects within 19 object streams
- 827 named destinations out of 1000 (max. 500000)
- 976 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 823 named destinations out of 1000 (max. 500000)
+ 984 words of extra memory for PDF output out of 10000 (max. 10000000)
 

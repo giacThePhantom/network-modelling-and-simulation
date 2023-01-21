@@ -182,7 +182,8 @@
 \contentsline {paragraph}{\numberline {3.4.4.4.2}Updating the firing time}{60}{paragraph.3.4.4.4.2}%
 \contentsline {subsubsection}{\numberline {3.4.4.5}Algorithm}{60}{subsubsection.3.4.4.5}%
 \contentsline {paragraph}{\numberline {3.4.4.5.1}Discussion}{61}{paragraph.3.4.4.5.1}%
-\contentsline {section}{\numberline {3.5}Next Reaction Method}{61}{section.3.5}%
+\contentsline {section}{\numberline {3.5}Rejection Based stochastic simulation algorithm}{61}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Fluctuation interval}{62}{subsection.3.5.1}%
 \contentsline {section}{\numberline {3.6}RSSA}{62}{section.3.6}%
 \contentsline {chapter}{\numberline {4}Approximation algorithms}{64}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Probability-Weighted Dynamic Monte Carlo Method}{64}{section.4.1}%
