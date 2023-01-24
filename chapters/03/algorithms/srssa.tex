@@ -1,0 +1,91 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Simultaneous RSSA (SRSSA)}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:srssa}
+
+\Input: a biochemical reaction network of $M$ reactions in which each reaction $R_j$, $j=1, \dots, M$ is accompanied with the state change vector $\vec{v}_j$ and the propensity $a_j$, the initial state $\vec{x}_0$ at time $0$ and the simulation ending time $T_{\max}$ and the number of generated trajectories $K$\;
+
+\Output: $K$ independent trajectory of the biochemical reaction network, which is a collection of states $X^r(t)$ for time $0\le t\le T_{\max}$\;
+
+\end{algorithm}
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Simultaneous RSSA (SRSSA)}
+
+\ForEach{Trajectory$\in K$}{
+	$t^r = 0$\;
+	$\vec{X^r} = \vec{x}_0$\;
+}
+build the species reaction SR dependency graph $\mathcal{G}$\;
+\ForEach{$S_i\in$ Species}{
+	define a new $[\underline{X_i},\overline{X_i}]$ around $X_i$, such that $\underline{X_i}\le X_i^1,\dots, X_i^K\le \overline{X_i}$\;
+}
+
+$\overline{a_0} = 0$\;
+
+\ForEach{$R_j\in$ Reactions}{
+	compute $\overline{a_j}$ and $\underline{a_j}$\;
+	$\overline{a_0} = \overline{a_0} + \overline{a_j}$\;
+}
+\Repeat{$t^r\ge T_{\max}\forall r=1,\dots,K$}{
+	$UpdateSpeciesSet = \emptyset$\;
+	\ForEach{$r=1\rightarrow K$}{
+		\Repeat{$\exists(X^r_i\not\in[\underline{X_i},\overline{X_i}])\lor t^r\ge T_{\max}$}{
+			$u = 1$\;
+			accepted = \False\;
+			\Repeat{accepted}{
+				generate three random numbers $r_1, r_2, r_3\sim norm(0,1)$\;
+				select $R_\mu$ with minimum $\mu$ such that $\sum\limits_{j=1}^\mu\overline{a_j}\ge r_1\overline{a_0}$\;
+				\If{$r_2\le\frac{\underline{a_\mu}}{\overline{a_\mu}}$}{
+					accepted = \True\;
+				}
+				\Else{
+					evaluate $a^r_\mu$ with state $X^r$\;
+					\If{$r_2\le\frac{a_\mu}{\overline{a_\mu}}$}{
+						accepted = \True\;
+					}
+				}
+				$u = u\cdot r_3$\;
+			}
+			$\tau^r = \frac{1}{\overline{a_0}}\ln(u)$\;
+			$\vec{X^r} = \vec{X^r}+\vec{v}_\mu$\;
+			$t^r=t^r+\tau^r$\;
+		}
+		\ForEach{$S_i$ where $X_i^r\not\in[\underline{X_i},\overline{X_i}]$}{
+			$UpdateSpeciesSet = UpdateSpeciesSet\cup\{S_i\}$\;
+		}
+	}
+	\ForEach{$S_i\in UpdateSpeciesSet$}{
+		define a new $[\underline{X_i}, \overline{X_i}]$ such that $\underline{X_i}\le X_i^1, \dots, X_i^K\le\overline{X_i}$\;
+		\ForEach{$R_j\in ReactionsAffectedBy(S_i)$}{
+			compute new propensity bounds $\overline{a_j}$ and $\underline{a_i}$\;
+			update $\overline{a_0}$\;
+		}
+	}
+}
+
+\end{algorithm}

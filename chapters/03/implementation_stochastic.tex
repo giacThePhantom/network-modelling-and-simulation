@@ -1104,6 +1104,277 @@ Because of this it is useful for reaction in which propensities are complex.
 
   $$\underline{X}\le X(t)\le \overline{X}$$
 
+  \subsection{Abstract propensity value}
+  For each $R_j$ an abstract propensity value $[\underline{a_j},\overline{a_j}]$ is computed, this is an interval encompassing all its possible values, including the exact one $a_j(X(t))$.
+  The bounds are derived by minimizing and maximizing $a_j$ over the fluctuation interval.
+  For the standard mass action or Michaelis-Menten kinetics, $a_j$ is a monotonic function of the state $X$, so that $\underline{a_j} = a_j(\underline{X})$ and $\overline{a_j} = a_j(\overline{X})$.
+  If it is non-monotonic, a numerical optimization technique or interval analysis can be applied to recover the bounds.
+  The exact bounds are not needed as the tight bounds of $a_j$ over the fluctuation interval are suffucuent.
+
+  \subsection{Selection of the next reaction}
+  The selection of the next reaction has two steps:
+
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item Simulation of the abstract model.
+      \item Acceptance of the candidate reaction.
+    \end{itemize}
+  \end{multicols}
+
+    \subsubsection{Simulation of the abstract model}
+    In the first step RSSA simulates the abstract model assigning to each $R_j$ $\frac{\overline{a_j}}{\overline{a_0}}$, where $\overline{a_0} = \sum\limits_{j=1}^M\overline{a_j}$.
+    $R_\mu$ is randomly selected with probability $\frac{\overline{a_\mu}}{\overline{a_0}}$ as a candidate.
+    The realization of $R_\mu$ is performed accumulating propensity upper bounds until the smallest $\mu$ is selected such that:
+
+    $$\sum\limits_{j=1}^\mu\overline{a_j}\ge r_1\overline{a_0}$$
+
+    Where $r_1\sim norm(0,1)$.
+
+    \subsubsection{Acceptance of the abstract model}
+    In the second step RSSA checks whether $R_\mu$ is accepted to occur in the concrete model through a rejection test with success probability $\frac{a_\mu}{\overline{a_\mu}}$.
+    Since the exact value of the propensity is not known, a random number $r_2\sim norm(0,1)$ is drawn to check whether:
+
+    $$r_2\le \frac{\underline{a_\mu}}{\overline{a_\mu}}$$
+
+    If this succeeds $R_\mu$ is accepted because $r_2\le\frac{\underline{a_\mu}}{\overline{a_\mu}}\le\frac{a_\mu}{\overline{a_\mu}}$.
+    When this fails $a_\mu$ is computed and $r_2$ is tested against $\frac{a_\mu}{\overline{a_\mu}}$.
+    This happens infrequently when $\frac{\underline{a_\mu}}{\overline{a_\mu}}$ is close to $1$.
+    If $R_\mu$ is accepted the firing time is computed, otherwise a new reaction is selected and tested again.
+
+  \subsection{Advancement of the simulation}
+  To remain exact RSSA has to advance the simulation at every attempt of rejection by an exponentially distributed variable with parameter $\overline{a_0}$.
+  Assuming $k-1$ reactions and following the acceptance, the simulation has to advance by a quantity equal to the sum of $k$ exponential random numbers:
+
+  $$\frac{1}{\overline{a_0}}\ln\frac{1}{u_1}+\frac{1}{\overline{a_0}}\ln\frac{1}{u_2}+\cdots+\frac{1}{\overline{a_0}}\ln\frac{1}{u_k}$$
+
+  Where $u_i\sim norm(0,1)$ are independent and identically distributed random numbers.
+  This sum is the Erlang distribution $erlang(k, \overline{a_0})$.
+
+  \subsection{Exactness of RSSA}
+  For each simulation iteration of RSSA, $R_\mu$ is selected to fire with probability $\frac{a_\mu}{a_0}$ and its firing time $\tau$ follows an exponential distribution with rate $a_0$.
+  Let $\mathbb{P}\{R_\mu\}$ be the probability that $R_\mu$ is selected and accepted to fire in a single attempt.
+  This can be expressed as the product of the probability of being selected and being accepted:
+
+  $$\mathbb{P}\{R_\mu\} = \frac{\overline{a_\mu}}{\overline{a_0}}\frac{a_\mu}{\overline{a_0}} = \frac{a_\mu}{\overline{a_0}}$$
+
+  Let $\mathbb{P}\{R\}$ be the probability that some reaction is accepted in a single attempt, this is:
+
+  $$\mathbb{P}\{R\} = \frac{\sum\limits_{j=1}^Ma_j}{\overline{a_0}} = \frac{a_0}{\overline{a_0}}$$
+
+  $R_\mu$ being accepted after any number of rejections is a conditional probability of accepting $R_\mu$ knowing some reaction is accepted:
+
+  $$\mathbb{P}\{R_\mu|R\} = \frac{\frac{a_\mu}{\overline{a_0}}}{\frac{a_0}{\overline{a_0}}} = \frac{a_\mu}{a_0}$$
+
+  Demonstrating that the reaction is selected with the correct probability.
+  Now let $F_V$ be the cdf and $f_V$ the pdf of $V$.
+  Let $k$ be the random variable for the number of attempts performed before accepting $R_\mu$.
+  $k$ is geometrically distributed with success probability $\mathbb{P}\{R\}$.
+  Let $\tau$ be a random variable corresponding to the simulation time advancement due to the firing of $R_\mu$.
+  Let $\mathbb{P}(\tau\le x)$ be the probability that $\tau\le x$ given a reaction is accepted after some trials, the pdf of $\tau$:
+
+  \begin{align*}
+    f_\tau(x) &= \frac{\partial}{\partial x}\mathbb{P}\{\tau\le x\} =\\
+              &= \frac{\partial}{\partial x}\sum\limits_{k_0=1}^{\infty}\mathbb{P}\{\tau\le x|k = k_0\}\mathbb{P}\{k=k_0\}=\\
+              &=\frac{\partial}{\partial x}\sum\limits_{k_0=1}^{\infty}F_{erlang(k_0,\overline{a_0})}(x)\frac{a_0}{\overline{a_0}}\left(1-\frac{a_0}{\overline{a_0}}\right)^{k_0-1} =\\
+              &=\sum\limits_{k_0=1}^{\infty}\frac{\partial}{\partial x}F_{erlang(k_0,\overline{a_0})}(x)\frac{a_0}{\overline{a_0}}\left(1-\frac{a_0}{\overline{a_0}}\right)^{k_0-1} =\\
+              &=\sum\limits_{k_0=1}^{\infty}f_{erlang(k_0,\overline{a_0})}(x)\frac{a_0}{\overline{a_0}}\left(1-\frac{a_0}{\overline{a_0}}\right)^{k_0-1} =\\
+              &=\sum\limits_{k_0=1}^{\infty}\frac{\overline{a_0}^{k_0}x^{k_0-1}e^{-\overline{a_0}x}}{(k_0-1)!}\frac{a_0}{\overline{a_0}}\left(\frac{\overline{a_0}-a_0}{\overline{a_0}}\right)^{k_0-1} =\\
+              &=a_0e^{-\overline{a_0}x}\sum\limits_{k_0=1}^{\infty}\frac{(\overline{a_0}-a_0)^{k_0-1}x^{k_0-1}}{(k_0-1)!}=\\
+              &=a_0e^{-\overline{a_0}x}e^{x(\overline{a_0}-a_0)} = a_0e^{-a_0 x}
+  \end{align*}
+
+  Noting that:
+
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item Partitioning $\mathbb{P}(\tau<x)$ according to $k$ is done because for a fixed $k$, $\tau$ is an Erlang distribution with parameters $k$ and $\overline{a_0}$.
+      \item Applying the closed form of the pdf of Erlang.
+      \item $e^x = \sum\limits_{n=0}^{\infty}\frac{x^n}{n!}$.
+    \end{itemize}
+  \end{multicols}
+
+  This shows how the firing time $\tau$ follows and exponential distribution $exp(a_0)$.
+
+    \subsubsection{Bounds on the acceptance probability}
+    The acceptance probability of a single attempt $\mathbb{P}\{R\}$ is bounded by:
+
+    $$\frac{\underline{a_0}}{\overline{a_0}} \le \mathbb{P}\{R\} = \frac{a_0}{\overline{a_0}} \le 1$$
+
+    Tighter lower or upper bounds yield a better acceptance probability: if $[\underline{X},\overline{X}]$ is reduced to the concrete state $X(t)$, the acceptance probability is $1$:
+
+    $$\underline{a_j}= \overline{a_j} = a_j$$
+
+    And RSSA is reduced to DM.
+
+  \subsection{Evolution of the state}
+  After firing $X(t)$ is updated and RSSA checks whether the new concrete state is compatible with the abstract state: $\underline{X_i}\le X_i(t)\le \overline{X_i}$ holds for each species.
+  This is often the case as a reaction only affects a few molecules.
+  When this is true RSSA does not recompute the abstract propensities: the inequality $\underline{a_j}\le a_j\le \overline{a_j}$ still holds for all reaction and the next reaction step can be performed.
+  If $X(t)$ falls outside the abstract state the abstract propensities have to be updated by redefining a new abstract state around the new concrete one and deriving the corresponding propensities.
+  This operation can be made cheaper by observing that only the reaction affected by the species for which a new fluctuation interval has been redefined require an update of the propensity bounds.
+  This are determined by a species-reaction RS dependency graph.
+
+    \subsubsection{Species-Reaction dependency graph}
+    Let $\mathcal{S}$ and $\mathcal{R}$ be the set of species and reactions in the biochemical network.
+    The species-reaction SR dependency graph is the direct bipartite graph $\mathcal{G}(V, E)$ having:
+
+    \begin{align*}
+      V &=\mathcal{S}\cup\mathcal{R}\\
+      E &=\{(s,r)\in\mathcal{S}\times\mathcal{R}|s\in Reactants(r)\}\cup\{(r,s)\in \mathcal{R}\times\mathcal{S}|s\in Products(r)\}
+    \end{align*}
+
+    This is a bipartite graph that shows the dependency of reactions on species.
+    This allows RSSA to decide which reaction should recompute their propensity bounds.
+    For a species $S_i$ if its population moves out of the fluctuation interval RSSA recomputes propensity bounds of a reaction $R_j$ if there is a directed edge from $S_i$ to $R_j$ in $SR$.
+    The number of reaction that needs to recompute propensity bounds is equal to the out-degree of $S_i$.
+    The reactions that have to recompute the propensity bounds if $X_i(t)\not\in[\underline{X_i},\overline{X_i}]$ are defined in term of the SR as:
+
+    $$ReactionAffectedBy(S_i) = \{R_j|\exists(S_i,R_j)\in\mathcal{G}\}$$
+
+  \subsection{Algorithm}
+  An implementation of RSSA is outlined in algorithm \ref{algo:rssa}.
+
+  \input{chapters/03/algorithms/rssa}
+
+    \subsubsection{Discussion}
+
+      \paragraph{Time complexity}
+      The time complexity is composed of the cost to realize a candidate reaction and the number of rejection tests.
+      RSSA accumulates propensity upper bounds linearly until it finds a candidate reaction: selecting the candidate is $O(M)$.
+      Let $\alpha = \frac{\overline{a_0}}{a_i}$ be the average number of times the search is performed until a candidate is accepted: the cost for the selection of firing is $O(\alpha M)$.
+      This cost is compensated by a huge reaction in propensity updates: let $T_{DM}^{update}$ be the cost for propensity updates in DM.
+      In RSSA is $\frac{T_{DM}^{update}}{\beta}$, where $\beta$ is the average number of skipped updates and is the average frequency of $X(t)\in[\underline{X},\overline{X}]$, providing a significant improvement for the simulation performance.
+
+  \subsection{Simultaneous RSSA}
+  Simultaneous RSSA SRSSA is a variant of RSSA that generates multiple independent trajectories in a simulation run.
+  The propensity bounds in SRSSA are computed once and shared across the simulations, reducing the memory requirements to store the propensity bounds.
+  The recomputing is performed collectively in a single operation which reduces the total number of propensity updates and improves the simulation performance.
+
+    \subsubsection{Global fluctuation interval}
+    Let $K$ be the number of trajectories and $X^r$ the system state of the $r$-th realization with $r = 1,\dots, K$.
+    Let $a_j^r$ the propensity of reaction $R_j$ in the $r$-th realization.
+    A lower and upper bound for each $R_j$ such that $\underline{a_j}\le a_j^r\le \overline{a_j}\forall r=1,\dots,K$ and uses these for all $K$ realization.
+    It stores only $M$ propensity bounds, which are derived by first defining a global fluctuation interval $[\underline{X},\overline{X}]$ which bounds all possible population in all $K$ states $X^r$.
+    Then $a_j$ is minimized or maximized $a_j$ on the global interval, which can be defined as $X_i^{\min} = \min(X_i^1, \dots, X_i^K)$ and $X_i^{\max} = \max(X_i^1, \dots, X_i^K)$ respectively to be the minimum and maximum of species $S_i$ in all $K$ states.
+    Then the population interval:
+
+    $$[\underline{X_i}, \overline{X_i}] = [(1-\delta_i)X_i^{\min}, (1+\delta_i)X_i^{\max}]$$
+
+    Will bound al population $S_i$ in $K$ states, where $\delta_i$ is the fluctuation rate of the species.
+    The new global population intervals are redefined only when all $K$ trajectories are stopped.
+
+    \subsubsection{Algorithm}
+    An implementation of SRSSA is outlined in algorithm \ref{algo:srssa}.
+
+    \input{chapters/03/algorithms/srssa}
+
+  \subsection{Improvements for RSSA}
+  The search for a candidate reaction in RSSA is linear and becomes a computational bottleneck for large reaction networks.
+
+    \subsubsection{RSSA with tree-based search}
+    The tree-based search can be used to reduce the time complexity of the search for the next reaction to logarithmic time.
+    The tree stores the propensity upper bounds in the RSSA case: the search time for the candidate reaction is $O(\log M)$ and a tree updated is performed in $O(\log M)$.
+    The time complexity of the algorithm is $O(\log M)$.
+
+      \paragraph{Algorithm}
+      An implementation of RSSA with tree-based search can be found in algorithm \ref{algo:rssa-tree}.
+
+      \input{chapters/03/algorithms/rssa-tree}
+
+    \subsubsection{RSSA with composition-rejection search}
+    RSSA with composition-rejection search RSSA-CR employs composition-rejection search.
+    The reaction are partitioned into $L$ groups using the propensity bounds.
+    $R_j$ is put into $G_l$ if $2^{u_l-1}\le\overline{a_j}< 2^{u_l}$ where $u_l = \lceil\log_2(\overline{a_j})\rceil$.
+    Let $p_l = \sum\limits_{R_j\in G_l}\overline{a_j}$ and $p_o = \sum\limits_{l=1}^Lp_l = \sum\limits_{j=1}^M\overline{a_j} = \overline{a_0}$.
+
+      \paragraph{Selection of the next reaction}
+      The selection of the next reaction is a two step process:
+
+      \begin{multicols}{2}
+        \begin{itemize}
+          \item Selection of the group.
+          \item Selection of a reaction.
+        \end{itemize}
+      \end{multicols}
+
+        \subparagraph{Selection of a group}
+        A group $G_\alpha$ is selected with probability $\frac{p_\alpha}{p_0}$ by linearly accumulating $p_l$ until a minimum $\alpha$ such that $\sum\limits_{l=1}^\alpha p_l\ge r_1p_0$ is found, where $r_0\sim norm(0,1)$.
+
+        \subparagraph{Selection of a reaction}
+        The selection of $R_\mu$ has two consecutive acceptance-rejection tests: the first randomly selects $R_\mu\in G_\alpha$ and accepts it with probability $\frac{\overline{a_\mu}}{2^{\mu\alpha}}$.
+        This is repeated until $R_\mu$ is accepted.
+        Then a second test with acceptance probability $\frac{a_\mu}{\overline{a_\mu}}$ is performed.
+        If the test fails both $R_\mu$ and $G_\alpha$ are rejected.
+
+      \paragraph{Firing time}
+      The firing time is generated by sampling $erlang{k,p_0}$, but the number of trials $k$ counts only the second rejection test.
+
+      \paragraph{Algorithm}
+      An implementation of RSSA with composition-rejection search can be found in algorithm \ref{algo:rssa-cr}.
+
+      \input{chapters/03/algorithms/rssa-cr}
+
+      \paragraph{Discussion}
+
+        \subparagraph{Time complexity}
+        Te time complexity consist of the cost of selecting the group in $O(L)$ and the average number of times that the validation test is performed to accept a reaction is $\alpha = \frac{2\overline{a_\mu}}{\underline{a_\mu}}$, which is dependent on the ratio of the propensity bounds which can be tuned through the fluctuation interval.
+        The total computational cost for the selection of a reaction is $O(L)$.
+
+    \subsubsection{RSSA with table-lookup search}
+    The alias table lookup search is a constant time search but it requires an expensive pre-processing step to build the lookup tables.
+    Any discrete probability distribution over $M$ probability values can be expressed as an equi-probable mixture of $M$ two-points distribution.
+    The $M$ probabilities are $\frac{\overline{a_j}}{\overline{a_0}}$.
+    The setup requires to build two tables implemented as arrays of size $M$ in which the first, the cut-off table $Q$, stores the first values of the two point mixture and the second, the alias table $A$, contains the alias to the second part.
+
+      \paragraph{Building the tables}
+      When building the tables the objective is to transform the $M$ probabilities into a square histogram.
+      The probabilities greater than average are stored in the $Greater$ set and the smaller in the $Smaller$ one.
+      For each loop an element of $Greater$ and an element of $Smaller$ are selected.
+      The element from $Greater$ transfer a part of its value to the smaller one from $Smaller$ to make it average.
+      This step implies that for $l\in Smaller$ such that $Q_l<1$ there is no alias.
+      This is repeated until all elements in $Smaller are processed$.
+      To show that it will never reach a deadlock consider the invariant of the while loop, the sum of element in $Greater$ and $Smaller$ is:
+
+      $$Total = \sum\limits_{j=1}^MQ_j = M$$
+
+      The average value will be $1$.
+      For each loop $l\in Smaller$ with value $Q_l$ is removed and value $Q_k$ of $k\in Greater $ is reduced by $1-Q_l$.
+      The total sum is reduced by $1$, so the loss after the $i$-th loop is:
+
+      $$Loss = \sum\limits_{k=1}^i 1 = i$$
+
+      The total number of elements in the sets is $M-i$: in each loop one element from $Smaller$ is removed.
+      The average value of elements in the sets after the $i$-th loop is:
+
+      $$\frac{Total-Loss}{M-i} = 1$$
+
+      For each loop, if $Smaller$ is not empty there is at least one element in $Greater$, proving the claim.
+      This procedure is outlined in algorithm \ref{algo:build-alias-tables}.
+
+      \input{chapters/03/algorithms/alias-build}
+
+      \paragraph{Search for the candidate reaction}
+      The search considers a random number $r\sim norm(0,1)$ as the parameter.
+      First a random index $\mu = [Mr]$ is computed, where $[-]$ is the truncation operator.
+      $r$ is rescaled and compared against $Q_\mu$ the probability cut-off.
+      If $r< Q_\mu$ $\mu$ is returned, otherwise the reaction index in $A_\mu$ is returned.
+      This procedure is outlined in algorithm \ref{algo:search-alias-tables}.
+
+      \input{chapters/03/algorithms/alias-search}
+
+      \paragraph{Algorithm}
+      An implementation of RSSA with table-lookup search is outlined in algorithm \ref{algo:rssa-table}.
+
+      \input{chapters/03/algorithms/rssa-table}
+
+      \paragraph{Discussion}
+      The alias table lookup takes one comparison and at most two memory accesses, so $O(1)$.
+      The constant time search is affected by a large computational cost for rebuilding the lookup tables, which is $O(M)$, but the average number of times the lookup tables rebuild is controllable through the fluctuation interval.
+
+
+
+
+
 
 
 

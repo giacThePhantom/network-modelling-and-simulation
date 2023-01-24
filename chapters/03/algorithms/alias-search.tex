@@ -1,0 +1,30 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{search\_alias\_table}
+
+\caption{\protect\TitleFunction{r}}
+\label{algo:search-alias-tables}
+
+\Input: alias array $A$ with size $M$ storing reaction indices and cut-off array $Q$ with size $M$ storing cut-off probabilities, and a random number $r\sim norm(0,1)$\;
+
+\Output: a candidate reaction $R_\mu$ with probability $\frac{\overline{a_\mu}}{\overline{a_0}}$\;
+
+$\mu = [Mr]$\;
+$r = Mr-\mu$\;
+\If{$r< Q_\mu$}{
+	\Return $\mu$\;
+}
+\Else{
+	\Return $A_\mu$\;
+}
+
+\end{algorithm}

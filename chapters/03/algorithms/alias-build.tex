@@ -1,0 +1,45 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{build\_alias\_table}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:build-alias-tables}
+
+\Input: $M$ probabilities $\frac{\overline{a_j}}{\overline{a_0}}$\;
+\Output: alias table $A$ with size $M$ storing reaction indices and cut-off table $Q$ with size $M$ storing cut-off probabilities\;
+
+\ForEach{$j = 1\rightarrow M$}{
+	$Q_j = M\frac{\overline{a_j}}{\overline{a_0}}$\;
+}
+
+$Greater = \emptyset$\;
+$Smaller = \emptyset$\;
+
+\ForEach{$j = 1\rightarrow M$}{
+	\If{$Q_j\ge 1$}{
+		add $j$ to $Greater$\;
+	}
+	\Else{
+		add $j$ to $Smaller$\;
+	}
+}
+
+\While{$Greater\neq\emptyset\land Smaller\neq\emptyset$}{
+	take $k\in Greater$ and $l\in Smaller$\;
+	$A_l = k$\;
+	remove $l$ from $Smaller$\;
+	$Q_k = Q_k-(1-Q_l)$\;
+	\If{$Q_k< 1$}{
+		move $k$ from $Greater$ to $Smaller$\;
+	}
+}
+\end{algorithm}

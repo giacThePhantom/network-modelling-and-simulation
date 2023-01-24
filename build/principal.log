@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.19)  21 JAN 2023 23:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.19)  24 JAN 2023 13:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -724,13 +724,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 178--181
 
  []
 
-<chapters/01/images//petri_nets.png, id=592, 691.58376pt x 550.055pt>
+<chapters/01/images//petri_nets.png, id=632, 691.58376pt x 550.055pt>
 File: chapters/01/images//petri_nets.png Graphic file (type png)
 <use chapters/01/images//petri_nets.png>
 Package pdftex.def Info: chapters/01/images//petri_nets.png  used on input line
  184.
 (pdftex.def)             Requested size: 216.81pt x 172.43732pt.
-<chapters/01/images///example_petri.png, id=595, 907.39pt x 353.32pt>
+<chapters/01/images///example_petri.png, id=635, 907.39pt x 353.32pt>
 File: chapters/01/images///example_petri.png Graphic file (type png)
 <use chapters/01/images///example_petri.png>
 Package pdftex.def Info: chapters/01/images///example_petri.png  used on input 
@@ -768,7 +768,7 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )) [21] [22])
 (./chapters/03/implementation_stochastic.tex [23]
 Chapter 3.
-<chapters/03/images//tree_methods.png, id=735, 873.2625pt x 552.0625pt>
+<chapters/03/images//tree_methods.png, id=776, 873.2625pt x 552.0625pt>
 File: chapters/03/images//tree_methods.png Graphic file (type png)
 <use chapters/03/images//tree_methods.png>
 Package pdftex.def Info: chapters/03/images//tree_methods.png  used on input li
@@ -777,7 +777,7 @@ ne 31.
 [24
 
 ]
-<chapters/03/images//boundaries.png, id=744, 701.62125pt x 289.08pt>
+<chapters/03/images//boundaries.png, id=785, 701.62125pt x 289.08pt>
 File: chapters/03/images//boundaries.png Graphic file (type png)
 <use chapters/03/images//boundaries.png>
 Package pdftex.def Info: chapters/03/images//boundaries.png  used on input line
@@ -818,24 +818,34 @@ d with Composition-Rejection
 ) [48] [49] [50] (./chapters/03/algorithms/frm.tex) [51]
 (./chapters/03/algorithms/ffm.tex) [52] [53] [54] [55]
 (./chapters/03/algorithms/nrm.tex) [56] [57] [58] [59]
-(./chapters/03/algorithms/mnrm.tex) [60] [61]
-Underfull \hbox (badness 10000) in paragraph at lines 1147--1158
+(./chapters/03/algorithms/mnrm.tex) [60] [61] [62] [63] [64]
+(./chapters/03/algorithms/rssa.tex) [65] [66]
+(./chapters/03/algorithms/srssa.tex) [67] [68]
+(./chapters/03/algorithms/rssa-tree.tex) [69] [70]
+(./chapters/03/algorithms/rssa-cr.tex) [71]
+Overfull \vbox (5.672pt too high) has occurred while \output is active []
+
+ [72]
+(./chapters/03/algorithms/alias-build.tex) [73]
+(./chapters/03/algorithms/alias-search.tex)
+(./chapters/03/algorithms/rssa-table.tex) [74] [75]
+Underfull \hbox (badness 10000) in paragraph at lines 1418--1429
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1163--1183
+Underfull \hbox (badness 10000) in paragraph at lines 1434--1454
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1163--1183
+Underfull \hbox (badness 10000) in paragraph at lines 1434--1454
 
  []
 
-[62]) (./chapters/04/approximation_algorithms.tex [63]
+) (./chapters/04/approximation_algorithms.tex [76] [77]
 Chapter 4.
-<chapters/04/images//SSA_tree.png, id=1421, 438.63875pt x 687.56876pt>
+<chapters/04/images//SSA_tree.png, id=1787, 438.63875pt x 687.56876pt>
 File: chapters/04/images//SSA_tree.png Graphic file (type png)
 <use chapters/04/images//SSA_tree.png>
 Package pdftex.def Info: chapters/04/images//SSA_tree.png  used on input line 2
@@ -846,9 +856,9 @@ Underfull \hbox (badness 10000) in paragraph at lines 39--47
 
  []
 
-[64
+[78
 
-] [65 <./chapters/04/images//SSA_tree.png>]
+] [79 <./chapters/04/images//SSA_tree.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 67--90
 
  []
@@ -863,7 +873,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 67--90
 
  []
 
-[66]) (./chapters/05/deterministic_simulations.tex
+[80]) (./chapters/05/deterministic_simulations.tex
 Underfull \hbox (badness 10000) in paragraph at lines 115--2
 
  []
@@ -873,7 +883,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 115--2
 
  []
 
-[67] [68]
+[81] [82]
 Chapter 5.
 
 LaTeX Warning: Command \textrightarrow invalid in math mode on input line 4.
@@ -895,25 +905,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 12--18
 
  []
 
-<chapters/05/images//reaction_ODEs.png, id=1449, 1143.27126pt x 457.71pt>
+<chapters/05/images//reaction_ODEs.png, id=1816, 1143.27126pt x 457.71pt>
 File: chapters/05/images//reaction_ODEs.png Graphic file (type png)
 <use chapters/05/images//reaction_ODEs.png>
 Package pdftex.def Info: chapters/05/images//reaction_ODEs.png  used on input l
 ine 21.
 (pdftex.def)             Requested size: 216.81pt x 86.79819pt.
-<chapters/05/images//reaction_rates.png, id=1451, 1143.27126pt x 457.71pt>
+<chapters/05/images//reaction_rates.png, id=1818, 1143.27126pt x 457.71pt>
 File: chapters/05/images//reaction_rates.png Graphic file (type png)
 <use chapters/05/images//reaction_rates.png>
 Package pdftex.def Info: chapters/05/images//reaction_rates.png  used on input 
 line 32.
 (pdftex.def)             Requested size: 216.81pt x 86.79819pt.
-[69
+[83
 
  <./chapters/05/images//reaction_ODEs.png>]
 
 LaTeX Warning: Command \textellipsis invalid in math mode on input line 51.
 
-[70 <./chapters/05/images//reaction_rates.png>]
+[84 <./chapters/05/images//reaction_rates.png>]
 
 LaTeX Warning: Command \textperiodcentered invalid in math mode on input line 7
 4.
@@ -972,32 +982,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 102--116
 
  []
 
-[71]
-<chapters/05/images//discretization.png, id=1469, 751.80875pt x 325.215pt>
+[85]
+<chapters/05/images//discretization.png, id=1837, 751.80875pt x 325.215pt>
 File: chapters/05/images//discretization.png Graphic file (type png)
 <use chapters/05/images//discretization.png>
 Package pdftex.def Info: chapters/05/images//discretization.png  used on input 
 line 126.
 (pdftex.def)             Requested size: 433.62pt x 187.57776pt.
-) (./chapters/06/hybrid_simulations.tex [72 <./chapters/05/images//discretizati
+) (./chapters/06/hybrid_simulations.tex [86 <./chapters/05/images//discretizati
 on.png>]
 Chapter 6.
-<chapters/06/images//regions.png, id=1479, 553.06625pt x 425.59pt>
+<chapters/06/images//regions.png, id=1846, 553.06625pt x 425.59pt>
 File: chapters/06/images//regions.png Graphic file (type png)
 <use chapters/06/images//regions.png>
 Package pdftex.def Info: chapters/06/images//regions.png  used on input line 26
 .
 (pdftex.def)             Requested size: 216.81pt x 166.83662pt.
-<chapters/06/images//scheme.png, id=1481, 615.29875pt x 336.25626pt>
+<chapters/06/images//scheme.png, id=1848, 615.29875pt x 336.25626pt>
 File: chapters/06/images//scheme.png Graphic file (type png)
 <use chapters/06/images//scheme.png>
 Package pdftex.def Info: chapters/06/images//scheme.png  used on input line 38.
 
 (pdftex.def)             Requested size: 216.81pt x 118.4816pt.
-[73
+[87
 
-] [74 <./chapters/06/images//regions.png> <./chapters/06/images//scheme.png>]
-<chapters/06/images//HRSSA.png, id=1496, 566.115pt x 729.72626pt>
+] [88 <./chapters/06/images//regions.png> <./chapters/06/images//scheme.png>]
+<chapters/06/images//HRSSA.png, id=1862, 566.115pt x 729.72626pt>
 File: chapters/06/images//HRSSA.png Graphic file (type png)
 <use chapters/06/images//HRSSA.png>
 Package pdftex.def Info: chapters/06/images//HRSSA.png  used on input line 98.
@@ -1007,17 +1017,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 90--107
 
  []
 
-[75]
-<chapters/06/images//HRSSA_oregonator.png, id=1505, 646.415pt x 476.78125pt>
+[89]
+<chapters/06/images//HRSSA_oregonator.png, id=1871, 646.415pt x 476.78125pt>
 File: chapters/06/images//HRSSA_oregonator.png Graphic file (type png)
 <use chapters/06/images//HRSSA_oregonator.png>
 Package pdftex.def Info: chapters/06/images//HRSSA_oregonator.png  used on inpu
 t line 116.
 (pdftex.def)             Requested size: 260.17464pt x 191.89496pt.
-) (./chapters/07/reali.tex [76 <./chapters/06/images//HRSSA.png>] [77 <./chapte
+) (./chapters/07/reali.tex [90 <./chapters/06/images//HRSSA.png>] [91 <./chapte
 rs/06/images//HRSSA_oregonator.png>]
 Chapter 7.
-[78
+[92
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 80--92
@@ -1029,7 +1039,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 105--117
 
  []
 
-<chapters/07/images//scheme_model.png, id=1525, 503.8825pt x 422.57875pt>
+<chapters/07/images//scheme_model.png, id=1891, 503.8825pt x 422.57875pt>
 File: chapters/07/images//scheme_model.png Graphic file (type png)
 <use chapters/07/images//scheme_model.png>
 Package pdftex.def Info: chapters/07/images//scheme_model.png  used on input li
@@ -1055,8 +1065,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 138--171
 
  []
 
-[79]
-<chapters/07/images//validation.png, id=1530, 691.58376pt x 319.1925pt>
+[93]
+<chapters/07/images//validation.png, id=1896, 691.58376pt x 319.1925pt>
 File: chapters/07/images//validation.png Graphic file (type png)
 <use chapters/07/images//validation.png>
 Package pdftex.def Info: chapters/07/images//validation.png  used on input line
@@ -1067,14 +1077,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 189--198
 
  []
 
-[80 <./chapters/07/images//scheme_model.png>]
-<chapters/07/images//workflow.png, id=1537, 286.06876pt x 621.32124pt>
+[94 <./chapters/07/images//scheme_model.png>]
+<chapters/07/images//workflow.png, id=1903, 286.06876pt x 621.32124pt>
 File: chapters/07/images//workflow.png Graphic file (type png)
 <use chapters/07/images//workflow.png>
 Package pdftex.def Info: chapters/07/images//workflow.png  used on input line 2
 18.
 (pdftex.def)             Requested size: 130.08731pt x 282.54044pt.
-<chapters/07/images//volterra.png, id=1539, 761.84625pt x 301.125pt>
+<chapters/07/images//volterra.png, id=1905, 761.84625pt x 301.125pt>
 File: chapters/07/images//volterra.png Graphic file (type png)
 <use chapters/07/images//volterra.png>
 Package pdftex.def Info: chapters/07/images//volterra.png  used on input line 2
@@ -1090,7 +1100,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 272--277
 
  []
 
-[81 <./chapters/07/images//validation.png>] [82 <./chapters/07/images//workflow
+[95 <./chapters/07/images//validation.png>] [96 <./chapters/07/images//workflow
 .png> <./chapters/07/images//volterra.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 293--304
 
@@ -1111,7 +1121,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 344--361
 
  []
 
-[83]
+[97]
 Underfull \hbox (badness 10000) in paragraph at lines 365--374
 
  []
@@ -1136,12 +1146,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 415--434
 
  []
 
-[84]
+[98]
 Underfull \hbox (badness 10000) in paragraph at lines 438--453
 
  []
 
-<chapters/07/images//example.png, id=1569, 1057.9525pt x 449.68pt>
+<chapters/07/images//example.png, id=1936, 1057.9525pt x 449.68pt>
 File: chapters/07/images//example.png Graphic file (type png)
 <use chapters/07/images//example.png>
 Package pdftex.def Info: chapters/07/images//example.png  used on input line 45
@@ -1172,7 +1182,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 484--501
 
  []
 
-[85 <./chapters/07/images//example.png>]
+[99 <./chapters/07/images//example.png>]
 Overfull \hbox (406.33354pt too wide) detected at line 501
 \OML/cmm/m/it/10 f [] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 f\OT1/cmr/m/n/10 (\OML
 /cmm/m/it/10 x\OT1/cmr/m/n/10 ) + \OML/cmm/m/it/10 "[]\OT1/cmr/m/n/10 (\OML/cmm
@@ -1211,7 +1221,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 501--528
 
  []
 
-[86]
+[100]
 Underfull \hbox (badness 10000) in paragraph at lines 592--600
 
  []
@@ -1221,12 +1231,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 615--626
 
  []
 
-[87]
+[101]
 Underfull \hbox (badness 10000) in paragraph at lines 677--687
 
  []
 
-<chapters/07/images//function.png, id=1594, 566.115pt x 548.0475pt>
+<chapters/07/images//function.png, id=1961, 566.115pt x 548.0475pt>
 File: chapters/07/images//function.png Graphic file (type png)
 <use chapters/07/images//function.png>
 Package pdftex.def Info: chapters/07/images//function.png  used on input line 7
@@ -1258,7 +1268,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 731--741
 
  []
 
-[88 <./chapters/07/images//function.png>]
+[102 <./chapters/07/images//function.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 745--756
 
  []
@@ -1278,7 +1288,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 799--813
 
  []
 
-[89]
+[103]
 Underfull \hbox (badness 10000) in paragraph at lines 874--892
 
  []
@@ -1293,7 +1303,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 874--892
 
  []
 
-[90]
+[104]
 Underfull \hbox (badness 10000) in paragraph at lines 914--928
 
  []
@@ -1308,7 +1318,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 950--961
 
  []
 
-[91]
+[105]
 Underfull \hbox (badness 10000) in paragraph at lines 988--1004
 
  []
@@ -1318,7 +1328,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1039--1051
 
  []
 
-[92]
+[106]
 Underfull \hbox (badness 10000) in paragraph at lines 1092--1109
 
  []
@@ -1358,19 +1368,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 1137--1180
 
  []
 
-[93]
+[107]
 Underfull \hbox (badness 10000) in paragraph at lines 1181--1193
 
  []
 
-<chapters/07/images//multistep.png, id=1634, 390.45876pt x 328.22626pt>
+<chapters/07/images//multistep.png, id=2000, 390.45876pt x 328.22626pt>
 File: chapters/07/images//multistep.png Graphic file (type png)
 <use chapters/07/images//multistep.png>
 Package pdftex.def Info: chapters/07/images//multistep.png  used on input line 
 1196.
 (pdftex.def)             Requested size: 195.12767pt x 164.02757pt.
-[94 <./chapters/07/images//multistep.png>]
-<chapters/07/images//stoch_LV.png, id=1641, 768.8725pt x 311.1625pt>
+[108 <./chapters/07/images//multistep.png>]
+<chapters/07/images//stoch_LV.png, id=2008, 768.8725pt x 311.1625pt>
 File: chapters/07/images//stoch_LV.png Graphic file (type png)
 <use chapters/07/images//stoch_LV.png>
 Package pdftex.def Info: chapters/07/images//stoch_LV.png  used on input line 1
@@ -1391,8 +1401,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 1252--1264
 
  []
 
-[95 <./chapters/07/images//stoch_LV.png>]
-<chapters/07/images//mcmc.png, id=1649, 340.27126pt x 242.9075pt>
+[109 <./chapters/07/images//stoch_LV.png>]
+<chapters/07/images//mcmc.png, id=2016, 340.27126pt x 242.9075pt>
 File: chapters/07/images//mcmc.png Graphic file (type png)
 <use chapters/07/images//mcmc.png>
 Package pdftex.def Info: chapters/07/images//mcmc.png  used on input line 1274.
@@ -1418,8 +1428,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 1298--1325
 
  []
 
-[96 <./chapters/07/images//mcmc.png>]
-<chapters/07/images//distribution.png, id=1658, 416.55624pt x 381.425pt>
+[110 <./chapters/07/images//mcmc.png>]
+<chapters/07/images//distribution.png, id=2024, 416.55624pt x 381.425pt>
 File: chapters/07/images//distribution.png Graphic file (type png)
 <use chapters/07/images//distribution.png>
 Package pdftex.def Info: chapters/07/images//distribution.png  used on input li
@@ -1435,7 +1445,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1386--1398
 
  []
 
-[97 <./chapters/07/images//distribution.png>]
+[111 <./chapters/07/images//distribution.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 1402--1413
 
  []
@@ -1471,7 +1481,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1482--1489
 
  []
 
-[98]
+[112]
 Underfull \hbox (badness 10000) in paragraph at lines 1546--1555
 
  []
@@ -1481,7 +1491,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1558--1565
 
  []
 
-[99]
+[113]
 Underfull \hbox (badness 10000) in paragraph at lines 1581--1595
 
  []
@@ -1501,20 +1511,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 1633--1643
 
  []
 
-[100]
-<chapters/07/images//diag_1.png, id=1682, 461.725pt x 494.84875pt>
+[114]
+<chapters/07/images//diag_1.png, id=2049, 461.725pt x 494.84875pt>
 File: chapters/07/images//diag_1.png Graphic file (type png)
 <use chapters/07/images//diag_1.png>
 Package pdftex.def Info: chapters/07/images//diag_1.png  used on input line 169
 7.
 (pdftex.def)             Requested size: 216.81pt x 232.35997pt.
-<chapters/07/images//diag_2.png, id=1683, 527.9725pt x 594.22pt>
+<chapters/07/images//diag_2.png, id=2050, 527.9725pt x 594.22pt>
 File: chapters/07/images//diag_2.png Graphic file (type png)
 <use chapters/07/images//diag_2.png>
 Package pdftex.def Info: chapters/07/images//diag_2.png  used on input line 170
 5.
 (pdftex.def)             Requested size: 216.81pt x 244.01259pt.
-<chapters/07/images//diag_3.png, id=1684, 461.725pt x 494.84875pt>
+<chapters/07/images//diag_3.png, id=2051, 461.725pt x 494.84875pt>
 File: chapters/07/images//diag_3.png Graphic file (type png)
 <use chapters/07/images//diag_3.png>
 Package pdftex.def Info: chapters/07/images//diag_3.png  used on input line 171
@@ -1535,7 +1545,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 1720--1741
 
  []
 
-[101 <./chapters/07/images//diag_1.png>] [102 <./chapters/07/images//diag_2.png
+[115 <./chapters/07/images//diag_1.png>] [116 <./chapters/07/images//diag_2.png
 > <./chapters/07/images//diag_3.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 1746--1760
 
@@ -1546,37 +1556,37 @@ Underfull \hbox (badness 10000) in paragraph at lines 1773--1783
 
  []
 
-[103]
-<chapters/07/images//ga_process.png, id=1708, 694.595pt x 366.36874pt>
+[117]
+<chapters/07/images//ga_process.png, id=2075, 694.595pt x 366.36874pt>
 File: chapters/07/images//ga_process.png Graphic file (type png)
 <use chapters/07/images//ga_process.png>
 Package pdftex.def Info: chapters/07/images//ga_process.png  used on input line
  1894.
 (pdftex.def)             Requested size: 216.81pt x 114.35577pt.
-<chapters/07/images//ga_algo.png, id=1709, 647.41875pt x 310.15875pt>
+<chapters/07/images//ga_algo.png, id=2076, 647.41875pt x 310.15875pt>
 File: chapters/07/images//ga_algo.png Graphic file (type png)
 <use chapters/07/images//ga_algo.png>
 Package pdftex.def Info: chapters/07/images//ga_algo.png  used on input line 19
 03.
 (pdftex.def)             Requested size: 346.89731pt x 166.18648pt.
- [104] [105 <./chapters/07/images//ga_process.png> <./chapters/07/images//ga_al
+ [118] [119 <./chapters/07/images//ga_process.png> <./chapters/07/images//ga_al
 go.png>]
 Underfull \hbox (badness 10000) in paragraph at lines 1920--1928
 
  []
 
-) [106] (./build/principal.aux)
+) [120] (./build/principal.aux)
 Package rerunfilecheck Info: File `principal.out' has not changed.
-(rerunfilecheck)             Checksum: 45C184821B55E37F40A7B6E4F5F523C6;19609.
+(rerunfilecheck)             Checksum: B2E7D775A87423DDC549DC992A99967B;21014.
  ) 
 Here is how much of TeX's memory you used:
- 17796 strings out of 478238
- 287638 string characters out of 5850455
- 606614 words of memory out of 5000000
- 34844 multiletter control sequences out of 15000+600000
+ 18141 strings out of 478238
+ 293286 string characters out of 5850455
+ 606890 words of memory out of 5000000
+ 34888 multiletter control sequences out of 15000+600000
  494924 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 65i,21n,66p,686b,732s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 65i,27n,66p,686b,873s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
 exmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texmf-dist/font
 s/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/public
@@ -1608,10 +1618,10 @@ type1/public/cm-super/sfbx2488.pfb></usr/share/texmf-dist/fonts/type1/public/cm
 e/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fo
 nts/type1/public/cm-super/sfti1000.pfb></usr/share/texmf-dist/fonts/type1/publi
 c/cm-super/sftt1000.pfb>
-Output written on ./build/principal.pdf (107 pages, 6632906 bytes).
+Output written on ./build/principal.pdf (121 pages, 6690188 bytes).
 PDF statistics:
- 2059 PDF objects out of 2073 (max. 8388607)
- 1806 compressed objects within 19 object streams
- 823 named destinations out of 1000 (max. 500000)
- 984 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2484 PDF objects out of 2487 (max. 8388607)
+ 2213 compressed objects within 23 object streams
+ 1103 named destinations out of 1200 (max. 500000)
+ 1048 words of extra memory for PDF output out of 10000 (max. 10000000)
 
