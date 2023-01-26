@@ -1,67 +1,221 @@
 \graphicspath{{chapters/04/images/}}
 \chapter{Approximation algorithms}
-Can we assume that in any condition the stochastic simulation bottleneck is a problem? It depends.
-If we are in a condition in which all species are present in low number and it takes a lot to cure, the stochastic simulation is not really a bottleneck.
-We might have an issue if we wish to simulate for a long time, as we require multiplicative factors.
-At the moment, it is not feasible to compute an exact stochastic simulations for all the models that we need to observe, in particular for a huge number of species and reactions. Therefore, there is a huge research in developing alternative strategies that allow to compute the system in an \emph{accurate} way (lose correctness) with lower computational cost and time.
-Why should we decide to use approximations in simulations?
 
-\begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \item it might be the only possible and feasible solution to solve a problem.
-  \item reality is affected by error, so even when we are using exact stochastic simulation algorithms we should consider a small degree of approximation.
-    A certain deal of error could aid in retrieving a more realistic result.
-\end{enumerate}
-\noindent
-In chapter 3 all the algorithms were belonging to exact stochastic simulation setting, so the result is the same.
-Instead in this case, each algorithm (Figure \ref{fig:SSA_tree}) approximates in a different way,  we assume different approximations → not a consistent set.
-We should observe that of the three main computational strategies presented here, there is one which is much more popular with respect to the others.
-The $\tau$ leaping method is well known and has been further developed, so we will be focusing on it.
+\section{Introduction}
+Exact simulation of complex biological system is often to expensive due to their stochastic and multi scale nature.
+These lead to the development of approximate algorithms, which improve the simulation efficiency by sacrificing their accuracy.
+Multiple firings are coalesced and performed together in one simulation step with a huge speed up.
+Approximate methods should be used because:
 
-\begin{figure}
-  \centering 
-  \includegraphics[width=0.5\textwidth]{SSA_tree.png}
-  \caption{}
+\begin{multicols}{2}
+  \begin{itemize}
+    \item It might be the only possible and feasible solution to solve a problem.
+    \item reality is affected by error, so even when using exact stochastic simulation algorithms a small degree of approximation should be considered.
+      A certain deal of error could aid in retrieving a more realistic result.
+  \end{itemize}
+\end{multicols}
+
+In this case, each algorithm (Figure \ref{fig:SSA_tree}) approximates in a different way,  assuming different approximations.
+Of the three main computational strategies presented here, there is one which is much more popular with respect to the others the $\tau$ leaping method.
+
+\begin{figure}]H]
+  \centering
+  \includegraphics[width=\textwidth]{SSA_tree.png}
+  \caption{Relationship between stochastic simulation algorithms}
     \label{fig:SSA_tree}
 \end{figure}
 
-\noindent
-Before introducing the algorithm, let's try to think about the possible bottlenecks which could prevent us from having a fast algorithm.
-We could improve:
 
-\begin{itemize}
-  \item work on the number of reaction events, group them in such a way to reduce the number of reactions in the system.
-    The $\tau$ leaping methodology is working in this direction \item improve the computation of the propensity.
-    For instance, the probability-weighted Monte Carlo is particularly promising in situations in which we have huge differences in propensities among reactions.
-\end{itemize}
+To improve the exact simulations algorithms, one should consider to:
+
+\begin{multicols}{2}
+  \begin{itemize}
+    \item Work on the number of reaction events, grouping them in such a way to reduce the number of reactions in the system.
+      The $\tau$ leaping methodology is working in this direction.
+    \item Improve the computation of the propensity.
+      For instance, the probability-weighted Monte Carlo is particularly promising in situations in which there is a huge differences in propensities among reactions.
+  \end{itemize}
+\end{multicols}
 
 \section{Probability-Weighted Dynamic Monte Carlo Method}
 The probability-weighted dynamic Monte Carlo method (PW-DMC) is an approximation approach for improving the computational efficiency of stochastic simulations of reaction networks where some reactions have propensities significantly larger than other reactions.
-The principle of this algorithm is a sort of modification of the probability distribution NRM through \emph{weighted sampling}.
-The idea is to introduce a bias weight value on the propensity, in order to take into the account the number of times in which the reaction is executed.
-\\
-\\
-\noindent
-We will have a lower amount of iterations at the price of applying reactions a different number of times according to the probability.
-The weight is a multiplicative factor of the stoichiometric coefficient.
-$\mu$ is the smallest reaction index $\mu$ such that: $$ \sum^{\mu}_{j=1}a^w_j \geq r_1 a^w_0 $$ Second, PW-DMC has to correct the firing time $\tau$ of reaction $R_\mu$ because it is selected through the weighted sampling.
-The generation of $\tau$ is adapted from SSA in which it is generated from an exponential distribution with rate $a^w_0$.
-PW-DMC then updates the state at time $t + \tau$ by assuming that there are $w_\mu$ consecutive firings of $R_\mu$ in the time interval $[t,t + \tau)$.
-This methodology started to provide some hints for the approximation setting.
-In the complete algorithm we have the concept of effective propensity, allowing to reach the speed up.
+This is because fast reactions (with large propensities) occur frequently and dominate the simulation, while slow reactions (with small propensities) occur less frequently.
+The events from the slow reaction are rare and their statistical estimation is unreliable.
+PW-DMC attempts to equalize the propensities of reactions so that a larger increment time step can be chosen, improving simulation's performance.
 
-\section{Bounded Acceptance Probability RSSA}
-If we compare RSSA and DM algorithm, the main difference is that the RSSA algorithm is more complex than DM at each iteration.
-The bottleneck in RSSA is that we use the third random numbers for the rejection test, so this algorithm tries to speed up the process and reduce the complexity.
-If we decide to accept everything, we will end up with a strong bias.
-In order to avoid the high computational costs, we can only apply rejection to some cases → set up bounds, reaching bounded acceptance probability RSSA.
-If the probability of the candidate reaction is greater than certain amount, we accept it without the rejection test.
-Algorithm: we are still executing one reaction at a time.
-Comparing in terms of accuracy, the approximation of the previous method is not applied.
-Here we are not working with the real propensity.
-In this version we are totally avoiding the rejection-based part, the approximation in this case increases the error.
-It could be possible to apply a strategy in which we apply rejection based only in certain conditions (more complex).
-By looking at the literature, it is interesting to rank strategies in terms of accuracy and time.
+  \subsection{Weighted sampling}
+  The principle of this algorithm is a sort of modification of the probability distribution of the next reaction firing through weighted sampling.
+  The propensity $a_j$ of $R_j$ is scaled by a biasing weight $w_j$ defined as the number of firing of $R_j$ at each step.
+  To compute it the unweighted probability $\frac{a_j}{a_0}$ is discretized into integer valued histogram bins according to a size $b$.
+
+    \subsubsection{Effective propensity}
+    The effective propensity $a^w_j$ is computed as:
+
+    $$a^w_j = \frac{a_j}{w_j}$$
+
+    These are then used for the selection of $R_\mu$.
+    The chance that a slow reaction fires is increased and so is the frequency of rate events.
+
+  \subsection{Realization of the reaction firing}
+  The realization of the next reaction firing has two step:
+
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item Selection of the reaction.
+      \item Correction of the firing time.
+    \end{itemize}
+  \end{multicols}
+
+    \subsubsection{Selection of the reactoin}
+    $R_\mu$ is selected with probability $\frac{a_\mu^w}{a_0^\mu}$, where $a_0^\mu = \sum\limits_{j=1}^Ma_j^w$.
+    This can be done by linearly accumulating $a_\mu^w$ as:
+
+    $$\mu = \arg\min\limits_{j\in \mu}\sum\limits_{j=1}^\mu a_j^w\ge r_1a_0^w$$
+
+    Where $r_1\sim norm(0,1)$.
+
+    \subsubsection{Correction of the firing time}
+    The firing time $\tau$ is corrected to account for the bias.
+    $\tau$ is generated from an exponential distribution with rate $a_0^w$:
+
+    $$\tau = \frac{1}{a_0^w}\ln\left(\frac{1}{r_2}\right)$$
+
+    Where $r_2\sim norm(0,1)$.
+    Then the state at time $t+\tau$ is updated assuming there are $w_\mu$ consecutive firings of $R_\mu$ in $[t,t+\tau[$ ant the state at time $t+\tau$ is updated as:
+
+    $$X(t+\tau) = X(t) + w_\mu\vec{v}_\mu$$
+
+    The weight of the reactions have to be updated accordingly.
+
+  \subsection{Bounds on the weights}
+  $w_j$ should be an integer value because the population of a species involved in a reaction is an integer.
+  Its magnitude is constrained in order to bound the error in the results.
+  Each time $R_j$ is selected it fires $w_j$ times.
+  The change of each species $S_i$ in $R_j$ is $w_j$, the fluctuation of the population is thus $\frac{w_j}{X}$.
+  This ratio must be less than a predefined tolerance $\epsilon$ to ensure the statistical uncertainty of the estimation of $X_i$.
+  Moreover the ration would be negligibly small when the population of species is large, and the chosen weight does not affect the simulation result.
+  However the weight introduces an approximation to the temporal dynamics when the population of species is low and in this case $w_j$ must be adjusted to maintain $w_j< \epsilon X_i$.
+
+  \subsection{Algorithm}
+  An implementation of PW-DMC can be found in algorithm \ref{algo:pw-dmc}.
+
+  \input{chapters/04/algorithms/pw-dmc}
+
+  \subsection{Discussion}
+
+    \subsubsection{Time complexity}
+    The speed-up gain in PW-DM is achieved by multiple firings of a reaction in each step.
+    The weight can be tuned to produce a significant gain in computational performance, while keeping accuracy.
+    The frequency of rare events is increased, helping explore more the biochemical systems.
+
+    \subsubsection{Limitations}
+    PW-DMC skews the probability distribution of the state, because the weight sampling groups reaction of the same type in bundles and fires them together, loosing the order of reaction.
+    PW-DMC could misdescribe the fluctuation of species in the result.
+    $\epsilon$ has to be set for constraining fluctuation of species to a reasonably small value in order to bound the accuracy of the simulation.
+
+\section{Bounded acceptance probability RSSA}
+The bounded acceptance probability RSSA BA-RSSA focuses on the simulation of reactions involved species with both small and large population.
+These will have a large propensity.
+Many firings can occur in time interval and quickly deplete the small population species.
+To bound the error updates must be performed frequently, degrading the simulation performance, especially if the small population is a hub species.
+The simulation of this reactions is accelerated by bounding the acceptance of a candidate reaction selected by RSSA.
+It accepts a candidate reaction without validation if its acceptance probability is greater than a user-defined probability, reducing the computational cost for both selecting of reaction firing and propensity updates.
+
+  \subsection{Defining the bounds}
+  Let $0\le\alpha\le 1$ be a constant defined as a lower bound for the acceptance probability and $R_j$ the selected reaction.
+  BA-RSSA guarantees that the probability that $R_j$ is accepted to fire is greater than $\alpha$.
+  The validation step of standard RSSA accepts $R_j$ to fire with probability $\frac{a_j(X(t))}{\overline{a_j}}$, the goal of BA-RSSA is to ensure:
+
+  $$\frac{a_j(X(t))}{\overline{a_j}} \ge \alpha$$
+
+  This is difficult to assess because it depends on $X(t)$.
+  Anytime the state changes $a_j$ has to be re-evaluated.
+  To cope with this BA-RSSA exploits the fact that $a_j(X(t))\ge \underline{a_j}$ when $X(t)\in[\underline{X}, \overline{X}]$, therefore if:
+
+  $$\frac{\underline{a_j}}{\overline{a_j}}\ge \alpha$$
+
+  Holds for each reaction $\frac{a_j(X(t))}{\overline{a_j}} \ge\alpha$ is automatically satisfied.
+
+  \subsection{Defining the fluctuation interval}
+  To enforce $\frac{\underline{a_j}}{\overline{a_j}}\ge \alpha$, $[\underline{X}, \overline{X}]$ has to be defined so that $\frac{\underline{a_j}}{\overline{a_j}}$ of each $R_j$ within the fluctuation interval is bounded by $\alpha$.
+  A fluctuation rate $\delta_i$ for each $S_i$ involved in $R_j$ has to be selected so that when $S_i$ fluctuates in $[(1-\delta_i)X_i(t), (1+\delta_i)X_i(t)]$ the inequality is satisfied.
+  Only a range of $\delta_i$ can be chosen given the ratio of propensity bounds.
+
+    \subsubsection{Computing the maximum fluctuation rate}
+    The maximum fluctuation rate $\delta_i$ computation is reaction dependent.
+
+      \paragraph{Synthesis reaction}
+      For a synthesis reaction $R_j$, $a_j$ is independent of $X(t)$ and is equal to $x_j$.
+      Also the bounds are constant, the ratio is equal to $1$ and the inequality is satisfied.
+
+      \paragraph{Unimolecolar reaction}
+      For a unimolecular reaction $R_j$, $\overline{a_j} = c_j(1+\delta_i)X_i$ and $\underline{a_j} = c_j(1-\delta_i)X_i$, so that the inequality becomes:
+
+      $$\frac{1-\delta_i}{1+\delta_i}\ge\alpha$$
+
+      The maximum value of $\delta_i$ then becomes:
+
+      $$\delta_i = \frac{1-\alpha}{1+\alpha}$$
+
+      \paragraph{Bimolecular reaction}
+      For a bimolecular reaction $R_j$ $\overline{a_j} = c_j(1+\delta_j)(1+\delta_k)X_iX_k$ and $\underline{a_j} = c_j(1-\delta_i)(1-\delta_k)X_iX_k$, so that:
+
+      $$\frac{(1-\delta_i)(1-\delta_k)}{(1+\delta_i)(1+\delta_k)}\ge \alpha$$
+
+      Which is a quadratic equation of two independent variables, which can be splitted in to part so that:
+
+      $$\frac{1-\delta_i}{1+\delta_i}\ge\sqrt{\alpha}\land\frac{1-\delta_k}{1+\delta_k}\ge\sqrt{\alpha}$$
+
+      So that the maximum values for the fluctuation rates are:
+
+      $$\delta_i = \delta_k = \frac{1-\sqrt{\alpha}}{1+\sqrt{\alpha}}$$
+
+      \paragraph{Dimerization reaction}
+      For a dimerization reaction $R_j$ by a similar derivation as the bimolecular one:
+
+      $$\frac{(1-\delta_i)((1-\delta_i)X_i-1)}{(1+\delta_i)((1+\delta_i)X_i-1)}\ge\alpha$$
+
+      So that the maximum $\delta_i$:
+
+      $$\delta_i = \frac{1-\sqrt{\alpha}}{1+\sqrt{\alpha}}\left(1-\frac{1}{X_i}\right)$$
+
+  \subsection{Selecting the propensity}
+  Once the state is confined in a fluctuation interval that satisfies the bounds, any $b_j\in[\underline{a_j}, \overline{a_j}]$ can be chosen as the propensity.
+  The extreme values may bias the selection step, so the average can be used:
+
+  $$b_j = \frac{\underline{a_j}+\overline{a_j}}{2}$$
+
+  This choice requires two evaluation of the propensity function.
+  Another choice is to compute the value of the propensity at the central point of the fluctuation interval so to have one evaluation of the propensity function:
+
+  $$b_J = a_j\left(\frac{\underline{X}+\overline{X}}{2}\right) = a_j(X(t))$$
+
+  \subsection{Algorithm}
+  An implementation of BA-RSSA can be found in algorithm \ref{algo:ba-rssa}.
+
+  \input{chapters/04/algorithms/ba-rssa}
+
+  \subsection{Discussion}
+  When $\alpha = 1$ return to the exact case.
+
+    \subsubsection{Time complexity}
+    BA-RSSA reduces the selection cost for the next reaction firing and avoids a large number of the propensity updates.
+    The selected reaction firing is ensured to fire with  probability greater than a threshold when the population is confined in its fluctuation interval.
+    The propensity updates are performed infrequently and only locally.
+
+
+\section{$\mathbf{\tau}$-Leaping method}
+The aim of the $\tau$-leaping method is to discretize the time axis into intervals and to approximate the number of reaction firing in each one.
+The simulation then leaps form one interval to the next with many reaction firing performed simultaneously.
+
+  \subsection{Simulation time}
+  The simulation time is discretized into
+
+
+
+
+
+
 
 \section{\texorpdfstring{$\tau$-Leaping Method}{-Leaping Method}}
 The $\tau$-leaping method is a stochastic approximate algorithm for improving performance of stochastic simulation.
@@ -76,7 +230,7 @@ Which could be a high-level property of tau to apply macrostep without a crude e
 \\
 \noindent
 We want to limit the bias on the propensity.
-This translates in tau selection satisfying the so-called ``\textbf{leap condition}'': 
+This translates in tau selection satisfying the so-called ``\textbf{leap condition}'':
 \\
 \\
 \noindent
