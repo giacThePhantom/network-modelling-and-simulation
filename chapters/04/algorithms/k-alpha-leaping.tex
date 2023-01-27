@@ -1,0 +1,47 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{$k_\alpha$-leaping method}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:k-alpha-leaping}
+
+\Input: a biochemical reaction network of $M$ reactions in which each reaction $R_j$, $j=1, \dots, M$ is accompanied with the state change vector $\vec{v}_j$ and the propensity $a_j$, the initial state $\vec{x}_0$ at time $0$ and the simulation ending time $T_{\max}$, the error control paramter $0<\epsilon\ll 1$\;
+
+\Output: a trajectory of the biochemical reaction network, which is a collection of states $X(t)$ for time $0\le t\le T_{\max}$\;
+
+$t = 0$\;
+$\vec{X} = \vec{x}_0$\;
+
+
+\While{$t<T_{\max}$}{
+	$acceptedLeap =$\False\;
+	\Repeat{acceptedLeap}{
+		acceptedLeap = \True\;
+		compute $a_j$ for each $R_j$\;
+		determine $k_\alpha$ satisfying the leap condition\;
+		generate $\tau\sim erlang(k_\alpha, a_\alpha)$\;
+		\ForEach{$R_j, j\neq\alpha$}{
+			generate Poisson-distributed random numbers $k_j\sim poi(a_j(\vec{x})\tau)$\;
+		}
+		$X = X+\sum\limits_{j=1}^Mk_j\vec{v}_j$\;
+		$t = t+\tau$\;
+
+		\If{$\exists$ a species in $X$ whose population $X_i<0$}{
+			roll back state $X = X-\sum\limits_{j=1}^Mk_j\vec{v}_j$ and time $t = t-\tau$\;
+			reduce $k_\alpha$\;
+			acceptedLeap = \False\;
+		}
+	}
+}
+\end{algorithm}

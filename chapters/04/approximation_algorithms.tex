@@ -532,31 +532,137 @@ The simulation then leaps form one interval to the next with many reaction firin
       This tends to dampen fluctuation of species.
       To solve this downshifting could be employed: the $\tau$ leap is interfaced with a sequence of smaller steps simulated using SSA to retain the damped fluctuation while still  achieving the computational efficiency of the implicit approach.
 
+\section{$\mathbf{k_\alpha}$-leaping method}
+The $K_\alpha$-leaping method is a variant of $\tau$ leaping.
+It leaps down by a predetermined number of firing for a predetermined $R_\alpha$ and may be more convenient in some circumstance.
+Let $k_\alpha$ be the number of firing of $R_\alpha$ given $X(t) =\vec{x}$.
+Let $\tau$ be the length so that at $t+\tau$ the $k_\alpha$th firing of $R_\alpha$ occurs.
+This method assumes that the leap condition is satisfied for all reactions in $[t,t+\tau[$.
+The number of firings $k_j$ for $R_j$, $j\neq\alpha$ in the time interval still follows $poi(a_j(\vec{x})\tau)$.
 
+  \subsection{Computing the time length}
+  To compute $\tau$ consider $R_\alpha$ at time $t$.
+  Each firing of $R_j$ is an exponentially distributed random number $exp(a_\alpha(x))$.
+  $\tau$ in which there are $k_\alpha$ firing of  $R_\alpha$ is the sum of $k_\alpha$ exponential distribution with the same rate $exp(a_\alpha(x))$.
+  So the time length $\tau$ is an Erlang random number $erlang(k_\alpha, a_\alpha)$ with shape $k_\alpha$ and rate $a_\alpha$.
 
+  \subsection{Selecting the number of firings}
+  To select the largest $k_\alpha$ satisfying the leap condition a control parameter $0<\epsilon\ll 1$ is used.
+  Let $\tau^{temp}$ be the largest time selected by the $\tau$ selection procedure.
+  $k_\alpha\sim poi(a_\alpha(\vec{x})\tau^{temp})$, so the average number of firing is:
 
+  $$k_\alpha = [a_\alpha(\vec{x})\tau^{temp}]$$
 
+  Where $[-]$ is the truncation operator.
+  $k_\alpha$ is then used for the simulation and $\tau^{temp}$ is discarded.
 
+  \subsection{Algorithm}
+  An implementation of the $k_\alpha$ leaping method is outlined in algorithm \ref{algo:k-alpha-leaping}.
 
+  \input{chapters/04/algorithms/k-alpha-leaping}
 
-\section{Chemical Langevin Method}
-We can use the Normal distribution instead of Poisson, and scale it with mean and variance with another Normal formula based on a (0,1) distribution, obtaining a simplified method.
-We will not have main events, but main \emph{drivers} in the system.
-Stochasticity is strongly approximated, we are moving to an idea of average, real numbers.
-This will be the starting point for the deterministic simulation.
-\\
-\\
-\noindent
-\textbf{COPASI} is a well-known simulator.
-It exploits Gillespie's algorithm and $\tau$-leaping algorithm.
-In general, any simulator offers many algorithms, so we should be able to choose the best computational approach → calibrating the model.
-The stochastic rate provides us the speed, we require to derive it with some methods; all simulations algorithm compute deterministically or stochastically a speed for the reaction, computed over parameters of the model e.g.~the rates.
-The rates, as the initial values, are not free-lunch, they can be derived through experiments.
-Often times, we work with models with not fully known parameters; in the second module we will explore solutions for \emph{estimating the parameters} (reverse engineering approach).
-\\
-\\
-\noindent
-\textbf{\emph{Adaptive algorithms}} select a delta and change it adaptively during the simulation in order to reach the best results, for instance post leap $\tau$ selection.
-\textbf{Chemical Langevin Method} allows to modify the evolution of the system; the update formula depends on the propensity, but allows to distinguish a totally deterministic part from the stochastic one.
-This algorithm also has an important difference with previously seen strategies: we do not have integers, we will be provided with a real number adding some noise.
-This dynamics is over continuous numbers, tends to an average behaviour.
+  \subsection{Discussion}
+  This method has the same performance as $\tau$-leaping, but it provides a more flexible way to choose the reaction and to adjust its number of firings to enforce the leap condition.
+  In particolar if $R_\alpha$ is selected such that $a_\alpha = \max\limits_{j=1}^Ma_j$ and bounds $k_\alpha$ to an upper value, the number of firings of the other reactions are bounded by this, making the leap condition easier to enforce by tuning this bound.
+
+  \subsection{K-leaping method}
+  The $K$-leaping method or $R$-leaping method is a generalization of the $k_\alpha$-leaping.
+  It leaps down the simulation by total $K$ firings of reactions chosen satisfying the leap condition.
+  Let $\tau$ be the time length to that there are $K$ reaction firings in $[t,t+\tau[$, given $X(t) = \vec{x}$.
+  The firing time of a reaction is $exp(a_0)$, $\tau$ is the sum of $K$ exponential distribution with rate $a_0$ and so is $erlang(K, a_0(\vec{x}))$.
+
+    \subsubsection{Number of firing}
+    Let $\mathbb{P}\{k_1, \dots, k_M|K, \tau, \vec{x},t\}$ be the joint probability that there are $k_j$ firings for each $R_j$ given the $X(t) = \vec{x}$.
+    The explicit formula under the leap assumption can be derived considering that the probability that $R_j$ fires in the interval is:
+
+    $$p_j = \frac{a_j}{a_0}$$
+
+    Moreover:
+
+    $$\sum\limits_{j=1}^Mk_j = K$$
+
+    The joint probability is then a multinomial distribution $multi(K, p_1, \dots, p_M)$, with formula:
+
+    $$\mathbb{P}\{k_1, \dots, k_M|K, \tau, \vec{x},t\} = \frac{K!}{k_1!\cdots k_M!}p_1^{k_1}\cdots p_m^{k_M}$$
+
+    The number of firings is obtained by sampling $multi(K, p_1, \dots, p_M)$.
+
+    \subsubsection{Selecting K}
+    To select the largest $K$ satiating the leap condition with control parameter $0<\epsilon\ll 1$, consider the preleap selection whit bounding $\Delta a_j(\vec{x})\le \epsilon a_0(\vec{x})$.
+    The expected value and variance can be obtained using the properties of the multinomial distribution:
+
+    \begin{itemize}
+      \item $\mathbb{E}[k_j] = Kp_j = \frac{Ka_j(\vec{x})}{a_0(\vec{x})}$.
+      \item $Var[k_j] = Kp_j(1-p_j) = \frac{Ka_j(\vec{x})}{a_0(\vec{x})}\left(1-\frac{a_j(\vec{x})}{a_0(\vec{x})}\right)$.
+      \item $cov(k_j, k_m) = -Kp_jp_m = -\frac{Ka_j(\vec{x})a_m(\vec{x})}{a_0^2(\vec{x})}$.
+    \end{itemize}
+
+    Therefore:
+
+    $$\mathbb{E}[\Delta a_j(\vec{x})] \approx\sum\limits_{l=1}^Mf_{jl}(\vec{x})\mathbb{E}[k_l] = K\frac{\mu_j(\vec{x})}{a_0(\vec{x})}$$
+
+    And:
+
+    \begin{align*}
+      Var[\Delta a_j(\vec{x})] &\approx \sum\limits_{l=1}^Mf_{jl}^2(\vec{x})Var[k_l] + \sum\limits_{l=1}^M\sum\limits_{l'=1}^Mf_{jl}(\vec{x})f_{jl'}(\vec{x})cov(k_l, k_{l'}) = \\
+                               &= K\left(\frac{\sigma_j^2(\vec{x})}{a_0(\vec{x})}-\frac{\mu_j^2(\vec{x})}{a_0^2(\vec{x})}\right)
+    \end{align*}
+
+    Where $\mu_j(\vec{x}$ and $\sigma_j^2$ are defined as in the preleap selection for the $\tau$-leaping method.
+    The largest $K$ is then;
+
+    $$K = \left[a_0(\vec{x})\min\limits_{k=1}^M\left(\frac{\epsilon a_0(\vec{x})}{2|\mu_j(\vec{x})|}, \frac{(\epsilon a_0(\vec{x}))^2}{4(\sigma_j^2(\vec{x})-\frac{\mu_j^2(\vec{x})}{a_0(\vec{x})})}\right)\right]$$
+
+    Where $[-]$ is the truncation operator.
+
+    \subsubsection{Algorithm}
+    An implementation of the $K$-leaping method is found in algorithm \ref{algo:k-leaping}.
+
+    \input{chapters/04/algorithms/k-leaping}
+
+    \subsubsection{Discussion}
+    The $K$-leaping differs from the $k_\alpha$ method in two points:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item $\tau$ is generated from $erlang(K, a_0)$.
+      \item $k_j\sim multi(K, p_1, \dots, p_m)$ with $p_j = \frac{a_j}{a_0}$
+      \end{itemize}
+    \end{multicols}
+
+    This method handles the negative population easier than $\tau$-leaping, improving the accuracy.
+    $K$ is a deterministic number and represent an upper bound on the number of firings on each reaction.
+    If the negative population problem happens, decreasing the $K$ reduces the change of it.
+
+\section{Chemical Langevin method}
+The chemical Langevin method is an approximation of the $\tau$-leaping.
+Let $\tau$ be the time satisfying the leap condition.
+$k_j$ of $R_j$ in the leap follows $poi(a_j(\vec{x})\tau)$.
+Assume that the expected value of the Poisson distribution is large enough.
+CLE assumes that there exists a small $\tau>0$ such that the change in propensity for each $R_j$ during $[t,t+\tau[$ is negligibly small and:
+
+$$a(\vec{x})\tau\gg 1$$
+
+Now $poi(a_j(\vec{x})\tau)$ can be approximated to a normal distribution with same mean and variance:
+
+$$poi(a_j(\vec{x})\tau)\approx norm(a_j(\vec{x})\tau, a_j(\vec{x})\tau) = a_j(\vec{x})\tau + \sqrt{a_j(\vec{x})\tau}norm(0,1)$$
+
+  \subsection{State update}
+  The state update after the leap is approximated by:
+
+  \begin{align*}
+    X(t+\tau)&\approx \vec{x} + \sum\limits_{j=1}^M poi(a_j(\vec{x})\tau)\vec{v}_j \approx\\
+             &\approx \vec{x}+\sum\limits_{j=1}^Ma_j(\vec{x})\vec{v}_j\tau + \sum\limits_{j=1}^M\sqrt{a_j(\vec{x})\tau}norm(0,1)\vec{v}_j
+  \end{align*}
+
+  This is the chemical Langevin equation CLE.
+  The state is no longer an integer vector due to the square root.
+
+  \subsection{Algorithm}
+  An implementation of the CLE is outlined in algorithm \ref{algo:cle}.
+
+  \input{chapters/04/algorithms/cle}
+
+  \subsection{Discussion}
+  This method does not handle the negative population explicitly, but it is relaxed because the population of species is very large in order to satisfy the CLE assumption and can be approximated to a continuous state.
+  The CLE method is faster because generating random normal distributed number is easier than the Poisson distribution and $k_j\gg 1$.

@@ -1,0 +1,35 @@
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Chemical Langevin method (CLE)}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:cle}
+
+\Input: a biochemical reaction network of $M$ reactions in which each reaction $R_j$, $j=1, \dots, M$ is accompanied with the state change vector $\vec{v}_j$ and the propensity $a_j$, the initial state $\vec{x}_0$ at time $0$ and the simulation ending time $T_{\max}$, the error control paramter $0<\epsilon\ll 1$\;
+
+\Output: a trajectory of the biochemical reaction network, which is a collection of states $X(t)$ for time $0\le t\le T_{\max}$\;
+
+$t = 0$\;
+$\vec{X} = \vec{x}_0$\;
+
+
+\While{$t<T_{\max}$}{
+	compute $a_j$ for each $R_j$\;
+	determine $\tau$ satisfying the leap condition and $a_j\tau\gg 1$\;
+	generate $M$ unit normal-distributed random number $n_j\sim norm(0,1)$\;
+	$X = X+\sum\limits_{j=1}^Ma_j\tau\vec{v}_j + \sum\limits_{j=1}^Mn_j\vec{v}_j\sqrt{a_j\tau}$\;
+	$t = t+\tau$\;
+}
+\end{algorithm}
