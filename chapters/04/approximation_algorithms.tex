@@ -421,6 +421,116 @@ The simulation then leaps form one interval to the next with many reaction firin
 
   \input{chapters/04/algorithms/tau-leaping}
 
+  \subsection{Improvements for $\mathbf{\tau}$-leaping}
+
+    \subsubsection{Modified $\mathbf{\tau}$-leaping}
+    The modified $\tau$-leaping method efficiently handles the negative population problem.
+    If the population of a species is low, the probability that it becomes negative is higher when reaction involving it fire.
+    During the simulation, the reaction involving the low population species will be marked as critical reaction and monitored because their reactant species are likely to be exhausted.
+
+      \paragraph{Permitted firings}
+      Let $L_j$ be the number of permitted firings of $R_j$ during $\tau$.
+      $L_j$ dependents on the reactants of $R_j$, but it is difficult to determine because the population of them can change due to other reactions.
+      This methods estimate $L_i$ by assuming that the reactant of reactions are independent during the simulation.
+      In this way the maximum number of permitted firings of $R_j$ involving $S_i$ is equal to the population of $S_i$ divided by its stoichiometric coefficient $v_{ji}^0$.
+      The minimum of these value will give the maximum number of permitted firings:
+
+      $$L_j = \min\limits_{S_i\in Reactants}\left[\frac{X_i}{v_{ij}^-}\right]$$
+
+      Where $[-]$ is the truncation operator.
+
+      \paragraph{Critical reactions}
+      Let $n_c$ be the critical value for classifying reactions.
+      The reaction set is partitioned into the critical reaction set $\mathcal{R}^c$ and the non critical one $\mathcal{R}^{nc}$.
+      $\mathcal{R}^c$ contains reactions with $L_l\le n_c$ and $\mathcal{R}^{nc}$ the rest:
+
+      $$\mathcal{R}^x = \{R_j|L_j\le n_c\}\quad\land\quad\mathcal{R}^{nc} = \{R_j|L_j>n_c\}$$
+
+      The partition has to be updated regularly because $L_j$ changes after every reaction firing.
+
+      \paragraph{Firing of reactions}
+      The firing of reaction in $\mathcal{R}^{c}$ is done through SSA, while $\mathcal{R}^{nc}$ with $\tau$-leaping.
+      Let $\tau^{nc}$ be the largest time that satisfies the leap condition for reaction in $\mathcal{R}^{nc}$ and $\tau^c$ the next firing time of a reaction in $\mathcal{R}^c$.
+      The actual leap time will be:
+
+      $$\tau = \min(\tau^{nc}, \tau^c)$$
+
+      Because at most one reaction in $\mathcal{R}^c$ is allowed to fire in the leap so that the population of their species never becomes negative.
+
+      \paragraph{algorithm}
+      The modified $t$-leaping method is outlined in algorithm \ref{algo:modified-tau-leap}.
+
+      \input{chapters/04/algorithms/modified-tau-leap}
+
+      \paragraph{Discussion}
+      A non-critical reaction could achieve a negative population, so there is still a need to check it and roll back when necessary, but the frequency is decreased and is controlled through $n_c$.
+      If $n_c\rightarrow\infty$ the modified $\tau$-leaping converges to SSA, while is $n_c=0$ it converges to the original $\tau$-leaping.
+
+    \subsubsection{Binomial $\mathbf{\tau}$-leaping}
+    In binomial $\tau$-leaping the Poisson-distributed random number are approximated with a binomial-distributed one.
+    Let $k_j$ be the number of firing of a reaction given $\tau$ and $L_j$ the maximum number of permitted firings.
+    The negative population problem is avoided if $k_j\le L_j$, a requirement that can guaranteed by the binomial distribution.
+
+      \paragraph{The binomial distribution}
+      The number of firings during a leap is approximated as a series of $L_j$ trials such that the probability that $R_j$ fires during a trial is:
+
+      $$p_j = \frac{a_j(\vec{x})\tau}{L_j}$$
+
+      And the rejection probability is $1-p_j$.
+      The number of firings follows a binomial distribution $k_j\sim bin(p, L_j)$.
+      This bounds $R_j$ to not fire more than $L_j$ times.
+
+      \paragraph{Species involved in many reactions}
+      This does not resolve the negative population problem because a reactant species may be involved in many reactions.
+      To solve the problem and additional N-vector $\tilde{X}$ is used to track the population of reactants of reactions during a leap.
+      At time $t$ set $\tilde{X}(t) = X(t)$, each time a reaction fire $\tilde{X}(t)$ updates the population of its reactants: let $\vec{v}_j^-$ be the change in population of reactants by the firing of $R_j$, $\tilde{X} = \tilde{X}-k_j\vec{v}_j^-$.
+      The maximum number of permitted firing of the next reaction is updated to reflect the change:
+
+      $$L_j = \min\limits_{S_i\in reactants(R_j)}\left[\frac{\tilde{X}_i}{v_{ji}^-}\right]$$
+
+      \paragraph{Algorithm}
+      An implementation of the binomial $\tau$-leaping method is outlined in algorithm \ref{algo:binomial-tau-leaping}
+
+      \input{chapters/04/algorithms/binomial-tau-leap}
+
+      \paragraph{Discussion}
+      This methods imposes some constraint on the simulation: the leap time is restricted such that $\tau<\frac{L_j}{a_j(\vec{x})}$.
+      Moreover the expected $k_j$ is the same as the Poisson distribution, but the variance is smaller than the Poisson one:
+
+      $$Var[bin(p_j, L_j)] = a_j(\vec{x})\tau\left[1-\frac{a_j(\vec{x})\tau}{L_j}\right]$$
+
+      Finally the order of execution of reactions depends on the current availability of reactants and affects the variance of $k_j$, biasing the trajectories.
+      To limit the bias the order of execution could be chosen randomly.
+
+    \subsubsection{Implicit $\mathbf{\tau}$-leaping}
+    In the implicit $\tau$-leaping method performance are improved for biochemical reactions with highly diverse reactions rates.
+    The leap time is very small, yielding a small number of firings of each reaction in a leap, degrading simulation efficiency.
+    This is improved by allowing to choose an arbitrary large $\tau$ value through an implicit approximation form.
+
+      \paragraph{Correction term}
+      The state update formula is complemented with a correction term to account for the change in propensity of each reaction over $[t,t+\tau[$.
+      If the propensity of a reaction changes after the leap, the number of firing is changed accordingly.
+      So $k_j$ is the sum of $poi(a_j(\vec{x})\tau)$ and the second part is a zero-mean random variable $[a_j(X(t+\tau))-a_j(\vec{x})]\tau$.
+      The propensity $a_j(X(t+\tau))$ in the correction part is a function of the unknown random state, the number of firing during the leap is:
+
+      $$k_j = poi(a_j(\vec{x})\tau) + [a_j(X(t+\tau))-a_j(\vec{x})]\tau$$
+
+      And the state update becomes:
+
+      $$X(t+\tau) = \vec{x} + \sum\limits_{j=1}^M\left(poi(a_j(\vec{x})\tau) + [a_j(X(t+\tau))-a_j(\vec{x})]\tau\right)\vec{v}_j$$
+
+      A root finding method like the Newton-Raphson can be applied to find the next state and the population of species in the unknown vector has to be cast to the nearest integer.
+
+      \paragraph{Algorithm}
+      An implementation of the implicit $\tau$-leaping method is outlined in algorithm \ref{algo:implicit-tau-leaping}.
+
+      \input{chapters/04/algorithms/implicit-tau-leap}
+
+      \paragraph{Discussion}
+      Since $\tau$ is fixed it is a time-stepping algorithm.
+      The grate efficiency is achieved from being able to choose a large leap for each leap.
+      This tends to dampen fluctuation of species.
+      To solve this downshifting could be employed: the $\tau$ leap is interfaced with a sequence of smaller steps simulated using SSA to retain the damped fluctuation while still  achieving the computational efficiency of the implicit approach.
 
 
 
