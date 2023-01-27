@@ -1,5 +1,41 @@
 \graphicspath{{chapters/05/images/}}
 \chapter{Deterministic simulations}
+
+\section{introduction}
+When the last noise term of equation:
+
+$$X(t+\tau)\approx \vec{x}+\sum\limits_{j=1}^Ma_j(\vec{x})\vec{v}_j\tau + \sum\limits_{j=1}^M\sqrt{a_j(\vec{x})\tau}norm(0,1)\vec{v}_j$$
+
+Becomes negligibly small compared with the second done, a deterministic way to computing the dynamics of a system can be applied.
+This happens in the limiting case $a_j(\vec{x})\tau\rightarrow\infty$ and the deterministic simulation produces an average behaviour of the system close to the one obtained by averaging an infinite number of stochastic simulations of the system starting from the same initial state.
+Deterministic simulation are faster than exact stochastic ones because reaction events are executed as the simultaneous application of a set of reactions.
+A single run is sufficient because stochasticity of the system is not considered any more.
+One way to simulate a biological system according to a deterministic approach is to translate it into a set of ordinary differential equations or ODEs.
+
+\section{From biochemical reactions to ODEs}
+Ordinary differential equations can be used to simulate a biochemical system that satisfied the spatial homogeneity and the continuum hypothesis.
+
+  \subsection{Starting hypothesis}
+
+    \subsubsection{Continuum hypothesis}
+    A biochemical system satisfies the continuum hypothesis if the number of molecules for each species is large enough to safely approximate molecular abundances by concentrations that vary continuously.
+
+
+
+\section{Numerical solution of ODEs}
+
+\section{Improving the accuracy of numerical methods}
+
+\section{Multistep methods}
+
+\section{Adaptive methods}
+
+\section{Issues of deterministic simulation}
+
+
+
+
+
 A \emph{deterministic} way of calculating the dynamics of a system, when the last (noise) term of CLM equation becomes negligibly small compared with the second one, can be applied.
 This happens in the limiting case $a_j(\mathbf{x})\tau → \infty$, $j = 1,...,M$, and the deterministic simulation produces an average behaviour of the system that is very close to the one that results by averaging an infinite number of stochastic simulations of the system starting from the same initial state.
 If we work in terms of \emph{moles}, we are moving Avogrado numbers; it is not so distant from the reaction size, the assumption is correct enough.
@@ -8,35 +44,35 @@ If we work in terms of \emph{moles}, we are moving Avogrado numbers; it is not s
 \noindent
 The deterministic simulations should give as an output the same result as an average stochastic simulation.
 ODEs can be safely used to simulate a biochemical system that satisfies the spatial homogeneity and continuum hypothesis.
-\subsection{Continuum hypothesis} 
-``A biochemical system satisfies the continuum hypothesis if the number of molecules for each species is large enough to safely approximate molecular abundances by concentrations that vary continuously (as opposed to integer- valued molecule counts).''
-Sometimes, models simply use the ODE formalism, regardless of the hypothesis (since the ODE is the only computational framework allowing to reach the end of the simulation).
-\\
-\\
-\noindent
-We are required to apply conversions and derive the ODE according to the following tables.
+  \subsection{Continuum hypothesis}
+  ``A biochemical system satisfies the continuum hypothesis if the number of molecules for each species is large enough to safely approximate molecular abundances by concentrations that vary continuously (as opposed to integer- valued molecule counts).''
+  Sometimes, models simply use the ODE formalism, regardless of the hypothesis (since the ODE is the only computational framework allowing to reach the end of the simulation).
+  \\
+  \\
+  \noindent
+  We are required to apply conversions and derive the ODE according to the following tables.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{reaction_ODEs.png}
-  \caption{Table 4.4 Marchetti's book}
-  \label{fig:rec_ODE}
-\end{figure}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{reaction_ODEs.png}
+    \caption{Table 4.4 Marchetti's book}
+    \label{fig:rec_ODE}
+  \end{figure}
 
-\noindent
-In Figure \ref{fig:rec_ODE} here we are not considering the combination of the reactants.
-$c$ = stochastic rate, $k$ = deterministic rate.
+  \noindent
+  In Figure \ref{fig:rec_ODE} here we are not considering the combination of the reactants.
+  $c$ = stochastic rate, $k$ = deterministic rate.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{reaction_rates.png}
-  \caption{Table 4.5 Marchetti's book}
-  \label{fig:rec_rates}
-\end{figure}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{reaction_rates.png}
+    \caption{Table 4.5 Marchetti's book}
+    \label{fig:rec_rates}
+  \end{figure}
 
-\noindent
-As shown in Figure \ref{fig:rec_rates} it is possible to go back to the stochastic setting from the deterministic one.
-CLM equation: if we assume that the product is crazily high i.e. ~close to infinite, we can assume that the two parts of the equations have different orders; in this specific condition, the noise part becomes negligible.
+  \noindent
+  As shown in Figure \ref{fig:rec_rates} it is possible to go back to the stochastic setting from the deterministic one.
+  CLM equation: if we assume that the product is crazily high i.e. ~close to infinite, we can assume that the two parts of the equations have different orders; in this specific condition, the noise part becomes negligible.
 
 \section{Deterministic approximation}
 If the propensity is approaching infinite, we can assume that the deterministic setting is motivated.
@@ -79,9 +115,9 @@ At the basis of such method is the concept of derivative and geometrical rule to
 
   \subsection{RUNGE-KUTTA Method}
   RK4 is a 4th order method, good compromise in accuracy and computational requirements.
-  This algorithm uses a sort of average over Ks, which are computed by solving the set of ODEs as following: 
+  This algorithm uses a sort of average over Ks, which are computed by solving the set of ODEs as following:
   $$K1 = F(t_n,[X_n])\\ K2 = F(t_n + 2h,[X_n]+ h2K_1)\\K3 = F(t_n + h2,[X_n]+ h2K_2)\\ K4 = F(t_{n+1},[X_n]+h·K_3)$$.
-  Is it possible to increase accuracy without increasing complexity? 
+  Is it possible to increase accuracy without increasing complexity?
 
   \subsection{Midpoint method}
   2nd order method, we compute the new state at line 5 by two elements: x the current state and x old (the previous one).
@@ -127,7 +163,7 @@ At the basis of such method is the concept of derivative and geometrical rule to
   \caption{ Figure 4.9 Marchetti's book}
   \label{fig:discretization}
 \end{figure}
- 
+
   The value of $h$ used at each step is plotted in Figure \ref{fig:discretization}. We can end up in situations in which the system changes a lot → \emph{stiffness condition}, if we work with an adaptive method the property of the dynamics leads to instability in deriving the discretization step.
   Stiffness is a couple property of ODEs and the numerical scheme used to solve the system.
   This means that the same system of ODEs may exhibit stiffness only when it is simulated with some of the numerical schemes introduced in this chapter.
