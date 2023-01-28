@@ -1,0 +1,34 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Linear $(s+1)$-step method}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:midpoint}
+
+\Input: a system of ODEs $\frac{d[X]}{dt} = \vec{F}(t, [X])$ corresponding to a biochemical reaction system, the initial state $[X_0]$ of the system with species concentrations at time $0$, the simulation ending time $T_{\max}$ and the discretization stepsize $h$ and the coefficient values $a_j, b_j$\;
+
+\Output: a trajectory of the biochemical system expressed in terms of molecule concentrations with discretization stepsize $h$\;
+
+$t = 0$\;
+$[X_{old}] = [X_0]$\;
+compute the first $s$ steps of the dynamics by a one-step numerical method of order at least equal to the implemented multistep method\;
+
+\While{$t<T_{\max}$}{
+	\If{$b_{-1}\neq 0$}{
+		approximate $[X_{t+h}]$\;
+	}
+  $[X] = \sum\limits_{j=0}^sa_j[X_{n-j}] + h\sum\limits_{j=0}^sb_j\vec{F}(t_{n-j}, [X_{n-j}]) + hb_{-1}\vec{F}(t_{n+1}, [X_{n+1}])$\;
+	$t = t+h$\;
+}
+\end{algorithm}

@@ -1,0 +1,32 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Backward Euler method}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:backward-euler}
+
+\Input: a system of ODEs $\frac{d[X]}{dt} = \vec{F}(t, [X])$ corresponding to a biochemical reaction system, the initial state $[X_0]$ of the system with species concentrations at time $0$, the simulation ending time $T_{\max}$ and the discretization stepsize $h$\;
+
+\Output: a trajectory of the biochemical system expressed in terms of molecule concentrations with discretization stepsize $h$\;
+
+$t = 0$\;
+$[X] = [X_0]$\;
+
+
+\While{$t<T_{\max}$}{
+	estimate $[X_{new}] = [X] + h\cdot\vec{F}(t, [X])$\;
+	$t = t+h$\;
+	$[X] = [X] + h\cdot\vec{f}(t, [X_{new}])$\;
+}
+\end{algorithm}
