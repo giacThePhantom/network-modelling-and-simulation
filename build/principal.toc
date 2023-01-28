@@ -325,15 +325,18 @@
 \contentsline {paragraph}{\numberline {5.5.1.1.2}Discussion}{111}{paragraph.5.5.1.1.2}%
 \contentsline {subsubsection}{\numberline {5.5.1.2}Simpson method}{111}{subsubsection.5.5.1.2}%
 \contentsline {subsubsection}{\numberline {5.5.1.3}General linear multistep algorithm}{111}{subsubsection.5.5.1.3}%
+\contentsline {subsection}{\numberline {5.5.2}Adams methods}{112}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}BDF methods}{112}{subsection.5.5.3}%
 \contentsline {section}{\numberline {5.6}Adaptive methods}{112}{section.5.6}%
-\contentsline {section}{\numberline {5.7}Issues of deterministic simulation}{112}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Continuum hypothesis}{112}{subsection.5.7.1}%
-\contentsline {section}{\numberline {5.8}Deterministic approximation}{113}{section.5.8}%
-\contentsline {section}{\numberline {5.9}Numerical solution of ODEs}{114}{section.5.9}%
-\contentsline {subsection}{\numberline {5.9.1}Euler's method}{114}{subsection.5.9.1}%
-\contentsline {subsection}{\numberline {5.9.2}RUNGE-KUTTA Method}{114}{subsection.5.9.2}%
-\contentsline {subsection}{\numberline {5.9.3}Midpoint method}{114}{subsection.5.9.3}%
-\contentsline {subsection}{\numberline {5.9.4}Adaptive methods - Runge-Kutta-Fehlberg}{115}{subsection.5.9.4}%
+\contentsline {subsection}{\numberline {5.6.1}Estimating the local truncation error}{113}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Runge-Kutta Fehlberg}{113}{subsection.5.6.2}%
+\contentsline {subsubsection}{\numberline {5.6.2.1}Algorithm}{114}{subsubsection.5.6.2.1}%
+\contentsline {subsubsection}{\numberline {5.6.2.2}Discussion}{115}{subsubsection.5.6.2.2}%
+\contentsline {subsection}{\numberline {5.6.3}Stiffness}{115}{subsection.5.6.3}%
+\contentsline {section}{\numberline {5.7}Issues of deterministic simulation}{116}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Spatial homogeneity and continuum hypothesis}{116}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Multistability}{116}{subsection.5.7.2}%
+\contentsline {subsection}{\numberline {5.7.3}Steady state}{116}{subsection.5.7.3}%
 \contentsline {chapter}{\numberline {6}Hybrid simulation approaches}{117}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Reaction-Based System Partitioning}{117}{section.6.1}%
 \contentsline {section}{\numberline {6.2}HRSSA}{119}{section.6.2}%

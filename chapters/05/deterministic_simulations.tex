@@ -385,146 +385,94 @@ Thy can be implicit or implicit and have an order of accuracy.
     \end{itemize}
   \end{multicols}
 
-
-
-
 \section{Adaptive methods}
+Adaptive numerical methods change the discretization stepsize at each simulation step so that $h$ remains close to the greatest value which keeps the global truncation error within a bound.
+They do not set $h$ but a threshold for a maximum value of the global truncation error.
+The output is a time series with time points not equally spaced.
+They require the implementation of an error estimator.
+Here one step methods are considered, particularly RK schemes.
+
+  \subsection{Estimating the local truncation error}
+  RK schemes are well suited to provide an efficient estimator of the local truncation error and to adapt the stepsize according to it.
+  An a posteriori error estimator is used to estimate the local truncation error.
+  This can be built in two ways:
+
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item By comparing the output of the same RK method with two different stepsizes $2h$ and $h$.
+      \item By comparing the output of two RK methods of different order.
+    \end{itemize}
+  \end{multicols}
+
+  In both cases the error estimator computes a posteriori, after the simulation step.
+  The first case a considerable increase of computational error is required, while the second do not by using two different RK methods with $s$ stages of order $p$ and $p+1$, which share the same set of values.
+
+  \subsection{Runge-Kutta Fehlberg}
+  The Runge-Kutta Fehlberg method of fourth order, or RK45 method updates the system as:
+
+  $$[X_{n+1}] = [X_n] + \frac{25}{216}K_1+\frac{1408}{2565}K_3+\frac{2187}{4104}K_4-\frac{1}{5}K_5$$
+
+  Coupled with a fifth order RK method:
+
+  $$[\tilde{X}_{n+1}] = [X_n] + \frac{16}{135}K_1 + \frac{6656}{12825}K_3 + \frac{28561}{56430}K_4 =\frac{9}{50}K_5 + \frac{2}{55}K_6$$
+
+  $K_1,\dots, K_6$ are shared between methods and are computed as:
+
+  \begin{align*}
+    K_1 &=h\vec{F}(t_n, [X_n])\\
+    K_2 &=h\vec{F}\left(t_n+\frac{h}{4}, [X_n]+\frac{1}{4}K_1\right)\\
+    K_3 &=h\vec{F}\left(t_n+\frac{3h}{8}, [X_n]+\frac{3}{32}K_1+\frac{9}{32}K_2\right)\\
+    K_4 &=h\vec{F}\left(t_n+\frac{12h}{13}, [X_n]+\frac{1932}{2197}K_1-\frac{7200}{2197}K_2+\frac{7296}{2197}K_3\right)\\
+    K_5 &=h\vec{F}\left(t_n+h, [X_n]+\frac{439}{216}K_1-8K_2+\frac{3680}{513}K_3-\frac{845}{4104}K_4\right)\\
+    K_6 &=h\vec{F}\left(t_n+\frac{h}{2}, [X_n]-\frac{8}{27}K_1+2K_2-\frac{3544}{2565}K_3+\frac{1859}{4104}K_4-\frac{11}{40}K_5\right)
+  \end{align*}
+
+  The fourth order version is used to compute the dynamics of the system, while the fifth order one is used to estimate the local truncation error:
+
+  $$\Delta_{n+1} = \frac{\biggr\vert [\tilde{X}_{n+1}]-[X_{n+1}]\biggr\vert}{h}$$
+
+  The error estimate is compared to the error threshold $\epsilon_t$.
+  If it is less the local truncation error is assumed smaller than the threshold and the state is accepted, in the other case the new state is rejected and evaluated again using a smaller $h$.
+  In both cases $h$ is updates as:
+
+  \begin{align*}
+    h_{n+1} &=h_n\sigma\\
+    \sigma &= \left(\frac{\epsilon_t}{2\Delta_{n+1}}\right)^{\frac{1}{4}}\approx 0.84\left(\frac{\epsilon_t}{\Delta_{n+1}}\right)^{\frac{1}{4}}
+  \end{align*}
+
+  This is derived from $\sigma = \left(\frac{\epsilon_t}{\Delta_{n+1}}\right)^{\frac{1}{p}}$, defining how to update $h$ for an adaptive one step method of order $p$.
+
+    \subsubsection{Algorithm}
+    An implementation of the RK45 method can be found at algorithm \ref{algo:rk45}
+
+    \input{chapters/05/algorithms/rk45}
+
+    \subsubsection{Discussion}
+    Even though the computation of the simulation step is more demanding than the RK4 method the possibility of changing $h$ often decreases the simulation runtime.
+
+  \subsection{Stiffness}
+  An expected result of the adaptive method is that $h$ is small in region where the solution curves display large variation and large in region when the solution have a near zero slope.
+  This doesn't always happen: the stepsize $h$ is forced to be small to an unacceptable level in region where solution curves are very small.
+  This phenomenon is known as stiffness.
+  A system of ODE is said to be stiff when a numerical solution of its initial value problem forces the numerical method to employ a discretization stepsize excessively small with respect to the smoothness of the exact solution.
+  This is a property of the couple of ODE system and numerical scheme used to solve.
+  It could appear or disappear changing the numerical scheme.
+  It doesn't arise only in adaptive methods, but it is important because the algorithm may lose control on the update of $h$ with an impact on the runtime.
+  In this cases the problem is solved by changing the numerical algorithm.
+  Usually BDF methods are used to simulate a system of ODEs that exhibits stiffness with adaptive numerical simulation.
 
 \section{Issues of deterministic simulation}
+Regardless of the chosen numerical method the deterministic simulation provides only an approximation of the biochemical dynamics, this is often not a problem: the gain in simulation runtime compensates the loss in accuracy, especially for higher-order numerical methods.
+However there are some specific conditions in which deterministic simulation fails to compute the real behaviour of the system.
 
+  \subsection{Spatial homogeneity and continuum hypothesis}
+  In particular spatial homogeneity and the continuum hypothesis are not satisfied for biological processes involving low numbered chemical species because the dynamics could be partially or totally driven by few stochastic events impossible to observe by considering averaged dynamics.
+  Even when the two hypothesis are satisfied some properties are impossible to observed.
 
+  \subsection{Multistability}
+  One of them is multistability: this is never observed by an averaged dynamics of the system because the deterministi simulation computes the same averaged dynamics when starting from the same initial state.
 
-
-
-A \emph{deterministic} way of calculating the dynamics of a system, when the last (noise) term of CLM equation becomes negligibly small compared with the second one, can be applied.
-This happens in the limiting case $a_j(\mathbf{x})\tau → \infty$, $j = 1,...,M$, and the deterministic simulation produces an average behaviour of the system that is very close to the one that results by averaging an infinite number of stochastic simulations of the system starting from the same initial state.
-If we work in terms of \emph{moles}, we are moving Avogrado numbers; it is not so distant from the reaction size, the assumption is correct enough.
-\\
-\\
-\noindent
-The deterministic simulations should give as an output the same result as an average stochastic simulation.
-ODEs can be safely used to simulate a biochemical system that satisfies the spatial homogeneity and continuum hypothesis.
-  \subsection{Continuum hypothesis}
-  ``A biochemical system satisfies the continuum hypothesis if the number of molecules for each species is large enough to safely approximate molecular abundances by concentrations that vary continuously (as opposed to integer- valued molecule counts).''
-  Sometimes, models simply use the ODE formalism, regardless of the hypothesis (since the ODE is the only computational framework allowing to reach the end of the simulation).
-  \\
-  \\
-  \noindent
-  We are required to apply conversions and derive the ODE according to the following tables.
-
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{reaction_ODEs.png}
-    \caption{Table 4.4 Marchetti's book}
-    \label{fig:rec_ODE}
-  \end{figure}
-
-  \noindent
-  In Figure \ref{fig:rec_ODE} here we are not considering the combination of the reactants.
-  $c$ = stochastic rate, $k$ = deterministic rate.
-
-  \begin{figure}
-    \centering
-    \includegraphics[width=0.5\textwidth]{reaction_rates.png}
-    \caption{Table 4.5 Marchetti's book}
-    \label{fig:rec_rates}
-  \end{figure}
-
-  \noindent
-  As shown in Figure \ref{fig:rec_rates} it is possible to go back to the stochastic setting from the deterministic one.
-  CLM equation: if we assume that the product is crazily high i.e. ~close to infinite, we can assume that the two parts of the equations have different orders; in this specific condition, the noise part becomes negligible.
-
-\section{Deterministic approximation}
-If the propensity is approaching infinite, we can assume that the deterministic setting is motivated.
-We are required to introduce the law of mass action and employ tables {[}last lecture{]} to derive a set of ODEs.
-In this context, the law of mass action is a bit different from what we have observed at the beginning of the course.
-We need to remember that the constant of proportionality, i.e.~rate, is not the same as the stochastic setting.
-
-$$ \frac{d[S_i]}{dt}= \sum^M_{j=1}( k_j\mathbf{v}_{ji}\prod^{N}_{l=1}{[S_l^{\mathbf{v}^{-}_{jl}}]}) ,i = 1,...,N.$$
-
-\noindent
-The equation $\frac{d[S_i]}{dt}$ should represent a molar concentration over time.
-We have an equation for each of the species $i=1,…,N$.
-It should take into consideration the effect of all substances in the system → sum over $M$, considering all reactions, which will be multiplied by the stoichiometric index.
-The system is computed as $k$ (constant of proportionality), stoichiometric index and the product of all the reactants.
-If a species is not a reactant, $S_i=0$, we end up with 1, only product of the reactants.
-
-$$\frac{d[A]}{dt}= - \frac{d[B]}{dt}= -V_{MAX}\cdot \frac{[A]}{K_M+[A]}$$
-
-\noindent
-We can just rely on a simplified set of equations to avid mass action correspondence.
-$V_{MAX}$ = maximum velocity of the enzymatic reactions, $K_m$, called \emph{Michaelis constant}, indicates the concentration of the substrate at which the reaction rate is half of its maximum value.
-
-\section{Numerical solution of ODEs}
-Often times in computational biology it is unlikely to have enough power for deriving an analytical solution of the system, reality is different and the complexity prevents this kind of approach.
-Therefore we rely on numerical methods to compute the simulation, adding an additional layer of approximation.
-The algorithm uses the idea of derivative to understand the next value.
-For a value of $t>0$, the level of approximation could be remarkable and depends on the dynamics of the system.
-Remember that when we simulate in time we have the issue that the computation of the next state depends on the previous state: we are dealing with an iterative formula, so potentially we can have a huge error explosion.
-At the basis of such method is the concept of derivative and geometrical rule to identify next step; Euler's method is the simplest one.
-
-  \subsection{Euler's method}
-  The first examples of explicit/implicit numerical methods are the \emph{forward Euler method/backward Euler method} for updating the system state:
-
-  \begin{itemize}
-    \item Forward Euler: $[X_{n+1}] = [X_n]+h·F(t_n,[X_n])$
-    \item Backward Euler: $[X_{n+1}] = [X_n]+h·F(t_{n+1},[X_{n+1}])$
-  \end{itemize}
-\noindent
-  Not surprisingly, for increasing the order of the algorithm we will require a more accurate approx of the derivative, translating in additional evaluation of the ODE.
-
-  \subsection{RUNGE-KUTTA Method}
-  RK4 is a 4th order method, good compromise in accuracy and computational requirements.
-  This algorithm uses a sort of average over Ks, which are computed by solving the set of ODEs as following:
-  $$K1 = F(t_n,[X_n])\\ K2 = F(t_n + 2h,[X_n]+ h2K_1)\\K3 = F(t_n + h2,[X_n]+ h2K_2)\\ K4 = F(t_{n+1},[X_n]+h·K_3)$$.
-  Is it possible to increase accuracy without increasing complexity?
-
-  \subsection{Midpoint method}
-  2nd order method, we compute the new state at line 5 by two elements: x the current state and x old (the previous one).
-  In this case, the multi-step method links the increased order to the number of step previously considered to compute the slope.
-  \\
-  \\
-  \noindent
-  Drawback: what happens in the first step? We require an initial state and and additional time series! Limitation of multi-step algorithms: they all require a discretization step, it rules the movement.
-  The time should not be computed during the iteration, chosen from the beginning; if we think about this, it can be a limitation of the application of the methodologies, which ask the user an information which might be unknown.
-  \\
-  \\
-  \noindent
-  Which is the right time for simulating? Of course we can try to keep the discretization step as small as possible, but the right question that should be asked is: which is the error value? Keeping the error below a certain threshold is not easy, since the dynamics evolve with the system.
-  In order to achieve error control, we should apply more requirements to discretization, leading us to seek an \emph{adaptive solution}.
-  In order to derive a rough estimate of the error we should compare the state computed by two algorithms of different order: one should be more accurate than the other, to have an idea of the degree of approximation.
-
-  \subsection{Adaptive methods - Runge-Kutta-Fehlberg}
-  ``Strapopular algorithm: Runge-Kutta-Fehlberg, RK45 for friends''.
-  RK45 is composed of two methods, 4th and 5th order to apply error evaluation {[}4th for dynamics, 5th for estimating the error{]}.
-  The algorithm will scale the step (h), in such a way that we keep the deviation below an error threshold.
-  A formula will allow to play with h according to the deviation (increase if deviation is little).
-  Recall that for the 5th order we require 6 derivations.
-  \\
-  \\
-  \noindent
-  The two methods are similar, they share the same Ks, therefore at the price of computing a fifth order method we will have the possibility to obtain two evaluations → quite efficient method.
-  ODE45 is this algorithm! Error computation: $\Delta_{n+1}=\frac{|[\tilde{X}*{n+1}]-[X*{n+1}]|}{h}$.
-  The error estimate is then compared to the error threshold $\epsilon_t$ provided by the user.
-  If $\Delta_{n+1}\leq \epsilon_t$, the local truncation error is assumed to be smaller than the threshold, the state $[X_{n+1}]$ is accepted and the algorithm moves one step forward.
-  In the other case, the new state is not accepted and the next state is evaluated again using a different (smaller) value of h.
-  In both cases, the value of h is updated as:
-
-  $$h_{n+1}=h_n\sigma \\ \sigma =(\frac{\epsilon_t}{2\Delta_{n+1}})^{1/4}$$
-
-\noindent
-  Issue: it's possible that for specific dynamics we will need an infinitesimal $h$ to satisfy the error threshold.
-  We can avoid this by updating the strategy, for instance impose an additional threshold to $h$ or insert an heuristic.
-
-
-\begin{figure}
-  \centering
-   \includegraphics[width=\textwidth]{discretization.png}
-  \caption{ Figure 4.9 Marchetti's book}
-  \label{fig:discretization}
-\end{figure}
-
-  The value of $h$ used at each step is plotted in Figure \ref{fig:discretization}. We can end up in situations in which the system changes a lot → \emph{stiffness condition}, if we work with an adaptive method the property of the dynamics leads to instability in deriving the discretization step.
-  Stiffness is a couple property of ODEs and the numerical scheme used to solve the system.
-  This means that the same system of ODEs may exhibit stiffness only when it is simulated with some of the numerical schemes introduced in this chapter.
-  In MATLAB we can use ODE15S in case of stiffness (happens quite often in biology simulations).
+  \subsection{Steady state}
+  Another condition that lead to important differences arises when the biochemical system is simulated from a steady state, a solution of the set of ODEs when all derivative are set to $0$.
+  This makes the averaged dynamics stationary.
+  The asyncronous application of reaction firing in stochastic simulation could cause an exit from the equilibrium leading to non-stationary dynamics.

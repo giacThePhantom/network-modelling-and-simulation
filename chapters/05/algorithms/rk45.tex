@@ -1,0 +1,51 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{RK45 algorithm}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:rk45}
+
+\Input: a system of ODEs $\frac{d[X]}{dt} = \vec{F}(t, [X])$ corresponding to a biochemical reaction system, the initial state $[X_0]$ of the system with species concentrations at time $0$, the simulation ending time $T_{\max}$, the initial discretization stepsize $h_0$ and a threshold for the maximum local truncation error $\epsilon_t$\;
+
+\Output: a trajectory of the biochemical system expressed in terms of molecule concentrations with discretization stepsize $h_0$\;
+
+$t = 0$\;
+$[X] = [X_0]$\;
+$h = h_0$\;
+
+
+\While{$t<T_{\max}$}{
+	$K_1 =h\vec{F}(t_n, [X_n])$\;
+	$K_2 =h\vec{F}\left(t_n+\frac{h}{4}, [X_n]+\frac{1}{4}K_1\right)$\;
+	$K_3 =h\vec{F}\left(t_n+\frac{3h}{8}, [X_n]+\frac{3}{32}K_1+\frac{9}{32}K_2\right)$\;
+	$K_4 =h\vec{F}\left(t_n+\frac{12h}{13}, [X_n]+\frac{1932}{2197}K_1-\frac{7200}{2197}K_2+\frac{7296}{2197}K_3\right)$\;
+	$K_5 =h\vec{F}\left(t_n+h, [X_n]+\frac{439}{216}K_1-8K_2+\frac{3680}{513}K_3-\frac{845}{4104}K_4\right)$\;
+	$K_6 =h\vec{F}\left(t_n+\frac{h}{2}, [X_n]-\frac{8}{27}K_1+2K_2-\frac{3544}{2565}K_3+\frac{1859}{4104}K_4-\frac{11}{40}K_5\right)$\;
+  $[X_{new}] = [X] + \frac{25}{216}K_1+\frac{1408}{2565}K_3+\frac{2187}{4104}K_4-\frac{1}{6}K_5$\;
+  $[\tilde{X}_{new}] = [X] + \frac{16}{135}K_1 + \frac{6656}{12825}K_3 + \frac{28561}{56430}K_4 =\frac{9}{50}K_5 + \frac{2}{55}K_6$\;
+	$\Delta = \frac{\biggr\vert [\tilde{X}_{new}]-[X_{new}]\biggr\vert}{h}$\;
+	\If{$\Delta\le\epsilon_t$}{
+		$[X] = [X_{new}]$\;
+		$t = t+h$\;
+	}
+	$\sigma = 0.84\left(\frac{\epsilon_t}{\Delta}\right)^{\frac{1}{4}}$\;
+	\If{$\sigma<0.1$}{
+		$\sigma = 0.1$\;
+	}
+	\If{$\sigma > 4$}{
+		$\sigma = 4$\;
+	}
+	$h = h\sigma$\;
+}
+\end{algorithm}
