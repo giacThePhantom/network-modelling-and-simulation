@@ -1,44 +1,58 @@
 \graphicspath{{chapters/06/images/}}
 \chapter{Hybrid simulation approaches}
-Hybrid simulation combines the advantages of complementary simulation approaches: a system is partitioned into subsystems that are simulated with different methods.
-Sometimes we need to make a consistent choice for the complete model, but often (especially in biology) the model can incorporate many different situations.
-For instance, not all species will be present in low or high amounts.
-We cannot simulate with exact simulation strategies due to complexity, but at the same time for some parts of the network relying on approximation is too much and we risk losing some important details.
-We need to identify the qualities of the system that should be linked to a specific degree of approximation.
-When is it particularly dangerous to simulate deterministically? For instance, when rare events can occur: the stochastic nature of reaction firing cannot be fully modelled by deterministic setting.
-If the firing probability is lower than a threshold, we can assume that it is rare → intrinsically stochastic.
-We can divide reactions according to their firing probability, apply a rule over the propensity.
-If instead we focus on variables, we can select abundance levels: in case of low abundance, the stochasticity over the average is providing an important part of the behaviour.
-Usually, reactions with low propensity are also the ones modifying low abundance species.
-In highly abundant species, the contribution of noise is reduced.
 
-\begin{itemize}
-  \item low number species and slow reactions → exact stochastic simulation
-  \item high numbered species and fast reactions → approximation
-\end{itemize}
-\noindent
-In the scheme in Figure \ref{fig:regions} we are trying to map the algorithms that we have already seen together, we are still not creating an hybrid method.
-Keep in mind that the availability of species can change along the trajectory.
-It is particularly difficult to make a consistent choice, therefore the hybrid setting is generally preferable in this case.
+\section{Introduction}
+Hybrid simulation approaches refer to a class of methods that combines the advantages of complementary simulation approaches: the system is partitioned into subsystems that are simulated with different methods.
+When exact stochastic simulation is not a realistic option approximate strategies have to be considered together with their accuracy, so they often require the fulfilment of specific conditions.
+The state space associated with biochemical reaction networks can be partitioned into regions depending on the nature of the system, according to the number of molecules and the frequency of reaction events.
+This helps evaluate which approximations are reasonable.
+The essential elements are the abundance of the species and the frequency of reaction.
+Threshold variables demarcate the different partitions and they are model dependents as seen in figure \ref{fig:regions}:
 
-\begin{figure}
+\begin{multicols}{2}
+  \begin{itemize}
+    \item $t_1$ indicates whether a reaction is considered fast.
+    \item $t_2$ indicates whether a population is abundant or not.
+    \item $t_3$ and $t_4$ the border between stochastic variation and deterministic behaviour.
+  \end{itemize}
+\end{multicols}
+
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.5\textwidth]{regions.png}
-  \caption{}
+  \caption{Partitions of the state space}
   \label{fig:regions}
 \end{figure}
-\noindent
-We need to partition the set of chemical reactions in subgroups in which we find consistent properties (Figure \ref{fig:scheme}).
-Once the groups are established, we should be able to simulate the system in different settings.
-The main assumption in the tau leaping method is that the propensity of the reaction will not change dramatically during the macrostep; if we apply this concept to the hybrid setting we will see that this is an issue, as groups are not disjoined.
+
+  \subsection{Slow-discrete region}
+  The system is in a slow-discrete region when the reaction are slow and low numbered species are present.
+  The species must be represented with an integer and discrete changes are allowed.
+  Moreover the reaction events are rare and correspond to significant changes in the system.
+  This region should be treated with the highest accuracy method available.
+
+  \subsection{Fast-discrete region}
+  The system is in the fast-discrete region whenever molecular populations are small and the reactions happen frequently enough that exact simulation could be intractable.
+  This region can be treated with stochastic approximate algorithms developed to work with large reaction propensities and small populations like BA-RSSA.
+
+  \subsection{Slow-continuous region}
+  The system is in the slow-continuous region whenever molecular population are large and reaction are slow.
+  The molecular populations can be assumed continuous and each reaction occurrence does not change significantly its species concentration.
+  The simulation of many reaction occurrences can be skipped without affecting the accuracy.
+  This region can be treated by the $\tau$-leaping algorithm.
+
+  \subsection{Fast continuous stochastic and deterministic region}
+  The system starts in the fast continuous stochastic and goes into the deterministic whenever it has fast reactions and high number species.
+  In the first case the CLE can be considered for the simulation, while in the second deterministic simulations can be used.
+
+  \subsection{Dimensionality explosion}
+  The system is two dimensional only when it has one species and one reaction.
+  When these two sets increase the criteria above can be applied only when all of them belong to the same region.
+  This is a very strict condition that must be preserved along all of the simulation process.
+  Hybrid simulation approaches try to solve this problem by dividing the system into parts that fit with the regions described which are then simulated by ad hoc simulation methods to provide the best compromise between accuracy and runtime.
 
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{scheme.png}
-  \caption{}
-  \label{fig:scheme}
-\end{figure}
+
+
 
 \section{Reaction-Based System Partitioning}
 In order to divide reactions into group we can set up a threshold, which could be computed over the product of the propensity of the state and the simulation step.
