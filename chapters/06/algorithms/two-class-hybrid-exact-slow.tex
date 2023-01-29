@@ -1,0 +1,37 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{Partitioning}{partitioning}
+\SetKwFunction{TitleFunction}{Two class hybrid strategy with exact simulation of slow reactions}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:two-class-hybrid-exact-slow}
+
+\Input: a biochemical reaction system with initial state $X_0$, the simulation ending time $T_{\max}$\;
+
+\Output: a trajectory of the biochemical system\;
+
+$t = 0$\;
+$X = X_0$\;
+
+\While{$t<T_{\max}$}{
+	\ForEach{$R_j\in \mathcal{R}$}{
+		$\mathcal{R}^s, \mathcal{R}^f$ = \Partitioning{$\mathcal{R}$}\;
+	}
+	generate two uniform random numbers $r_1, r_2\sim norm(0,1)$\;
+	compute $X_{new}$ from $X$ by approximating the firing of fast reactions until $t+\tau$ is reached that satisfied the integral $\int_t^{t+\tau} a_0^s(X(t'))dt' +\ln(r) = 0$\;
+	select the slow reaction $R_\mu\in\mathcal{R}^s$ with the smallest $\mu$ such that $\sum\limits_{j=1}^\mu a_j>r_2a_0^s$\;
+	update $X_{new}$ by applyinh $R_\mu$\;
+	$t = t+\tau$\;
+}
+\end{algorithm}

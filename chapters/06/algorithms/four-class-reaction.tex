@@ -1,0 +1,43 @@
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Two class reaction-based partitioning}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:two-class-reaction-partitioning}
+
+\Input: a biochemical reaction system with current staet $\vec{x}$, the firing time $\tau$ of the next model reaction and the threshold parameter $\theta$\;
+
+\Output: the sets $\mathcal{R}^{vs}$, $\mathcal{R}^s$, $\mathcal{R}^m$ and $\mathcal{R}^f$\;
+
+$\mathcal{R}^{vs} = \emptyset$\;
+$\mathcal{R}^f = \emptyset$\;
+$\mathcal{R}^m = \emptyset$\;
+$\mathcal{R}^f = \emptyset$\;
+
+\ForEach{$R_j\in\mathcal{R}$}{
+	\If{$a_j\tau\le 1$}{
+		$R_j\in\mathcal{R}^{vs}$\;
+	}
+	\ElseIf{$a_j\tau < \theta$}{
+		$R_j\in\mathcal{R}^s$\;
+	}
+	\ElseIf{$\sqrt{a_j\tau} < \theta$}{
+		$R_j\in\mathcal{R}^m$\;
+	}
+	\Else{
+		$R_j\in\mathcal{R}^f$\;
+	}
+}
+\end{algorithm}

@@ -50,6 +50,122 @@ Threshold variables demarcate the different partitions and they are model depend
   This is a very strict condition that must be preserved along all of the simulation process.
   Hybrid simulation approaches try to solve this problem by dividing the system into parts that fit with the regions described which are then simulated by ad hoc simulation methods to provide the best compromise between accuracy and runtime.
 
+\section{Reaction-based system partitioning}
+The reaction based system partitioning partitions the system into subnetwork that reaquire to be simulated by the same strategy.
+The reaction are divided into $\mathcal{R}^s$ and $\mathcal{R}^f$ of slow and fast reactions.
+Fast reaction have high propensities and can be simulated by CLE or deterministic simulation while slow one have low propensities.
+When deterministic simulation is employed a preliminary step is required to transform the set of reactions in ODEs.
+Slow reactions require a more accurate stochastic simulation approache.
+
+  \subsection{Classifying fast reactions}
+  Reactions can be fast when it occurs many times in a small time interval and the effect of each reaction on the number of reactants and products is small, so quantitatively:
+
+  $$a_j\tau^f \ge \theta\ll 1$$
+
+  And:
+
+  $$\vec{x}_i > \lambda|\vec{v}_{ij}|, \forall S_i\in Reactants(R_j)\cup Products(R_j)$$
+
+  $\theta$ and $\lambda$ define the minimum number of time a fast reaction can be applied within $\tau^f$ and how fine grained the species must be in order for them to appear as continuous.
+Usually for practical models $\theta = 10$ and $\lambda = 100$.
+
+  \subsection{Partitioning algorithm}
+  An implementation of this reaction-based partitioning can be found in algorithm \ref{algo:two-class-reaction-partitioning}
+
+  \input{chapters/06/algorithms/two-class-reaction-partitioning}
+
+  \subsection{Dynamic partitioning}
+  Because reaction propensities and state vector change in time the partitioning has to be evaluated during the simulation.
+  This is dynamic partitioning.
+  It is important when the system state varies considerably over time.
+  A fixed partitioning can be used  when the subsystems are different and these differences remain constant during the simulation.
+
+  \subsection{Different constraints}
+  Some partitioning strategies depends only on the second condition and relax it to include only the reactants.
+  This is to speed up the simulation by taking out the stochastically simulated fast reaction subsystem, while particle-number based partitioning is concerned with correctly treating reactions with small concentrations.
+  Moreover $\tau^f$ can change at each simulation step and can be not considered: the reaction are divided into a tentative partitioning and then a fixed point iterative scheme happens, tuning the partitioning so that the propensity of each fast reaction will be at least $\lambda$ times larger than the fastest slow reaction.
+  This procedure, outlined in algorithm \ref{algo:two-class-reaction-fixed-point} is more computationally demanding but has less parameters.
+
+  \input{chapters/06/algorithms/two-class-reaction-fixed-point}
+
+  \subsection{Four class reaction partitioning}
+  The reaction partitioning in two classes reduces at minimum the simulation strategies implemented in the hybrid algorithm, simplifying its implementation, but reducing the accuracy of the results.
+  A higher number of reaction classes are introduced to be more consistent with the regions.
+  A way of doing so is to divide it into fours set:
+
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item Very slow reactions $\mathcal{R}^{vs}$ requiring exact simulation.
+      \item Slow reactions $\mathcal{R}^s$ requiring a $\tau$-leaping method.
+      \item Medium reactions $\mathcal{R}^m$, requiring CLE.
+      \item Fast reactions $\mathcal{R}^f$, requiring deterministic simulation.
+    \end{itemize}
+  \end{multicols}
+
+  At the basis of this strategy is the computation of $\tau$, providing the next firing time of a model reaction and imposing the following restraints:
+
+  \begin{itemize}
+    \item $a_j\tau\le 1$ $R_j$ very slow.
+    \item $a_j\tau > 1\land a_j\tau\not\gg 1$ $R_j$ is slow.
+    \item $a_j\tau\gg 1\land\sqrt{a_j\tau}\not\gg 1$ $R_j$ is medium.
+    \item $\sqrt{a_j\tau}\gg 1$ $R_j$ is fast.
+  \end{itemize}
+
+    \subsubsection{Algorithm}
+    An implementation of the four class reaction based partitioning is outlined in algorithm \ref{algo:four-class-reaction}, introducing $\theta$ to implement the $\gg$ constraint
+
+    \input{chapters/06/algorithms/four-class-reaction}
+
+\section{Synchronization of exact and approximate simulations}
+When the hybrid strategy moves forward one simulation step, slow reaction are simulated by exact stochastic simulation while less accurate strategies are used for faster reactions.
+The approximate simulation of faster reactions is constrained to not exceed the firing time of the first slow reaction.
+This is a synchronization to preserve the accuracy of the simulation.
+Even if the simulation of slow reactions is exact, their firing is not guaranteed to be exact when faster reactions are simulated in an approximate way.
+Since the approximation is difficult to obtain many hybrid algorithm implement a simulation for slow reactions that is not exact, but less approximate than the one of the fast reactions.
+
+  \subsection{Algorithm}
+  An implementation of a four class hybrid simulation strategy is implemented in algorithm \ref{algo:four-class-hybrid-simulation}.
+
+  \input{chapters/06/algorithms/four-class-hybrid-simulation}
+
+  \subsection{Preserving the exactness}
+  In order to preserve the exactness of the simulation of slow reactions, the reaction probability density has to be extended to consider time-varying transition propensities account for the propensities of slow reactions that change due to the simulation of fast reactions.
+  The pdf of the next firing of a slow reaction $R_\mu\in\mathcal{R}^s$ becomes:
+
+  $$p^s(\tau, \mu|\vec{x}, t) = a_\mu(X(t+\tau))e^{-\int_t^{t+\tau}a_0^s(X(t'))dt'}$$
+
+  Where $X(t+\tau)$ is the system at time $t+\tau$, $\vec{x}$ is the current system state and:
+
+  $$a_0^s = \sum\limits_{R_j\in\mathcal{R}^s}a_j$$
+
+  The firing time of the next slow reaction is obtained by solving:
+
+  $$\int_t^{t+\tau} a_0^s(X(t'))dt' = -\ln(r)$$
+
+  This solution is difficult to compute: the system state is changed by fast reactions during the time interval.
+  The hybrid simulation has to evaluate it simultaneously with the simulation of the fast reaction to generate the next slow reaction event.
+
+    \subsubsection{Event detection}
+    In order to satisfy the time integral the simulation of fast reaction has to include an event detection part.
+    The easiest way to do so is to relax the constraint of the equation to find a time instant along the simulation such that:
+
+    $$\biggr\vert\int_t^{t+\tau}a_0^x(X(t'))dt' + \ln(r)\biggr\vert\le\epsilon$$
+
+    Where $\epsilon\approx 0$ is a positive error threshold.
+    This makes the simulation of slow reaction depend on $\epsilon$.
+    This correspond to adding to the set of deterministic ODEs an additional equation:
+
+    $$\frac{dRES}{dt} = a_0^xRES(0) = \ln(r)$$
+
+    This is numerically integrated together with the set of ODE until $|RES(t+\tau)|\le\epsilon$.
+    The computation of the firing time of the next slow reaction will be not exact because it depends on the order of the numerical method used to solve the initial value problem.
+
+    \subsubsection{Algorithm}
+    A two class hybrid strategy with exact simulation of slow reactions is outlined in algorithm \ref{algo:two-class-hybrid-exact-slow}
+
+    \input{chapters/06/algorithms/two-class-hybrid-exact-slow}
+
+\section{Hybrid Rejection-Based SSA}
 
 
 

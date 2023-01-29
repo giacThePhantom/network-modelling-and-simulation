@@ -1,0 +1,49 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Two class reaction-based partitioning with fixed point iterations}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:two-class-reaction-fixed-point}
+
+\Input: a biochemical reaction system with stoichiometrix matrix $\vec{v}$ and current state $\vec{x}$, the time increment $\tau^f$ for the approximate simulation of fast reaction, $\gamma$ indicating how fine grained the reactant and product species must be in order to be approximated by continuous numbers abd $\lambda$ indicating how many times the propensity of the slowest fast reaction has to be larger than the propensity of the fastest slow reaction\;
+
+\Output: the sets $\mathcal{R}^s$ and $\mathcal{R}^f$\;
+
+$a^s_{\max} = 0$\;
+$\mathcal{R}^s = \emptyset$\;
+$\mathcal{R}^f = \emptyset$\;
+
+\ForEach{$R_j\in\mathcal{R}$}{
+	\If{$\exists S_i\in Reactants(R_j)\cup Products(R_j): \vec{x}_i\le\gamma|\vec{v}_{ij}|$}{
+		$R_j\in\mathcal{R}^s$\;
+		$a_{\max}^s = \max\{a_{\max}^s, a_j\}$\;
+	}
+	\Else{
+		$R_j\in\mathcal{R}^f$\;
+	}
+}
+
+\If{$\mathcal{R}^s\neq\emptyset\land\mathcal{R}^f\neq\emptyset$}{
+	\Repeat{$fxdpt = $\True}{
+		fxdpt = \True\;
+		\ForEach{$R_j\in\mathcal{R}^f$}{
+			\If{$a_j<\lambda a_{\max}^s$}{
+				move $R_j$ from $\mathcal{R}^f$ to $\mathcal{R}^s$\;
+				$a_{\max}^s = \max\{a_{\max}^s, a_j\}$\;
+				fxdpt = \False\;
+			}
+		}
+	}
+}
+\end{algorithm}

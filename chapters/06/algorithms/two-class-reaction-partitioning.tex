@@ -1,0 +1,37 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Two class reaction-based partitioning}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:two-class-reaction-partitioning}
+
+\Input: a biochemical reaction system with stoichiometrix matrix $\vec{v}$ and current state $\vec{x}$, the time increment $\tau^f$ for the approximate simulation of fast reaction, $\theta$ defining the minimum number of times that a fast reaction has to be applied on average within $\tau^f$ and $\lambda$ indicating how fine grained the reactant and product species must be in order to be approximated by continuous numbers\;
+
+\Output: the sets $\mathcal{R}^s$ and $\mathcal{R}^f$\;
+
+$\mathcal{R}^s = \emptyset$\;
+$\mathcal{R}^f = \emptyset$\;
+
+\ForEach{$R_j\in\mathcal{R}$}{
+	\If{$a_j\tau^f<\tau$}{
+		$R_j\in\mathcal{R}^s$\;
+	}
+	\ElseIf{$\exists S_i\in Reactants(R_j)\cup Products(R_j): \vec{x}_i\le\lambda|\vec{v}_{ij}|$}{
+		$R_j\in\mathcal{R}^s$\;
+	}
+	\Else{
+		$R_j\in\mathcal{R}^f$\;
+	}
+}
+\end{algorithm}

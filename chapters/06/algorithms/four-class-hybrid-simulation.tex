@@ -1,0 +1,61 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{Partitioning}{partitioning}
+\SetKwFunction{TitleFunction}{Four class hybrid simulation strategy}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:four-class-hybrid-simulation}
+
+\Input: a biochemical reaction system with initial state $X_0$, the simulation ending time $T_{\max}$ and the threshold parameter $\theta>1$\;
+
+\Output: a trajectory of the biochemical system\;
+
+$t = 0$\;
+$X = X_0$\;
+
+\While{$t<T_{\max}$}{
+	compute $\tau$ according to the $\tau$-leaping method\;
+	\Repeat{$\neg updateNeeded$}{
+		$updateNeeded$ = \False\;
+		\ForEach{$R_j\in\mathcal{R}$}{
+			$\mathcal{R}^{vs}, \mathcal{R}^s, \mathcal{R}^m, \mathcal{R}^f$ = \Partitioning{$\mathcal{R}$, $\theta$, $\tau$}\;
+		}
+		\ForEach{$R_j\in\mathcal{R}^{vs}$}{
+			compute $\tau_f$ using exact simulation algorithm\;
+		}
+		\If{$\mathcal{R}^{vs} = \mathcal{R}\land \tau\neq\min\{\tau_j\}, R_j\in\mathcal{R}^{vs}$}{
+			$\tau = \min\{\tau_j\}, R_j\in\mathcal{R}^{vs}$\;
+		}
+		\If{$\tau>\min\{\tau_j\}, R_j\in\mathcal{R}^{vs}$}{
+			$\tau = \min\{\tau_j\}, R_j\in\mathcal{R}^{vs}$\;
+			$updateNeeded$ = \True\;
+		}
+		\If{$\neg updateNeeded$}{
+			compute $X^{new}$ at $t+\tau$ approximating the firing of reactions in $\mathcal{R}^s. \mathcal{R}^m, \mathcal{R}^f$ accorrding to:\;
+			$\tau$-leaping method for slow reactions\;
+			CLE for medium reactions\;
+			deterministic simulation for fast reactions\;
+			update $X^{new}$ by applying $R_j\in\mathcal{R}^{vs}$, such that $\tau_j = \tau$\;
+			\If{any $X_i^{new}<0$}{
+				$\tau = \frac{\tau}{2}$\;
+				$updateNeeded$ = \True\;
+			}
+			\Else{
+				$X = X^{new}$\;
+				$t = t+\tau$\;
+			}
+		}
+	}
+}
+\end{algorithm}
