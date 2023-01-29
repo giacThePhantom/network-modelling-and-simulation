@@ -357,62 +357,72 @@
 \contentsline {subsubsection}{\numberline {6.3.2.1}Event detection}{124}{subsubsection.6.3.2.1}%
 \contentsline {subsubsection}{\numberline {6.3.2.2}Algorithm}{124}{subsubsection.6.3.2.2}%
 \contentsline {section}{\numberline {6.4}Hybrid Rejection-Based SSA}{125}{section.6.4}%
-\contentsline {section}{\numberline {6.5}Reaction-Based System Partitioning}{125}{section.6.5}%
-\contentsline {section}{\numberline {6.6}HRSSA}{125}{section.6.6}%
-\contentsline {subsubsection}{\numberline {6.6.0.1}HSimulator}{126}{subsubsection.6.6.0.1}%
-\contentsline {chapter}{\numberline {7}Reali}{128}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Introduction}{128}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Definition of a system}{128}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Determinism, nondeterminism, or stochasticity?}{128}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Computational complexity}{129}{subsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.1.4}Definition of a model}{129}{subsection.7.1.4}%
-\contentsline {subsection}{\numberline {7.1.5}Checking the validity of a model}{129}{subsection.7.1.5}%
-\contentsline {subsection}{\numberline {7.1.6}How to build a model}{130}{subsection.7.1.6}%
-\contentsline {section}{\numberline {7.2}Optimization problem}{131}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}General definition of an optimization problem}{131}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}Definition of a minimum}{133}{subsection.7.2.2}%
-\contentsline {section}{\numberline {7.3}Gradient methods}{134}{section.7.3}%
-\contentsline {subsubsection}{\numberline {7.3.0.1}Lagrangian function}{134}{subsubsection.7.3.0.1}%
-\contentsline {subsection}{\numberline {7.3.1}Lagrangian Multipliers Theorem}{134}{subsection.7.3.1}%
-\contentsline {subsection}{\numberline {7.3.2}Definition of a gradient}{134}{subsection.7.3.2}%
-\contentsline {subsection}{\numberline {7.3.3}Limitations of gradient descent methods}{135}{subsection.7.3.3}%
-\contentsline {subsection}{\numberline {7.3.4}Gradient approximation with Taylor formula}{135}{subsection.7.3.4}%
-\contentsline {subsection}{\numberline {7.3.5}Line search}{136}{subsection.7.3.5}%
-\contentsline {subsubsection}{\numberline {7.3.5.1}Newton's direction}{136}{subsubsection.7.3.5.1}%
-\contentsline {subsubsection}{\numberline {7.3.5.2}Line search algorithm for function minimization}{137}{subsubsection.7.3.5.2}%
-\contentsline {subsubsection}{\numberline {7.3.5.3}Quasi Newton's direction}{137}{subsubsection.7.3.5.3}%
-\contentsline {subsubsection}{\numberline {7.3.5.4}Steepest descent direction}{137}{subsubsection.7.3.5.4}%
-\contentsline {subsubsection}{\numberline {7.3.5.5}Selecting $\alpha $}{137}{subsubsection.7.3.5.5}%
-\contentsline {subsubsection}{\numberline {7.3.5.6}Convergence of a method}{138}{subsubsection.7.3.5.6}%
-\contentsline {subsection}{\numberline {7.3.6}Trust region}{139}{subsection.7.3.6}%
-\contentsline {subsubsection}{\numberline {7.3.6.1}Trust region steepest descent}{139}{subsubsection.7.3.6.1}%
-\contentsline {subsubsection}{\numberline {7.3.6.2}Trust region algorithm}{140}{subsubsection.7.3.6.2}%
-\contentsline {section}{\numberline {7.4}Least squares problems}{141}{section.7.4}%
-\contentsline {subsection}{\numberline {7.4.1}The Levenberg-Marquardt method}{142}{subsection.7.4.1}%
-\contentsline {subsection}{\numberline {7.4.2}Solving a problem with bounds}{142}{subsection.7.4.2}%
-\contentsline {subsection}{\numberline {7.4.3}Solving global minimum problem}{143}{subsection.7.4.3}%
-\contentsline {subsection}{\numberline {7.4.4}Gauss-Newton method}{143}{subsection.7.4.4}%
-\contentsline {subsection}{\numberline {7.4.5}Latin hypercube sample}{143}{subsection.7.4.5}%
-\contentsline {subsection}{\numberline {7.4.6}MATLAB}{143}{subsection.7.4.6}%
-\contentsline {section}{\numberline {7.5}Stochastic methods for parameter estimation}{145}{section.7.5}%
-\contentsline {subsection}{\numberline {7.5.1}Markov Chain Monte Carlo (MCMC)}{145}{subsection.7.5.1}%
-\contentsline {subsection}{\numberline {7.5.2}Sampling a distribution}{147}{subsection.7.5.2}%
-\contentsline {subsection}{\numberline {7.5.3}Rejection sampling algorithm}{147}{subsection.7.5.3}%
-\contentsline {subsection}{\numberline {7.5.4}Metropolis Hastings}{148}{subsection.7.5.4}%
-\contentsline {subsubsection}{\numberline {7.5.4.1}MH algorithm}{148}{subsubsection.7.5.4.1}%
-\contentsline {subsubsection}{\numberline {7.5.4.2}Visualization of MCMC}{149}{subsubsection.7.5.4.2}%
-\contentsline {subsubsection}{\numberline {7.5.4.3}How to link data and MH}{149}{subsubsection.7.5.4.3}%
-\contentsline {subsection}{\numberline {7.5.5}Random walk MCMC}{150}{subsection.7.5.5}%
-\contentsline {subsubsection}{\numberline {7.5.5.1}Algorithm RW-MCMC ( C known)}{150}{subsubsection.7.5.5.1}%
-\contentsline {subsubsection}{\numberline {7.5.5.2}Diagnostics}{151}{subsubsection.7.5.5.2}%
-\contentsline {section}{\numberline {7.6}Heuristics and the genetic algorithm}{153}{section.7.6}%
-\contentsline {subsection}{\numberline {7.6.1}The genetic algorithm}{153}{subsection.7.6.1}%
-\contentsline {subsubsection}{\numberline {7.6.1.1}Chromosome encoding}{154}{subsubsection.7.6.1.1}%
-\contentsline {subsubsection}{\numberline {7.6.1.2}Generation of an initial population}{154}{subsubsection.7.6.1.2}%
-\contentsline {subsubsection}{\numberline {7.6.1.3}Fitness evaluation}{154}{subsubsection.7.6.1.3}%
-\contentsline {subsubsection}{\numberline {7.6.1.4}Parent selection}{154}{subsubsection.7.6.1.4}%
-\contentsline {subsubsection}{\numberline {7.6.1.5}Reproduction}{154}{subsubsection.7.6.1.5}%
-\contentsline {subsubsection}{\numberline {7.6.1.6}Mutation}{154}{subsubsection.7.6.1.6}%
-\contentsline {subsection}{\numberline {7.6.2}Genetic algorithm pseudocode}{156}{subsection.7.6.2}%
-\contentsline {subsubsection}{\numberline {7.6.2.1}Cons}{156}{subsubsection.7.6.2.1}%
-\contentsline {subsubsection}{\numberline {7.6.2.2}Pros}{156}{subsubsection.7.6.2.2}%
+\contentsline {subsection}{\numberline {6.4.1}Reaction partitioning}{125}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Firing time}{125}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Updating the system}{125}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}Algorithm}{125}{subsection.6.4.4}%
+\contentsline {subsection}{\numberline {6.4.5}Correctness of the simulation of slow reactions}{127}{subsection.6.4.5}%
+\contentsline {section}{\numberline {6.5}Hybrid simulation with stiffness}{128}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Formulation of reactions with stiffness}{128}{subsection.6.5.1}%
+\contentsline {subsubsection}{\numberline {6.5.1.1}Quasi-steady state assumption}{129}{subsubsection.6.5.1.1}%
+\contentsline {subsubsection}{\numberline {6.5.1.2}Partial equilibrium assumption}{130}{subsubsection.6.5.1.2}%
+\contentsline {subsection}{\numberline {6.5.2}Slow-scale stochastic simulation algorithm}{130}{subsection.6.5.2}%
+\contentsline {subsubsection}{\numberline {6.5.2.1}Algorithm}{130}{subsubsection.6.5.2.1}%
+\contentsline {subsection}{\numberline {6.5.3}Nested stochastic simulation algorithm}{131}{subsection.6.5.3}%
+\contentsline {subsubsection}{\numberline {6.5.3.1}Algorithm}{131}{subsubsection.6.5.3.1}%
+\contentsline {chapter}{\numberline {7}Reali}{133}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Introduction}{133}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Definition of a system}{133}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Determinism, nondeterminism, or stochasticity?}{133}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Computational complexity}{134}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}Definition of a model}{134}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}Checking the validity of a model}{134}{subsection.7.1.5}%
+\contentsline {subsection}{\numberline {7.1.6}How to build a model}{135}{subsection.7.1.6}%
+\contentsline {section}{\numberline {7.2}Optimization problem}{136}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}General definition of an optimization problem}{136}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Definition of a minimum}{138}{subsection.7.2.2}%
+\contentsline {section}{\numberline {7.3}Gradient methods}{139}{section.7.3}%
+\contentsline {subsubsection}{\numberline {7.3.0.1}Lagrangian function}{139}{subsubsection.7.3.0.1}%
+\contentsline {subsection}{\numberline {7.3.1}Lagrangian Multipliers Theorem}{139}{subsection.7.3.1}%
+\contentsline {subsection}{\numberline {7.3.2}Definition of a gradient}{139}{subsection.7.3.2}%
+\contentsline {subsection}{\numberline {7.3.3}Limitations of gradient descent methods}{140}{subsection.7.3.3}%
+\contentsline {subsection}{\numberline {7.3.4}Gradient approximation with Taylor formula}{140}{subsection.7.3.4}%
+\contentsline {subsection}{\numberline {7.3.5}Line search}{141}{subsection.7.3.5}%
+\contentsline {subsubsection}{\numberline {7.3.5.1}Newton's direction}{141}{subsubsection.7.3.5.1}%
+\contentsline {subsubsection}{\numberline {7.3.5.2}Line search algorithm for function minimization}{142}{subsubsection.7.3.5.2}%
+\contentsline {subsubsection}{\numberline {7.3.5.3}Quasi Newton's direction}{142}{subsubsection.7.3.5.3}%
+\contentsline {subsubsection}{\numberline {7.3.5.4}Steepest descent direction}{142}{subsubsection.7.3.5.4}%
+\contentsline {subsubsection}{\numberline {7.3.5.5}Selecting $\alpha $}{142}{subsubsection.7.3.5.5}%
+\contentsline {subsubsection}{\numberline {7.3.5.6}Convergence of a method}{143}{subsubsection.7.3.5.6}%
+\contentsline {subsection}{\numberline {7.3.6}Trust region}{144}{subsection.7.3.6}%
+\contentsline {subsubsection}{\numberline {7.3.6.1}Trust region steepest descent}{144}{subsubsection.7.3.6.1}%
+\contentsline {subsubsection}{\numberline {7.3.6.2}Trust region algorithm}{145}{subsubsection.7.3.6.2}%
+\contentsline {section}{\numberline {7.4}Least squares problems}{146}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}The Levenberg-Marquardt method}{147}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}Solving a problem with bounds}{147}{subsection.7.4.2}%
+\contentsline {subsection}{\numberline {7.4.3}Solving global minimum problem}{148}{subsection.7.4.3}%
+\contentsline {subsection}{\numberline {7.4.4}Gauss-Newton method}{148}{subsection.7.4.4}%
+\contentsline {subsection}{\numberline {7.4.5}Latin hypercube sample}{148}{subsection.7.4.5}%
+\contentsline {subsection}{\numberline {7.4.6}MATLAB}{148}{subsection.7.4.6}%
+\contentsline {section}{\numberline {7.5}Stochastic methods for parameter estimation}{150}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Markov Chain Monte Carlo (MCMC)}{150}{subsection.7.5.1}%
+\contentsline {subsection}{\numberline {7.5.2}Sampling a distribution}{152}{subsection.7.5.2}%
+\contentsline {subsection}{\numberline {7.5.3}Rejection sampling algorithm}{152}{subsection.7.5.3}%
+\contentsline {subsection}{\numberline {7.5.4}Metropolis Hastings}{153}{subsection.7.5.4}%
+\contentsline {subsubsection}{\numberline {7.5.4.1}MH algorithm}{153}{subsubsection.7.5.4.1}%
+\contentsline {subsubsection}{\numberline {7.5.4.2}Visualization of MCMC}{154}{subsubsection.7.5.4.2}%
+\contentsline {subsubsection}{\numberline {7.5.4.3}How to link data and MH}{154}{subsubsection.7.5.4.3}%
+\contentsline {subsection}{\numberline {7.5.5}Random walk MCMC}{155}{subsection.7.5.5}%
+\contentsline {subsubsection}{\numberline {7.5.5.1}Algorithm RW-MCMC ( C known)}{155}{subsubsection.7.5.5.1}%
+\contentsline {subsubsection}{\numberline {7.5.5.2}Diagnostics}{156}{subsubsection.7.5.5.2}%
+\contentsline {section}{\numberline {7.6}Heuristics and the genetic algorithm}{158}{section.7.6}%
+\contentsline {subsection}{\numberline {7.6.1}The genetic algorithm}{158}{subsection.7.6.1}%
+\contentsline {subsubsection}{\numberline {7.6.1.1}Chromosome encoding}{159}{subsubsection.7.6.1.1}%
+\contentsline {subsubsection}{\numberline {7.6.1.2}Generation of an initial population}{159}{subsubsection.7.6.1.2}%
+\contentsline {subsubsection}{\numberline {7.6.1.3}Fitness evaluation}{159}{subsubsection.7.6.1.3}%
+\contentsline {subsubsection}{\numberline {7.6.1.4}Parent selection}{159}{subsubsection.7.6.1.4}%
+\contentsline {subsubsection}{\numberline {7.6.1.5}Reproduction}{159}{subsubsection.7.6.1.5}%
+\contentsline {subsubsection}{\numberline {7.6.1.6}Mutation}{159}{subsubsection.7.6.1.6}%
+\contentsline {subsection}{\numberline {7.6.2}Genetic algorithm pseudocode}{161}{subsection.7.6.2}%
+\contentsline {subsubsection}{\numberline {7.6.2.1}Cons}{161}{subsubsection.7.6.2.1}%
+\contentsline {subsubsection}{\numberline {7.6.2.2}Pros}{161}{subsubsection.7.6.2.2}%

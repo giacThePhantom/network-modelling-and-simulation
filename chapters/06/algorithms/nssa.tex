@@ -1,0 +1,37 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Nested SSA (nSSA)}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:nssa}
+
+\Input: a biochemical reaction network of $M$ reactions and $N$ species.
+Partition the state into $X^f$ and $X^s$, the simulation ending time $T_{\max}$, the time discretization $\Delta_ft$ and the number of simulation runs $K$ for simulating fast reactions.
+
+\Output: a trajectory of the biochemical reaction network\;
+
+$t = 0$\;
+$\vec{X} = \vec{x}_0$\;
+\While{$t<T_{\max}$}{
+	simulate only the fast reaction subset by $K$ runs of SSA from $t$ to $t+\Delta_ft$\;
+  $\hat{a}_j(\vec{x}^s)\approx\frac{1}{K}\sum\limits_{i=1}^K\frac{1}{\Delta_{f}t}\int_{t}^{t+\Delta_ft}a_j(\vec{x}^f, \vec{x}^s)dt$\;
+	$\hat{a}_0 = \sum\limits_{R_j\in\mathcal{R}^f}\hat{a}_j$\;
+	$r_1,r_2\sim norm(0,1)$\;
+	select $R_\mu$ with minimum $\mu$ such that $\sum\limits_{j=1}^\mu\hat{a}_j\ge r_1\hat{a}_0$\;
+	$\tau = \frac{1}{\hat{a}_0}\ln\frac{1}{r_2}$\;
+	$X = X+\vec{v}_\mu$\;
+	$t = t+\tau$\;
+}
+
+\end{algorithm}

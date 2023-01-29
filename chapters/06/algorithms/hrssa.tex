@@ -1,0 +1,66 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{Partition}{partition}
+\SetKwFunction{TitleFunction}{Hybrid Rejection-Based SSA (HRSSA)}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:hrssa}
+
+\Input: a biochemical reaction system with initial state $X_0$, $\delta$ to compute the fluctuation interval, $\tau^f$, $\theta$, $\gamma$ to partition the system and simulation ending time $T_{\max}$.
+
+\Output: a trajectory of the biochemical reaction system\;
+
+$t = 0$\;
+$\vec{X} = \vec{x}_0$\;
+\While{$t<T_{\max}$}{
+	$[\underline{X}, \overline{X}] = [(1-\delta)X, (1+\delta)X]$\;
+	\ForEach{$R_j\in\mathcal{R}$}{
+		compute $\overline{a_j}$ and $\underline{a_j}$\;
+		$\mathcal{R}^s, \mathcal{R}^f$ = \Partition{$\underline{X}$, $\gamma$, $\theta$, $\tau^f$}\;
+		bound the system state $\underline{X}$ according to $\gamma,\theta, \tau^f$\;
+	}
+	$\overline{a}_0^s = \sum\limits_{R_j\in\mathcal{R}^s}\overline{a}_j$\;
+	updateNeeded = \False\;
+	\While{$t<T_{\max}\land\neg updateNeeded$}{
+		$r\sim norm(0,1)$\;
+		$\tau = -\frac{\ln r}{\overline{a}_0^s}$\;
+		compute $X(t+\tau')$ by simulating $\mathcal{R}^f$ at time steps of maximum length $\tau^f$, where $t+\tau'$ is the last computed step such that $\tau'\le\tau\land X(t+\tau')\in[\underline{X}, \overline{X}]$\;
+		\If{$\tau'=\tau$}{
+			generate $r_1, r_2\sim norm(0,1)$\;
+			accepted = \False\;
+			select $R_\mu \in\mathcal{R}^s$ with smallest $\mu$ such that $\sum\limits_{j=1}^\mu\overline{a}_j>r_i\overline{a}_0^s$\;
+			\If{$r_2\le\frac{\underline{a}_\mu}{\overline{a}_\mu}$}{
+				accepted = \True\;
+			}
+			\Else{
+				compute $a_\mu(X(t+\tau'))$\;
+				\If{$r_2\le \frac{a_\mu(X(t+\tau'))}{\overline{a}_\mu}$}{
+					accepted = \True\;
+				}
+			}
+			\If{accepted = \True}{
+				update $X(t+\tau')$ by applying $R_\mu$\;
+			}
+			\If{$X(t+\tau')\not\in[\underline{X}, \overline{X}]$}{
+				updateNeeded = \True\;
+			}
+		}
+		\Else{
+			updateNeeded = \True\;
+		}
+		$X = X(t+\tau')$\;
+		$t = t+\tau'$\;
+	}
+}
+\end{algorithm}

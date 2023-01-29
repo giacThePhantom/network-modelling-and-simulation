@@ -1,0 +1,37 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{TitleFunction}{Slow-scale SSA (ssSSA)}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:ssssa}
+
+\Input: a biochemical reaction network of $M$ reactions and $N$ species.
+Partition the state into $X^f$ and $X^s$. Find the stationary distribution for $X^f$ as the mehod for genertaing a random value for the corresponding distribution\;
+
+\Output: a trajectory of the biochemical reaction network\;
+
+$t = 0$\;
+$\vec{X} = \vec{x}_0$\;
+\While{$t<T_{\max}$}{
+	compute $\langle X_f\rangle$ from its stationary probability distribution\;
+	$\hat{a}_j(\vec{x}^s)\approx a_j*\langle X^f\rangle, \vec{x}^s$\;
+	$\hat{a}_i = \sum\limits_{j=0}^M\hat{a}_j$\;
+	$r_1,r_2\sim norm(0,1)$\;
+	select $R_\mu$ with minimum $\mu$ such that $\sum\limits_{j=1}^\mu\hat{a}_j\ge r_1\hat{a}_0$\;
+	$\tau = \frac{1}{\hat{a}_0}\ln\frac{1}{r_2}$\;
+	$X = X+\vec{v}_\mu$\;
+	$t = t+\tau$\;
+}
+
+\end{algorithm}

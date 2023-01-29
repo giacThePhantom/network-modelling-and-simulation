@@ -166,91 +166,215 @@ Since the approximation is difficult to obtain many hybrid algorithm implement a
     \input{chapters/06/algorithms/two-class-hybrid-exact-slow}
 
 \section{Hybrid Rejection-Based SSA}
+The hybrid rejection based stochastic simulation algorithm HRSSA is built on top of RSSA.
+The simulation strategy relies on the concept of fluctuation interval:
 
+$$[\underline{\vec{x}}, \overline{\vec{x}}] = [(1-\delta)\vec{x}, (1+\delta)\vec{x}], 0<\delta<1$$
 
+Used to obtain exact stochastic simulation of slow reactions without computing the integral, improving simulation accuracy and runtime.
 
+  \subsection{Reaction partitioning}
+  Reactions are partitioned in two classes and the partition is updated only when the current system does not fit any more in its fluctuation interval: the partitioning is done considering the lower bond $\underline{\vec{x}}$.
+  This does not affect the accuracy of the classification, but it imposes more stringent constraints that increase the number of reactions classified as slow.
 
-\section{Reaction-Based System Partitioning}
-In order to divide reactions into group we can set up a threshold, which could be computed over the product of the propensity of the state and the simulation step.
-If the product is higher or lower than the threshold, we can identify the reaction as rare or probable.
-Example of partitioning algorithm: \emph{two class reaction-based partitioning}.
-Divide reactions in slow and fast through an iterative loop.
-In general, we can increase the complexity of such approach as much as we want.
-Example: \emph{four class reaction based partitioning}, we can bridge more simulation strategies.
-In Algorithm 45 the four class partitioning is applied; at the very beginning we impose a time step e.g.~with tau leaping, compute the partitioning ending up with 4 sets (very slow, slow, medium and fast).
-For any of the reactions we will apply different strategies, for instance in the case of the very slow we require exact stochastic simulation.
-For sure the simulation will be more accurate, but we cannot claim that the simulation is exact, since we are only working on a set of reactions, not on the full system.
-If we wish to have an exact algorithm, we should consider the problem of \textbf{time varying reaction propensity}.
-If we want to be able to appropriately generate time, we should move considering the integral of the propensity over the time and the random number.
-We can consider the zero crossing of an equation as following (the log of the random number is a negative quantity):
+  \subsection{Firing time}
+  The sum of the upper propensity bounds of slow reactions is computed:
 
-$$\int_t^{t+\tau}a_0^s (X(t')) dt' = - \ln(r)$$
-\noindent
-Instead of deciding $\tau$ at the beginning, the time will be computed along the approximation; when the quantity will be equal to zero, the approximation will stop and restart.
-We can consider this as a sort of traffic light: an event is generated, green light, we can move one.
-The real issue is that even if we have an equation to find the right time, being able to compute this requirement exactly with a computational strategy is a problem.
-The approach to zero will be affected by a variety of steps, e.g.~the computer has a certain threshold for the zero.
-In addition computing the integral is computationally challenging.
+  $$\overline{a_0}^s = \sum\limits_{R_j\in\mathcal{R}^s}\overline{a}_j = \sum\limits_{R_j\in\mathcal{R}^s}a_j(\overline{\vec{x}})$$
 
-\begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \item non trivial complexity, integrals tend to be approximated by computers
-  \item the zero crossing is affected by approximation error
-\end{enumerate}
-\noindent
-If we use deterministic simulation for simulating fast reactions, we can add another equation to understand when it is the time to stop during the simulation.
-We start from the logarithm of the random number and proceed with numerical integration.
+  The firing time of a candidate slow reaction is:
 
-$$\frac{dRES}{t}= a_0^x,RES(0)= \ln(r)$$
+  $$\tau = -\frac{\ln r}{\overline{a}_0^s}$$
 
-Synchronization has a price: the more complex, the higher impact we will have on the right time.
-Can we do something better? We can apply an extension of RSSA to obtain better results.
+  Where $r\sim norm(0,1)$.
+  If the system state remains in the fluctuation interval $\overline{a}_0^s$ is not dependent on time in $[t, t+\tau]$, allowing to simulate fast reactions over this interval without an side effect on slow reactions.
 
-\section{HRSSA}
-This algorithm claims to be exact and was developed by Marchetti.
-In RSSA we have a side effect: $\tau$ is computed over an \emph{upper bound}, therefore we no longer need to reason in terms of propensity varying in time.
-By taking this perspective, we totally avoid slow events, just focus on upper bound.
-We have two main issues in this strategy:
+  \subsection{Updating the system}
+  After the simulation of fast reaction in $[t,t+\tau]$, a slow reaction is chosen and validated to fire.
+  To preserve the exactness, the feasibility of the current system must be preserved during the simulation of the fast reactions.
+  Every time the system state exists from its bounds the simulation has to be stopped and the fluctuation interval is updated.
+  Fast reactions are simulated in $[r,t+\tau']$, where $t+\tau'$ is the last computed time step $\tau'\le \tau$ that does not violate the feasibility of the current system state.
+  When $\tau'< \tau$, the simulation process is stopped and the fluctuation interval of the system state is updated, ensuring correct synchronization.
+  When $\tau'=\tau$, the state can be updated by applying one slow reaction $R_j$, selected according to the RSSA simulation strategy.
 
-\begin{enumerate}
-  \def\labelenumi{\arabic{enumi}.}
-  \item by considering an upper bound we will generate more events
-  \item the bounds should be satisfied, therefore along the simulations we will need to check the consistency over the fluctuation interval of the state
-\end{enumerate}
-\noindent
-We have no need of computing the integral, we work with fluctuation intervals and link the generation of $\tau$ over this quantity, with the only difference that we only consider the upper bound and not the current value.
-\\
-\\
-\noindent
-Pseudocode (Figure \ref{fig:HRSSA}): we start from a while loop, we compute the fluctuation interval, the bounds of the propensity (same as RSSA) and move forward with $\tau$ computation.
-\begin{figure}
-  \centering
-  \includegraphics[width=0.5\textwidth]{HRSSA.png}
-  \caption{HRSSA algorithm}
-  \label{fig:HRSSA}
-\end{figure}
-When we reach $\tau$ we decide to apply or not the reaction through random number generation.
-The main issue is how to compute the reaction partitioning, in this case the algorithm divide into slow and fast.
-Since we are working with bounds, we substitute the real propensity with the lower bound for performing the partitioning.
-Given that the partitioning is computed on the bound, it is just necessary to compute it again for each interval → speed up.
-When the system is very complex, it is often not possible to apply this algorithm.
+  \subsection{Algorithm}
+  An implementation of HRSSA is outlined in algorithm \ref{algo:hrssa}.
 
-\subsubsection{HSimulator}
-Simulator prototype (Java) developed by Marchetti to try HRSSA.
-We simply provide the set of reactions in arrow notation, same specification as MATLAB.
-The simulations provided are DM, RSSA, Euler, RK45 and HRSSA.
-We have the possibility to define simulation length and time sampling i.e.~sampling over which the time series is stored.
+  \input{chapters/06/algorithms/hrssa}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=0.6\textwidth]{HRSSA_oregonator.png}
-  \caption{HSimulator HRSSA Oregonator}
-  \label{fig:oregonator}
-\end{figure}
-\noindent
-\textbf{Oregonator HRSSA:} (Figure \ref{fig:oregonator})  the algorithm applies the stochastic approach by starting from the deterministic setting.
-In the advanced options we can insert additional specifications{]}.
-If we apply steady state conditions (simulation length = 5, time sampling = 0.
-0001), we observe a flat signal; the issue is that the stochastic simulation is applied to the subset of slow reactions.
-If we change the parameters for deciding if something is fast or slow, we should see a change in the behaviour.
-By working with smaller variables, we see something remarkable: noise is heavily present.
+  \subsection{Correctness of the simulation of slow reactions}
+  HRSSA simulates slow reactions exactly under the hypothesis that the system state remains in its fluctuation interval during the simulation.
+  Let $p_1^s(\tau|\vec{x},t)$ be the pdf of the firing time $\tau$ such that $p_1^s(\tau|\vec{x},t)d\tau$ gives the probability that the slow reaction is selected to fire at time $t+\tau$.
+  Let $p_2^s(\mu|\tau,\vec{x},t)$ be the probability that the slow reaction is $R_\mu$ assuming that $\vec{x}\in[\underline{X},\overline{X}]$.
+  The multiplication of $p_1^s$ and $p_2^s$ gives the joint probability density function of the next slow reaction $R_\mu$ firing at $t+\tau$, sampled by HRSSA.
+  To compute $p_1^s(\tau|\vec{x})$ let $\mathbb{P}\{R^s\}$ be the probability that some slow reaction is accepted by HRSSA at $t+\tau$:
+
+  $$\mathbb{P}\{R^s\} = \frac{\int_t^{t+\tau}\sum\limits_{R_j\in\mathcal{R}^s}a_j(X(t'))dt'}{\overline{a}_0^s} = \frac{\int_t^{t+\tau}a_0^s(X(t'))dt'}{\overline{a}_0^s\tau}$$
+
+  If $k$ is the number of attempts before a reaction is accepted, $k$ is geometrically distributed with success probability $\mathbb{R}\{R^s\}$.
+  For a fixed $k$, $\tau$ is an Erlang distribution of parameters $k$ and $a_0^s(\overline{\vec{x}})$.
+  Summing over all possible $k$:
+
+  $$p_1^s(\tau|\vec{x},t) = \sum\limits_{k=1}^{\infty}f_{erlang(k, \overline{a}_0^s)}(\tau) \mathbb{P}\{R^s\}(1-\mathbb{P}\{R^s\})^{k-1}$$
+
+  Where $f_{erlang(k, \overline{a}_0^s)}$ is the pdf of the Erlang distribution.
+  Substituting the formula of $\mathbb{P}\{R^s\}$ and recalling:
+
+  $$f_{erlang(k, \overline{a}_0^s)} = \frac{(\overline{a}_0^s)^k\tau^{k-1}e^{-\overline{a}_0^s\tau}}{(k-1)!}$$
+
+  Then:
+
+  \begin{align*}
+    p_1^s(\tau|\vec{x},t) &=\sum\limits_{k=1}^\infty\frac{(\overline{a}_0^s)^k\tau^{k-1}e^{-\overline{a}_0^s\tau}}{(k-1)!}\frac{\int_t^{t+\tau}a_0^s(X(t'))dt'}{\overline{a}_0^s\tau}\left(1-\frac{\int_t^{t+\tau}a_0^s(X(t'))dt'}{\overline{a}_0^s\tau}\right)^{k-1} = \\
+                          &=\frac{\int_t^{t+\tau}a_0^s(X(t'))dt'}{\tau}e^{-\overline{a}_0^s\tau}\sum\limits_{k=1}^{\infty}\frac{(\overline{a}_0^s\tau-\int_t^{t+\tau}a_0^s(X(t'))dt')^{k-1}}{(k-1)!} = \\
+                          &=\frac{\int_t^{t+\tau}a_0^s(X(t'))dt'}{\tau}e^{-\overline{a}_0^s\tau}e^{\overline{a}_0^s\tau-\int_t^{t+\tau}a_0^s(X(t'))dt'} = \\
+                          &=\frac{\int_t^{t+\tau}a_0^s(X(t'))dt'}{\tau}e^{-\int_t^{t+\tau}a_0^s(X(t'))dt'}
+  \end{align*}
+
+  Now let $\mathbb{R}\{R_\mu\}$ be the probability that $R_\mu$ is selected and accepted at $t+\tau$ given that some reaction is accepted at that time $\mathbb{P}\{R_\mu\}$ is the multiplication of the probability that $R_\mu$ is selected and is accepted:
+
+  $$\mathbb{P}\{R_\mu\} = \frac{\overline{a}_\mu}{\overline{a}_0^s} \frac{a_\mu(X(t+\tau))}{\overline{a}_\mu} = \frac{a_\mu(X(t+\tau))}{\overline{a}_0^s}$$
+
+  Which combining with $\mathbb{P}\{R^s\}$:
+
+  $$p_2^s(j|\tau, \vec{x},t) = \frac{\mathbb{P}\{R_\mu\}}{\mathbb{P}\{R\}} = \frac{\frac{a_\mu(X(t+\tau))}{\overline{a}_0^s}}{\frac{\int_t^{t+\tau}a_0^s(X(t'))dt'}{\overline{a}_0^s\tau}} = \frac{a_\mu(X(t+\tau))\tau}{\int_t^{t+\tau}a_0^s(X(t'))dt'}$$
+
+  Now:
+
+  $$p_1^s(\tau|\vec{x},t)p_2^s(j|\tau,\vec{x},t) = a_\mu(X(t+\tau))e^{-\int_t^{t+\tau}a_0^s(X(t'))dt'}$$
+
+  Which is equal to $p^s(\tau, \mu|\vec{x},t)$ proving the correctness of HRSSA.
+
+\section{Hybrid simulation with stiffness}
+Fast reactions have highly reactive species which may have a low population which quickly equilibrates to a stochastic equilibrium distribution on the time scales of slow reactions.
+This is kept changing over time due to the firings of reactions, but its distribution remains.
+This equilibrium could be altered by slow reactions.
+This behaviour is called stiffness and it often arises from the quasi-steady state (QSS) or the reaction partial equilibrium (PE).
+The former concentrates on the state, while the latter on the reactions.
+QSS assumes that the changes in populations of fast species is fast with respect to slow species, while PE assumes that fast reactions involving only fast species quickly equilibrate to a stationary distribution in the time scale of slow reactions.
+Under stiffness the behaviour of species at equilibrium is averaging and the dynamics are formulated conditionally on the limiting of these species, skipping the detailed simulation of the fast reactions.
+
+  \subsection{Formulation of reactions with stiffness}
+  Consider a biochemical network where species are partitioned into a fast $\mathcal{S}^f$ and slow $\mathcal{S}^s$.
+  If a species is highly active is a fast or intermedie species in $\mathcal{S}^f$, otherwise it is a slow or primary species.
+  The state vector is $X = (X^f, X^s)$ and the state change vector of $R_j$ is $\vec{v}_j = (\vec{v}_j^f, \vec{v}_j^s)$.
+  Let now $X(t) = (X^f(t), X^s(t)) = (\vec{x}^f, \vec{x}^s)$ the state at $t$.
+  The CME equation can be written as:
+
+  $$\frac{d\mathbb{P}\{\vec{x}^f, \vec{x}^s, t\}}{dt} = \sum\limits_{j=1}^{M}(a_j(\vec{x}^f-\vec{v}_j^f, \vec{x}^s-\vec{v}_j^s)\mathbb{P}\{\vec{x}^f-\vec{v}_j^f,\vec{x}^s-\vec{v}_j^s, t\})-\mathbb{P}\{\vec{x}^f, \vec{x}^s, t\}\sum\limits_{j=1}^Ma_j(\vec{x}^f, \vec{x}^s)$$
+
+  The initial state in the condition has been omitted to simplify the notation.
+  The probability can be factorized as:
+
+  $$\mathbb{P}\{\vec{x}^f, \vec{x}^s, t\} = \mathbb{P}\{\vec{x}^s, t\}\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}$$
+
+  Differentiating both sides with respect to time:
+
+  $$\frac{d\mathbb{P}\{\vec{x}^f,\vec{x}^s, t\}}{dt} = \mathbb{P}\{\vec{x}^f|\vec{x}^s, t\}\frac{d\mathbb{P}\{\vec{x}^s,t\}}{dt} + \mathbb{P}\{\vec{x}^s,t\}\frac{d\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}}{dt}$$
+
+  Resulting in:
+
+  \begin{align*}
+    \mathbb{P}\{\vec{x}^f|\vec{x}^s, t\}\frac{d\mathbb{P}\{\vec{x}^s,t\}}{dt} &+ \mathbb{P}\{\vec{x}^s,t\}\frac{d\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}}{dt} = \\
+                                                                              &= \sum\limits_{j=1}^M(a_j(\vec{x}^f-\vec{v}_j^f, \vec{x}^s-\vec{v}_j^s)\mathbb{P}\{\vec{x}^f-\vec{v}_j^s,t\}\mathbb{P}\{\vec{x}^s-\vec{v}_j^s,t\})+\\
+                                                                              &\quad\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}\mathbb{P}\{\vec{x}^s,t\}\sum\limits_{j=1}^Ma_j(\vec{x}^f,\vec{x}^s)
+  \end{align*}
+
+  Now summing both sides over all possible value of $\vec{x}^f$ and noting that:
+
+  \begin{itemize}
+    \item $\sum\limits_{x^f}\mathbb{P}\{\vec{x}^f|\vec{x}^s\} = 1$\;
+    \item $\sum\limits_{x^f}\frac{d\mathbb{P}\{\vec{x}^f|\vec{x}^s\}}{dt} = \frac{d\sum\limits_{x^f}\mathbb{P}\{\vec{x}^f|\vec{x}^s\}}{dt}=0$\;
+  \end{itemize}
+
+  $$\frac{d\mathbb{P}\{\vec{x}^s,t\}}{dt} = \sum\limits_{j=1}^(\hat{a}_j(\vec{x}^s-\vec{v}_j^s)\mathbb{P}\{\vec{x}^s-\vec{v}_j^s, t\})-\mathbb{P}\{\vec{x}^s,t\}\sum\limits_{j=1}^M\hat{a}_j(\vec{x}^s)$$
+
+  Where:
+
+  $$\hat{a}_j(\vec{x}_s) = \sum\limits_{x^f}a_j(\vec{x}^f,\vec{x}^s)\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}$$
+
+  Is the slow scale propensity: it is the average propensity of a reaction over a fast species.
+  This is the conditional mean of propensity $a_j(\vec{x}^f, \vec{x}^s)$ with respect to $\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}$.
+  This equation defines a CME for a slow species,
+  To simulate it the QSS assumption or the PE assumption have to be considered: the slow scale propensity is affected by the time-dependent probability $\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}$.
+  In QSSA the net change in the population of fast species is assumed to be approximately zero.
+  PEA assumes that the fast reactions that reach equilibrium remain in it.
+  These allow to approximate the slow-scale propensity and a stochastic simulation algorithm can then be adapted to simulate the dynamics of slow species.
+
+    \subsubsection{Quasi-steady state assumption}
+    Under QSSA the slow scale propensity is approximated by replacing the probability by a time-invariant one:
+
+    $$\hat{a}_j(\vec{x}^s)\approx\sum\limits_{\vec{x}^f}a_j(\vec{x}^f, \vec{x}^s)\mathbb{P}\{\vec{x}^f|\vec{x}^s\}$$
+
+    This is obtained by imposing:
+
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item The dynamics of the state $X^f$ conditional on $X^s$ is Markovian: $\mathbb{P}\{\vec{x}^f||vec{x}^s,t\}$ satisfies the CME equation.
+        \item The net change $\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}$ is approximately zero: $\frac{d\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}}{dt} = 0$.
+      \end{itemize}
+    \end{multicols}
+
+    Let $\mathcal{R}^f$ the set of fast reactions that drive $\mathcal{S}^f$ into an equilibrium.
+    Note that the fast reactions can involve a slow species state.
+    The time-invariant probability distribution is the solution of:
+
+    $$\sum\limits_{R_j\in\mathcal{R}^f}(a_j(\vec{x}^f-\vec{v}_j^f,\vec{x}^s)\mathbb{P}\{\vec{x}^f-\vec{v}_j^f|\vec{x}^s\})-\mathbb{P}\{\vec{x}^f,\vec{x}^s\}\sum\limits_{j=1}^Ma_j(\vec{x}^f,\vec{x}^s) = 0$$
+
+    \subsubsection{Partial equilibrium assumption}
+    The partial equilibrium assumption PEA is an alternative to approximate slow-scale propensity.
+    It is done by uncoupling the dynamics of $X^f$ from $X^s$ in the computation of its stationary distribution.
+    The equilibrium distribution $\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}\approx\mathbb{P}\{\vec{x}^f(\infty)\}$.
+    The slow scale propensity then is computed as:
+
+    $$\hat{a}_j(\vec{x}^s)\approx\sum\limits_{\vec{x}^f}a_j(\vec{x}^f, \vec{x}^s)\mathbb{P}\{\vec{x}^f(\infty)\}$$
+
+    Reactions are first provisionally partitioned into $\mathcal{R}^f$ and $\mathcal{R}^s$.
+    A reaction is put into $\mathcal{R}^f$ if its propensity is much larger than a reaction in $\mathcal{R}^s$.
+    Species of reactions in $\mathcal{R}^f$ are put into $\mathcal{S}^f$ with state $X^f$, while for slow one they are put into $\mathcal{S}^s$ with state $X^s$.
+    Fast species can participate as a reactant in a slow reaction while slow species cannot participate in a reactant in a fast one.
+    The behaviour of fast species can be affected by slow ones.
+    To uncouple slow species from the fast one, fast reactions are assumed to quickly reach an equilibrium distribution.
+    The dynamics of $X^f$ can uncouple from $X^s$ by defining a virtual fast process $\hat{X}^f$ composed of $X^f$ evolved through fast reactions only.
+    This virtual fast process is only dependent on fast reactions and its probability distribution satisfies a CME, and its probability reaches a stationary distribution quickly:
+
+    $$\lim\limits_{t\rightarrow\infty}\mathbb{P}\{\vec{x}^f, t\} = \mathbb{P}\{\vec{x}^f(\infty)\}$$
+
+    The stationary distribution of fast species is the solution of:
+
+    $$\sum\limits_{R_j\in\mathcal{R}^f}(a_j(\vec{x}^f-\vec{v}_j^f, \vec{x}^s)\mathbb{P}\{\vec{x}^f-\vec{v}_j^f\})-\mathbb{P}\{\vec{x}^f\}\sum\limits_{j=1}^Ma_j(\vec{x}^f,\vec{x}^s) = 0$$
+
+  \subsection{Slow-scale stochastic simulation algorithm}
+  The slow scale stochastic simulation algorithm ssSSA simulates the dynamical behaviour of slow species.
+  The species have to be partitioned into slow and fast and the fast equilibrate to a stationary distribution under QSSA or PE.
+  It supposes to be able to generate value for fast species state $X^f$ and to compute $\hat{a}_j$ assuming that there exists an explicit formula for $\mathbb{P}\{\vec{x}^f|\vec{x}^s\}$ or $\mathbb{R}\{\vec{x}^f(\infty)\}$.
+  For each slow reaction where the sum over all possible values of $X^f$ given its stationary distribution is:
+
+  $$\hat{a}_j(\vec{x}^s)\approx a_j*\langle X^f\rangle, \vec{x}^s$$
+
+  This approximation is exact it the propensity is linear with respect to fast species.
+
+    \subsubsection{Algorithm}
+    An implementation of ssSSA is outlined in algorithm \ref{algo:ssssa}.
+
+    \input{chapters/06/algorithms/ssssa}
+
+  \subsection{Nested stochastic simulation algorithm}
+  Finding an explicit analytical expression is often difficult, so is a direct computation of $\hat{a}_j$.
+  The nested stochastic algorithm nSSA is an alternative approach that approximates $\hat{a}_j$ on the fly.
+  Two nested SSA simulations are used in which the inner loop simulates the fast reaction and approximates $\hat{a}_j$, while the other simulates the slow subset.
+  Let $X(t) = (\vec{x}^f,\vec{x}^s)$, be the state at $t$.
+  The simulation is two consecutive SSAs.
+  The first computes $\hat{a}_j$ for a slow reaction while it simulates the fast reactions as:
+
+  $$\hat{a}_j(\vec{x}^s)\approx\frac{1}{K}\sum\limits_{i=1}^K\frac{1}{\Delta_{f}t}\int_{t}^{t+\Delta_ft}a_j(\vec{x}^f, \vec{x}^s)dt$$
+
+  Here $K$ and $\Delta_ft$ are predefined number of simulations and time interval for the fast reactions on which the error depends.
+  When they reach $\infty$ the computation converges to an exact value.
+  The time interval can be chosen small because the fast reactions under stiffness quickly approach the equilibrium.
+  Then the second step is used to select the next slow reaction in the slow reaction subset.
+
+    \subsubsection{Algorithm}
+    An implementation of nSSA is outlined in algorithm \ref{algo:nssa}.
+
+    \input{chapters/06/algorithms/nssa}
