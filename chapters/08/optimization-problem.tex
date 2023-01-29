@@ -1,0 +1,117 @@
+\chapter{Optimization problem}
+
+
+In general, it is a problem in which we try to \emph{maximize} or \emph{minimize}
+something. What we want to optimize is a function usually called
+\emph{objective function} (or cost function). The function depends on a
+variable or a vector of variables, called unknowns or parameters or
+parameter estimates. They may be subject to certain
+constraints(\textless,\textgreater,=).
+
+\subsection{General definition of an optimization problem}
+
+$\left.\left\{\begin{array}{ll} \max _{x \in \mathbb{R}^n} f(x) & \\ c_i(x)=0 & i=\mathcal{E}\\ f_j(x) \geq 0 & j = I \end{array}\right\} \text { set of indexes }\right] \text { Constraints (equality and inequality) }$
+\\
+\\
+\noindent
+The model (for us) is a function that gives a certain interval/time,
+initial conditions and parameters, returns the variables at that time.
+(Assume deterministic description)
+
+$m: \mathbb{R} \times \mathbb{R}^{(n+1)} \times \mathbb{R}^m \rightarrow \mathbb{R}^N$
+
+where n+1 accounts for the dimension of variables and time.
+
+$$
+\left(t_1,\left(\vec{x}_0, t_0\right), \theta\right)
+\longmapsto \vec{x}_1 $$
+
+Initial conditions in Lotka-Volterra: $((20,5), 0)$.
+\\
+\\
+\noindent
+$\theta$ represents parameters e.g.~in Lotka-Volterra, $a,b,\beta,\alpha$. Now, assume that we have $k$ observations:
+
+$(t_i ,\vec{y}_i), i=1, \ldots k$ , where
+$t_i \in \mathbb{R}^+, \vec{y}_i \in \mathbb{R}^\ell$
+\noindent
+$y$ in theory can be a subset, $\ell<N$ : this happens a lot in complex
+systems, we may not observe all variables! For simplicity, we can assume
+$\ell=N$. Assuming that we can compute the following:
+
+$$m\left(t_1,\left(\vec{x}_0, t_0\right), \theta\right) \in \mathbb{R}^{N} =_{\text{drop initial point notation}} m(t_i,\theta)$$
+\noindent
+We can compute distance: $d_i=\vec{y}_i-m(t_i, \theta)$.
+\noindent
+We can choose any type of distance (Euclidean, max\ldots). What we do is
+calculating point-wise the distance between the model and `true' labels.
+It is quite common to use the \textbf{\emph{Euclidean distance}}:
+$$d \varepsilon =\sqrt{\sum_{i=1}^k(\vec{y}_i,-m(t_i, \theta))^2}\\
+\rightarrow d{\varepsilon}-\sqrt{\sum_{i=1}^{K} \sum_{j=1}^{N} \left(y_{ij}-m_j\left(t_i, \theta\right)\right)^2}$$
+\noindent
+Sometimes we need need to add weights, which multiply each component in
+the distances. We are putting together many outputs from the same model,
+so we might want to scale everything to make it more comparable.
+Furthermore, variables might be in different units of measurement,
+leading to biased results.
+\\
+\\
+\noindent
+Observations:
+
+\begin{itemize}
+\tightlist
+\item
+  we do not want to reach ``zero'' when minimizing. Indeed, if the
+  residual error $=0$, we are $100 \%$ sure that we are overfitting the
+  data.
+\item
+  we need to really understand the data to construct the model
+\item
+  we are manipulating $\theta$ in the space of the parameters, but we
+  modify the output in the space of the observations: we are connecting
+  abstract values to observations - like parameters for maximum
+  likelihood.
+\end{itemize}
+
+\noindent
+Weights are multiplicative factors, sometimes we might wish to
+\emph{transform} the distance.
+\\
+\\
+\noindent
+Example:  \textbf{Least squares algorithm}
+
+$$d{\varepsilon}=\sqrt{\sum \sum W_{ij}\left(y_{ij}-m_j\left(t_i, \theta\right)\right)}$$
+
+\noindent
+Our problem is to minimize/maximize a function. Assume:
+
+$$
+\min f(x), x \in \mathbb{R}^n
+$$
+
+\subsection{Definition of a minimum}
+
+A point $x^*$ is called \textbf{minimum} if
+$\exists \varepsilon > 0 : \forall x : || x- x^* || < \varepsilon$
+
+$$
+\Rightarrow f(x) \geq f(x^*) \\
+$$
+\noindent
+{[}For the maximum $f(x) \leq f(x^*)${]}
+\\
+\\
+\noindent
+The minimum is \textbf{\emph{global}} if $\forall x \in \mathbb{R}^n$
+(or in our domain) $f(x) \geq f(x^*)$. In general it is not easy to
+determine global minimum/maximum, especially if we have a lot of
+dimensions.
+\noindent
+To find minima or maxima, we should impose $f'(x)=0$.
+\\
+\\
+\noindent
+We call a \textbf{\emph{stationary point}}, a
+$\bar{x} \text{ s.t.} f'(\bar{x})=0$.

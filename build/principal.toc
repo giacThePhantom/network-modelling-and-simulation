@@ -1,428 +1,430 @@
 \babel@toc {english}{}\relax 
-\contentsline {chapter}{\numberline {1}Introduction}{6}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Introduction}{6}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}Cells}{6}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.1.2}Biochemical reactions}{6}{subsection.1.1.2}%
-\contentsline {subsubsection}{\numberline {1.1.2.1}Reaction kinetics}{6}{subsubsection.1.1.2.1}%
-\contentsline {subsubsection}{\numberline {1.1.2.2}Pathways}{6}{subsubsection.1.1.2.2}%
-\contentsline {subsection}{\numberline {1.1.3}Systems biology}{7}{subsection.1.1.3}%
-\contentsline {subsubsection}{\numberline {1.1.3.1}Challenges of system biology}{7}{subsubsection.1.1.3.1}%
-\contentsline {subsubsection}{\numberline {1.1.3.2}Stochasticity}{7}{subsubsection.1.1.3.2}%
-\contentsline {subsection}{\numberline {1.1.4}Computational tools}{7}{subsection.1.1.4}%
-\contentsline {subsubsection}{\numberline {1.1.4.1}Biological models}{7}{subsubsection.1.1.4.1}%
-\contentsline {subsubsection}{\numberline {1.1.4.2}Computer simulation}{7}{subsubsection.1.1.4.2}%
-\contentsline {subsubsection}{\numberline {1.1.4.3}Advantages and applications of in silico experiment}{8}{subsubsection.1.1.4.3}%
-\contentsline {subsection}{\numberline {1.1.5}Synthetic biology}{8}{subsection.1.1.5}%
-\contentsline {section}{\numberline {1.2}Different levels of simulation}{8}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Molecular dynamics}{8}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Brownian dynamics}{8}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Deterministic simulation}{9}{subsection.1.2.3}%
-\contentsline {subsection}{\numberline {1.2.4}Stochastic simulation}{9}{subsection.1.2.4}%
-\contentsline {subsection}{\numberline {1.2.5}Problems with stochastic simulations}{9}{subsection.1.2.5}%
-\contentsline {section}{\numberline {1.3}Network modeling}{10}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Logic models}{10}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Petri nets}{10}{subsection.1.3.2}%
-\contentsline {subsection}{\numberline {1.3.3}Rewriting systems}{11}{subsection.1.3.3}%
-\contentsline {subsubsection}{\numberline {1.3.3.1}P systems}{11}{subsubsection.1.3.3.1}%
-\contentsline {subsubsection}{\numberline {1.3.3.2}MP systems}{12}{subsubsection.1.3.3.2}%
-\contentsline {subsection}{\numberline {1.3.4}Equation-based approach}{12}{subsection.1.3.4}%
-\contentsline {subsubsection}{\numberline {1.3.4.1}ODE systems}{12}{subsubsection.1.3.4.1}%
-\contentsline {subsection}{\numberline {1.3.5}Simulation algorithms}{12}{subsection.1.3.5}%
-\contentsline {subsubsection}{\numberline {1.3.5.1}Reaction propensity}{12}{subsubsection.1.3.5.1}%
-\contentsline {chapter}{\numberline {2}Stochastic simulation of biochemical reaction systems}{13}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Introduction}{13}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Stochastic chemical kinetics}{13}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Rewriting biochemical reactions}{13}{subsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.1.1}Representing molecular reactions}{13}{subsubsection.2.2.1.1}%
-\contentsline {paragraph}{\numberline {2.2.1.1.1}Some elementary reactions}{13}{paragraph.2.2.1.1.1}%
-\contentsline {subparagraph}{\numberline {2.2.1.1.1.1}Unimolecolar reaction}{13}{subparagraph.2.2.1.1.1.1}%
-\contentsline {subparagraph}{\numberline {2.2.1.1.1.2}Degradation}{14}{subparagraph.2.2.1.1.1.2}%
-\contentsline {subparagraph}{\numberline {2.2.1.1.1.3}Synthesis}{14}{subparagraph.2.2.1.1.1.3}%
-\contentsline {subparagraph}{\numberline {2.2.1.1.1.4}Bimolecular reaction}{14}{subparagraph.2.2.1.1.1.4}%
-\contentsline {subparagraph}{\numberline {2.2.1.1.1.5}Dimerization}{14}{subparagraph.2.2.1.1.1.5}%
-\contentsline {paragraph}{\numberline {2.2.1.1.2}Some non-elementary reactions}{14}{paragraph.2.2.1.1.2}%
-\contentsline {subparagraph}{\numberline {2.2.1.1.2.1}Termolecular reaction}{14}{subparagraph.2.2.1.1.2.1}%
-\contentsline {subparagraph}{\numberline {2.2.1.1.2.2}Enzymatic reaction}{14}{subparagraph.2.2.1.1.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.1.2}Equation-based methods}{15}{subsubsection.2.2.1.2}%
-\contentsline {subsubsection}{\numberline {2.2.1.3}Creating a formal mathematical description of a biological system}{15}{subsubsection.2.2.1.3}%
-\contentsline {subsubsection}{\numberline {2.2.1.4}Well-mixed reaction volume}{15}{subsubsection.2.2.1.4}%
-\contentsline {subsubsection}{\numberline {2.2.1.5}Formal representation}{15}{subsubsection.2.2.1.5}%
-\contentsline {subsubsection}{\numberline {2.2.1.6}Stoichiometric matrix}{16}{subsubsection.2.2.1.6}%
-\contentsline {subsubsection}{\numberline {2.2.1.7}Summary}{16}{subsubsection.2.2.1.7}%
-\contentsline {subsection}{\numberline {2.2.2}Reaction propensity}{17}{subsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.2.1}Definition}{17}{subsubsection.2.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.2.2}Value of the propensity}{17}{subsubsection.2.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.2.3}Mass action propensity}{18}{subsubsection.2.2.2.3}%
-\contentsline {paragraph}{\numberline {2.2.2.3.1}The stochastic rate}{18}{paragraph.2.2.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.2.2.4}Reaction propensity for reactions $ R_j$ with mass action kinetics}{18}{subsubsection.2.2.2.4}%
-\contentsline {subsubsection}{\numberline {2.2.2.5}Complex reaction kinetics}{19}{subsubsection.2.2.2.5}%
-\contentsline {paragraph}{\numberline {2.2.2.5.1}Michaelis-Menten kinetics}{19}{paragraph.2.2.2.5.1}%
-\contentsline {subsection}{\numberline {2.2.3}Chemical Master Equation}{19}{subsection.2.2.3}%
-\contentsline {subsubsection}{\numberline {2.2.3.1}Grand probability function}{19}{subsubsection.2.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.2.3.2}Deriving the chemical master equation}{19}{subsubsection.2.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.2.3.3}Limitations of the chemical master equation}{21}{subsubsection.2.2.3.3}%
-\contentsline {section}{\numberline {2.3}Stochastic simulation}{21}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Probability density function}{21}{subsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.1.1}Computing the probability density function}{21}{subsubsection.2.3.1.1}%
-\contentsline {subsection}{\numberline {2.3.2}Stochastic simulation algorithm}{23}{subsection.2.3.2}%
-\contentsline {section}{\numberline {2.4}Simulation output analysis}{24}{section.2.4}%
-\contentsline {subsection}{\numberline {2.4.1}Confidence interval estimation}{24}{subsection.2.4.1}%
-\contentsline {subsection}{\numberline {2.4.2}Probability distribution equation}{25}{subsection.2.4.2}%
-\contentsline {chapter}{\numberline {3}Implementation of the Stochastic Simulation Algorithms}{26}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introduction}{26}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Non-deterministic vs stochastic}{26}{subsection.3.1.1}%
-\contentsline {subsubsection}{\numberline {3.1.1.1}Exact stochastic simulation}{26}{subsubsection.3.1.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}Advantages of a non-deterministic approach}{26}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Categories of the exact simulation algorithms}{26}{subsection.3.1.3}%
-\contentsline {section}{\numberline {3.2}Direct method}{27}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Mathematical discussion}{28}{subsection.3.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.1}Choice of the reaction}{29}{subsubsection.3.2.1.1}%
-\contentsline {subsubsection}{\numberline {3.2.1.2}Selection of the firing time}{29}{subsubsection.3.2.1.2}%
-\contentsline {subsection}{\numberline {3.2.2}The algorithm}{29}{subsection.3.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.2.1}Time complexity}{30}{subsubsection.3.2.2.1}%
-\contentsline {subsection}{\numberline {3.2.3}Enhanced direct method}{30}{subsection.3.2.3}%
-\contentsline {subsubsection}{\numberline {3.2.3.1}Reaction dependency graph}{31}{subsubsection.3.2.3.1}%
-\contentsline {paragraph}{\numberline {3.2.3.1.1}Some definitions}{31}{paragraph.3.2.3.1.1}%
-\contentsline {subparagraph}{\numberline {3.2.3.1.1.1}Reactants and products set}{31}{subparagraph.3.2.3.1.1.1}%
-\contentsline {subparagraph}{\numberline {3.2.3.1.1.2}Affects set}{31}{subparagraph.3.2.3.1.1.2}%
-\contentsline {subparagraph}{\numberline {3.2.3.1.1.3}Mass action kinetics}{31}{subparagraph.3.2.3.1.1.3}%
-\contentsline {subparagraph}{\numberline {3.2.3.1.1.4}AffectedBy set}{31}{subparagraph.3.2.3.1.1.4}%
-\contentsline {subparagraph}{\numberline {3.2.3.1.1.5}Population of AffectedBy}{31}{subparagraph.3.2.3.1.1.5}%
-\contentsline {paragraph}{\numberline {3.2.3.1.2}Definition of the reaction dependency graph}{31}{paragraph.3.2.3.1.2}%
-\contentsline {paragraph}{\numberline {3.2.3.1.3}Dependent reactions}{32}{paragraph.3.2.3.1.3}%
-\contentsline {subsubsection}{\numberline {3.2.3.2}Algorithm}{32}{subsubsection.3.2.3.2}%
-\contentsline {subsection}{\numberline {3.2.4}Improvements for Direct Method}{33}{subsection.3.2.4}%
-\contentsline {subsubsection}{\numberline {3.2.4.1}Direct method with sorted reaction}{33}{subsubsection.3.2.4.1}%
-\contentsline {paragraph}{\numberline {3.2.4.1.1}Optimized direct method}{33}{paragraph.3.2.4.1.1}%
-\contentsline {subparagraph}{\numberline {3.2.4.1.1.1}Average search depth}{33}{subparagraph.3.2.4.1.1.1}%
-\contentsline {subparagraph}{\numberline {3.2.4.1.1.2}Algorithm}{33}{subparagraph.3.2.4.1.1.2}%
-\contentsline {subparagraph}{\numberline {3.2.4.1.1.3}Discussion}{34}{subparagraph.3.2.4.1.1.3}%
-\contentsline {paragraph}{\numberline {3.2.4.1.2}Sorting direct method}{34}{paragraph.3.2.4.1.2}%
-\contentsline {subparagraph}{\numberline {3.2.4.1.2.1}Algorithm}{34}{subparagraph.3.2.4.1.2.1}%
-\contentsline {subparagraph}{\numberline {3.2.4.1.2.2}Discussion}{35}{subparagraph.3.2.4.1.2.2}%
-\contentsline {subsubsection}{\numberline {3.2.4.2}Direct method with Multi-level search}{35}{subsubsection.3.2.4.2}%
-\contentsline {paragraph}{\numberline {3.2.4.2.1}Exactness of the multi level search}{36}{paragraph.3.2.4.2.1}%
-\contentsline {paragraph}{\numberline {3.2.4.2.2}Implementation}{36}{paragraph.3.2.4.2.2}%
-\contentsline {paragraph}{\numberline {3.2.4.2.3}Algorithm}{36}{paragraph.3.2.4.2.3}%
-\contentsline {paragraph}{\numberline {3.2.4.2.4}Discussion}{37}{paragraph.3.2.4.2.4}%
-\contentsline {subsubsection}{\numberline {3.2.4.3}Direct method with tree-based search}{38}{subsubsection.3.2.4.3}%
-\contentsline {paragraph}{\numberline {3.2.4.3.1}Dimension of a complete tree}{38}{paragraph.3.2.4.3.1}%
-\contentsline {paragraph}{\numberline {3.2.4.3.2}Implementation of the tree}{38}{paragraph.3.2.4.3.2}%
-\contentsline {paragraph}{\numberline {3.2.4.3.3}Tree-based search}{38}{paragraph.3.2.4.3.3}%
-\contentsline {paragraph}{\numberline {3.2.4.3.4}Updating the tree}{39}{paragraph.3.2.4.3.4}%
-\contentsline {paragraph}{\numberline {3.2.4.3.5}Algorithm}{39}{paragraph.3.2.4.3.5}%
-\contentsline {paragraph}{\numberline {3.2.4.3.6}Discussion}{40}{paragraph.3.2.4.3.6}%
-\contentsline {paragraph}{\numberline {3.2.4.3.7}Tree with optimal height}{40}{paragraph.3.2.4.3.7}%
-\contentsline {subparagraph}{\numberline {3.2.4.3.7.1}Average number of comparison}{40}{subparagraph.3.2.4.3.7.1}%
-\contentsline {subparagraph}{\numberline {3.2.4.3.7.2}Complete tree}{40}{subparagraph.3.2.4.3.7.2}%
-\contentsline {subparagraph}{\numberline {3.2.4.3.7.3}Huffman tree}{41}{subparagraph.3.2.4.3.7.3}%
-\contentsline {subparagraph}{\numberline {3.2.4.3.7.4}Building the Huffman tree}{41}{subparagraph.3.2.4.3.7.4}%
-\contentsline {subparagraph}{\numberline {3.2.4.3.7.5}Selecting the weight}{42}{subparagraph.3.2.4.3.7.5}%
-\contentsline {subparagraph}{\numberline {3.2.4.3.7.6}Fixed time tree rebuilding}{42}{subparagraph.3.2.4.3.7.6}%
-\contentsline {subparagraph}{\numberline {3.2.4.3.7.7}Adaptive time tree rebuilding}{43}{subparagraph.3.2.4.3.7.7}%
-\contentsline {subsubsection}{\numberline {3.2.4.4}Direct method with composition-rejection search}{43}{subsubsection.3.2.4.4}%
-\contentsline {paragraph}{\numberline {3.2.4.4.1}Search for the next reaction}{43}{paragraph.3.2.4.4.1}%
-\contentsline {subparagraph}{\numberline {3.2.4.4.1.1}First step}{43}{subparagraph.3.2.4.4.1.1}%
-\contentsline {subparagraph}{\numberline {3.2.4.4.1.2}Second step}{43}{subparagraph.3.2.4.4.1.2}%
-\contentsline {paragraph}{\numberline {3.2.4.4.2}Algorithm}{43}{paragraph.3.2.4.4.2}%
-\contentsline {paragraph}{\numberline {3.2.4.4.3}Discussion}{44}{paragraph.3.2.4.4.3}%
-\contentsline {subparagraph}{\numberline {3.2.4.4.3.1}Computational cost}{45}{subparagraph.3.2.4.4.3.1}%
-\contentsline {subsection}{\numberline {3.2.5}Partial-propensity direct method}{45}{subsection.3.2.5}%
-\contentsline {subsubsection}{\numberline {3.2.5.1}Partial propensities of elementary reactions}{45}{subsubsection.3.2.5.1}%
-\contentsline {subsubsection}{\numberline {3.2.5.2}Storing the partial propensities}{45}{subsubsection.3.2.5.2}%
-\contentsline {paragraph}{\numberline {3.2.5.2.1}Minimizing updates}{45}{paragraph.3.2.5.2.1}%
-\contentsline {subsubsection}{\numberline {3.2.5.3}Group-sum array}{46}{subsubsection.3.2.5.3}%
-\contentsline {subsubsection}{\numberline {3.2.5.4}Reaction lookup}{46}{subsubsection.3.2.5.4}%
-\contentsline {subsubsection}{\numberline {3.2.5.5}Selecting the reaction firing}{46}{subsubsection.3.2.5.5}%
-\contentsline {paragraph}{\numberline {3.2.5.5.1}First step}{46}{paragraph.3.2.5.5.1}%
-\contentsline {paragraph}{\numberline {3.2.5.5.2}Second step}{46}{paragraph.3.2.5.5.2}%
-\contentsline {subsubsection}{\numberline {3.2.5.6}Exactness of PDM}{47}{subsubsection.3.2.5.6}%
-\contentsline {subsubsection}{\numberline {3.2.5.7}Algorithm}{47}{subsubsection.3.2.5.7}%
-\contentsline {paragraph}{\numberline {3.2.5.7.1}Discussion}{49}{paragraph.3.2.5.7.1}%
-\contentsline {subparagraph}{\numberline {3.2.5.7.1.1}Time complexity}{49}{subparagraph.3.2.5.7.1.1}%
-\contentsline {subparagraph}{\numberline {3.2.5.7.1.2}Limitations}{49}{subparagraph.3.2.5.7.1.2}%
-\contentsline {subsubsection}{\numberline {3.2.5.8}Partial propensity direct method with composition-rejection search}{49}{subsubsection.3.2.5.8}%
-\contentsline {paragraph}{\numberline {3.2.5.8.1}Selection of the next reaction firing}{49}{paragraph.3.2.5.8.1}%
-\contentsline {subparagraph}{\numberline {3.2.5.8.1.1}Selecting group index}{49}{subparagraph.3.2.5.8.1.1}%
-\contentsline {subparagraph}{\numberline {3.2.5.8.1.2}Selecting element index}{50}{subparagraph.3.2.5.8.1.2}%
-\contentsline {paragraph}{\numberline {3.2.5.8.2}Algorithm}{50}{paragraph.3.2.5.8.2}%
-\contentsline {section}{\numberline {3.3}First reaction method}{51}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Tentative time}{51}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Exactness of the first reaction method}{52}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Algorithm}{53}{subsection.3.3.3}%
-\contentsline {subsubsection}{\numberline {3.3.3.1}Time complexity}{53}{subsubsection.3.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.4}First family method}{54}{subsection.3.3.4}%
-\contentsline {subsubsection}{\numberline {3.3.4.1}Next reaction event}{54}{subsubsection.3.3.4.1}%
-\contentsline {paragraph}{\numberline {3.3.4.1.1}Selection of the family}{54}{paragraph.3.3.4.1.1}%
-\contentsline {paragraph}{\numberline {3.3.4.1.2}Selection of the reaction}{54}{paragraph.3.3.4.1.2}%
-\contentsline {subsubsection}{\numberline {3.3.4.2}Algorithm}{54}{subsubsection.3.3.4.2}%
-\contentsline {paragraph}{\numberline {3.3.4.2.1}Discussion}{55}{paragraph.3.3.4.2.1}%
-\contentsline {subparagraph}{\numberline {3.3.4.2.1.1}Performance}{55}{subparagraph.3.3.4.2.1.1}%
-\contentsline {subparagraph}{\numberline {3.3.4.2.1.2}Comparison with DM and FRM}{55}{subparagraph.3.3.4.2.1.2}%
-\contentsline {section}{\numberline {3.4}Next reaction method}{55}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Absolute tentative time}{56}{subsection.3.4.1}%
-\contentsline {subsubsection}{\numberline {3.4.1.1}Distribution of the residual time}{56}{subsubsection.3.4.1.1}%
-\contentsline {subsubsection}{\numberline {3.4.1.2}Relationship between absolute and relative tentative time}{56}{subsubsection.3.4.1.2}%
-\contentsline {subsubsection}{\numberline {3.4.1.3}Computing the absolute time}{57}{subsubsection.3.4.1.3}%
-\contentsline {paragraph}{\numberline {3.4.1.3.1}Computing the new tentative time}{57}{paragraph.3.4.1.3.1}%
-\contentsline {subsubsection}{\numberline {3.4.1.4}Conclusion}{58}{subsubsection.3.4.1.4}%
-\contentsline {subsection}{\numberline {3.4.2}Data structures}{58}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Algorithm}{58}{subsection.3.4.3}%
-\contentsline {subsubsection}{\numberline {3.4.3.1}Discussion}{59}{subsubsection.3.4.3.1}%
-\contentsline {paragraph}{\numberline {3.4.3.1.1}Time complexity}{59}{paragraph.3.4.3.1.1}%
-\contentsline {paragraph}{\numberline {3.4.3.1.2}Inactive reaction}{59}{paragraph.3.4.3.1.2}%
-\contentsline {subsection}{\numberline {3.4.4}Modified next reaction method}{60}{subsection.3.4.4}%
-\contentsline {subsubsection}{\numberline {3.4.4.1}Poisson process}{60}{subsubsection.3.4.4.1}%
-\contentsline {paragraph}{\numberline {3.4.4.1.1}$Y(t)$ is a Poisson distribution}{60}{paragraph.3.4.4.1.1}%
-\contentsline {paragraph}{\numberline {3.4.4.1.2}The time to the next event is an exponential distribution}{60}{paragraph.3.4.4.1.2}%
-\contentsline {subsubsection}{\numberline {3.4.4.2}Unit Poisson process}{61}{subsubsection.3.4.4.2}%
-\contentsline {subsubsection}{\numberline {3.4.4.3}Random time change representation}{61}{subsubsection.3.4.4.3}%
-\contentsline {subsubsection}{\numberline {3.4.4.4}Internal time}{61}{subsubsection.3.4.4.4}%
-\contentsline {paragraph}{\numberline {3.4.4.4.1}Computing the tentative time}{61}{paragraph.3.4.4.4.1}%
-\contentsline {paragraph}{\numberline {3.4.4.4.2}Updating the firing time}{62}{paragraph.3.4.4.4.2}%
-\contentsline {subsubsection}{\numberline {3.4.4.5}Algorithm}{62}{subsubsection.3.4.4.5}%
-\contentsline {paragraph}{\numberline {3.4.4.5.1}Discussion}{63}{paragraph.3.4.4.5.1}%
-\contentsline {section}{\numberline {3.5}Rejection Based stochastic simulation algorithm}{63}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Fluctuation interval}{64}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Abstract propensity value}{64}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Selection of the next reaction}{64}{subsection.3.5.3}%
-\contentsline {subsubsection}{\numberline {3.5.3.1}Simulation of the abstract model}{64}{subsubsection.3.5.3.1}%
-\contentsline {subsubsection}{\numberline {3.5.3.2}Acceptance of the abstract model}{64}{subsubsection.3.5.3.2}%
-\contentsline {subsection}{\numberline {3.5.4}Advancement of the simulation}{65}{subsection.3.5.4}%
-\contentsline {subsection}{\numberline {3.5.5}Exactness of RSSA}{65}{subsection.3.5.5}%
-\contentsline {subsubsection}{\numberline {3.5.5.1}Bounds on the acceptance probability}{66}{subsubsection.3.5.5.1}%
-\contentsline {subsection}{\numberline {3.5.6}Evolution of the state}{66}{subsection.3.5.6}%
-\contentsline {subsubsection}{\numberline {3.5.6.1}Species-Reaction dependency graph}{67}{subsubsection.3.5.6.1}%
-\contentsline {subsection}{\numberline {3.5.7}Algorithm}{67}{subsection.3.5.7}%
-\contentsline {subsubsection}{\numberline {3.5.7.1}Discussion}{69}{subsubsection.3.5.7.1}%
-\contentsline {paragraph}{\numberline {3.5.7.1.1}Time complexity}{69}{paragraph.3.5.7.1.1}%
-\contentsline {subsection}{\numberline {3.5.8}Simultaneous RSSA}{69}{subsection.3.5.8}%
-\contentsline {subsubsection}{\numberline {3.5.8.1}Global fluctuation interval}{69}{subsubsection.3.5.8.1}%
-\contentsline {subsubsection}{\numberline {3.5.8.2}Algorithm}{69}{subsubsection.3.5.8.2}%
-\contentsline {subsection}{\numberline {3.5.9}Improvements for RSSA}{71}{subsection.3.5.9}%
-\contentsline {subsubsection}{\numberline {3.5.9.1}RSSA with tree-based search}{71}{subsubsection.3.5.9.1}%
-\contentsline {paragraph}{\numberline {3.5.9.1.1}Algorithm}{71}{paragraph.3.5.9.1.1}%
-\contentsline {subsubsection}{\numberline {3.5.9.2}RSSA with composition-rejection search}{73}{subsubsection.3.5.9.2}%
-\contentsline {paragraph}{\numberline {3.5.9.2.1}Selection of the next reaction}{73}{paragraph.3.5.9.2.1}%
-\contentsline {subparagraph}{\numberline {3.5.9.2.1.1}Selection of a group}{73}{subparagraph.3.5.9.2.1.1}%
-\contentsline {subparagraph}{\numberline {3.5.9.2.1.2}Selection of a reaction}{73}{subparagraph.3.5.9.2.1.2}%
-\contentsline {paragraph}{\numberline {3.5.9.2.2}Firing time}{73}{paragraph.3.5.9.2.2}%
-\contentsline {paragraph}{\numberline {3.5.9.2.3}Algorithm}{73}{paragraph.3.5.9.2.3}%
-\contentsline {paragraph}{\numberline {3.5.9.2.4}Discussion}{75}{paragraph.3.5.9.2.4}%
-\contentsline {subparagraph}{\numberline {3.5.9.2.4.1}Time complexity}{75}{subparagraph.3.5.9.2.4.1}%
-\contentsline {subsubsection}{\numberline {3.5.9.3}RSSA with table-lookup search}{75}{subsubsection.3.5.9.3}%
-\contentsline {paragraph}{\numberline {3.5.9.3.1}Building the tables}{75}{paragraph.3.5.9.3.1}%
-\contentsline {paragraph}{\numberline {3.5.9.3.2}Search for the candidate reaction}{76}{paragraph.3.5.9.3.2}%
-\contentsline {paragraph}{\numberline {3.5.9.3.3}Algorithm}{76}{paragraph.3.5.9.3.3}%
-\contentsline {paragraph}{\numberline {3.5.9.3.4}Discussion}{78}{paragraph.3.5.9.3.4}%
-\contentsline {chapter}{\numberline {4}Approximation algorithms}{79}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduction}{79}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Probability-Weighted Dynamic Monte Carlo Method}{79}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Weighted sampling}{81}{subsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.1.1}Effective propensity}{81}{subsubsection.4.2.1.1}%
-\contentsline {subsection}{\numberline {4.2.2}Realization of the reaction firing}{81}{subsection.4.2.2}%
-\contentsline {subsubsection}{\numberline {4.2.2.1}Selection of the reactoin}{81}{subsubsection.4.2.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.2.2}Correction of the firing time}{81}{subsubsection.4.2.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Bounds on the weights}{82}{subsection.4.2.3}%
-\contentsline {subsection}{\numberline {4.2.4}Algorithm}{82}{subsection.4.2.4}%
-\contentsline {subsection}{\numberline {4.2.5}Discussion}{82}{subsection.4.2.5}%
-\contentsline {subsubsection}{\numberline {4.2.5.1}Time complexity}{82}{subsubsection.4.2.5.1}%
-\contentsline {subsubsection}{\numberline {4.2.5.2}Limitations}{83}{subsubsection.4.2.5.2}%
-\contentsline {section}{\numberline {4.3}Bounded acceptance probability RSSA}{83}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Defining the bounds}{83}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Defining the fluctuation interval}{83}{subsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.2.1}Computing the maximum fluctuation rate}{83}{subsubsection.4.3.2.1}%
-\contentsline {paragraph}{\numberline {4.3.2.1.1}Synthesis reaction}{84}{paragraph.4.3.2.1.1}%
-\contentsline {paragraph}{\numberline {4.3.2.1.2}Unimolecolar reaction}{84}{paragraph.4.3.2.1.2}%
-\contentsline {paragraph}{\numberline {4.3.2.1.3}Bimolecular reaction}{84}{paragraph.4.3.2.1.3}%
-\contentsline {paragraph}{\numberline {4.3.2.1.4}Dimerization reaction}{84}{paragraph.4.3.2.1.4}%
-\contentsline {subsection}{\numberline {4.3.3}Selecting the propensity}{84}{subsection.4.3.3}%
-\contentsline {subsection}{\numberline {4.3.4}Algorithm}{85}{subsection.4.3.4}%
-\contentsline {subsection}{\numberline {4.3.5}Discussion}{86}{subsection.4.3.5}%
-\contentsline {subsubsection}{\numberline {4.3.5.1}Time complexity}{86}{subsubsection.4.3.5.1}%
-\contentsline {section}{\numberline {4.4}$\mathbf {\tau }$-Leaping method}{86}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Simulation time}{86}{subsection.4.4.1}%
-\contentsline {subsubsection}{\numberline {4.4.1.1}Leap condition}{86}{subsubsection.4.4.1.1}%
-\contentsline {subsection}{\numberline {4.4.2}Advancing the simulation time}{87}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Issues}{87}{subsection.4.4.3}%
-\contentsline {subsubsection}{\numberline {4.4.3.1}Efficiency and accuracy}{87}{subsubsection.4.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.4.3.2}Negative population of reactant species}{87}{subsubsection.4.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.4.3.3}Switch to exact simulation}{87}{subsubsection.4.4.3.3}%
-\contentsline {subsection}{\numberline {4.4.4}Leap selection}{87}{subsection.4.4.4}%
-\contentsline {subsubsection}{\numberline {4.4.4.1}Postleap $\mathbf {\tau }$ selection}{87}{subsubsection.4.4.4.1}%
-\contentsline {paragraph}{\numberline {4.4.4.1.1}Issues}{88}{paragraph.4.4.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.4.4.2}Preleap $\mathbf {\tau }$ selection}{88}{subsubsection.4.4.4.2}%
-\contentsline {paragraph}{\numberline {4.4.4.2.1}Bounding changes in propensities}{88}{paragraph.4.4.4.2.1}%
-\contentsline {paragraph}{\numberline {4.4.4.2.2}Bounding changes in species population}{89}{paragraph.4.4.4.2.2}%
-\contentsline {subparagraph}{\numberline {4.4.4.2.2.1}Unimolecolar reaction}{90}{subparagraph.4.4.4.2.2.1}%
-\contentsline {subparagraph}{\numberline {4.4.4.2.2.2}Bimolecular reaction}{90}{subparagraph.4.4.4.2.2.2}%
-\contentsline {subparagraph}{\numberline {4.4.4.2.2.3}Dimerization reaction}{90}{subparagraph.4.4.4.2.2.3}%
-\contentsline {subparagraph}{\numberline {4.4.4.2.2.4}Approximating the change in population}{90}{subparagraph.4.4.4.2.2.4}%
-\contentsline {subsection}{\numberline {4.4.5}Avoiding the negative population problem}{91}{subsection.4.4.5}%
-\contentsline {subsubsection}{\numberline {4.4.5.1}The number of firings is greater than the current population of reactants}{91}{subsubsection.4.4.5.1}%
-\contentsline {subsubsection}{\numberline {4.4.5.2}Simultaneous firing of multiple reactions}{91}{subsubsection.4.4.5.2}%
-\contentsline {subsubsection}{\numberline {4.4.5.3}Handling the negative population problem}{91}{subsubsection.4.4.5.3}%
-\contentsline {subsection}{\numberline {4.4.6}Switching to exact simulation}{91}{subsection.4.4.6}%
-\contentsline {subsection}{\numberline {4.4.7}The $\mathbf {\tau }$-leaping algorithm}{91}{subsection.4.4.7}%
-\contentsline {subsection}{\numberline {4.4.8}Improvements for $\mathbf {\tau }$-leaping}{92}{subsection.4.4.8}%
-\contentsline {subsubsection}{\numberline {4.4.8.1}Modified $\mathbf {\tau }$-leaping}{92}{subsubsection.4.4.8.1}%
-\contentsline {paragraph}{\numberline {4.4.8.1.1}Permitted firings}{92}{paragraph.4.4.8.1.1}%
-\contentsline {paragraph}{\numberline {4.4.8.1.2}Critical reactions}{93}{paragraph.4.4.8.1.2}%
-\contentsline {paragraph}{\numberline {4.4.8.1.3}Firing of reactions}{93}{paragraph.4.4.8.1.3}%
-\contentsline {paragraph}{\numberline {4.4.8.1.4}algorithm}{93}{paragraph.4.4.8.1.4}%
-\contentsline {paragraph}{\numberline {4.4.8.1.5}Discussion}{95}{paragraph.4.4.8.1.5}%
-\contentsline {subsubsection}{\numberline {4.4.8.2}Binomial $\mathbf {\tau }$-leaping}{95}{subsubsection.4.4.8.2}%
-\contentsline {paragraph}{\numberline {4.4.8.2.1}The binomial distribution}{95}{paragraph.4.4.8.2.1}%
-\contentsline {paragraph}{\numberline {4.4.8.2.2}Species involved in many reactions}{95}{paragraph.4.4.8.2.2}%
-\contentsline {paragraph}{\numberline {4.4.8.2.3}Algorithm}{95}{paragraph.4.4.8.2.3}%
-\contentsline {paragraph}{\numberline {4.4.8.2.4}Discussion}{96}{paragraph.4.4.8.2.4}%
-\contentsline {subsubsection}{\numberline {4.4.8.3}Implicit $\mathbf {\tau }$-leaping}{96}{subsubsection.4.4.8.3}%
-\contentsline {paragraph}{\numberline {4.4.8.3.1}Correction term}{97}{paragraph.4.4.8.3.1}%
-\contentsline {paragraph}{\numberline {4.4.8.3.2}Algorithm}{97}{paragraph.4.4.8.3.2}%
-\contentsline {paragraph}{\numberline {4.4.8.3.3}Discussion}{97}{paragraph.4.4.8.3.3}%
-\contentsline {section}{\numberline {4.5}$\mathbf {k_\alpha }$-leaping method}{98}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Computing the time length}{98}{subsection.4.5.1}%
-\contentsline {subsection}{\numberline {4.5.2}Selecting the number of firings}{98}{subsection.4.5.2}%
-\contentsline {subsection}{\numberline {4.5.3}Algorithm}{98}{subsection.4.5.3}%
-\contentsline {subsection}{\numberline {4.5.4}Discussion}{99}{subsection.4.5.4}%
-\contentsline {subsection}{\numberline {4.5.5}K-leaping method}{99}{subsection.4.5.5}%
-\contentsline {subsubsection}{\numberline {4.5.5.1}Number of firing}{100}{subsubsection.4.5.5.1}%
-\contentsline {subsubsection}{\numberline {4.5.5.2}Selecting K}{100}{subsubsection.4.5.5.2}%
-\contentsline {subsubsection}{\numberline {4.5.5.3}Algorithm}{101}{subsubsection.4.5.5.3}%
-\contentsline {subsubsection}{\numberline {4.5.5.4}Discussion}{101}{subsubsection.4.5.5.4}%
-\contentsline {section}{\numberline {4.6}Chemical Langevin method}{102}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}State update}{102}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Algorithm}{102}{subsection.4.6.2}%
-\contentsline {subsection}{\numberline {4.6.3}Discussion}{103}{subsection.4.6.3}%
-\contentsline {chapter}{\numberline {5}Deterministic simulations}{104}{chapter.5}%
-\contentsline {section}{\numberline {5.1}introduction}{104}{section.5.1}%
-\contentsline {section}{\numberline {5.2}From biochemical reactions to ODEs}{104}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Starting hypothesis}{104}{subsection.5.2.1}%
-\contentsline {subsubsection}{\numberline {5.2.1.1}Continuum hypothesis}{104}{subsubsection.5.2.1.1}%
-\contentsline {subsubsection}{\numberline {5.2.1.2}Effect of starting hypothesis}{104}{subsubsection.5.2.1.2}%
-\contentsline {subsection}{\numberline {5.2.2}Law of mass action}{105}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Building the set of ODEs}{105}{subsection.5.2.3}%
-\contentsline {subsection}{\numberline {5.2.4}Michaelis-Menten kinetics}{106}{subsection.5.2.4}%
-\contentsline {section}{\numberline {5.3}Numerical solution of ODEs}{107}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Finding a solution}{107}{subsection.5.3.1}%
-\contentsline {subsection}{\numberline {5.3.2}Forward/Backward Euler method}{107}{subsection.5.3.2}%
-\contentsline {subsubsection}{\numberline {5.3.2.1}Forward Euler algorithm}{108}{subsubsection.5.3.2.1}%
-\contentsline {subsubsection}{\numberline {5.3.2.2}Backward Euler algorithm}{108}{subsubsection.5.3.2.2}%
-\contentsline {subsubsection}{\numberline {5.3.2.3}Discussion}{108}{subsubsection.5.3.2.3}%
-\contentsline {section}{\numberline {5.4}Improving the accuracy of numerical methods}{108}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Global truncation error}{109}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Consistency of a numerical method}{109}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Order of a numerical method}{109}{subsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.4.4}Heun method}{109}{subsection.5.4.4}%
-\contentsline {subsubsection}{\numberline {5.4.4.1}Algorithm}{110}{subsubsection.5.4.4.1}%
-\contentsline {subsection}{\numberline {5.4.5}Runge-Kutta methods}{110}{subsection.5.4.5}%
-\contentsline {subsubsection}{\numberline {5.4.5.1}Fourth order RK method}{111}{subsubsection.5.4.5.1}%
-\contentsline {paragraph}{\numberline {5.4.5.1.1}Algorithm}{111}{paragraph.5.4.5.1.1}%
-\contentsline {section}{\numberline {5.5}Multistep methods}{111}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Linear multistep numerical method}{111}{subsection.5.5.1}%
-\contentsline {subsubsection}{\numberline {5.5.1.1}Midpoint method}{112}{subsubsection.5.5.1.1}%
-\contentsline {paragraph}{\numberline {5.5.1.1.1}Algorithm}{112}{paragraph.5.5.1.1.1}%
-\contentsline {paragraph}{\numberline {5.5.1.1.2}Discussion}{112}{paragraph.5.5.1.1.2}%
-\contentsline {subsubsection}{\numberline {5.5.1.2}Simpson method}{112}{subsubsection.5.5.1.2}%
-\contentsline {subsubsection}{\numberline {5.5.1.3}General linear multistep algorithm}{112}{subsubsection.5.5.1.3}%
-\contentsline {subsection}{\numberline {5.5.2}Adams methods}{113}{subsection.5.5.2}%
-\contentsline {subsection}{\numberline {5.5.3}BDF methods}{113}{subsection.5.5.3}%
-\contentsline {section}{\numberline {5.6}Adaptive methods}{113}{section.5.6}%
-\contentsline {subsection}{\numberline {5.6.1}Estimating the local truncation error}{114}{subsection.5.6.1}%
-\contentsline {subsection}{\numberline {5.6.2}Runge-Kutta Fehlberg}{114}{subsection.5.6.2}%
-\contentsline {subsubsection}{\numberline {5.6.2.1}Algorithm}{115}{subsubsection.5.6.2.1}%
-\contentsline {subsubsection}{\numberline {5.6.2.2}Discussion}{116}{subsubsection.5.6.2.2}%
-\contentsline {subsection}{\numberline {5.6.3}Stiffness}{116}{subsection.5.6.3}%
-\contentsline {section}{\numberline {5.7}Issues of deterministic simulation}{117}{section.5.7}%
-\contentsline {subsection}{\numberline {5.7.1}Spatial homogeneity and continuum hypothesis}{117}{subsection.5.7.1}%
-\contentsline {subsection}{\numberline {5.7.2}Multistability}{117}{subsection.5.7.2}%
-\contentsline {subsection}{\numberline {5.7.3}Steady state}{117}{subsection.5.7.3}%
-\contentsline {chapter}{\numberline {6}Hybrid simulation approaches}{118}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Introduction}{118}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Slow-discrete region}{119}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Fast-discrete region}{119}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}Slow-continuous region}{119}{subsection.6.1.3}%
-\contentsline {subsection}{\numberline {6.1.4}Fast continuous stochastic and deterministic region}{119}{subsection.6.1.4}%
-\contentsline {subsection}{\numberline {6.1.5}Dimensionality explosion}{119}{subsection.6.1.5}%
-\contentsline {section}{\numberline {6.2}Reaction-based system partitioning}{119}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Classifying fast reactions}{119}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Partitioning algorithm}{120}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Dynamic partitioning}{120}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Different constraints}{120}{subsection.6.2.4}%
-\contentsline {subsection}{\numberline {6.2.5}Four class reaction partitioning}{121}{subsection.6.2.5}%
-\contentsline {subsubsection}{\numberline {6.2.5.1}Algorithm}{122}{subsubsection.6.2.5.1}%
-\contentsline {section}{\numberline {6.3}Synchronization of exact and approximate simulations}{122}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Algorithm}{122}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Preserving the exactness}{123}{subsection.6.3.2}%
-\contentsline {subsubsection}{\numberline {6.3.2.1}Event detection}{124}{subsubsection.6.3.2.1}%
-\contentsline {subsubsection}{\numberline {6.3.2.2}Algorithm}{124}{subsubsection.6.3.2.2}%
-\contentsline {section}{\numberline {6.4}Hybrid Rejection-Based SSA}{125}{section.6.4}%
-\contentsline {subsection}{\numberline {6.4.1}Reaction partitioning}{125}{subsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.4.2}Firing time}{125}{subsection.6.4.2}%
-\contentsline {subsection}{\numberline {6.4.3}Updating the system}{125}{subsection.6.4.3}%
-\contentsline {subsection}{\numberline {6.4.4}Algorithm}{125}{subsection.6.4.4}%
-\contentsline {subsection}{\numberline {6.4.5}Correctness of the simulation of slow reactions}{127}{subsection.6.4.5}%
-\contentsline {section}{\numberline {6.5}Hybrid simulation with stiffness}{128}{section.6.5}%
-\contentsline {subsection}{\numberline {6.5.1}Formulation of reactions with stiffness}{128}{subsection.6.5.1}%
-\contentsline {subsubsection}{\numberline {6.5.1.1}Quasi-steady state assumption}{129}{subsubsection.6.5.1.1}%
-\contentsline {subsubsection}{\numberline {6.5.1.2}Partial equilibrium assumption}{130}{subsubsection.6.5.1.2}%
-\contentsline {subsection}{\numberline {6.5.2}Slow-scale stochastic simulation algorithm}{130}{subsection.6.5.2}%
-\contentsline {subsubsection}{\numberline {6.5.2.1}Algorithm}{130}{subsubsection.6.5.2.1}%
-\contentsline {subsection}{\numberline {6.5.3}Nested stochastic simulation algorithm}{131}{subsection.6.5.3}%
-\contentsline {subsubsection}{\numberline {6.5.3.1}Algorithm}{131}{subsubsection.6.5.3.1}%
-\contentsline {chapter}{\numberline {7}Reali}{133}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Introduction}{133}{section.7.1}%
-\contentsline {subsection}{\numberline {7.1.1}Definition of a system}{133}{subsection.7.1.1}%
-\contentsline {subsection}{\numberline {7.1.2}Determinism, nondeterminism, or stochasticity?}{133}{subsection.7.1.2}%
-\contentsline {subsection}{\numberline {7.1.3}Computational complexity}{134}{subsection.7.1.3}%
-\contentsline {subsection}{\numberline {7.1.4}Definition of a model}{134}{subsection.7.1.4}%
-\contentsline {subsection}{\numberline {7.1.5}Checking the validity of a model}{134}{subsection.7.1.5}%
-\contentsline {subsection}{\numberline {7.1.6}How to build a model}{135}{subsection.7.1.6}%
-\contentsline {section}{\numberline {7.2}Optimization problem}{136}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}General definition of an optimization problem}{136}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}Definition of a minimum}{138}{subsection.7.2.2}%
-\contentsline {section}{\numberline {7.3}Gradient methods}{139}{section.7.3}%
-\contentsline {subsubsection}{\numberline {7.3.0.1}Lagrangian function}{139}{subsubsection.7.3.0.1}%
-\contentsline {subsection}{\numberline {7.3.1}Lagrangian Multipliers Theorem}{139}{subsection.7.3.1}%
-\contentsline {subsection}{\numberline {7.3.2}Definition of a gradient}{139}{subsection.7.3.2}%
-\contentsline {subsection}{\numberline {7.3.3}Limitations of gradient descent methods}{140}{subsection.7.3.3}%
-\contentsline {subsection}{\numberline {7.3.4}Gradient approximation with Taylor formula}{140}{subsection.7.3.4}%
-\contentsline {subsection}{\numberline {7.3.5}Line search}{141}{subsection.7.3.5}%
-\contentsline {subsubsection}{\numberline {7.3.5.1}Newton's direction}{141}{subsubsection.7.3.5.1}%
-\contentsline {subsubsection}{\numberline {7.3.5.2}Line search algorithm for function minimization}{142}{subsubsection.7.3.5.2}%
-\contentsline {subsubsection}{\numberline {7.3.5.3}Quasi Newton's direction}{142}{subsubsection.7.3.5.3}%
-\contentsline {subsubsection}{\numberline {7.3.5.4}Steepest descent direction}{142}{subsubsection.7.3.5.4}%
-\contentsline {subsubsection}{\numberline {7.3.5.5}Selecting $\alpha $}{142}{subsubsection.7.3.5.5}%
-\contentsline {subsubsection}{\numberline {7.3.5.6}Convergence of a method}{143}{subsubsection.7.3.5.6}%
-\contentsline {subsection}{\numberline {7.3.6}Trust region}{144}{subsection.7.3.6}%
-\contentsline {subsubsection}{\numberline {7.3.6.1}Trust region steepest descent}{144}{subsubsection.7.3.6.1}%
-\contentsline {subsubsection}{\numberline {7.3.6.2}Trust region algorithm}{145}{subsubsection.7.3.6.2}%
-\contentsline {section}{\numberline {7.4}Least squares problems}{146}{section.7.4}%
-\contentsline {subsection}{\numberline {7.4.1}The Levenberg-Marquardt method}{147}{subsection.7.4.1}%
-\contentsline {subsection}{\numberline {7.4.2}Solving a problem with bounds}{147}{subsection.7.4.2}%
-\contentsline {subsection}{\numberline {7.4.3}Solving global minimum problem}{148}{subsection.7.4.3}%
-\contentsline {subsection}{\numberline {7.4.4}Gauss-Newton method}{148}{subsection.7.4.4}%
-\contentsline {subsection}{\numberline {7.4.5}Latin hypercube sample}{148}{subsection.7.4.5}%
-\contentsline {subsection}{\numberline {7.4.6}MATLAB}{148}{subsection.7.4.6}%
-\contentsline {section}{\numberline {7.5}Stochastic methods for parameter estimation}{150}{section.7.5}%
-\contentsline {subsection}{\numberline {7.5.1}Markov Chain Monte Carlo (MCMC)}{150}{subsection.7.5.1}%
-\contentsline {subsection}{\numberline {7.5.2}Sampling a distribution}{152}{subsection.7.5.2}%
-\contentsline {subsection}{\numberline {7.5.3}Rejection sampling algorithm}{152}{subsection.7.5.3}%
-\contentsline {subsection}{\numberline {7.5.4}Metropolis Hastings}{153}{subsection.7.5.4}%
-\contentsline {subsubsection}{\numberline {7.5.4.1}MH algorithm}{153}{subsubsection.7.5.4.1}%
-\contentsline {subsubsection}{\numberline {7.5.4.2}Visualization of MCMC}{154}{subsubsection.7.5.4.2}%
-\contentsline {subsubsection}{\numberline {7.5.4.3}How to link data and MH}{154}{subsubsection.7.5.4.3}%
-\contentsline {subsection}{\numberline {7.5.5}Random walk MCMC}{155}{subsection.7.5.5}%
-\contentsline {subsubsection}{\numberline {7.5.5.1}Algorithm RW-MCMC ( C known)}{155}{subsubsection.7.5.5.1}%
-\contentsline {subsubsection}{\numberline {7.5.5.2}Diagnostics}{156}{subsubsection.7.5.5.2}%
-\contentsline {section}{\numberline {7.6}Heuristics and the genetic algorithm}{158}{section.7.6}%
-\contentsline {subsection}{\numberline {7.6.1}The genetic algorithm}{158}{subsection.7.6.1}%
-\contentsline {subsubsection}{\numberline {7.6.1.1}Chromosome encoding}{159}{subsubsection.7.6.1.1}%
-\contentsline {subsubsection}{\numberline {7.6.1.2}Generation of an initial population}{159}{subsubsection.7.6.1.2}%
-\contentsline {subsubsection}{\numberline {7.6.1.3}Fitness evaluation}{159}{subsubsection.7.6.1.3}%
-\contentsline {subsubsection}{\numberline {7.6.1.4}Parent selection}{159}{subsubsection.7.6.1.4}%
-\contentsline {subsubsection}{\numberline {7.6.1.5}Reproduction}{159}{subsubsection.7.6.1.5}%
-\contentsline {subsubsection}{\numberline {7.6.1.6}Mutation}{159}{subsubsection.7.6.1.6}%
-\contentsline {subsection}{\numberline {7.6.2}Genetic algorithm pseudocode}{161}{subsection.7.6.2}%
-\contentsline {subsubsection}{\numberline {7.6.2.1}Cons}{161}{subsubsection.7.6.2.1}%
-\contentsline {subsubsection}{\numberline {7.6.2.2}Pros}{161}{subsubsection.7.6.2.2}%
+\contentsline {part}{I\hspace {1em}Stochastic models}{6}{part.1}%
+\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Introduction}{7}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Cells}{7}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Biochemical reactions}{7}{subsection.1.1.2}%
+\contentsline {subsubsection}{\numberline {1.1.2.1}Reaction kinetics}{7}{subsubsection.1.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.1.2.2}Pathways}{7}{subsubsection.1.1.2.2}%
+\contentsline {subsection}{\numberline {1.1.3}Systems biology}{8}{subsection.1.1.3}%
+\contentsline {subsubsection}{\numberline {1.1.3.1}Challenges of system biology}{8}{subsubsection.1.1.3.1}%
+\contentsline {subsubsection}{\numberline {1.1.3.2}Stochasticity}{8}{subsubsection.1.1.3.2}%
+\contentsline {subsection}{\numberline {1.1.4}Computational tools}{8}{subsection.1.1.4}%
+\contentsline {subsubsection}{\numberline {1.1.4.1}Biological models}{8}{subsubsection.1.1.4.1}%
+\contentsline {subsubsection}{\numberline {1.1.4.2}Computer simulation}{8}{subsubsection.1.1.4.2}%
+\contentsline {subsubsection}{\numberline {1.1.4.3}Advantages and applications of in silico experiment}{9}{subsubsection.1.1.4.3}%
+\contentsline {subsection}{\numberline {1.1.5}Synthetic biology}{9}{subsection.1.1.5}%
+\contentsline {section}{\numberline {1.2}Different levels of simulation}{9}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Molecular dynamics}{9}{subsection.1.2.1}%
+\contentsline {subsection}{\numberline {1.2.2}Brownian dynamics}{9}{subsection.1.2.2}%
+\contentsline {subsection}{\numberline {1.2.3}Deterministic simulation}{10}{subsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.2.4}Stochastic simulation}{10}{subsection.1.2.4}%
+\contentsline {subsection}{\numberline {1.2.5}Problems with stochastic simulations}{10}{subsection.1.2.5}%
+\contentsline {section}{\numberline {1.3}Network modeling}{11}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Logic models}{11}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Petri nets}{11}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Rewriting systems}{12}{subsection.1.3.3}%
+\contentsline {subsubsection}{\numberline {1.3.3.1}P systems}{12}{subsubsection.1.3.3.1}%
+\contentsline {subsubsection}{\numberline {1.3.3.2}MP systems}{13}{subsubsection.1.3.3.2}%
+\contentsline {subsection}{\numberline {1.3.4}Equation-based approach}{13}{subsection.1.3.4}%
+\contentsline {subsubsection}{\numberline {1.3.4.1}ODE systems}{13}{subsubsection.1.3.4.1}%
+\contentsline {subsection}{\numberline {1.3.5}Simulation algorithms}{13}{subsection.1.3.5}%
+\contentsline {subsubsection}{\numberline {1.3.5.1}Reaction propensity}{13}{subsubsection.1.3.5.1}%
+\contentsline {chapter}{\numberline {2}Stochastic simulation of biochemical reaction systems}{14}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introduction}{14}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Stochastic chemical kinetics}{14}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Rewriting biochemical reactions}{14}{subsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.1}Representing molecular reactions}{14}{subsubsection.2.2.1.1}%
+\contentsline {paragraph}{\numberline {2.2.1.1.1}Some elementary reactions}{14}{paragraph.2.2.1.1.1}%
+\contentsline {subparagraph}{\numberline {2.2.1.1.1.1}Unimolecolar reaction}{14}{subparagraph.2.2.1.1.1.1}%
+\contentsline {subparagraph}{\numberline {2.2.1.1.1.2}Degradation}{15}{subparagraph.2.2.1.1.1.2}%
+\contentsline {subparagraph}{\numberline {2.2.1.1.1.3}Synthesis}{15}{subparagraph.2.2.1.1.1.3}%
+\contentsline {subparagraph}{\numberline {2.2.1.1.1.4}Bimolecular reaction}{15}{subparagraph.2.2.1.1.1.4}%
+\contentsline {subparagraph}{\numberline {2.2.1.1.1.5}Dimerization}{15}{subparagraph.2.2.1.1.1.5}%
+\contentsline {paragraph}{\numberline {2.2.1.1.2}Some non-elementary reactions}{15}{paragraph.2.2.1.1.2}%
+\contentsline {subparagraph}{\numberline {2.2.1.1.2.1}Termolecular reaction}{15}{subparagraph.2.2.1.1.2.1}%
+\contentsline {subparagraph}{\numberline {2.2.1.1.2.2}Enzymatic reaction}{15}{subparagraph.2.2.1.1.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1.2}Equation-based methods}{16}{subsubsection.2.2.1.2}%
+\contentsline {subsubsection}{\numberline {2.2.1.3}Creating a formal mathematical description of a biological system}{16}{subsubsection.2.2.1.3}%
+\contentsline {subsubsection}{\numberline {2.2.1.4}Well-mixed reaction volume}{16}{subsubsection.2.2.1.4}%
+\contentsline {subsubsection}{\numberline {2.2.1.5}Formal representation}{16}{subsubsection.2.2.1.5}%
+\contentsline {subsubsection}{\numberline {2.2.1.6}Stoichiometric matrix}{17}{subsubsection.2.2.1.6}%
+\contentsline {subsubsection}{\numberline {2.2.1.7}Summary}{17}{subsubsection.2.2.1.7}%
+\contentsline {subsection}{\numberline {2.2.2}Reaction propensity}{18}{subsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2.1}Definition}{18}{subsubsection.2.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2.2}Value of the propensity}{18}{subsubsection.2.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2.3}Mass action propensity}{19}{subsubsection.2.2.2.3}%
+\contentsline {paragraph}{\numberline {2.2.2.3.1}The stochastic rate}{19}{paragraph.2.2.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.2.2.4}Reaction propensity for reactions $ R_j$ with mass action kinetics}{19}{subsubsection.2.2.2.4}%
+\contentsline {subsubsection}{\numberline {2.2.2.5}Complex reaction kinetics}{20}{subsubsection.2.2.2.5}%
+\contentsline {paragraph}{\numberline {2.2.2.5.1}Michaelis-Menten kinetics}{20}{paragraph.2.2.2.5.1}%
+\contentsline {subsection}{\numberline {2.2.3}Chemical Master Equation}{20}{subsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.3.1}Grand probability function}{20}{subsubsection.2.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.2.3.2}Deriving the chemical master equation}{20}{subsubsection.2.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.2.3.3}Limitations of the chemical master equation}{22}{subsubsection.2.2.3.3}%
+\contentsline {section}{\numberline {2.3}Stochastic simulation}{22}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Probability density function}{22}{subsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.1.1}Computing the probability density function}{22}{subsubsection.2.3.1.1}%
+\contentsline {subsection}{\numberline {2.3.2}Stochastic simulation algorithm}{24}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Simulation output analysis}{25}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Confidence interval estimation}{25}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Probability distribution equation}{26}{subsection.2.4.2}%
+\contentsline {chapter}{\numberline {3}Implementation of the Stochastic Simulation Algorithms}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{27}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Non-deterministic vs stochastic}{27}{subsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.1.1}Exact stochastic simulation}{27}{subsubsection.3.1.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Advantages of a non-deterministic approach}{27}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Categories of the exact simulation algorithms}{27}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}Direct method}{28}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Mathematical discussion}{29}{subsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.1}Choice of the reaction}{30}{subsubsection.3.2.1.1}%
+\contentsline {subsubsection}{\numberline {3.2.1.2}Selection of the firing time}{30}{subsubsection.3.2.1.2}%
+\contentsline {subsection}{\numberline {3.2.2}The algorithm}{30}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}Time complexity}{31}{subsubsection.3.2.2.1}%
+\contentsline {subsection}{\numberline {3.2.3}Enhanced direct method}{31}{subsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.3.1}Reaction dependency graph}{32}{subsubsection.3.2.3.1}%
+\contentsline {paragraph}{\numberline {3.2.3.1.1}Some definitions}{32}{paragraph.3.2.3.1.1}%
+\contentsline {subparagraph}{\numberline {3.2.3.1.1.1}Reactants and products set}{32}{subparagraph.3.2.3.1.1.1}%
+\contentsline {subparagraph}{\numberline {3.2.3.1.1.2}Affects set}{32}{subparagraph.3.2.3.1.1.2}%
+\contentsline {subparagraph}{\numberline {3.2.3.1.1.3}Mass action kinetics}{32}{subparagraph.3.2.3.1.1.3}%
+\contentsline {subparagraph}{\numberline {3.2.3.1.1.4}AffectedBy set}{32}{subparagraph.3.2.3.1.1.4}%
+\contentsline {subparagraph}{\numberline {3.2.3.1.1.5}Population of AffectedBy}{32}{subparagraph.3.2.3.1.1.5}%
+\contentsline {paragraph}{\numberline {3.2.3.1.2}Definition of the reaction dependency graph}{32}{paragraph.3.2.3.1.2}%
+\contentsline {paragraph}{\numberline {3.2.3.1.3}Dependent reactions}{33}{paragraph.3.2.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.2.3.2}Algorithm}{33}{subsubsection.3.2.3.2}%
+\contentsline {subsection}{\numberline {3.2.4}Improvements for Direct Method}{34}{subsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.4.1}Direct method with sorted reaction}{34}{subsubsection.3.2.4.1}%
+\contentsline {paragraph}{\numberline {3.2.4.1.1}Optimized direct method}{34}{paragraph.3.2.4.1.1}%
+\contentsline {subparagraph}{\numberline {3.2.4.1.1.1}Average search depth}{34}{subparagraph.3.2.4.1.1.1}%
+\contentsline {subparagraph}{\numberline {3.2.4.1.1.2}Algorithm}{34}{subparagraph.3.2.4.1.1.2}%
+\contentsline {subparagraph}{\numberline {3.2.4.1.1.3}Discussion}{35}{subparagraph.3.2.4.1.1.3}%
+\contentsline {paragraph}{\numberline {3.2.4.1.2}Sorting direct method}{35}{paragraph.3.2.4.1.2}%
+\contentsline {subparagraph}{\numberline {3.2.4.1.2.1}Algorithm}{35}{subparagraph.3.2.4.1.2.1}%
+\contentsline {subparagraph}{\numberline {3.2.4.1.2.2}Discussion}{36}{subparagraph.3.2.4.1.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.4.2}Direct method with Multi-level search}{36}{subsubsection.3.2.4.2}%
+\contentsline {paragraph}{\numberline {3.2.4.2.1}Exactness of the multi level search}{37}{paragraph.3.2.4.2.1}%
+\contentsline {paragraph}{\numberline {3.2.4.2.2}Implementation}{37}{paragraph.3.2.4.2.2}%
+\contentsline {paragraph}{\numberline {3.2.4.2.3}Algorithm}{37}{paragraph.3.2.4.2.3}%
+\contentsline {paragraph}{\numberline {3.2.4.2.4}Discussion}{38}{paragraph.3.2.4.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.4.3}Direct method with tree-based search}{39}{subsubsection.3.2.4.3}%
+\contentsline {paragraph}{\numberline {3.2.4.3.1}Dimension of a complete tree}{39}{paragraph.3.2.4.3.1}%
+\contentsline {paragraph}{\numberline {3.2.4.3.2}Implementation of the tree}{39}{paragraph.3.2.4.3.2}%
+\contentsline {paragraph}{\numberline {3.2.4.3.3}Tree-based search}{39}{paragraph.3.2.4.3.3}%
+\contentsline {paragraph}{\numberline {3.2.4.3.4}Updating the tree}{40}{paragraph.3.2.4.3.4}%
+\contentsline {paragraph}{\numberline {3.2.4.3.5}Algorithm}{40}{paragraph.3.2.4.3.5}%
+\contentsline {paragraph}{\numberline {3.2.4.3.6}Discussion}{41}{paragraph.3.2.4.3.6}%
+\contentsline {paragraph}{\numberline {3.2.4.3.7}Tree with optimal height}{41}{paragraph.3.2.4.3.7}%
+\contentsline {subparagraph}{\numberline {3.2.4.3.7.1}Average number of comparison}{41}{subparagraph.3.2.4.3.7.1}%
+\contentsline {subparagraph}{\numberline {3.2.4.3.7.2}Complete tree}{41}{subparagraph.3.2.4.3.7.2}%
+\contentsline {subparagraph}{\numberline {3.2.4.3.7.3}Huffman tree}{42}{subparagraph.3.2.4.3.7.3}%
+\contentsline {subparagraph}{\numberline {3.2.4.3.7.4}Building the Huffman tree}{42}{subparagraph.3.2.4.3.7.4}%
+\contentsline {subparagraph}{\numberline {3.2.4.3.7.5}Selecting the weight}{43}{subparagraph.3.2.4.3.7.5}%
+\contentsline {subparagraph}{\numberline {3.2.4.3.7.6}Fixed time tree rebuilding}{43}{subparagraph.3.2.4.3.7.6}%
+\contentsline {subparagraph}{\numberline {3.2.4.3.7.7}Adaptive time tree rebuilding}{44}{subparagraph.3.2.4.3.7.7}%
+\contentsline {subsubsection}{\numberline {3.2.4.4}Direct method with composition-rejection search}{44}{subsubsection.3.2.4.4}%
+\contentsline {paragraph}{\numberline {3.2.4.4.1}Search for the next reaction}{44}{paragraph.3.2.4.4.1}%
+\contentsline {subparagraph}{\numberline {3.2.4.4.1.1}First step}{44}{subparagraph.3.2.4.4.1.1}%
+\contentsline {subparagraph}{\numberline {3.2.4.4.1.2}Second step}{44}{subparagraph.3.2.4.4.1.2}%
+\contentsline {paragraph}{\numberline {3.2.4.4.2}Algorithm}{44}{paragraph.3.2.4.4.2}%
+\contentsline {paragraph}{\numberline {3.2.4.4.3}Discussion}{45}{paragraph.3.2.4.4.3}%
+\contentsline {subparagraph}{\numberline {3.2.4.4.3.1}Computational cost}{46}{subparagraph.3.2.4.4.3.1}%
+\contentsline {subsection}{\numberline {3.2.5}Partial-propensity direct method}{46}{subsection.3.2.5}%
+\contentsline {subsubsection}{\numberline {3.2.5.1}Partial propensities of elementary reactions}{46}{subsubsection.3.2.5.1}%
+\contentsline {subsubsection}{\numberline {3.2.5.2}Storing the partial propensities}{46}{subsubsection.3.2.5.2}%
+\contentsline {paragraph}{\numberline {3.2.5.2.1}Minimizing updates}{46}{paragraph.3.2.5.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.5.3}Group-sum array}{47}{subsubsection.3.2.5.3}%
+\contentsline {subsubsection}{\numberline {3.2.5.4}Reaction lookup}{47}{subsubsection.3.2.5.4}%
+\contentsline {subsubsection}{\numberline {3.2.5.5}Selecting the reaction firing}{47}{subsubsection.3.2.5.5}%
+\contentsline {paragraph}{\numberline {3.2.5.5.1}First step}{47}{paragraph.3.2.5.5.1}%
+\contentsline {paragraph}{\numberline {3.2.5.5.2}Second step}{47}{paragraph.3.2.5.5.2}%
+\contentsline {subsubsection}{\numberline {3.2.5.6}Exactness of PDM}{48}{subsubsection.3.2.5.6}%
+\contentsline {subsubsection}{\numberline {3.2.5.7}Algorithm}{48}{subsubsection.3.2.5.7}%
+\contentsline {paragraph}{\numberline {3.2.5.7.1}Discussion}{50}{paragraph.3.2.5.7.1}%
+\contentsline {subparagraph}{\numberline {3.2.5.7.1.1}Time complexity}{50}{subparagraph.3.2.5.7.1.1}%
+\contentsline {subparagraph}{\numberline {3.2.5.7.1.2}Limitations}{50}{subparagraph.3.2.5.7.1.2}%
+\contentsline {subsubsection}{\numberline {3.2.5.8}Partial propensity direct method with composition-rejection search}{50}{subsubsection.3.2.5.8}%
+\contentsline {paragraph}{\numberline {3.2.5.8.1}Selection of the next reaction firing}{50}{paragraph.3.2.5.8.1}%
+\contentsline {subparagraph}{\numberline {3.2.5.8.1.1}Selecting group index}{50}{subparagraph.3.2.5.8.1.1}%
+\contentsline {subparagraph}{\numberline {3.2.5.8.1.2}Selecting element index}{51}{subparagraph.3.2.5.8.1.2}%
+\contentsline {paragraph}{\numberline {3.2.5.8.2}Algorithm}{51}{paragraph.3.2.5.8.2}%
+\contentsline {section}{\numberline {3.3}First reaction method}{52}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Tentative time}{52}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Exactness of the first reaction method}{53}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Algorithm}{54}{subsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.3.1}Time complexity}{54}{subsubsection.3.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.4}First family method}{55}{subsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.4.1}Next reaction event}{55}{subsubsection.3.3.4.1}%
+\contentsline {paragraph}{\numberline {3.3.4.1.1}Selection of the family}{55}{paragraph.3.3.4.1.1}%
+\contentsline {paragraph}{\numberline {3.3.4.1.2}Selection of the reaction}{55}{paragraph.3.3.4.1.2}%
+\contentsline {subsubsection}{\numberline {3.3.4.2}Algorithm}{55}{subsubsection.3.3.4.2}%
+\contentsline {paragraph}{\numberline {3.3.4.2.1}Discussion}{56}{paragraph.3.3.4.2.1}%
+\contentsline {subparagraph}{\numberline {3.3.4.2.1.1}Performance}{56}{subparagraph.3.3.4.2.1.1}%
+\contentsline {subparagraph}{\numberline {3.3.4.2.1.2}Comparison with DM and FRM}{56}{subparagraph.3.3.4.2.1.2}%
+\contentsline {section}{\numberline {3.4}Next reaction method}{56}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Absolute tentative time}{57}{subsection.3.4.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.1}Distribution of the residual time}{57}{subsubsection.3.4.1.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.2}Relationship between absolute and relative tentative time}{57}{subsubsection.3.4.1.2}%
+\contentsline {subsubsection}{\numberline {3.4.1.3}Computing the absolute time}{58}{subsubsection.3.4.1.3}%
+\contentsline {paragraph}{\numberline {3.4.1.3.1}Computing the new tentative time}{58}{paragraph.3.4.1.3.1}%
+\contentsline {subsubsection}{\numberline {3.4.1.4}Conclusion}{59}{subsubsection.3.4.1.4}%
+\contentsline {subsection}{\numberline {3.4.2}Data structures}{59}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Algorithm}{59}{subsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.3.1}Discussion}{60}{subsubsection.3.4.3.1}%
+\contentsline {paragraph}{\numberline {3.4.3.1.1}Time complexity}{60}{paragraph.3.4.3.1.1}%
+\contentsline {paragraph}{\numberline {3.4.3.1.2}Inactive reaction}{60}{paragraph.3.4.3.1.2}%
+\contentsline {subsection}{\numberline {3.4.4}Modified next reaction method}{61}{subsection.3.4.4}%
+\contentsline {subsubsection}{\numberline {3.4.4.1}Poisson process}{61}{subsubsection.3.4.4.1}%
+\contentsline {paragraph}{\numberline {3.4.4.1.1}$Y(t)$ is a Poisson distribution}{61}{paragraph.3.4.4.1.1}%
+\contentsline {paragraph}{\numberline {3.4.4.1.2}The time to the next event is an exponential distribution}{61}{paragraph.3.4.4.1.2}%
+\contentsline {subsubsection}{\numberline {3.4.4.2}Unit Poisson process}{62}{subsubsection.3.4.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.4.3}Random time change representation}{62}{subsubsection.3.4.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.4.4}Internal time}{62}{subsubsection.3.4.4.4}%
+\contentsline {paragraph}{\numberline {3.4.4.4.1}Computing the tentative time}{62}{paragraph.3.4.4.4.1}%
+\contentsline {paragraph}{\numberline {3.4.4.4.2}Updating the firing time}{63}{paragraph.3.4.4.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.4.5}Algorithm}{63}{subsubsection.3.4.4.5}%
+\contentsline {paragraph}{\numberline {3.4.4.5.1}Discussion}{64}{paragraph.3.4.4.5.1}%
+\contentsline {section}{\numberline {3.5}Rejection Based stochastic simulation algorithm}{64}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Fluctuation interval}{65}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Abstract propensity value}{65}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Selection of the next reaction}{65}{subsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.3.1}Simulation of the abstract model}{65}{subsubsection.3.5.3.1}%
+\contentsline {subsubsection}{\numberline {3.5.3.2}Acceptance of the abstract model}{65}{subsubsection.3.5.3.2}%
+\contentsline {subsection}{\numberline {3.5.4}Advancement of the simulation}{66}{subsection.3.5.4}%
+\contentsline {subsection}{\numberline {3.5.5}Exactness of RSSA}{66}{subsection.3.5.5}%
+\contentsline {subsubsection}{\numberline {3.5.5.1}Bounds on the acceptance probability}{67}{subsubsection.3.5.5.1}%
+\contentsline {subsection}{\numberline {3.5.6}Evolution of the state}{67}{subsection.3.5.6}%
+\contentsline {subsubsection}{\numberline {3.5.6.1}Species-Reaction dependency graph}{68}{subsubsection.3.5.6.1}%
+\contentsline {subsection}{\numberline {3.5.7}Algorithm}{68}{subsection.3.5.7}%
+\contentsline {subsubsection}{\numberline {3.5.7.1}Discussion}{70}{subsubsection.3.5.7.1}%
+\contentsline {paragraph}{\numberline {3.5.7.1.1}Time complexity}{70}{paragraph.3.5.7.1.1}%
+\contentsline {subsection}{\numberline {3.5.8}Simultaneous RSSA}{70}{subsection.3.5.8}%
+\contentsline {subsubsection}{\numberline {3.5.8.1}Global fluctuation interval}{70}{subsubsection.3.5.8.1}%
+\contentsline {subsubsection}{\numberline {3.5.8.2}Algorithm}{70}{subsubsection.3.5.8.2}%
+\contentsline {subsection}{\numberline {3.5.9}Improvements for RSSA}{72}{subsection.3.5.9}%
+\contentsline {subsubsection}{\numberline {3.5.9.1}RSSA with tree-based search}{72}{subsubsection.3.5.9.1}%
+\contentsline {paragraph}{\numberline {3.5.9.1.1}Algorithm}{72}{paragraph.3.5.9.1.1}%
+\contentsline {subsubsection}{\numberline {3.5.9.2}RSSA with composition-rejection search}{74}{subsubsection.3.5.9.2}%
+\contentsline {paragraph}{\numberline {3.5.9.2.1}Selection of the next reaction}{74}{paragraph.3.5.9.2.1}%
+\contentsline {subparagraph}{\numberline {3.5.9.2.1.1}Selection of a group}{74}{subparagraph.3.5.9.2.1.1}%
+\contentsline {subparagraph}{\numberline {3.5.9.2.1.2}Selection of a reaction}{74}{subparagraph.3.5.9.2.1.2}%
+\contentsline {paragraph}{\numberline {3.5.9.2.2}Firing time}{74}{paragraph.3.5.9.2.2}%
+\contentsline {paragraph}{\numberline {3.5.9.2.3}Algorithm}{74}{paragraph.3.5.9.2.3}%
+\contentsline {paragraph}{\numberline {3.5.9.2.4}Discussion}{76}{paragraph.3.5.9.2.4}%
+\contentsline {subparagraph}{\numberline {3.5.9.2.4.1}Time complexity}{76}{subparagraph.3.5.9.2.4.1}%
+\contentsline {subsubsection}{\numberline {3.5.9.3}RSSA with table-lookup search}{76}{subsubsection.3.5.9.3}%
+\contentsline {paragraph}{\numberline {3.5.9.3.1}Building the tables}{76}{paragraph.3.5.9.3.1}%
+\contentsline {paragraph}{\numberline {3.5.9.3.2}Search for the candidate reaction}{77}{paragraph.3.5.9.3.2}%
+\contentsline {paragraph}{\numberline {3.5.9.3.3}Algorithm}{77}{paragraph.3.5.9.3.3}%
+\contentsline {paragraph}{\numberline {3.5.9.3.4}Discussion}{79}{paragraph.3.5.9.3.4}%
+\contentsline {chapter}{\numberline {4}Approximation algorithms}{80}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduction}{80}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Probability-Weighted Dynamic Monte Carlo Method}{80}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Weighted sampling}{82}{subsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.1.1}Effective propensity}{82}{subsubsection.4.2.1.1}%
+\contentsline {subsection}{\numberline {4.2.2}Realization of the reaction firing}{82}{subsection.4.2.2}%
+\contentsline {subsubsection}{\numberline {4.2.2.1}Selection of the reactoin}{82}{subsubsection.4.2.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.2.2}Correction of the firing time}{82}{subsubsection.4.2.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Bounds on the weights}{83}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Algorithm}{83}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Discussion}{83}{subsection.4.2.5}%
+\contentsline {subsubsection}{\numberline {4.2.5.1}Time complexity}{83}{subsubsection.4.2.5.1}%
+\contentsline {subsubsection}{\numberline {4.2.5.2}Limitations}{84}{subsubsection.4.2.5.2}%
+\contentsline {section}{\numberline {4.3}Bounded acceptance probability RSSA}{84}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Defining the bounds}{84}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Defining the fluctuation interval}{84}{subsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.1}Computing the maximum fluctuation rate}{84}{subsubsection.4.3.2.1}%
+\contentsline {paragraph}{\numberline {4.3.2.1.1}Synthesis reaction}{85}{paragraph.4.3.2.1.1}%
+\contentsline {paragraph}{\numberline {4.3.2.1.2}Unimolecolar reaction}{85}{paragraph.4.3.2.1.2}%
+\contentsline {paragraph}{\numberline {4.3.2.1.3}Bimolecular reaction}{85}{paragraph.4.3.2.1.3}%
+\contentsline {paragraph}{\numberline {4.3.2.1.4}Dimerization reaction}{85}{paragraph.4.3.2.1.4}%
+\contentsline {subsection}{\numberline {4.3.3}Selecting the propensity}{85}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Algorithm}{86}{subsection.4.3.4}%
+\contentsline {subsection}{\numberline {4.3.5}Discussion}{87}{subsection.4.3.5}%
+\contentsline {subsubsection}{\numberline {4.3.5.1}Time complexity}{87}{subsubsection.4.3.5.1}%
+\contentsline {section}{\numberline {4.4}$\mathbf {\tau }$-Leaping method}{87}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Simulation time}{87}{subsection.4.4.1}%
+\contentsline {subsubsection}{\numberline {4.4.1.1}Leap condition}{87}{subsubsection.4.4.1.1}%
+\contentsline {subsection}{\numberline {4.4.2}Advancing the simulation time}{88}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Issues}{88}{subsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.3.1}Efficiency and accuracy}{88}{subsubsection.4.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.4.3.2}Negative population of reactant species}{88}{subsubsection.4.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.4.3.3}Switch to exact simulation}{88}{subsubsection.4.4.3.3}%
+\contentsline {subsection}{\numberline {4.4.4}Leap selection}{88}{subsection.4.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.4.1}Postleap $\mathbf {\tau }$ selection}{88}{subsubsection.4.4.4.1}%
+\contentsline {paragraph}{\numberline {4.4.4.1.1}Issues}{89}{paragraph.4.4.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.4.4.2}Preleap $\mathbf {\tau }$ selection}{89}{subsubsection.4.4.4.2}%
+\contentsline {paragraph}{\numberline {4.4.4.2.1}Bounding changes in propensities}{89}{paragraph.4.4.4.2.1}%
+\contentsline {paragraph}{\numberline {4.4.4.2.2}Bounding changes in species population}{90}{paragraph.4.4.4.2.2}%
+\contentsline {subparagraph}{\numberline {4.4.4.2.2.1}Unimolecolar reaction}{91}{subparagraph.4.4.4.2.2.1}%
+\contentsline {subparagraph}{\numberline {4.4.4.2.2.2}Bimolecular reaction}{91}{subparagraph.4.4.4.2.2.2}%
+\contentsline {subparagraph}{\numberline {4.4.4.2.2.3}Dimerization reaction}{91}{subparagraph.4.4.4.2.2.3}%
+\contentsline {subparagraph}{\numberline {4.4.4.2.2.4}Approximating the change in population}{91}{subparagraph.4.4.4.2.2.4}%
+\contentsline {subsection}{\numberline {4.4.5}Avoiding the negative population problem}{92}{subsection.4.4.5}%
+\contentsline {subsubsection}{\numberline {4.4.5.1}The number of firings is greater than the current population of reactants}{92}{subsubsection.4.4.5.1}%
+\contentsline {subsubsection}{\numberline {4.4.5.2}Simultaneous firing of multiple reactions}{92}{subsubsection.4.4.5.2}%
+\contentsline {subsubsection}{\numberline {4.4.5.3}Handling the negative population problem}{92}{subsubsection.4.4.5.3}%
+\contentsline {subsection}{\numberline {4.4.6}Switching to exact simulation}{92}{subsection.4.4.6}%
+\contentsline {subsection}{\numberline {4.4.7}The $\mathbf {\tau }$-leaping algorithm}{92}{subsection.4.4.7}%
+\contentsline {subsection}{\numberline {4.4.8}Improvements for $\mathbf {\tau }$-leaping}{93}{subsection.4.4.8}%
+\contentsline {subsubsection}{\numberline {4.4.8.1}Modified $\mathbf {\tau }$-leaping}{93}{subsubsection.4.4.8.1}%
+\contentsline {paragraph}{\numberline {4.4.8.1.1}Permitted firings}{93}{paragraph.4.4.8.1.1}%
+\contentsline {paragraph}{\numberline {4.4.8.1.2}Critical reactions}{94}{paragraph.4.4.8.1.2}%
+\contentsline {paragraph}{\numberline {4.4.8.1.3}Firing of reactions}{94}{paragraph.4.4.8.1.3}%
+\contentsline {paragraph}{\numberline {4.4.8.1.4}algorithm}{94}{paragraph.4.4.8.1.4}%
+\contentsline {paragraph}{\numberline {4.4.8.1.5}Discussion}{96}{paragraph.4.4.8.1.5}%
+\contentsline {subsubsection}{\numberline {4.4.8.2}Binomial $\mathbf {\tau }$-leaping}{96}{subsubsection.4.4.8.2}%
+\contentsline {paragraph}{\numberline {4.4.8.2.1}The binomial distribution}{96}{paragraph.4.4.8.2.1}%
+\contentsline {paragraph}{\numberline {4.4.8.2.2}Species involved in many reactions}{96}{paragraph.4.4.8.2.2}%
+\contentsline {paragraph}{\numberline {4.4.8.2.3}Algorithm}{96}{paragraph.4.4.8.2.3}%
+\contentsline {paragraph}{\numberline {4.4.8.2.4}Discussion}{97}{paragraph.4.4.8.2.4}%
+\contentsline {subsubsection}{\numberline {4.4.8.3}Implicit $\mathbf {\tau }$-leaping}{97}{subsubsection.4.4.8.3}%
+\contentsline {paragraph}{\numberline {4.4.8.3.1}Correction term}{98}{paragraph.4.4.8.3.1}%
+\contentsline {paragraph}{\numberline {4.4.8.3.2}Algorithm}{98}{paragraph.4.4.8.3.2}%
+\contentsline {paragraph}{\numberline {4.4.8.3.3}Discussion}{98}{paragraph.4.4.8.3.3}%
+\contentsline {section}{\numberline {4.5}$\mathbf {k_\alpha }$-leaping method}{99}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Computing the time length}{99}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Selecting the number of firings}{99}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Algorithm}{99}{subsection.4.5.3}%
+\contentsline {subsection}{\numberline {4.5.4}Discussion}{100}{subsection.4.5.4}%
+\contentsline {subsection}{\numberline {4.5.5}K-leaping method}{100}{subsection.4.5.5}%
+\contentsline {subsubsection}{\numberline {4.5.5.1}Number of firing}{101}{subsubsection.4.5.5.1}%
+\contentsline {subsubsection}{\numberline {4.5.5.2}Selecting K}{101}{subsubsection.4.5.5.2}%
+\contentsline {subsubsection}{\numberline {4.5.5.3}Algorithm}{102}{subsubsection.4.5.5.3}%
+\contentsline {subsubsection}{\numberline {4.5.5.4}Discussion}{102}{subsubsection.4.5.5.4}%
+\contentsline {section}{\numberline {4.6}Chemical Langevin method}{103}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}State update}{103}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Algorithm}{103}{subsection.4.6.2}%
+\contentsline {subsection}{\numberline {4.6.3}Discussion}{104}{subsection.4.6.3}%
+\contentsline {chapter}{\numberline {5}Deterministic simulations}{105}{chapter.5}%
+\contentsline {section}{\numberline {5.1}introduction}{105}{section.5.1}%
+\contentsline {section}{\numberline {5.2}From biochemical reactions to ODEs}{105}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Starting hypothesis}{105}{subsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.1.1}Continuum hypothesis}{105}{subsubsection.5.2.1.1}%
+\contentsline {subsubsection}{\numberline {5.2.1.2}Effect of starting hypothesis}{105}{subsubsection.5.2.1.2}%
+\contentsline {subsection}{\numberline {5.2.2}Law of mass action}{106}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Building the set of ODEs}{106}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Michaelis-Menten kinetics}{107}{subsection.5.2.4}%
+\contentsline {section}{\numberline {5.3}Numerical solution of ODEs}{108}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Finding a solution}{108}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Forward/Backward Euler method}{108}{subsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.2.1}Forward Euler algorithm}{109}{subsubsection.5.3.2.1}%
+\contentsline {subsubsection}{\numberline {5.3.2.2}Backward Euler algorithm}{109}{subsubsection.5.3.2.2}%
+\contentsline {subsubsection}{\numberline {5.3.2.3}Discussion}{109}{subsubsection.5.3.2.3}%
+\contentsline {section}{\numberline {5.4}Improving the accuracy of numerical methods}{109}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Global truncation error}{110}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Consistency of a numerical method}{110}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Order of a numerical method}{110}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}Heun method}{110}{subsection.5.4.4}%
+\contentsline {subsubsection}{\numberline {5.4.4.1}Algorithm}{111}{subsubsection.5.4.4.1}%
+\contentsline {subsection}{\numberline {5.4.5}Runge-Kutta methods}{111}{subsection.5.4.5}%
+\contentsline {subsubsection}{\numberline {5.4.5.1}Fourth order RK method}{112}{subsubsection.5.4.5.1}%
+\contentsline {paragraph}{\numberline {5.4.5.1.1}Algorithm}{112}{paragraph.5.4.5.1.1}%
+\contentsline {section}{\numberline {5.5}Multistep methods}{112}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Linear multistep numerical method}{112}{subsection.5.5.1}%
+\contentsline {subsubsection}{\numberline {5.5.1.1}Midpoint method}{113}{subsubsection.5.5.1.1}%
+\contentsline {paragraph}{\numberline {5.5.1.1.1}Algorithm}{113}{paragraph.5.5.1.1.1}%
+\contentsline {paragraph}{\numberline {5.5.1.1.2}Discussion}{113}{paragraph.5.5.1.1.2}%
+\contentsline {subsubsection}{\numberline {5.5.1.2}Simpson method}{113}{subsubsection.5.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.5.1.3}General linear multistep algorithm}{113}{subsubsection.5.5.1.3}%
+\contentsline {subsection}{\numberline {5.5.2}Adams methods}{114}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}BDF methods}{114}{subsection.5.5.3}%
+\contentsline {section}{\numberline {5.6}Adaptive methods}{114}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Estimating the local truncation error}{115}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Runge-Kutta Fehlberg}{115}{subsection.5.6.2}%
+\contentsline {subsubsection}{\numberline {5.6.2.1}Algorithm}{116}{subsubsection.5.6.2.1}%
+\contentsline {subsubsection}{\numberline {5.6.2.2}Discussion}{117}{subsubsection.5.6.2.2}%
+\contentsline {subsection}{\numberline {5.6.3}Stiffness}{117}{subsection.5.6.3}%
+\contentsline {section}{\numberline {5.7}Issues of deterministic simulation}{118}{section.5.7}%
+\contentsline {subsection}{\numberline {5.7.1}Spatial homogeneity and continuum hypothesis}{118}{subsection.5.7.1}%
+\contentsline {subsection}{\numberline {5.7.2}Multistability}{118}{subsection.5.7.2}%
+\contentsline {subsection}{\numberline {5.7.3}Steady state}{118}{subsection.5.7.3}%
+\contentsline {chapter}{\numberline {6}Hybrid simulation approaches}{119}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Introduction}{119}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Slow-discrete region}{120}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Fast-discrete region}{120}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Slow-continuous region}{120}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.4}Fast continuous stochastic and deterministic region}{120}{subsection.6.1.4}%
+\contentsline {subsection}{\numberline {6.1.5}Dimensionality explosion}{120}{subsection.6.1.5}%
+\contentsline {section}{\numberline {6.2}Reaction-based system partitioning}{120}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Classifying fast reactions}{120}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Partitioning algorithm}{121}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Dynamic partitioning}{121}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.2.4}Different constraints}{121}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}Four class reaction partitioning}{122}{subsection.6.2.5}%
+\contentsline {subsubsection}{\numberline {6.2.5.1}Algorithm}{123}{subsubsection.6.2.5.1}%
+\contentsline {section}{\numberline {6.3}Synchronization of exact and approximate simulations}{123}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Algorithm}{123}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Preserving the exactness}{124}{subsection.6.3.2}%
+\contentsline {subsubsection}{\numberline {6.3.2.1}Event detection}{125}{subsubsection.6.3.2.1}%
+\contentsline {subsubsection}{\numberline {6.3.2.2}Algorithm}{125}{subsubsection.6.3.2.2}%
+\contentsline {section}{\numberline {6.4}Hybrid Rejection-Based SSA}{126}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Reaction partitioning}{126}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Firing time}{126}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Updating the system}{126}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}Algorithm}{126}{subsection.6.4.4}%
+\contentsline {subsection}{\numberline {6.4.5}Correctness of the simulation of slow reactions}{128}{subsection.6.4.5}%
+\contentsline {section}{\numberline {6.5}Hybrid simulation with stiffness}{129}{section.6.5}%
+\contentsline {subsection}{\numberline {6.5.1}Formulation of reactions with stiffness}{129}{subsection.6.5.1}%
+\contentsline {subsubsection}{\numberline {6.5.1.1}Quasi-steady state assumption}{130}{subsubsection.6.5.1.1}%
+\contentsline {subsubsection}{\numberline {6.5.1.2}Partial equilibrium assumption}{131}{subsubsection.6.5.1.2}%
+\contentsline {subsection}{\numberline {6.5.2}Slow-scale stochastic simulation algorithm}{131}{subsection.6.5.2}%
+\contentsline {subsubsection}{\numberline {6.5.2.1}Algorithm}{131}{subsubsection.6.5.2.1}%
+\contentsline {subsection}{\numberline {6.5.3}Nested stochastic simulation algorithm}{132}{subsection.6.5.3}%
+\contentsline {subsubsection}{\numberline {6.5.3.1}Algorithm}{132}{subsubsection.6.5.3.1}%
+\contentsline {part}{II\hspace {1em}Parameter optimization}{134}{part.2}%
+\contentsline {chapter}{\numberline {7}Reali}{135}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Introduction}{135}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Definition of a system}{135}{subsection.7.1.1}%
+\contentsline {subsection}{\numberline {7.1.2}Determinism, nondeterminism, or stochasticity?}{135}{subsection.7.1.2}%
+\contentsline {subsection}{\numberline {7.1.3}Computational complexity}{136}{subsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.1.4}Definition of a model}{136}{subsection.7.1.4}%
+\contentsline {subsection}{\numberline {7.1.5}Checking the validity of a model}{136}{subsection.7.1.5}%
+\contentsline {subsection}{\numberline {7.1.6}How to build a model}{137}{subsection.7.1.6}%
+\contentsline {chapter}{\numberline {8}Optimization problem}{140}{chapter.8}%
+\contentsline {subsection}{\numberline {8.0.1}General definition of an optimization problem}{140}{subsection.8.0.1}%
+\contentsline {subsection}{\numberline {8.0.2}Definition of a minimum}{141}{subsection.8.0.2}%
+\contentsline {chapter}{\numberline {9}Gradient methods}{142}{chapter.9}%
+\contentsline {subsubsection}{\numberline {9.0.0.1}Lagrangian function}{142}{subsubsection.9.0.0.1}%
+\contentsline {subsection}{\numberline {9.0.1}Lagrangian Multipliers Theorem}{142}{subsection.9.0.1}%
+\contentsline {subsection}{\numberline {9.0.2}Definition of a gradient}{142}{subsection.9.0.2}%
+\contentsline {subsection}{\numberline {9.0.3}Limitations of gradient descent methods}{143}{subsection.9.0.3}%
+\contentsline {subsection}{\numberline {9.0.4}Gradient approximation with Taylor formula}{143}{subsection.9.0.4}%
+\contentsline {subsection}{\numberline {9.0.5}Line search}{144}{subsection.9.0.5}%
+\contentsline {subsubsection}{\numberline {9.0.5.1}Newton's direction}{144}{subsubsection.9.0.5.1}%
+\contentsline {subsubsection}{\numberline {9.0.5.2}Line search algorithm for function minimization}{145}{subsubsection.9.0.5.2}%
+\contentsline {subsubsection}{\numberline {9.0.5.3}Quasi Newton's direction}{145}{subsubsection.9.0.5.3}%
+\contentsline {subsubsection}{\numberline {9.0.5.4}Steepest descent direction}{145}{subsubsection.9.0.5.4}%
+\contentsline {subsubsection}{\numberline {9.0.5.5}Selecting $\alpha $}{146}{subsubsection.9.0.5.5}%
+\contentsline {subsubsection}{\numberline {9.0.5.6}Convergence of a method}{146}{subsubsection.9.0.5.6}%
+\contentsline {subsection}{\numberline {9.0.6}Trust region}{147}{subsection.9.0.6}%
+\contentsline {subsubsection}{\numberline {9.0.6.1}Trust region steepest descent}{147}{subsubsection.9.0.6.1}%
+\contentsline {subsubsection}{\numberline {9.0.6.2}Trust region algorithm}{148}{subsubsection.9.0.6.2}%
+\contentsline {chapter}{\numberline {10}Least squares problems}{150}{chapter.10}%
+\contentsline {subsection}{\numberline {10.0.1}The Levenberg-Marquardt method}{151}{subsection.10.0.1}%
+\contentsline {subsection}{\numberline {10.0.2}Solving a problem with bounds}{152}{subsection.10.0.2}%
+\contentsline {subsection}{\numberline {10.0.3}Solving global minimum problem}{152}{subsection.10.0.3}%
+\contentsline {subsection}{\numberline {10.0.4}Gauss-Newton method}{152}{subsection.10.0.4}%
+\contentsline {subsection}{\numberline {10.0.5}Latin hypercube sample}{152}{subsection.10.0.5}%
+\contentsline {subsection}{\numberline {10.0.6}MATLAB}{153}{subsection.10.0.6}%
+\contentsline {chapter}{\numberline {11}Stochastic methods for parameter estimation}{155}{chapter.11}%
+\contentsline {subsection}{\numberline {11.0.1}Markov Chain Monte Carlo (MCMC)}{155}{subsection.11.0.1}%
+\contentsline {subsection}{\numberline {11.0.2}Sampling a distribution}{157}{subsection.11.0.2}%
+\contentsline {subsection}{\numberline {11.0.3}Rejection sampling algorithm}{158}{subsection.11.0.3}%
+\contentsline {subsection}{\numberline {11.0.4}Metropolis Hastings}{158}{subsection.11.0.4}%
+\contentsline {subsubsection}{\numberline {11.0.4.1}MH algorithm}{159}{subsubsection.11.0.4.1}%
+\contentsline {subsubsection}{\numberline {11.0.4.2}Visualization of MCMC}{159}{subsubsection.11.0.4.2}%
+\contentsline {subsubsection}{\numberline {11.0.4.3}How to link data and MH}{160}{subsubsection.11.0.4.3}%
+\contentsline {subsection}{\numberline {11.0.5}Random walk MCMC}{160}{subsection.11.0.5}%
+\contentsline {subsubsection}{\numberline {11.0.5.1}Algorithm RW-MCMC ( C known)}{161}{subsubsection.11.0.5.1}%
+\contentsline {subsubsection}{\numberline {11.0.5.2}Diagnostics}{161}{subsubsection.11.0.5.2}%
+\contentsline {chapter}{\numberline {12}Heuristics and the genetic algorithm}{164}{chapter.12}%
+\contentsline {subsection}{\numberline {12.0.1}The genetic algorithm}{164}{subsection.12.0.1}%
+\contentsline {subsubsection}{\numberline {12.0.1.1}Chromosome encoding}{165}{subsubsection.12.0.1.1}%
+\contentsline {subsubsection}{\numberline {12.0.1.2}Generation of an initial population}{165}{subsubsection.12.0.1.2}%
+\contentsline {subsubsection}{\numberline {12.0.1.3}Fitness evaluation}{165}{subsubsection.12.0.1.3}%
+\contentsline {subsubsection}{\numberline {12.0.1.4}Parent selection}{165}{subsubsection.12.0.1.4}%
+\contentsline {subsubsection}{\numberline {12.0.1.5}Reproduction}{165}{subsubsection.12.0.1.5}%
+\contentsline {subsubsection}{\numberline {12.0.1.6}Mutation}{166}{subsubsection.12.0.1.6}%
+\contentsline {subsection}{\numberline {12.0.2}Genetic algorithm pseudocode}{166}{subsection.12.0.2}%
+\contentsline {subsubsection}{\numberline {12.0.2.1}Cons}{167}{subsubsection.12.0.2.1}%
+\contentsline {subsubsection}{\numberline {12.0.2.2}Pros}{167}{subsubsection.12.0.2.2}%
