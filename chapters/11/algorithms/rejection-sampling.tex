@@ -1,0 +1,32 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{Partitioning}{partitioning}
+\SetKwFunction{TitleFunction}{Rejection sampling}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:rejection-sampling}
+
+\Input: $M$, $p(x)$ and $q(x)$\;
+
+\Output: a random variable distributed according to $p$\;
+
+$i = 1$\;
+\Repeat{}{
+	sample $x^{(i)}\sim q$, $u\sim norm(0,1)$\;
+	\If{$u>\frac{p(x^{(i)})}{Mq(X^i)}$}{
+		$i = i + 1$\;
+	}
+}
+
+\end{algorithm}

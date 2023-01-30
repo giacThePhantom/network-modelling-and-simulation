@@ -1,193 +1,128 @@
 \graphicspath{{chapters/11/images}}
 \chapter{Stochastic methods for parameter estimation}
 
-
+\section{Introduction}
 Stochastic methods are often used when we cannot compute the gradient.
-With the same parameters, stochastic methods can produce dramatically
-different results.
+With the same parameters, stochastic methods can produce dramatically different results, as it can be seen in figure \ref{fig:res}.
 
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{stoch_LV.png}
-\caption{Lotka-Volterra stochastic simulation results. In B we witness
-preys and predators extinction, it is the output of a simulation
-performed with the same model and parameters as A.}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{stoch_LV.png}
+  \caption{Lotka-Volterra stochastic simulation results. In B we witness
+  preys and predators extinction, it is the output of a simulation
+  performed with the same model and parameters as A.}
 \label{fig:res}
 \end{figure}
 
-Lotka-Volterra stochastic simulation results are reported in Figure \ref{fig:res}- In B we witness preys and
-predators extinction, it is the output of a simulation performed with
-the same model and parameters as A.
-\\
-\\
-\noindent
-Instead of following the gradient, we collect information in a manner
-resembling natural selection. Monte Carlo Methods are dated around 1949,
-the name comes from casinos (recalls concept of luck). In order to use
-MCM to do inference, Metropoli and Hastings developed a specific
-algorithm in 1970.
+Instead of following the gradient informations are collected in a manner resembling natural selection.
+Monte Carlo Methods are dated around 1949, the name comes from casinos.
+In order to use MCM to do inference, Metropoli and Hastings developed a specific algorithm in 1970.
 
+\section{Markov Chain Monte Carlo (MCMC)}
+MCMC is a chain of events where the current state depends on the previous one and on the transition probability.
+Running MCMC long enough they will reach a stable point.
+$x^{(i)}$ is a random variable or stochastic process that takes only discrete values $\{x_1,\dots,x_s\}$.
+Let $p(x)$ be the probability distribution of $x$.
 
-\subsection{Markov Chain Monte Carlo (MCMC)}
+  \subsection{Markov chain}
+  $x^{(i)}$ is a Markov Chain if:
 
-MCMC is a chain of events where the current state depends on the
-previous one and on the transition probability.
-\noindent
-If $x^{(i)}$ is a random variable (stochastic process) and it takes only
-discrete values $\{x_1,\dots,x_s\}$. Let $p(x)$ be the probability
-distribution of $x$. $x^{(i)}$ is a Markov Chain if:
+  $$p(x^{(i)}|x^{(i-1)},\dots,x^{(1)})=T(x^{(i)}|x^{(i-1)})$$
 
-$$
-p(x^{(i)}|x^{(i-1)},\dots,x^{(1)})=T(x^{(i)}|x^{(i-1)})
-$$
-\noindent
-Simplest case: a MC is \textbf{homogenous} if $T(x^{(i)})x^{(i-1)}=T$,
-i.e.~the transition matrix is constant.
-\\
-\\
-\noindent
-If we run MCMC long enough, they will hopefully reach a stable point.
-\\
-\\
-\noindent
-Example: 3 states and homogenous transition matrix
+    \subsubsection{Homogeneity}
+    A Markov chain is homogenous if $T(x^{(i)})x^{(i-1)}=T$,
+    So that the transition matrix is constant.
 
-$$
-T = \begin{bmatrix}
-0 & 1 & 0\\
-0 & 0.1 & 0.9\\ 0.6 & 0.4 & 0\\
-\end{bmatrix}
-$$
+  \subsection{Example}
+  Let $3$ states as in figure \ref{fig:MCMCexmple}.
 
-\begin{figure}
-\centering
-\includegraphics[width=0.3\textwidth]{mcmc.png}
-\caption{MCMC example}
-\label{fig:MCMCexample}
-\end{figure}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.3\textwidth]{mcmc.png}
+    \caption{MCMC example}
+    \label{fig:MCMCexample}
+  \end{figure}
 
-MCMC example (Figure \ref{fig:MCMCexample}):
+  The homogeneous transition matrix:
 
-$$
-\pi_1=\begin{pmatrix}0.5 & 0.2& 0.3 \end{pmatrix}
-$$
-\noindent
-The next probability of being in the three states is given by
+  $$T = \begin{bmatrix}0 & 1 & 0\\0 & 0.1 & 0.9\\ 0.6 & 0.4 & 0\\\end{bmatrix}$$
 
-$$
-\pi_1 \cdot T=\begin{pmatrix}0.3\cdot0.6, & 0.5+0.02+0.12,& 0.18 \end{pmatrix} = \begin{pmatrix}0.18, & 0.64,& 0.18 \end{pmatrix}
-$$
-\noindent
-If we do this enough, we will always arrive to a fixed distribution,
-called invariant distribution $\Rightarrow$ we want to build a Markov
-Chain whose invariant distribution is the distribution of our unknown
-parameters.
+  And the states:
 
-$$
-p(x)=\dots = \begin{pmatrix} 0.2213 \\ 0.4098 \\ 0.3689\end{pmatrix}^T
-$$
-Where p(x) is called \textbf{invariant distribution}.
-\\
-\\
-\noindent
-A stochastic matrix is \emph{irreducible} if its graph does not contain
-unconnected sub-graphs. If T is an irreducible transition matrix (+ aperiodic) → the MC has an
-invariant distribution.
-\noindent
-We must connect probability distribution / values for the parameters
-with the model. There is a known function that we can use to do so.
-\\
-\\
-\noindent
-Monte Carlo refers to a family of methods developed for
-\textbf{sampling}. In particular, we obtain samples of a certain i.i.d.
-random variables $\{x^{(i)}\}_{i>0}$ from a known density $p(X)$.
-\\
-\\
-\noindent
-The samples can be used to ``estimate / approximate'' a target density /
-distribution. We exploit known distributions e.g.~Normal,
-Poisson,\ldots{} to approximate our unknown distribution of interest.
-\\
-\\
-\noindent
-Given enough samples, we can approximate $p$ as:
+  $$\pi_1=\begin{pmatrix}0.5 & 0.2& 0.3 \end{pmatrix}$$
 
-$$
-p_N(x)= \frac{1}{N}\sum^N_{i=1}\delta_{x^{(i)}}(x)
-$$
+  The next probability of being in the three states is given by
 
-with
-$\delta_{x^{(i)}}(x)= \begin{cases}1, & x=x^{(i)} \\ 0, & \text{elsewhere}\end{cases}$
-\noindent
-This is often used to approximate ``hard'' integrals. We can approximate
-and integral with a finite sum of values, which is obtained as:
+  $$\pi_1 \cdot T=\begin{pmatrix}0.3\cdot0.6, & 0.5+0.02+0.12,& 0.18 \end{pmatrix} = \begin{pmatrix}0.18, & 0.64,& 0.18 \end{pmatrix}$$
 
-$$
-I_N(f)=\frac{1}{N} \sum^N_{i=1} f(x^{(i)})
-$$
-\noindent
-Here we are evaluating the function is some points. We can use the mean
-as an approximation of the integral. This equation converges to the real
-integral by the law of large numbers.
+  Iterating enough time a fixed distribution will be reached.
 
-$$
-I_N(f)=\frac{1}{N} \sum^N_{i=1} f(x^{(i)})  \xrightarrow[N \rightarrow \infty  ]{}   I(f)= \int_x f(x)p(x)dx
-$$
-\noindent
-A probability is richer than the output of one least squares, we have
-information on the shape.
+  \subsection{Invariant distribution}
+  The invariant distribution if a fixed distribution reached after enough Monte Carlo iterations.
+  The objective is to build a Markov chain whose invariant distribution is the distribution of the unknown parameters.
+  For example, in the previous example, the invariant distribution will be:
 
+  $$p(x)=\dots = \begin{pmatrix} 0.2213 \\ 0.4098 \\ 0.3689\end{pmatrix}^T$$
 
-\subsection{Sampling a distribution}
+  \subsection{Irreducible matrices}
+  A stochastic matrix is irreducible if its graph does not contain unconnected sub-graphs.
+  If $T$ is an irreducible transition matrix and is aperiodic the Markov chain has an invariant distribution.
+  The probability distribution has to be linked with the model.
 
-Let $p$ be a known probability distribution (up to a proportionality
-constant). We usually prefer to sample from a well-known distribution
-$q(x)$ s.t. $\exists M>0$
+  \subsection{Monte Carlo sampling}
+  Monte Carlo refers to a family of methods developed for sampling.
+  In particular, the output of a Monte Carlo method are independent and identically distributed random variables $\{x^{(i)}\}_{i>0}$ from a known density $p(X)$.
+  The samples can be used to ``estimate or approximate'' a target density or distribution.
+  Known distributions are exploited to approximate the unknown distribution of interest.
+  Given enough samples, $p$ can be approximated as:
 
-$$
-p(x) \leq M q(x)
-$$
+  $$p_N(x)= \frac{1}{N}\sum^N_{i=1}\delta_{x^{(i)}}(x)$$
+
+  With:
+
+  $$\delta_{x^{(i)}}(x)= \begin{cases}1, & x=x^{(i)} \\ 0, & \text{elsewhere}\end{cases}$$
+
+  This is often used to approximate ``hard'' integrals.
+  An integral with a finite sum of values, can be obtained as:
+
+  $$I_N(f)=\frac{1}{N} \sum^N_{i=1} f(x^{(i)})$$
+
+  The function is being evaluated as some points and the mean is an integration of the integral.
+  This equation converges to the real integral by the law of large numbers:
+
+  $$I_N(f)=\frac{1}{N} \sum^N_{i=1} f(x^{(i)})  \xrightarrow[N \rightarrow \infty  ]{}   I(f)= \int_x f(x)p(x)dx$$
+
+  This is better than the output of the least square problem as it gives information about the shape of the distribution.
+
+\section{Sampling a distribution}
+Let $p$ be a known probability distribution up to a proportionality constant.
+It is usually preferred to sample from a well-known distribution, like for example the one in \ref{fig:bimodal}.
+
+$$q(x)\text{ such that }\exists M>0$$
+
+$$p(x) \leq M q(x)$$
 
 
 \begin{figure}
-\centering
-\includegraphics[width=0.3\textwidth]{distribution.png}
-\caption{Example: bimodal distribution}
+  \centering
+  \includegraphics[width=0.3\textwidth]{distribution.png}
+  \caption{Example: bimodal distribution}
+  \label{fig:bimodal}
 \end{figure}
-\noindent
-We extract values from $q$ if they are smaller than $Mq$; each time we
-are collecting information on $p$ collecting from $q$.
 
-\subsection{Rejection sampling algorithm}
+Values from $q$ are extracted if they are smaller than $Mq$.
+Each time information about $p$ are collected from $q$.
 
-Set $i=1$
+  \subsection{Rejection sampling algorithm}
+  A rejection sampling implementation is outlined in algorithm \ref{algo:rejection-sampling}.
 
-REPEAT
+  \input{chapters/11/algorithms/rejection-sampling}
 
-Sample $x^{(i)}$ from $q$ and $u \in \mathcal{U}(0,1)$
+  If the point is in the area between $p$ and $Mq$ is accepted.
+  The further the ratio is from $1$, the smaller the chance of keeping the point.
+  A known distribution $p$ is being used, then gradually what is known about it is removed in the following iterations.
 
-IF $u < \frac{p(x^{(i)})}{Mq(X^i)}$ and $x^{(i)}$
-
-$i=i+1$
-
-ELSE
-
-REJECT
-\\
-\\
-\noindent
-If the point is in the area between p and Mq we still accept it; the
-further the ratio is from one, the smaller the chance of keeping the
-point.
-\\
-\\
-\noindent
-At this point we are using a known distribution $p$; we then gradually
-remove what we know in the following iterations.
-
-
-\subsection{Metropolis Hastings}
+\section{Metropolis Hastings}
 
 Let $X$ be our current point, $q$ the proposal distribution and $p$ the
 target distribution. $p$ can be an unnormalized density
