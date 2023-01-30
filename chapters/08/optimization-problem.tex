@@ -1,117 +1,90 @@
 \chapter{Optimization problem}
 
+\section{Introduction}
+An optimization problem is a problem in which the objective is to maximize or minimize something.
+The optimization objective is called an objective or cost function that depends on a variable or a vector of variables called unknowns or parameters or parameter estimates.
+These variables may be subject to certain constraints.
 
-In general, it is a problem in which we try to \emph{maximize} or \emph{minimize}
-something. What we want to optimize is a function usually called
-\emph{objective function} (or cost function). The function depends on a
-variable or a vector of variables, called unknowns or parameters or
-parameter estimates. They may be subject to certain
-constraints(\textless,\textgreater,=).
+\section{General definition of an optimization problem}
 
-\subsection{General definition of an optimization problem}
+$$\left.\left\{\begin{array}{ll} \max _{x \in \mathbb{R}^n} f(x) & \\ c_i(x)=0 & i=\mathcal{E}\\ f_j(x) \geq 0 & j = I \end{array}\right\} \text { set of indexes }\right] \text { Constraints (equality and inequality) }$$
 
-$\left.\left\{\begin{array}{ll} \max _{x \in \mathbb{R}^n} f(x) & \\ c_i(x)=0 & i=\mathcal{E}\\ f_j(x) \geq 0 & j = I \end{array}\right\} \text { set of indexes }\right] \text { Constraints (equality and inequality) }$
-\\
-\\
-\noindent
-The model (for us) is a function that gives a certain interval/time,
-initial conditions and parameters, returns the variables at that time.
-(Assume deterministic description)
+The model will be a function that given a certain interval or time, initial conditions and parameters, returns the variables at that time.
+Now assuming a deterministic condition, the model $m$:
 
-$m: \mathbb{R} \times \mathbb{R}^{(n+1)} \times \mathbb{R}^m \rightarrow \mathbb{R}^N$
+$$m: \mathbb{R} \times \mathbb{R}^{(n+1)} \times \mathbb{R}^m \rightarrow \mathbb{R}^N$$
 
-where n+1 accounts for the dimension of variables and time.
+Where $n+1$ accounts for the dimension of variables and time:
 
-$$
-\left(t_1,\left(\vec{x}_0, t_0\right), \theta\right)
-\longmapsto \vec{x}_1 $$
+$$\left(t_1,\left(\vec{x}_0, t_0\right), \theta\right)\longmapsto \vec{x}_1 $$
 
-Initial conditions in Lotka-Volterra: $((20,5), 0)$.
-\\
-\\
-\noindent
-$\theta$ represents parameters e.g.~in Lotka-Volterra, $a,b,\beta,\alpha$. Now, assume that we have $k$ observations:
+Where $\theta$ is the vector of parameters.
+Assuming that there are $k$ observation:
 
-$(t_i ,\vec{y}_i), i=1, \ldots k$ , where
-$t_i \in \mathbb{R}^+, \vec{y}_i \in \mathbb{R}^\ell$
-\noindent
-$y$ in theory can be a subset, $\ell<N$ : this happens a lot in complex
-systems, we may not observe all variables! For simplicity, we can assume
-$\ell=N$. Assuming that we can compute the following:
+$$(t_i ,\vec{y}_i), i=1, \ldots k$$
 
-$$m\left(t_1,\left(\vec{x}_0, t_0\right), \theta\right) \in \mathbb{R}^{N} =_{\text{drop initial point notation}} m(t_i,\theta)$$
-\noindent
-We can compute distance: $d_i=\vec{y}_i-m(t_i, \theta)$.
-\noindent
-We can choose any type of distance (Euclidean, max\ldots). What we do is
-calculating point-wise the distance between the model and `true' labels.
-It is quite common to use the \textbf{\emph{Euclidean distance}}:
-$$d \varepsilon =\sqrt{\sum_{i=1}^k(\vec{y}_i,-m(t_i, \theta))^2}\\
-\rightarrow d{\varepsilon}-\sqrt{\sum_{i=1}^{K} \sum_{j=1}^{N} \left(y_{ij}-m_j\left(t_i, \theta\right)\right)^2}$$
-\noindent
-Sometimes we need need to add weights, which multiply each component in
-the distances. We are putting together many outputs from the same model,
-so we might want to scale everything to make it more comparable.
-Furthermore, variables might be in different units of measurement,
-leading to biased results.
-\\
-\\
-\noindent
-Observations:
+Where $t_i \in \mathbb{R}^+, \vec{y}_i \in \mathbb{R}^\ell$.
+In particular $y$ can be a subset such that $\ell<N$.
+This happens a lot in complex systems, where some variables are not observed.
 
-\begin{itemize}
-\tightlist
-\item
-  we do not want to reach ``zero'' when minimizing. Indeed, if the
-  residual error $=0$, we are $100 \%$ sure that we are overfitting the
-  data.
-\item
-  we need to really understand the data to construct the model
-\item
-  we are manipulating $\theta$ in the space of the parameters, but we
-  modify the output in the space of the observations: we are connecting
-  abstract values to observations - like parameters for maximum
-  likelihood.
-\end{itemize}
+  \subsection{Distance}
+  For simplicity assume $\ell = N$ and that the following can be computed:
 
-\noindent
-Weights are multiplicative factors, sometimes we might wish to
-\emph{transform} the distance.
-\\
-\\
-\noindent
-Example:  \textbf{Least squares algorithm}
+  $$m\left(t_1,\left(\vec{x}_0, t_0\right), \theta\right) \in \mathbb{R}^{N} = m(t_i,\theta)$$
 
-$$d{\varepsilon}=\sqrt{\sum \sum W_{ij}\left(y_{ij}-m_j\left(t_i, \theta\right)\right)}$$
+  Now the distance can be computed:
 
-\noindent
-Our problem is to minimize/maximize a function. Assume:
+  $$d_i=\vec{y}_i-m(t_i, \theta)$$
 
-$$
-\min f(x), x \in \mathbb{R}^n
-$$
+  Where $d_i$ is any type of distance.
+  Now the point-wise distance between the model and the observed labels is computed.
+  A common distance measure is the Euclidean one:
 
-\subsection{Definition of a minimum}
+  \begin{align*}
+    d_\varepsilon &=\sqrt{\sum_{i=1}^k(\vec{y}_i,-m(t_i, \theta))^2}=\\
+                  &=\sqrt{\sum_{i=1}^{K} \sum_{j=1}^{N} \left(y_{ij}-m_j\left(t_i, \theta\right)\right)^2}
+  \end{align*}
 
-A point $x^*$ is called \textbf{minimum} if
-$\exists \varepsilon > 0 : \forall x : || x- x^* || < \varepsilon$
+  Sometimes a weight is added so to scale the components of the output of the model as to make them more comparable and to make the variables unit of measurement agnostic, unbiasing the results.
 
-$$
-\Rightarrow f(x) \geq f(x^*) \\
-$$
-\noindent
-{[}For the maximum $f(x) \leq f(x^*)${]}
-\\
-\\
-\noindent
-The minimum is \textbf{\emph{global}} if $\forall x \in \mathbb{R}^n$
-(or in our domain) $f(x) \geq f(x^*)$. In general it is not easy to
-determine global minimum/maximum, especially if we have a lot of
-dimensions.
-\noindent
-To find minima or maxima, we should impose $f'(x)=0$.
-\\
-\\
-\noindent
-We call a \textbf{\emph{stationary point}}, a
-$\bar{x} \text{ s.t.} f'(\bar{x})=0$.
+  \subsection{Weights}
+  A weight is a scalar that multiplies the component in the distance.
+  So it is a multiplicative factors that allows to transform the distance.
+  For example in the least square algorithm the distance is computed as:
+
+  $$d_\varepsilon=\sqrt{\sum \sum W_{ij}\left(y_{ij}-m_j\left(t_i, \theta\right)\right)}$$
+
+  \subsection{Objective}
+  The objective of an optimization problem is to minimize or maximizing a function:
+
+  $$\min f(x), x \in \mathbb{R}^n$$
+
+  \subsection{Observations}
+  When minimize the zero of the function is not the final objective, because if the residual error is zero, the data is being overfitted.
+  Furthermore a great attention has to be posed to the construction of the model.
+  During optimization $\theta$, the space of the parameters is being manipulated, modifying the output in the space of observations.
+  In this way abstract values are being linked to observations.
+
+
+\section{Definition of a minimum}
+A point $x^*$ is called a minimum if:
+
+$$\exists \varepsilon > 0 : \forall x : || x- x^* || < \varepsilon\Rightarrow f(x) \geq f(x^*)$$
+
+Respectively, for the maximum:
+
+$$f(x) \leq f(x^*)$$
+
+A minimum is called global if:
+
+$$\forall x \in \mathbb{R}^n$$
+
+Or, in this domain:
+
+$$f(x) \geq f(x^*)$$
+
+In general it is not easy to compute the global minimum or maximum, especially if there are a lot of dimensions.
+To find minima or maxima, $f'(x)=0$ should be imposed.
+A stationary point can be defined as:
+
+$$\bar{x} \text{ s.t.} f'(\bar{x})=0$$

@@ -1,0 +1,31 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{Partitioning}{partitioning}
+\SetKwFunction{TitleFunction}{Line search}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:line-search}
+
+\Input: the function $f$ to be minimized and $x_k$ starting point\;
+
+\Output: the minimized function\;
+
+\While{$||\nabla f(x_k)||>0$}{
+	$p_k = -(\nabla^2 f(x_k))^{-1}\nabla f(x_k)$\;
+	select $\alpha_k$\;
+	$x_{k+1} = x_k+\alpha_kp_k = x_k-\alpha_k(\nabla^2f(x_k))^{-1}\nabla f(x_k)$\;
+	$k = k+1$\;
+}
+
+\end{algorithm}

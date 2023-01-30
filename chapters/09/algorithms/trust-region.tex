@@ -1,0 +1,50 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{Partitioning}{partitioning}
+\SetKwFunction{TitleFunction}{Trust region}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:trust-region}
+
+\Input: the function $f$ to be minimized and $x_k$ starting point, $\delta$ and $\eta$ parameters\;
+
+\Output: the minimized function\;
+
+$\delta>0$\;
+$\delta_0\in]0,\delta[$\;
+$\eta \in\biggr]0,\frac{1}{4}\biggr[$\;
+$k = 0$\;
+$\epsilon < 0$\;
+
+\Repeat{$||\nabla f(x_k)||<0$}{
+	obtain $p_k$ such that $p_k=\arg\min\limits_{p}m(x_k+p)$\;
+	compute $p_k$\;
+	\If{$\rho_k<\frac{1}{4}$}{
+		$\delta_{k+1} = \frac{1}{4}\delta_k$\;
+	}
+	\ElseIf{$\rho_k < \frac{3}{4}\land||p_k||=\delta_k$}{
+		$\delta_{k+1} = \min(2\delta_k, \hat{\delta})$\;
+	}
+	\Else{
+		$\delta_{k+1} = \delta_k$\;
+	}
+	\If{$\rho_k >\eta$}{
+		$x_{k+1} = x_k +p_k$\;
+	}
+	\Else{
+		$x_{k+1} = x_k$\;
+	}
+}
+
+\end{algorithm}
