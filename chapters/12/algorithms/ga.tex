@@ -1,0 +1,49 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{Partitioning}{partitioning}
+\SetKwFunction{TitleFunction}{Genetic algorithm}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:ga}
+
+\Input: a fitness function $c$ that measures the goodness of the fit, the population size $N$, the rate of mutation $\sigma$ and the number of generations $G$\;
+
+\Output: the best candidate solution $\tilde{p}$ after $g$ generations\;
+
+map the parameters into strings of lenth $l$\;
+generate an initial population of strings $P = \{p_1,\dots, p_N\}$\;
+
+\ForEach{$G = 1, \dots, G$}{
+	$P' = \emptyset$\;
+	$f_i = c(p_i), i = 1, \dots, N$\;
+	$f_0 = \sum\limits_{i=1}^N f_i$\;
+	\ForEach{$N = 1, \dots, N$}{
+		$j\sim norm(0,1)$\;
+		determine the smallest $k$ such that $\sum\limits_{i=1}^jf_i>jf_0$\;
+		$P' = P'\cup p_k$\;
+	}
+	$P = \emptyset$\;
+	\ForEach{$N = 1, \dots, N$}{
+		$m,n\sim norm(1, N)$\;
+		select $p_m, p_n\in P'$\;
+		$t\sim norm(1, l)$\;
+		$\tilde{p} = \{p_m\{1:t\}, p_n\{t+1:l\}\}$\;
+		\For{$i = 1,\dot, l$}{
+			randomly change $\tilde{p}_i$ with probability $\sigma$\;
+		}
+		$P = P\cup \tilde{p}$\;
+	}
+}
+\Return the best solution $\tilde{p}$ such that $c(\tilde{p}) = \min\limits_{p\in P}c(p)$\;
+\end{algorithm}
