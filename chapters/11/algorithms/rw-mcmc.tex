@@ -1,0 +1,42 @@
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{Partitioning}{partitioning}
+\SetKwFunction{TitleFunction}{Random walk Markov Chain Monte Carlo (RW-MCMC)}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:rw-mcmc}
+
+\Input: $L$, $\theta$\;
+
+\Output: a random variable distributed according to $p$\;
+
+initialize matrix $D_\theta$ and vector $V_L$\;
+generate randomly $\theta_1$\;
+$L(\theta_1) = L_1$\;
+\ForEach{$i = 1, \dots, N$}{
+	$Z\sim norm(D, \mathcal{C})$\;
+	$\theta_2$ = $\theta_1 +Z$\;
+	$L_2 = L(\theta_2)$\;
+	$ratio = \frac{L_1}{L_2}$\;
+	$u\sim norm(0,1)$\;
+	\If{$u<ratio$}{
+		$L_1 = L_2$\;
+		$\theta_1 = \theta_2$\;
+	}
+	\If{$i>warm-up$}{
+		$D_\theta = [D_\theta;\theta_1]$\;
+		$V_L = [V_L;L_1]$\;
+	}
+}
+\end{algorithm}

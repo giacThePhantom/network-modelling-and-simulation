@@ -1,0 +1,37 @@
+
+\begin{algorithm}[H]
+\DontPrintSemicolon
+\SetKwComment{comment}{$\%$}{}
+\SetKw{Int}{int}
+\SetKw{To}{to}
+\SetKw{Return}{return}
+\SetKw{Not}{not}
+\SetKw{Input}{Input}
+\SetKw{Output}{Output}
+\SetKw{False}{false}
+\SetKw{True}{true}
+\SetKwData{Item}{item}
+\SetKwFunction{Min}{min}
+\SetKwFunction{Partitioning}{partitioning}
+\SetKwFunction{TitleFunction}{Metropolis Hastings}
+
+\caption{\protect\TitleFunction{}}
+\label{algo:mh}
+
+\Input: $N$, $r$ and $q(x)$\;
+
+\Output: a random variable distributed according to $p$\;
+
+guess $x^{(i)}$\;
+
+\ForEach{$i = 0,\dots, N-1$}{
+	sample $s^*\sim q(\cdot|x^{(i)})$ and $u\sim norm(0,1)$\;
+	\If{$u<\min\{1, r_H(x,x^*)\}$}{
+		$x^{(i+1)} = x^{(*)}$\;
+	}
+	\Else{
+		$x^{(i+1)} = x^{(i)}$\;
+	}
+}
+
+\end{algorithm}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.19)  30 JAN 2023 14:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.15)  31 JAN 2023 02:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -733,13 +733,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 178--181
 
  []
 
-<chapters/01/images//petri_nets.png, id=1159, 691.58376pt x 550.055pt>
+<chapters/01/images//petri_nets.png, id=1189, 691.58376pt x 550.055pt>
 File: chapters/01/images//petri_nets.png Graphic file (type png)
 <use chapters/01/images//petri_nets.png>
 Package pdftex.def Info: chapters/01/images//petri_nets.png  used on input line
  184.
 (pdftex.def)             Requested size: 216.81pt x 172.43732pt.
-<chapters/01/images///example_petri.png, id=1162, 907.39pt x 353.32pt>
+<chapters/01/images///example_petri.png, id=1192, 907.39pt x 353.32pt>
 File: chapters/01/images///example_petri.png Graphic file (type png)
 <use chapters/01/images///example_petri.png>
 Package pdftex.def Info: chapters/01/images///example_petri.png  used on input 
@@ -777,7 +777,7 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )) [25] [26])
 (./chapters/03/implementation_stochastic.tex [27]
 Chapter 3.
-<chapters/03/images//tree_methods.png, id=1302, 873.2625pt x 552.0625pt>
+<chapters/03/images//tree_methods.png, id=1332, 873.2625pt x 552.0625pt>
 File: chapters/03/images//tree_methods.png Graphic file (type png)
 <use chapters/03/images//tree_methods.png>
 Package pdftex.def Info: chapters/03/images//tree_methods.png  used on input li
@@ -786,7 +786,7 @@ ne 31.
 [28
 
 ]
-<chapters/03/images//boundaries.png, id=1310, 701.62125pt x 289.08pt>
+<chapters/03/images//boundaries.png, id=1340, 701.62125pt x 289.08pt>
 File: chapters/03/images//boundaries.png Graphic file (type png)
 <use chapters/03/images//boundaries.png>
 Package pdftex.def Info: chapters/03/images//boundaries.png  used on input line
@@ -840,7 +840,7 @@ Overfull \vbox (5.672pt too high) has occurred while \output is active []
 (./chapters/03/algorithms/rssa-table.tex) [78])
 (./chapters/04/approximation_algorithms.tex [79] [80]
 Chapter 4.
-<chapters/04/images//SSA_tree.png, id=2308, 438.63875pt x 687.56876pt>
+<chapters/04/images//SSA_tree.png, id=2339, 438.63875pt x 687.56876pt>
 File: chapters/04/images//SSA_tree.png Graphic file (type png)
 <use chapters/04/images//SSA_tree.png>
 Package pdftex.def Info: chapters/04/images//SSA_tree.png  used on input line 2
@@ -938,7 +938,7 @@ LaTeX Warning: Reference `tab:rk-order' on page 112 undefined on input line 272
 ) [114] [115] [116] (./chapters/05/algorithms/rk45.tex) [117] [118])
 (./chapters/06/hybrid_simulations.tex [119]
 Chapter 6.
-<chapters/06/images//regions.png, id=2862, 553.06625pt x 425.59pt>
+<chapters/06/images//regions.png, id=2892, 553.06625pt x 425.59pt>
 File: chapters/06/images//regions.png Graphic file (type png)
 <use chapters/06/images//regions.png>
 Package pdftex.def Info: chapters/06/images//regions.png  used on input line 22
@@ -976,28 +976,28 @@ Chapter 7.
 [136
 
 ]
-<chapters/07/images//scheme_model.png, id=3118, 503.8825pt x 422.57875pt>
+<chapters/07/images//scheme_model.png, id=3148, 503.8825pt x 422.57875pt>
 File: chapters/07/images//scheme_model.png Graphic file (type png)
 <use chapters/07/images//scheme_model.png>
 Package pdftex.def Info: chapters/07/images//scheme_model.png  used on input li
 ne 79.
 (pdftex.def)             Requested size: 260.17464pt x 218.19469pt.
  [137]
-<chapters/07/images//validation.png, id=3123, 691.58376pt x 319.1925pt>
+<chapters/07/images//validation.png, id=3153, 691.58376pt x 319.1925pt>
 File: chapters/07/images//validation.png Graphic file (type png)
 <use chapters/07/images//validation.png>
 Package pdftex.def Info: chapters/07/images//validation.png  used on input line
  100.
 (pdftex.def)             Requested size: 303.53267pt x 140.09445pt.
  [138 <./chapters/07/images//scheme_model.png>]
-<chapters/07/images//workflow.png, id=3131, 286.06876pt x 621.32124pt>
+<chapters/07/images//workflow.png, id=3161, 286.06876pt x 621.32124pt>
 File: chapters/07/images//workflow.png Graphic file (type png)
 <use chapters/07/images//workflow.png>
 Package pdftex.def Info: chapters/07/images//workflow.png  used on input line 1
 33.
 (pdftex.def)             Requested size: 130.08731pt x 282.54044pt.
  [139 <./chapters/07/images//validation.png>]
-<chapters/07/images//volterra.png, id=3140, 761.84625pt x 301.125pt>
+<chapters/07/images//volterra.png, id=3170, 761.84625pt x 301.125pt>
 File: chapters/07/images//volterra.png Graphic file (type png)
 <use chapters/07/images//volterra.png>
 Package pdftex.def Info: chapters/07/images//volterra.png  used on input line 1
@@ -1013,7 +1013,7 @@ Chapter 9.
 [145
 
 ]
-<chapters/09/images/example.png, id=3170, 1057.9525pt x 449.68pt>
+<chapters/09/images/example.png, id=3200, 1057.9525pt x 449.68pt>
 File: chapters/09/images/example.png Graphic file (type png)
 <use chapters/09/images/example.png>
 Package pdftex.def Info: chapters/09/images/example.png  used on input line 69.
@@ -1039,7 +1039,7 @@ Chapter 10.
 [152
 
 ] [153] (./chapters/10/algorithms/gauss-newton.tex) [154] [155]
-<chapters/10/images//multistep.png, id=3266, 390.45876pt x 328.22626pt>
+<chapters/10/images//multistep.png, id=3296, 390.45876pt x 328.22626pt>
 File: chapters/10/images//multistep.png Graphic file (type png)
 <use chapters/10/images//multistep.png>
 Package pdftex.def Info: chapters/10/images//multistep.png  used on input line 
@@ -1049,7 +1049,7 @@ Package pdftex.def Info: chapters/10/images//multistep.png  used on input line
 (./chapters/11/stochastic-methods-parameter-estimation.tex [156 <./chapters/10/
 images//multistep.png>]
 Chapter 11.
-<chapters/11/images/stoch_LV.png, id=3275, 768.8725pt x 311.1625pt>
+<chapters/11/images/stoch_LV.png, id=3305, 768.8725pt x 311.1625pt>
 File: chapters/11/images/stoch_LV.png Graphic file (type png)
 <use chapters/11/images/stoch_LV.png>
 Package pdftex.def Info: chapters/11/images/stoch_LV.png  used on input line 10
@@ -1062,121 +1062,63 @@ Package pdftex.def Info: chapters/11/images/stoch_LV.png  used on input line 10
 LaTeX Warning: Reference `fig:MCMCexmple' on page 158 undefined on input line 3
 7.
 
-<chapters/11/images/mcmc.png, id=3282, 340.27126pt x 242.9075pt>
+<chapters/11/images/mcmc.png, id=3312, 340.27126pt x 242.9075pt>
 File: chapters/11/images/mcmc.png Graphic file (type png)
 <use chapters/11/images/mcmc.png>
 Package pdftex.def Info: chapters/11/images/mcmc.png  used on input line 41.
 (pdftex.def)             Requested size: 130.08731pt x 92.86548pt.
 [158 <./chapters/11/images/mcmc.png>] [159]
-<chapters/11/images/distribution.png, id=3295, 416.55624pt x 381.425pt>
+<chapters/11/images/distribution.png, id=3326, 416.55624pt x 381.425pt>
 File: chapters/11/images/distribution.png Graphic file (type png)
 <use chapters/11/images/distribution.png>
 Package pdftex.def Info: chapters/11/images/distribution.png  used on input lin
 e 108.
 (pdftex.def)             Requested size: 130.08731pt x 119.11353pt.
 
-(./chapters/11/algorithms/rejection-sampling.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 127--138
-
- []
-
-[160 <./chapters/11/images/distribution.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 167--178
+(./chapters/11/algorithms/rejection-sampling.tex) [160 <./chapters/11/images/di
+stribution.png>] (./chapters/11/algorithms/mh.tex)
+Underfull \hbox (badness 10000) in paragraph at lines 161--177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 167--178
+Underfull \hbox (badness 10000) in paragraph at lines 161--177
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 187--203
-
+Overfull \hbox (7.52618pt too wide) in paragraph at lines 178--185
+[][]$\T1/cmtt/m/n/10 http : / / chi-[]feng . github . io / mcmc-[]demo / app . 
+html ? algorithm = RandomWalkMH & target = banana$[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 187--203
+Underfull \hbox (badness 10000) in paragraph at lines 178--185
 
  []
 
-
-Overfull \hbox (23.7269pt too wide) in paragraph at lines 207--214
-[]$\T1/cmtt/m/n/10 http : / / chi-[]feng . github . io / mcmc-[]demo / app . ht
-ml ? algorithm = RandomWalkMH & target = banana$[] \T1/cmr/m/n/10 Green:
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 207--214
-
- []
-
-[161]
-Underfull \hbox (badness 10000) in paragraph at lines 271--280
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 283--290
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 306--320
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 306--320
-
- []
-
-[162]
-Underfull \hbox (badness 10000) in paragraph at lines 358--368
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 358--368
-
- []
-
-[163]
-<chapters/11/images/diag_1.png, id=3332, 461.725pt x 494.84875pt>
+[161] [162] (./chapters/11/algorithms/rw-mcmc.tex) [163]
+<chapters/11/images/diag_1.png, id=3391, 461.725pt x 494.84875pt>
 File: chapters/11/images/diag_1.png Graphic file (type png)
 <use chapters/11/images/diag_1.png>
-Package pdftex.def Info: chapters/11/images/diag_1.png  used on input line 422.
+Package pdftex.def Info: chapters/11/images/diag_1.png  used on input line 311.
 
 (pdftex.def)             Requested size: 216.81pt x 232.35997pt.
-<chapters/11/images/diag_2.png, id=3333, 527.9725pt x 594.22pt>
+<chapters/11/images/diag_2.png, id=3393, 527.9725pt x 594.22pt>
 File: chapters/11/images/diag_2.png Graphic file (type png)
 <use chapters/11/images/diag_2.png>
-Package pdftex.def Info: chapters/11/images/diag_2.png  used on input line 430.
+Package pdftex.def Info: chapters/11/images/diag_2.png  used on input line 320.
 
 (pdftex.def)             Requested size: 216.81pt x 244.01259pt.
-<chapters/11/images/diag_3.png, id=3334, 461.725pt x 494.84875pt>
+ [164 <./chapters/11/images/diag_1.png>]
+<chapters/11/images/diag_3.png, id=3402, 461.725pt x 494.84875pt>
 File: chapters/11/images/diag_3.png Graphic file (type png)
 <use chapters/11/images/diag_3.png>
-Package pdftex.def Info: chapters/11/images/diag_3.png  used on input line 442.
+Package pdftex.def Info: chapters/11/images/diag_3.png  used on input line 332.
 
 (pdftex.def)             Requested size: 216.81pt x 232.35997pt.
-) (./chapters/12/heuristic-genetic.tex
-Underfull \hbox (badness 10000) in paragraph at lines 445--2
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 445--2
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 445--2
-
- []
-
-[164 <./chapters/11/images/diag_1.png>] [165 <./chapters/11/images/diag_2.png> 
-<./chapters/11/images/diag_3.png>]
+) (./chapters/12/heuristic-genetic.tex [165 <./chapters/11/images/diag_2.png>] 
+[166 <./chapters/11/images/diag_3.png>]
 Chapter 12.
 
 Underfull \hbox (badness 10000) in paragraph at lines 6--20
@@ -1192,17 +1134,17 @@ Underfull \hbox (badness 10000) in paragraph at lines 33--43
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
 (hyperref)                than one, level fixed on input line 45.
 
-[166
+[167
 
 ]
-<chapters/12/images//ga_process.png, id=3357, 694.595pt x 366.36874pt>
+<chapters/12/images//ga_process.png, id=3421, 694.595pt x 366.36874pt>
 File: chapters/12/images//ga_process.png Graphic file (type png)
 <use chapters/12/images//ga_process.png>
 Package pdftex.def Info: chapters/12/images//ga_process.png  used on input line
  154.
 (pdftex.def)             Requested size: 216.81pt x 114.35577pt.
- [167]
-<chapters/12/images//ga_algo.png, id=3367, 647.41875pt x 310.15875pt>
+ [168]
+<chapters/12/images//ga_algo.png, id=3432, 647.41875pt x 310.15875pt>
 File: chapters/12/images//ga_algo.png Graphic file (type png)
 <use chapters/12/images//ga_algo.png>
 Package pdftex.def Info: chapters/12/images//ga_algo.png  used on input line 16
@@ -1213,8 +1155,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 180--188
 
  []
 
-[168 <./chapters/12/images//ga_process.png> <./chapters/12/images//ga_algo.png>
-]) [169] (./build/principal.aux)
+[169 <./chapters/12/images//ga_process.png> <./chapters/12/images//ga_algo.png>
+]) [170] (./build/principal.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1222,13 +1164,13 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `principal.out' has not changed.
-(rerunfilecheck)             Checksum: 5335B5FCDD93EC3349D1847E4B3A821E;38364.
+(rerunfilecheck)             Checksum: 43430D71A915C00F2E6EC1C10A84B1ED;39289.
  ) 
 Here is how much of TeX's memory you used:
- 19140 strings out of 478238
- 311357 string characters out of 5850455
- 608032 words of memory out of 5000000
- 35074 multiletter control sequences out of 15000+600000
+ 19194 strings out of 478238
+ 312288 string characters out of 5850455
+ 608271 words of memory out of 5000000
+ 35091 multiletter control sequences out of 15000+600000
  495540 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  65i,27n,66p,769b,873s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1261,10 +1203,10 @@ ts/type1/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public
 /cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1
 200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb></usr/s
 hare/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on ./build/principal.pdf (170 pages, 5069741 bytes).
+Output written on ./build/principal.pdf (171 pages, 5073485 bytes).
 PDF statistics:
- 3904 PDF objects out of 4296 (max. 8388607)
- 3589 compressed objects within 36 object streams
- 1809 named destinations out of 2073 (max. 500000)
- 1821 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 3974 PDF objects out of 4296 (max. 8388607)
+ 3657 compressed objects within 37 object streams
+ 1840 named destinations out of 2073 (max. 500000)
+ 1869 words of extra memory for PDF output out of 10000 (max. 10000000)
 
