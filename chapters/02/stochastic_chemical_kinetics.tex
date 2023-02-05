@@ -68,7 +68,7 @@ The dynamical behaviour is described by the chemical master equation or CME.
         $$2A +B\rightarrow C$$
 
         \subparagraph{Enzymatic reaction}
-        Another multi-step reaction is an enzymatic reaction, where the enzyme $W$ that catalyses the rate of conversion is kept the same:
+        Another multi-step reaction is an enzymatic reaction, where the enzyme $E$ that catalyses the rate of conversion is kept the same:
 
         $$A+E\rightarrow B+E$$
 
@@ -88,7 +88,7 @@ The dynamical behaviour is described by the chemical master equation or CME.
     \end{enumerate}
 
     A reaction will be faster when there is a huge amount of reactants.
-    This is because in term of probability: the more a species is present, the more it is likely to interact and for the reaction is to happen.
+    This is because in term of probability, the more a species is present, the more it is likely to interact and for the reaction is to happen.
     This is true only when the assumption of that there is a well-mixed reaction volume is made.
     This assumption entails that the distribution of molecules is uniform.
     Moreover, in order to approximate a complex system the main compartments can be partitioned in smaller sets where a discretization procedure can be applied.
@@ -120,7 +120,7 @@ The dynamical behaviour is described by the chemical master equation or CME.
     \end{multicols}
 
     A reactant species that affects the speed of a reaction but is not consumed by it is called a catalyst.
-    The sum of stoichiometric coefficients of reactants of a reaction $R_j$i s called reaction order.
+    The sum of stoichiometric coefficients of reactants of a reaction $R_j$ is called reaction order.
     For each reaction $R_j$, the net change in the population of species $S_i$ involved in the reaction is equal to $v^+_{ji}-v^-_{ji}$, which can be positive, negative or zero.
 
     \subsubsection{Stoichiometric matrix}
@@ -157,7 +157,7 @@ The dynamical behaviour is described by the chemical master equation or CME.
 
     \subsubsection{Summary}
     While specifying in computational terms the biological system of interest, the structure of at least one compartment has to be described, where it is assumed to find a chemical volume in which there are some entities that interact with each other.
-    The he well-mixed volume preliminary assumption is enforced, meaning that all the actors are present with equal availability in all the parts of the volume.
+    The well-mixed volume preliminary assumption is enforced, meaning that all the actors are present with equal availability in all the parts of the volume.
     For each compartment, the entities or how many molecules are available, and the reactions that provide the rules for transforming the chemicals in others along the time have to be specified.
     All these structures of reactions can be defined in mathematical terms using matrices: the number of columns is equal to the number of variables, while the number of rows is equal to the number of reactions and the stoichiometric coefficient of the transformation from reactant to products is specified.
 
@@ -168,12 +168,12 @@ The dynamical behaviour is described by the chemical master equation or CME.
   Through the reaction propensity the probability of execution of a reaction will be hinted.
 
     \subsubsection{Definition}
-    The propensity $a_j$ of a reaction $R_j$ is defined such that $a_j(x)dt$ is probability that a reaction $R_j$ fires in the next infinitesimal time interval $[t, t+dt[$, given the state $X(t) = \vec{x}$ at time $t$.
+    The propensity $a_j$ of a reaction $R_j$ is defined such that $a_j(\vec{x})dt$ is the probability that a reaction $R_j$ fires in the next infinitesimal time interval $[t, t+dt[$, given the state $X(t) = \vec{x}$ at time $t$.
   In a chemical setting, the probability of execution of one reaction will be proportional to the viability of the reactant.
 
     \subsubsection{Value of the propensity}
     The propensity $a_j(X(T))$ is a function of the state $X(t)$.
-    The fact that $a_j$ of a reaction depends on time $t$ happens implicitly through the Marcokian assumptions.
+    The fact that $a_j$ of a reaction depends on time $t$ happens implicitly through the Markovian assumptions.
     At a particular time $t$, the value of the propensity $a_j(X(T))$ is a deterministic quantity.
     The propensity value of a reaction in state $X(t)$ is often used as a measure of how fast the reaction proceeds to move to a new state.
     Let $\mathcal{P}\{R_j\text{ fires }\in [t,t+dt[\}$ be the probability that reaction $R_j$ fires in the time interval.
@@ -281,7 +281,7 @@ The dynamical behaviour is described by the chemical master equation or CME.
     \subsubsection{Grand probability function}
     The probability function or grand probability:
 
-    $$\mathbb{P}\{\vec{x},t|\vec{x}_0,t_o\}$$
+    $$\mathbb{P}\{\vec{x},t|\vec{x}_0,t_0\}$$
 
     Is the probability that the system state is $X(t) = \vec{x}$ at time $t$, given the initial state $X(t_0) = \vec{x}_0$ at time $t_0$.
     It is called so because it gives the probabilities of all reachable states of the system at time $t$ given the initial state.
@@ -346,7 +346,7 @@ The dynamical behaviour is described by the chemical master equation or CME.
 
 \section{Stochastic simulation}
 When applying the CME, all the possible state of the system are explored.
-With a stochastic simulation only one possible trajectory of the system are computed (to obtain the total description many simulations have to be run).
+With a stochastic simulation only one possible trajectory of the system is computed (to obtain the total description many simulations have to be run).
 The stochastic simulation works because only an idea of the most probable conditions of the system is needed.
 A stochastic simulation is faster than a real experiment and it can be run on a personal computer (also thousands of simulations can be performed).
 One of the crucial points of a stochastic simulation is that there is a need to be able to sample from this probability distribution  function given the fact that the computer has few ways of generating something that is stochastic.
@@ -473,7 +473,7 @@ Many independent run started with the same initial conditions are needed to have
   Let $\langle \vec{X}\rangle$ be the sample mean and $s^2$ the unbiased variance.
   They are computed as:
 
-  $$\langle\vec{X}\rangle = \frac{\sum\limits_{r=1}^K\vec{X}^r}{K}\qquad s^2=\frac{\sum\limits_{r=1}^K(\vec{X}^r-\langle\vec{x}\rangle)^2}{K=1}$$
+  $$\langle\vec{X}\rangle = \frac{\sum\limits_{r=1}^K\vec{X}^r}{K}\qquad s^2=\frac{\sum\limits_{r=1}^K(\vec{X}^r-\langle\vec{x}\rangle)^2}{K-1}$$
 
   The sample mean and variance will approach the mean and variance of the random variable $\vec{X}$ when $K$ tends to infinity:
 

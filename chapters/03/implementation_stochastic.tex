@@ -50,7 +50,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
       \label{fig:boundaries}
     \end{figure}
 
-  \item Generate another random number $V_2 =U(0,1)$ \item $\tau \sim Exp(a_0)$ \item $\tau = \frac{1}{a_0}ln(\frac{1}{V_2})$.
+  \item Generate another random number $V_2 =U(0,1)$ \item $\tau \sim exp(a_0)$ \item $\tau = \frac{1}{a_0}ln(\frac{1}{V_2})$.
 \end{enumerate}
 
   \subsection{Mathematical discussion}
@@ -105,7 +105,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
 
     \subsubsection{Selection of the firing time}
     For the reaction of the firing time $\tau$, consider its pdf $p_1(\tau|\vec{x},t)$.
-    It can be noted ho it is an exponential distribution with rate $a_0$.
+    It can be noted how it is an exponential distribution with rate $a_0$.
     So the firing time can be generated as:
 
     $$\tau = \frac{1}{a_0}\ln\frac{1}{r_2}$$
@@ -211,7 +211,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
 
       \paragraph{Optimized direct method}
       The optimized direct method reduces the average search depth of the next reaction firing.
-      This is done because in many biochemical networks, some reactions fire much more frequently tan others.
+      This is done because in many biochemical networks, some reactions fire much more frequently than others.
 
         \subparagraph{Average search depth}
         The average search depth $S_m$ is the average number of operation performed for the selection of the next reaction firing:
@@ -255,7 +255,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
         SDM is thus suited to deal with the simulation of networks where the propensities change sharply.
 
     \subsubsection{Direct method with Multi-level search}
-    The mani bottleneck of DM is that the search for next reaction firing is slow in large reaction models.
+    The main bottleneck of DM is that the search for next reaction firing is slow in large reaction models.
     The multi-level search is an effort to reduce the time complexity of DM for large systems.
     The search problem is divided into smaller sub-problem partitioning the $M$ reactions into $L$ groups $G_1, \dots, G_L$.
     Each group $G_l$ contains $k_l$ reactions.
@@ -292,7 +292,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
       $$\frac{r_1 a_0 -\sum\limits_{l=1}^{\alpha-1}a^l}{a^\alpha}$$
 
       Is a uniformly distributed random number.
-      SO $r_1$ is rescaled to select the next reaction firing in the group.
+      So $r_1$ is rescaled to select the next reaction firing in the group.
 
       \paragraph{Algorithm}
       The direct method with multi-level search is implemented as in algorithm \ref{algo:dm-multi-level}.
@@ -312,7 +312,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
 
       The total time complexity is then
 
-      $$O\left(\frac{M}{k}\right) + O(k) = O(\max\left\{\frac{M}{k}, k\right\})$$
+      $$O\left(\frac{M}{k}\right) + O(k) = O\left(\max\left\{\frac{M}{k}, k\right\}\right)$$
 
       The total time is minimized by taking $k = c\sqrt{M}$, so that the minimal time complexity per reaction event is $O(\sqrt{M})$.
       The multi-level search can be further expanded partitioning the groups into sub-groups, introducing the multi-dimensional search method.
@@ -419,7 +419,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
         Each element in the array points to its left and right child and an additional field parent points to the parent of the node.
         To extract the nodes with minimal weights a binary heap is used, such that each element is $(i,w_i)$, where $i$ is the index of a node in the tree and the weight $w_i$ is used as the key for ordering the heap.
         A heap is a tree-based data structure that satisfies the heap property: the key of a parent node is smaller than the key of its child nodes.
-        The implementation for this procedure is presented in algorithm \ref{algo:huffman}
+        The implementation for this procedure is presented in algorithm \ref{algo:huffman}.
 
         \input{chapters/03/algorithms/huffman}
 
@@ -434,7 +434,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
         \begin{multicols}{2}
           \begin{itemize}
             \item Fixed time tree rebuilding.
-            \item Adaptive time tre rebuilding.
+            \item Adaptive time tree rebuilding.
           \end{itemize}
         \end{multicols}
 
@@ -447,7 +447,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
 
           $$Conflicts(R_j) = \{R_k|(R_j\in Dependents(R_k))\land(Reactants(R_k)\cap Reactants(R_j)\neq\emptyset)\}$$
 
-          $$Favors(R_j) = \{R_k|(R_j\in Dependents(R_k))\land (Products(R_k)\cap Reactants(R_j)\neq\emptyset)\}$$
+          $$Favours(R_j) = \{R_k|(R_j\in Dependents(R_k))\land (Products(R_k)\cap Reactants(R_j)\neq\emptyset)\}$$
 
           \textbf{Dependency graph}
           In terms of the dependency graph:
@@ -455,7 +455,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
           $$|Conflicts(R_j)| + |Favours(R_j)| = in\ degree\ of\ R_j$$
 
           \textbf{Estimating changes of propensity}
-          After a reaction firing, the probability that $R_j$ will increase or decrease is estimated as $\frac{|Conflicts(R_j)}{M}$ or $\frac{|Favours(R_j)}{M}$.
+          After a reaction firing, the probability that $R_j$ will increase or decrease is estimated as $\frac{|Conflicts(R_j)|}{M}$ or $\frac{|Favours(R_j)|}{M}$.
           For $k$ simulation steps, the estimated weight of reaction $R_j$ is:
 
           $$w_j(a_j, k) = a_j + \alpha_1 k\frac{|Favours(R_j)|}{M} + \alpha_2 k\frac{|Conflicts(R_j)|}{M}$$
@@ -503,7 +503,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
         The acceptance probability is bound to $\frac{1}{2}$: $\frac{a_\mu}{2^{u_\alpha}}\ge \frac{1}{2}$ by definition.
 
       \paragraph{Algorithm}
-      An implementation of this method is found in algorithm \ref{algo:dm-cr}
+      An implementation of this method is found in algorithm \ref{algo:dm-cr}.
       The rejection test is repeated on average two times: the acceptance rate is bounded by $\frac{1}{2}$.
       Moreover after a reaction firing the propensity must be updated and it could be that a new reaction falls outside of the current bound, so it must be moved to an appropriate group.
 
@@ -518,7 +518,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
       After each of this two operations, the hash table is updated.
 
         \subparagraph{Computational cost}
-        The computational cost is composed by the search for the group, proportional to the number of groups $O(L)$ and the costo for selecting the next reaction, which is constant.
+        The computational cost is composed by the search for the group, proportional to the number of groups $O(L)$ and the cost for selecting the next reaction, which is constant.
         Because the average number of rejection tests is bound by $2$, the time is $O(L)$ and is independent of the number of reactions $M$.
         If $L\ll M$ and is bounded by a small constant the search for the next reaction firing is $O(1)$.
 
@@ -553,7 +553,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
     The sum $\Lambda_i = \Sigma_j\Pi_{i,j}$ gives the sum of partial propensities of reactions $R_j$ sharing common reactant $S_i$.
     This is the group-sum array and is used to store the sum of partial propensities in group.
     $\Omega_i = X_i\Lambda_i$, where $X_i$ is the population of $S_i$ will be the sum of propensities of reaction having species $S_i$ as the common reactant.
-    The array $\Omega = \{\Omega_i\}_{i=0}^N$ to store the sum of propensities of gropus.
+    The array $\Omega = \{\Omega_i\}_{i=0}^N$ to store the sum of propensities of groups.
     The total propensity is computed as:
 
     $$a_0 = \sum\limits_{i=0}^N\Omega_i$$
@@ -641,7 +641,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
 
   \subsubsection{Partial propensity direct method with composition-rejection search}
   The partial propensity direct method with composition-rejection search PDM-CR is a variant of PDM where the selection of $p$ and $q$ are done through the composition-rejection approach.
-  $`M$ is grouped into $L$ groups such that $G_l$ stores group index $i$ such that $2^{u_l-1}\le \Omega_i< 2^{u_l}$ with $u_l = \lceil\log_2(\Omega_i)\rceil$.
+  $\Omega$ is grouped into $L$ groups such that $G_l$ stores group index $i$ such that $2^{u_l-1}\le \Omega_i< 2^{u_l}$ with $u_l = \lceil\log_2(\Omega_i)\rceil$.
   The sum of propensities in $G_l$ is:
 
   $$a^l = \sum\limits_{i\in G_l}\Omega_i$$
@@ -671,7 +671,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
       Then the element index $q$ in the groups is selected through an acceptance-rejection test with probability $\frac{\Pi_{p,q}}{2^{v_\beta^p}}$.
 
     \paragraph{Algorithm}
-    The PDM-CR implementation is outlined in algorithm \ref{algo:pdm-cr}
+    The PDM-CR implementation is outlined in algorithm \ref{algo:pdm-cr}.
 
     \input{chapters/03/algorithms/pdm-cr}
 
