@@ -156,127 +156,199 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
       These issues raise a computational challenge for developing and implementing efficient stochastic simulation methods.
   \end{itemize}
 
-\section{Network modeling}
-
-[ missing lecture 2 ]
+\section{Network modelling}
 
   \subsection{Logic models}
-  Recap from the previous theory lecture: what is the main issue in using logic modelling with multiple levels? The update formulae need to be defined for each level, tricky extension procedure.
+  A logical model $(\mathcal{G}, \mathcal{K}$ of a regulatory network is defined by:
+
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item A set of $n$ regulatory components $\mathcal{G} = \{g_1, \dots, g_n\}$, with each $g_i$ associated with an integer value bounded by $\{0, \dots, \max_i\}$.
+        This defines a discrete mapping of the range of the component functional level.
+        The state space $\mathcal{S}$ is the Cartesian product $\prod\limits_{i=1}^n\{0, \max_i\}$.
+        A model state is a vector $g = (g_1, \dots, g_n)$.
+      \item For each $g_i$ a discrete function $\mathcal{K}_i$ defines its values depending on the state: $\mathcal{K}_i:\mathcal{S}\rightarrow\{0, \dots,\max_i\}$.
+        The transition function $\mathcal{K}:\mathcal{S}\rightarrow\mathcal{S}$ defines the model behaviour and the underlying regulatory graph as $\mathcal{K}(g) = (\mathcal{K}_1(g), \dots, \mathcal{K}_n(g))$.
+        In some cases a regulatory component may operate at different levels on distinct targets and requires multiple values whose maximum is greater than $1$.
+        The discrete functions are still logical functions.
+    \end{itemize}
+  \end{multicols}
+
+    \subsubsection{Regulatory graph}
+    The regulatory graph $(\mathcal{G}, \mathcal{R})$ encompasses nodes denoting model components in $\mathcal{G}$ and signed, directed edges denoting regulatory activations or inhibitions in $\mathcal{R}$.
+    The logical rules encode these interactions: $(\mathcal{G}, \mathcal{R})$ can be deduced from $\mathcal{K}$.
+    Several sets of logical rules can be compliant with a regulatory graph, which therefore defines a family of logical models.
+
+    \subsubsection{Functional interaction}
+    A functional interaction from $g_j$ to $g_i$, or $(g_j, g_i)\in \mathcal{R}$ if and only if there exists a pair of neighbouring states that only differ on the value of $g_j$ and for which $\mathcal{K}_i$ takes a different value.: a variation of $g_j$ has an effect on $g_I$.
+    Formally, assume that $g_j$ is a boolean variable, $(g_i, g_j)\in\mathcal{R}$ if an only if there exist:
+
+    $$g = (g_1, \dots, g_{j-1}, 1, g_{j+1}, \dots, g_n)$$
+
+    $$\bar{g} = (g_1, \dots, g_{j-1}, 0, g_{j+1}, \dots, g_n)$$
+
+    Such that $\mathcal{K}_i(g)\neq\mathcal{K}_i(\bar{g})$.
+    If $\mathcal{K}_i(g)<\mathcal{K}_i(\bar{g})$ this interaction is an activation, otherwise an inhibition.
+
+    \subsubsection{Model dynamics}
+    Given a stage $g$, $\mathcal{K}$ specifies the possible changes on the model variables: if $\mathcal{K}(g)\neq g$, there is at least one $g_i$ called to update toward the target value $\mathcal{K}_i(g)$.
+    Multi-valued variables are modified stepwise: the next value of $g_i$ is changed by $1$ for each step.
+    If $\mathcal{K}(g) = g$ $g$ is a stable state and each component value is maintained constant.
+    Input components have no regulators and considered constant.
+
+    \subsubsection{State transition graphs}
+    State transition graphs or STG represents model dynamics.
+    Nodes denote states, while directed edges state transitions.
+    Since the number of states is finite, model simulation end up in a stable state or a cyclic trajectory.
+    These are called attractors and are defined as terminal strongly connected components SCC of the STG, the maximal sets of mutually exclusive reachable states, with no transitions leaving the set.
+    The set of states from which trajectories lead exclusively to an attractor is called its strict basin of attraction.
+    They are relevant since they define the reachable attractors depending on the initial state.
+
+    \subsubsection{State updates}
+    If at state $g$ several variables are called to change their values, there is a need to specify how the changes should be performed.
+
+    \paragraph{Synchronous update}
+    According to the synchronous method, all the variable updates are performed synchronously.
+    The resulting deterministic dynamics defines at each time step $t$ the successor state of $g(t)$:
+
+    $$g(t+1) = (g_i(t) + sing(\mathcal{K}_i(g(t))-g_i(t)))_{i=1, \dots, n}$$
+
+    Where:
+
+
+    $$sign(p) = \begin{cases} 1 & p>0\\ -1 p<0\\ 0 & otherwise\end{cases}$$
+
+    A successor state is defined by increasing or decreasing $1$ all the variables whose current value differ form the values specified by their logical function.
+    This yields exactly one transition toward a successor state, which can be $g$ itself.
+
+    \paragraph{Asynchronous update}
+    According to the asynchronous update each variable is modified independently, yielding as many transitions and successor states as the number of updated variables.
+    At state $g(t)$, for all $g_i\in\mathcal{G}$ such that $\mathcal{K}_i(g(t))\neq g_i(t)$, an asynchronous successor is defined as:
+
+    $$g_i(t+1) = g_i(t) + sign(\mathcal{K}_i(g(t))-g_i(t))$$
+
+    $$g_j(t+1) = g_j(t)\forall j\neq i$$
+
+    According to this definition a stable state has no successors.
 
   \subsection{Petri nets}
-  \textbf{Petri nets} are specific networks introduced in 1960s, with the idea to describe \emph{communication processes} (computer science field).
-  We have two kinds of nodes:
+  Petri nets are specific networks introduced in 1960s, with the idea to describe communication processes in the computer science field.
+  In Petri nets two types of nodes can be found:
 
+  \begin{multicols}{2}
   \begin{itemize}
-    \item \textbf{\emph{places}}: container of entities
-      \begin{itemize}
-        \item \emph{tokens}: entities
-      \end{itemize}
-    \item \textbf{\emph{transitions}}: possibility to move one or more tokens to other places
+    \item Places: container of entities, which are represented as tokens.
+    \item Transitions: nodes that describe the possibility to move one or more tokens to other places.
   \end{itemize}
+\end{multicols}
 
-\noindent
-  In order to model a chemical reaction, we can associate places to variables, transitions to chemical transformations and tokens to molecules.
+  In order to model a chemical reaction, places can be associated to variables, tokens to molecules and transitions to chemical transformations.
   \\
 
-  \begin{figure}[h!]
+  \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{petri_nets.png}
     \caption{PetriNets\_SimaoEtAl.pdf}
     \label{fig:petri}
   \end{figure}
 
-\noindent
-  Figure \ref{fig:petri}: in the example we have numbers inserted in places.
+  Figure \ref{fig:petri} is an example of a Petri net.
   The network will evolve according to the transitions applied.
-  A transition can be \emph{enabled} or not to fire.
-  E.g. there is one token in \(p_1\), so we know that \(t_1\) and \(t_2\) are enabled.
+  A transition can be enabled or not to fire.
+  For example there is one token in \(p_1\), so \(t_1\) and \(t_2\) are enabled.
   Instead, \(t_4\) cannot be enabled, as 3 tokens are required but only one is present.
-  \(t_2\) is taking the token from \(p_1\) and creating 2 tokens in \(p_2\) and \(p_3\); this allows to fire \(t_4\), since now \(p_3\) has the required number of tokens.
+  \(t_2\) is taking the token from \(p_1\) and creating 2 tokens in \(p_2\) and \(p_3\), allowing to fire \(t_4\), since now \(p_3\) has the required number of tokens.
+  Moreover, looking at figure \ref{fig:expetri}:
 
-  \begin{enumerate}
-    \def\labelenumi{(\alph{enumi})}
-    \item shows the initial marking before firing the enable transition t;
-    \item shows the marking after transition labeled reaction 1 fires.
-      Places: hydrogen, oxygen and water.
-      We can represent the stoichiometry of the reaction through the numbers on the edges and the numbers to the tokens.
+  \begin{multicols}{2}
+    \begin{enumerate}
+        \item Panel (a) shows the initial marking before firing the enable transition t.
+        \item Panel (b) shows the marking after transition labeled reaction 1 fires.
+          Places: hydrogen, oxygen and water.
+          The stoichiometry of the reaction can be represented through the numbers on the edges and the numbers on the tokens.
     \end{enumerate}
+  \end{multicols}
 
-  \begin{figure}
+  \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{/example_petri.png}
+    \includegraphics[width=0.7\textwidth]{example_petri.png}
     \caption{Review\_ModelingComplexBiologicalSystems.pdf}
     \label{fig:expetri}
   \end{figure}
 
-\noindent
-  Figure \ref{fig:expetri}
-  \begin{itemize}
-  \item Pros: we have no constraint on the data type, not strictly boolean values. They allow to extend the number of items which can be associated to a model.
-  \item Cons: there is no fixed rule for applying transitions. Furthermore, we are not encoding the reaction's complexity (all transitions are equally probable, but it is possible to weight the edges).
-  \end{itemize}
+    \subsubsection{Advantages and disadvantages}
+    In Petri nets there is no constraint on the data type, allowing to extend the number of items which can be associated to a model.
+    However there is still no fixed rule to apply transition and reaction's complexity is still not being considered.
 
-  \noindent
-  Having a dynamics based on the integers can be quite useful, as if we consider single chemical events we are working with discrete data.
-  The exact stochastic algorithm works with integers.
-  In differential equations instead we need real numbers.
-  Also the discretization of the time step might not be a limitation, since time can be discretized in reality.
-  The main limitation of network models is the \textbf{approximation of time},  as we are assuming that all the reactions take the same (unknown) amount of time.
-  \\
-  \\
-  \noindent
- By upgrading the notation we can achieve more accurate representations:
-  \begin{itemize}
-    \item add inhibitory and test transitions.
-    \item differentiate between discrete and continuous transitions.
-  \end{itemize}
+  \subsection{Discussion}
+  Having a dynamics based on the integers can be quite useful, as if considering single chemical events the data is discrete.
+  This is the same case as the exact stochastic algorithms.
+  In differential equations real numbers are needed.
+  Also the discretization of the time step might not be a limitation, as time can be discretized in reality.
+  The main limitation of network models is the approximation of time: all the reactions take the same amount of time to happen.
+
 
   \subsection{Rewriting systems}
+  By upgrading the notation more accurate representations can be achieved:
+
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item Add inhibitory and test transitions.
+      \item Differentiate between discrete and continuous transitions.
+    \end{itemize}
+  \end{multicols}
 
     \subsubsection{P systems}
-    Popular rewriting systems are \textbf{\emph{P systems}}, which are also called membrane systems.
+    Popular rewriting systems are P systems, which are also called membrane systems.
     They are computational environments inspired to the structure of membranes.
-    In particular, they define a hierarchy of membranes partitioning the space in different areas - similarly to a cell.
-    In each region we can allocate entities and apply transformation rules.
+    In particular, they define a hierarchy of membranes partitioning the space in different areas, similarly to a cell.
+    In each region entities can be assigned and transformation rules applied.
     The rewriting rules change the value of each letter.
-    The pedix \(_{in4}\) gives more details on the reaction.
-    These kind of systems tend to use \emph{non-determinism}, they try to explore the full set of possibilities.
+    These kind of systems tend to use non-determinism: they try to explore the full set of possibilities.
 
     \subsubsection{MP systems}
     The difference with standard P system is the association of functions to each reaction.
-    In this way we can reconstruct the complexity of the reaction, since in the model we apply all possible reaction - which will produce an amount given by the function.
+    In this way the complexity of the reaction can be reconstructed, since in the model all possible reaction are applied, which will produce an amount given by the function.
 
   \subsection{Equation-based approach}
+  Equation-based approaches represent the system as a set of ordinary differential equations ODE.
+  For example the mass action model:
 
-    \subsubsection{ODE systems}
-    Example: mass-action model
-    \(A+E \underset{k_2}{\overset{k_1}{\rightleftharpoons}}A \mid E \stackrel{k_3}{\longrightarrow}B+E\)
+  \(A+E \underset{k_2}{\overset{k_1}{\rightleftharpoons}}A \mid E \stackrel{k_3}{\longrightarrow}B+E\)
 
   \subsection{Simulation algorithms}
-  For simulating we need the specification of a stoichiometric matrix, a vector of integers (initial values) and a stochastic rate.
-  \textbf{Exact simulation algorithms} are computationally intensive, but provide the most accurate solution.
-  Stepwise, we will try to define faster strategies with the aim of compromising accurate dynamics and feasible solutions.
-  It is also possible to rely on a mixture of technologies to focus on different results.
-  If the well-mixed assumption is not fulfilled:
+  For a simulation to be computed the necessary data are:
 
-  \begin{itemize}
-    \item partition the compartment in sub-compartments → approximation
-    \item use more sophisticated algorithms
-  \end{itemize}
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item The stoichiometric matrix.
+      \item A vector of initial values.
+      \item A stochastic rate.
+    \end{itemize}
+  \end{multicols}
 
-  \noindent
-  The \emph{stoichiometric matrix} tells us how the system evolves if one of the two functions is applied, but it is not enough for computing a simulation.
-  There can be many reactions that arrive to the same definition of stoichiometric matrix.
-  If we want to compute a dynamics we need to develop a series of states; at each step we require two ingredients:
+    \subsubsection{Exact simulation algorithms}
+    Exact simulation algorithms are computationally intensive, but provide the most accurate solution.
+    For each step they try to define the faster strategies with the aim of compromising between accurate dynamics and a feasible solution.
+    It is also possible to rely on a mixture of technologies to focus on different results.
+    If the well-mixed assumption is not fulfilled, the compartments are partitioned into sub-compartments leading to an approximation or more sophisticated algorithms are needed.
 
-  \begin{itemize}
-    \item \(\tau\): tells how much later the system will evolve to another state
-    \item \(\mu\): choose the reaction by considering the probability of execution of each reaction at the step
-  \end{itemize}
+    \subsubsection{The stoichiometric matrix}
+    The stoichiometric matrix tells how the system evolves if one of the two functions is applied, but it is not enough for computing a simulation.
+    There can be many reactions that arrive to the same definition of stoichiometric matrix.
+    To compute the dynamics a series of states needs to be developed, requiring:
 
-\subsubsection{Reaction propensity}
-  The reaction propensity is a function needed for the derivation of probability.
-  The higher the propensity, the higher will be the strength of the reaction.
-  Naturally, we will have a higher probability when a higher propensity is observed, but the two quantities are something different.
-  The propensity is a property of the reaction, probability is a property of a reaction in the system (we need to take into account also other reactions) Instead of performing an in depth analysis of probability, we will choose a stochastic approach.
-  It is only necessary to compute one evolution of the system per time.
+    \begin{multicols}{2}
+      \begin{itemize}
+        \item \(\tau\): tells how much later the system will evolve to another state.
+        \item \(\mu\): choose the reaction by considering the probability of execution of each reaction at the step.
+      \end{itemize}
+    \end{multicols}
+
+    \subsubsection{Reaction propensity}
+    The reaction propensity is a function needed for the derivation of probability.
+    The higher the propensity, the higher will be the strength of the reaction.
+    Naturally, a higher probability is found when a higher propensity is observed, but the two quantities are something different.
+    The propensity is a property of the reaction, while the probability is a property of a reaction in the system: it takes into account other reactions.
+    Instead of performing an in depth analysis of probability, a stochastic approach is undertaken.
+    It is only necessary to compute one evolution of the system per time.

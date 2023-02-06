@@ -2,9 +2,9 @@
 \chapter{Introduction}
 
 \section{Systems}
-A system is a set of integrated and interacting \emph{components} or \emph{entities} that form a whole with definite boundaries and surrounding environment.
+A system is a set of integrated and interacting components or entities that form a whole with definite boundaries and surrounding environment.
 It has a goal to achieve by performing one or more functions or tasks.
-Systems can be aggregated into a \textbf{\emph{hierarchy}}.
+Systems can be aggregated into a hierarchy.
 A system at a given level of detail can be a component of another at a higher level of detail.
 
 \begin{multicols}{2}
@@ -25,7 +25,7 @@ A system at a given level of detail can be a component of another at a higher le
   \begin{multicols}{2}
     \begin{itemize}
       \item Steady state: some of the attributes of the system will no longer change in the future.
-      \item Transient state: time needed to reach the steady state.
+      \item Transient state: the system stays in this state for time needed to reach the steady state.
     \end{itemize}
   \end{multicols}
 
@@ -59,7 +59,7 @@ A system at a given level of detail can be a component of another at a higher le
 
 
 \section{Models}
-A \emph{representation} is a set of symbols used to convey information and knowledge about a system.
+A representation is a set of symbols used to convey information and knowledge about a system.
 It is either physical as a cell or an ecosystem, or artificial as a computer network or an economic market.
 An abstraction is a representation that ignores some aspects of a system which are not of interest for the current investigation.
 A \emph{model} is an abstraction of a system.
@@ -81,15 +81,15 @@ The set of all the attributes in a model is the experimental frame.
 \end{figure}
 
   \subsection{Checking the validity of a model}
-  \emph{Validity} is a fundamental property of models and witnesses the capacity of a model of making good predictions.
+  Validity is a fundamental property of models and witnesses the capacity of a model of making good predictions.
   Assessing the validity of a model is a fundamental step to predict the behaviour of the system of interest.
   Assume that $M$ is a model for the system $S$ and $\underline{M}$ is the modelling process.
   Let $s(t)$ and $m(t)$ be the state of the system and of the model at time $t$, and $f_s$ and $f_m$ the state transition functions of the system and of the model respectively.
   Finally, let $I_s(t)$ and $O_s(t)$ be the input and output of the system at time $t$.
   Similarly, the input and output are defined also for the model $I_m(t)$ and $O_m(t)$.
-  Going from one state to the there there is a function for the system and one for the model.
+  Going from one state to another a function for the system and one for the model are found.
   In particular in a mathematical model $f_m$ is integrated to investigate the transition phase, while for the real system $f_s$ is knot known.
-  Because of this the model needs to be I/O validated known input and output are used to investigate it, where input and output are generalized concepts.
+  Because of this the model needs to be input/output validated: known input and output are used to investigate it, where input and output are generalized concepts.
   For example, an input can be any perturbation of the system, while an output any observable property causally related to the input.
   Now a model $M$ can be said to be valid for a system $S$ if:
 
@@ -102,7 +102,7 @@ The set of all the attributes in a model is the experimental frame.
     \end{figure}
   \noindent
 
-  An I/O validity check can be performed by comparing data-set from the system and from the model.
+  An input/output validity check can be performed by comparing data-set from the system and from the model.
   This checking process could cause overfitting:
 
   \begin{multicols}{2}
@@ -134,7 +134,7 @@ The set of all the attributes in a model is the experimental frame.
     \caption{Workflow}
   \end{figure}
 
-  After defining these things them model needs to be built and calibrated, so to check if it can recapitulate data.
+  After defining these things the model needs to be built and calibrated, so to check if it can recapitulate data.
   If it does not, the model can be wrong or some parameters need to be tuned.
   It is important to note that different parameters can lead to dramatic changes in dynamics, like for example, in the Lotka-Volterra model in figure \ref{fig:Volterra}.
   It can be noted how this example shows periodic oscillation, with the same amount of preys and predators, on the left, while on the right, after parameter change, it shows higher peaks and a lower predator presence.
