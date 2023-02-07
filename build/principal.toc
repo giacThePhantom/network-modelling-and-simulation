@@ -393,12 +393,13 @@
 \contentsline {subsection}{\numberline {7.2.2}Building a model}{141}{subsection.7.2.2}%
 \contentsline {chapter}{\numberline {8}Optimization problem}{144}{chapter.8}%
 \contentsline {section}{\numberline {8.1}Introduction}{144}{section.8.1}%
-\contentsline {section}{\numberline {8.2}General definition of an optimization problem}{144}{section.8.2}%
-\contentsline {subsection}{\numberline {8.2.1}Distance}{144}{subsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.2.2}Weights}{145}{subsection.8.2.2}%
-\contentsline {subsection}{\numberline {8.2.3}Objective}{145}{subsection.8.2.3}%
-\contentsline {subsection}{\numberline {8.2.4}Observations}{145}{subsection.8.2.4}%
-\contentsline {section}{\numberline {8.3}Definition of a minimum}{145}{section.8.3}%
+\contentsline {subsection}{\numberline {8.1.1}Definition of a minimum}{144}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}Finding the minimum}{144}{subsection.8.1.2}%
+\contentsline {subsection}{\numberline {8.1.3}Constraints}{145}{subsection.8.1.3}%
+\contentsline {section}{\numberline {8.2}Parameter optimization of a model}{145}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Distance}{145}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}Weights}{146}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}Observations}{146}{subsection.8.2.3}%
 \contentsline {chapter}{\numberline {9}Gradient methods}{147}{chapter.9}%
 \contentsline {section}{\numberline {9.1}Introduction}{147}{section.9.1}%
 \contentsline {subsection}{\numberline {9.1.1}Lagrangian function}{147}{subsection.9.1.1}%
@@ -410,66 +411,68 @@
 \contentsline {subsection}{\numberline {9.2.1}Vanishing gradient}{150}{subsection.9.2.1}%
 \contentsline {section}{\numberline {9.3}Line search}{150}{section.9.3}%
 \contentsline {subsection}{\numberline {9.3.1}Newton's direction}{150}{subsection.9.3.1}%
-\contentsline {subsection}{\numberline {9.3.2}Line search algorithm for function minimization}{150}{subsection.9.3.2}%
-\contentsline {subsection}{\numberline {9.3.3}Quasi Newton's direction}{151}{subsection.9.3.3}%
-\contentsline {subsection}{\numberline {9.3.4}Steepest descent direction}{151}{subsection.9.3.4}%
-\contentsline {subsection}{\numberline {9.3.5}Selecting $\mathbf {\alpha }$}{151}{subsection.9.3.5}%
-\contentsline {subsubsection}{\numberline {9.3.5.1}Convergence of a method}{151}{subsubsection.9.3.5.1}%
+\contentsline {subsubsection}{\numberline {9.3.1.1}Algorithm}{150}{subsubsection.9.3.1.1}%
+\contentsline {subsection}{\numberline {9.3.2}Quasi Newton's direction}{151}{subsection.9.3.2}%
+\contentsline {subsection}{\numberline {9.3.3}Steepest descent direction}{151}{subsection.9.3.3}%
+\contentsline {subsection}{\numberline {9.3.4}Selecting $\mathbf {\alpha }$}{151}{subsection.9.3.4}%
+\contentsline {subsubsection}{\numberline {9.3.4.1}Armijio condition}{152}{subsubsection.9.3.4.1}%
+\contentsline {subsubsection}{\numberline {9.3.4.2}Curvature condition}{152}{subsubsection.9.3.4.2}%
+\contentsline {subsection}{\numberline {9.3.5}Convergence of a method}{152}{subsection.9.3.5}%
 \contentsline {section}{\numberline {9.4}Trust region}{152}{section.9.4}%
 \contentsline {subsection}{\numberline {9.4.1}Trust region steepest descent}{152}{subsection.9.4.1}%
-\contentsline {subsection}{\numberline {9.4.2}Evaluating the trust regions}{152}{subsection.9.4.2}%
+\contentsline {subsection}{\numberline {9.4.2}Evaluating the trust regions}{153}{subsection.9.4.2}%
 \contentsline {subsection}{\numberline {9.4.3}Trust region algorithm}{153}{subsection.9.4.3}%
-\contentsline {chapter}{\numberline {10}Least squares problems}{154}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Introduction}{154}{section.10.1}%
-\contentsline {subsection}{\numberline {10.1.1}Effect of parameters on the distance}{154}{subsection.10.1.1}%
-\contentsline {subsection}{\numberline {10.1.2}Linear problem}{155}{subsection.10.1.2}%
-\contentsline {subsection}{\numberline {10.1.3}General functions}{155}{subsection.10.1.3}%
-\contentsline {subsection}{\numberline {10.1.4}Summary}{155}{subsection.10.1.4}%
-\contentsline {section}{\numberline {10.2}The Levenberg-Marquardt method}{156}{section.10.2}%
-\contentsline {subsection}{\numberline {10.2.1}Solving a problem with bounds}{156}{subsection.10.2.1}%
-\contentsline {subsection}{\numberline {10.2.2}Solving global minimum problem}{156}{subsection.10.2.2}%
-\contentsline {section}{\numberline {10.3}Gauss-Newton method}{156}{section.10.3}%
-\contentsline {subsection}{\numberline {10.3.1}Detecting if a minimum is global}{157}{subsection.10.3.1}%
-\contentsline {section}{\numberline {10.4}Matlab}{157}{section.10.4}%
-\contentsline {subsection}{\numberline {10.4.1}Quantifying the fit}{157}{subsection.10.4.1}%
-\contentsline {subsection}{\numberline {10.4.2}Optimizing}{157}{subsection.10.4.2}%
-\contentsline {subsection}{\numberline {10.4.3}Matlab multi-start}{158}{subsection.10.4.3}%
-\contentsline {chapter}{\numberline {11}Stochastic methods for parameter estimation}{159}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Introduction}{159}{section.11.1}%
-\contentsline {section}{\numberline {11.2}Markov Chain Monte Carlo (MCMC)}{160}{section.11.2}%
-\contentsline {subsection}{\numberline {11.2.1}Markov chain}{160}{subsection.11.2.1}%
-\contentsline {subsubsection}{\numberline {11.2.1.1}Homogeneity}{160}{subsubsection.11.2.1.1}%
-\contentsline {subsection}{\numberline {11.2.2}Example}{160}{subsection.11.2.2}%
-\contentsline {subsection}{\numberline {11.2.3}Invariant distribution}{161}{subsection.11.2.3}%
-\contentsline {subsection}{\numberline {11.2.4}Irreducible matrices}{161}{subsection.11.2.4}%
-\contentsline {subsection}{\numberline {11.2.5}Monte Carlo sampling}{161}{subsection.11.2.5}%
-\contentsline {section}{\numberline {11.3}Sampling a distribution}{162}{section.11.3}%
-\contentsline {subsection}{\numberline {11.3.1}Rejection sampling algorithm}{162}{subsection.11.3.1}%
-\contentsline {section}{\numberline {11.4}Metropolis Hastings}{162}{section.11.4}%
-\contentsline {subsection}{\numberline {11.4.1}Algorithm}{163}{subsection.11.4.1}%
-\contentsline {subsection}{\numberline {11.4.2}Visualization of MCMC}{163}{subsection.11.4.2}%
-\contentsline {section}{\numberline {11.5}How to link data and MH}{164}{section.11.5}%
-\contentsline {section}{\numberline {11.6}Random walk MCMC}{165}{section.11.6}%
-\contentsline {subsection}{\numberline {11.6.1}Algorithm RW-MCMC ( C known)}{165}{subsection.11.6.1}%
-\contentsline {subsection}{\numberline {11.6.2}Discussion}{165}{subsection.11.6.2}%
-\contentsline {subsection}{\numberline {11.6.3}Diagnostics}{166}{subsection.11.6.3}%
-\contentsline {subsubsection}{\numberline {11.6.3.1}Sample split}{167}{subsubsection.11.6.3.1}%
-\contentsline {subsubsection}{\numberline {11.6.3.2}Conclusions}{167}{subsubsection.11.6.3.2}%
-\contentsline {chapter}{\numberline {12}Heuristics and the genetic algorithm}{169}{chapter.12}%
-\contentsline {section}{\numberline {12.1}Introduction}{169}{section.12.1}%
-\contentsline {subsection}{\numberline {12.1.1}An example}{169}{subsection.12.1.1}%
-\contentsline {subsection}{\numberline {12.1.2}Famous heuristic algorithms}{169}{subsection.12.1.2}%
-\contentsline {subsection}{\numberline {12.1.3}Evolution strategy and population}{169}{subsection.12.1.3}%
-\contentsline {section}{\numberline {12.2}The genetic algorithm}{170}{section.12.2}%
-\contentsline {subsection}{\numberline {12.2.1}Outline of a genetic algorithm}{170}{subsection.12.2.1}%
-\contentsline {subsection}{\numberline {12.2.2}Chromosome encoding}{170}{subsection.12.2.2}%
-\contentsline {subsection}{\numberline {12.2.3}Generation of an initial population}{170}{subsection.12.2.3}%
-\contentsline {subsection}{\numberline {12.2.4}Fitness evaluation}{170}{subsection.12.2.4}%
-\contentsline {subsection}{\numberline {12.2.5}Parent selection}{170}{subsection.12.2.5}%
-\contentsline {subsection}{\numberline {12.2.6}Reproduction}{171}{subsection.12.2.6}%
-\contentsline {subsection}{\numberline {12.2.7}Mutation}{171}{subsection.12.2.7}%
-\contentsline {subsection}{\numberline {12.2.8}Algorithm}{171}{subsection.12.2.8}%
-\contentsline {subsection}{\numberline {12.2.9}Discussion}{172}{subsection.12.2.9}%
-\contentsline {subsection}{\numberline {12.2.10}Conclusion}{172}{subsection.12.2.10}%
-\contentsline {subsubsection}{\numberline {12.2.10.1}Cons}{172}{subsubsection.12.2.10.1}%
-\contentsline {subsubsection}{\numberline {12.2.10.2}Pros}{173}{subsubsection.12.2.10.2}%
+\contentsline {chapter}{\numberline {10}Least squares problems}{155}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Introduction}{155}{section.10.1}%
+\contentsline {subsection}{\numberline {10.1.1}Effect of parameters on the distance}{155}{subsection.10.1.1}%
+\contentsline {subsection}{\numberline {10.1.2}Linear problem}{156}{subsection.10.1.2}%
+\contentsline {subsection}{\numberline {10.1.3}General functions}{156}{subsection.10.1.3}%
+\contentsline {subsection}{\numberline {10.1.4}Summary}{156}{subsection.10.1.4}%
+\contentsline {section}{\numberline {10.2}The Levenberg-Marquardt method}{157}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}Solving a problem with bounds}{157}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}Solving global minimum problem}{157}{subsection.10.2.2}%
+\contentsline {section}{\numberline {10.3}Gauss-Newton method}{157}{section.10.3}%
+\contentsline {subsection}{\numberline {10.3.1}Detecting if a minimum is global}{158}{subsection.10.3.1}%
+\contentsline {section}{\numberline {10.4}Matlab}{158}{section.10.4}%
+\contentsline {subsection}{\numberline {10.4.1}Quantifying the fit}{158}{subsection.10.4.1}%
+\contentsline {subsection}{\numberline {10.4.2}Optimizing}{158}{subsection.10.4.2}%
+\contentsline {subsection}{\numberline {10.4.3}Matlab multi-start}{159}{subsection.10.4.3}%
+\contentsline {chapter}{\numberline {11}Stochastic methods for parameter estimation}{160}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Introduction}{160}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Markov Chain Monte Carlo (MCMC)}{161}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}Markov chain}{161}{subsection.11.2.1}%
+\contentsline {subsubsection}{\numberline {11.2.1.1}Homogeneity}{161}{subsubsection.11.2.1.1}%
+\contentsline {subsection}{\numberline {11.2.2}Example}{161}{subsection.11.2.2}%
+\contentsline {subsection}{\numberline {11.2.3}Invariant distribution}{162}{subsection.11.2.3}%
+\contentsline {subsection}{\numberline {11.2.4}Irreducible matrices}{162}{subsection.11.2.4}%
+\contentsline {subsection}{\numberline {11.2.5}Monte Carlo sampling}{162}{subsection.11.2.5}%
+\contentsline {section}{\numberline {11.3}Sampling a distribution}{163}{section.11.3}%
+\contentsline {subsection}{\numberline {11.3.1}Rejection sampling algorithm}{163}{subsection.11.3.1}%
+\contentsline {section}{\numberline {11.4}Metropolis Hastings}{163}{section.11.4}%
+\contentsline {subsection}{\numberline {11.4.1}Algorithm}{164}{subsection.11.4.1}%
+\contentsline {subsection}{\numberline {11.4.2}Visualization of MCMC}{164}{subsection.11.4.2}%
+\contentsline {section}{\numberline {11.5}How to link data and MH}{165}{section.11.5}%
+\contentsline {section}{\numberline {11.6}Random walk MCMC}{166}{section.11.6}%
+\contentsline {subsection}{\numberline {11.6.1}Algorithm RW-MCMC ( C known)}{166}{subsection.11.6.1}%
+\contentsline {subsection}{\numberline {11.6.2}Discussion}{166}{subsection.11.6.2}%
+\contentsline {subsection}{\numberline {11.6.3}Diagnostics}{167}{subsection.11.6.3}%
+\contentsline {subsubsection}{\numberline {11.6.3.1}Sample split}{168}{subsubsection.11.6.3.1}%
+\contentsline {subsubsection}{\numberline {11.6.3.2}Conclusions}{168}{subsubsection.11.6.3.2}%
+\contentsline {chapter}{\numberline {12}Heuristics and the genetic algorithm}{170}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Introduction}{170}{section.12.1}%
+\contentsline {subsection}{\numberline {12.1.1}An example}{170}{subsection.12.1.1}%
+\contentsline {subsection}{\numberline {12.1.2}Famous heuristic algorithms}{170}{subsection.12.1.2}%
+\contentsline {subsection}{\numberline {12.1.3}Evolution strategy and population}{170}{subsection.12.1.3}%
+\contentsline {section}{\numberline {12.2}The genetic algorithm}{171}{section.12.2}%
+\contentsline {subsection}{\numberline {12.2.1}Outline of a genetic algorithm}{171}{subsection.12.2.1}%
+\contentsline {subsection}{\numberline {12.2.2}Chromosome encoding}{171}{subsection.12.2.2}%
+\contentsline {subsection}{\numberline {12.2.3}Generation of an initial population}{171}{subsection.12.2.3}%
+\contentsline {subsection}{\numberline {12.2.4}Fitness evaluation}{171}{subsection.12.2.4}%
+\contentsline {subsection}{\numberline {12.2.5}Parent selection}{171}{subsection.12.2.5}%
+\contentsline {subsection}{\numberline {12.2.6}Reproduction}{172}{subsection.12.2.6}%
+\contentsline {subsection}{\numberline {12.2.7}Mutation}{172}{subsection.12.2.7}%
+\contentsline {subsection}{\numberline {12.2.8}Algorithm}{172}{subsection.12.2.8}%
+\contentsline {subsection}{\numberline {12.2.9}Discussion}{173}{subsection.12.2.9}%
+\contentsline {subsection}{\numberline {12.2.10}Conclusion}{173}{subsection.12.2.10}%
+\contentsline {subsubsection}{\numberline {12.2.10.1}Cons}{173}{subsubsection.12.2.10.1}%
+\contentsline {subsubsection}{\numberline {12.2.10.2}Pros}{174}{subsubsection.12.2.10.2}%

@@ -1,43 +1,83 @@
 \chapter{Optimization problem}
 
 \section{Introduction}
-An optimization problem is a problem in which the objective is to maximize or minimize something.
-The optimization objective is called an objective or cost function that depends on a variable or a vector of variables called unknowns or parameters or parameter estimates.
+An optimization problem is a problem in which the objective is to maximize or minimize a function.
+The optimization objective is called an objective or cost function that depends on a variable or a vector of variables called unknowns, parameters or parameter estimates.
 These variables may be subject to certain constraints.
 
-\section{General definition of an optimization problem}
+  \subsection{Definition of a minimum}
+  A point $x^*$ is called a minimum of a function $f$ if:
 
-$$\left.\left\{\begin{array}{ll} \max _{x \in \mathbb{R}^n} f(x) & \\ c_i(x)=0 & i=\mathcal{E}\\ f_j(x) \geq 0 & j = I \end{array}\right\} \text { set of indexes }\right] \text { Constraints (equality and inequality) }$$
+  $$\exists \varepsilon > 0 : \forall x : || x- x^* || < \varepsilon\Rightarrow f(x) \geq f(x^*)$$
 
-The model will be a function that given a certain interval or time, initial conditions and parameters, returns the variables at that time.
-Now assuming a deterministic condition, the model $m$:
+  Respectively, for the maximum:
+
+  $$f(x) \leq f(x^*)$$
+
+  A minimum is called global if is valid $\forall x \in \mathbb{R}^n$.
+  Or, in this domain:
+
+  $$f(x) \geq f(x^*)$$
+
+  In general it is not easy to compute the global minimum or maximum, especially if there are a lot of dimensions.
+  To find minima or maxima, $f'(x)=0$ should be imposed.
+  A stationary point $\bar{x}$ is defined as the point for which:
+
+  $$f'(\bar{x})=0$$
+
+  \subsection{Finding the minimum}
+  In general in an optimization problem $f$ and $f'$ are not known, so a numerical approximation is used.
+  The idea is to look at the derivative $f'$ and try to move in the point space so to set $f'=0$.
+  This is at the base of gradient methods.
+
+  \subsection{Constraints}
+  The optimization problem could have some constraints on the values that $x$ can have, so they have to be considered.
+  The problem now becomes:
+
+  $$\begin{cases} \max\limits_{x\in\mathbb{R}^n} f(x)\\g_i(x) =0 & i\in\mathcal{I}\\x\in\mathbb{R}^n\end{cases}$$
+
+  Where:
+
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item $\mathcal{I} = 1, \dots, m$ iterates over the constraints.
+      \item The constraints $g_i$ could be equality or inequality ones.
+    \end{itemize}
+  \end{multicols}
+
+\section{Parameter optimization of a model}
+A model is a function that given a certain interval or time, initial conditions and parameters, returns the variables at that time the end of the interval.
+Assuming a deterministic condition, the model $m$ can be defined as:
 
 $$m: \mathbb{R} \times \mathbb{R}^{(n+1)} \times \mathbb{R}^m \rightarrow \mathbb{R}^N$$
 
 Where $n+1$ accounts for the dimension of variables and time:
 
-$$\left(t_1,\left(\vec{x}_0, t_0\right), \theta\right)\longmapsto \vec{x}_1 $$
+$$\left(t_1,\left(\vec{x}_0, t_0\right), \theta\right)\rightarrow \vec{x}_1 $$
 
 Where $\theta$ is the vector of parameters.
-Assuming that there are $k$ observation:
+Assuming that there are $k$ observation for the model:
 
-$$(t_i ,\vec{y}_i), i=1, \ldots k$$
+$$(t_i ,\vec{y}_i)\quad i=1, \dots, k$$
 
 Where $t_i \in \mathbb{R}^+, \vec{y}_i \in \mathbb{R}^\ell$.
-In particular $y$ can be a subset such that $\ell<N$.
-This happens a lot in complex systems, where some variables are not observed.
+It should be noted how in complex systems, where some variables are often not observed, $y$ could be a subset of dimension $\ell <N$.
 
   \subsection{Distance}
-  For simplicity assume $\ell = N$ and that the following can be computed:
+  The distance is the measure of how the output of the model is far from the observed labels.
+  It will be used to determine how to change the parameters of the model.
+  The objective becomes to change the parameters to minimize the distance between predicted values and observed ones.
+  Assume that $\ell = N$ and that:
 
   $$m\left(t_1,\left(\vec{x}_0, t_0\right), \theta\right) \in \mathbb{R}^{N} = m(t_i,\theta)$$
 
-  Now the distance can be computed:
+  Can be computed.
+  The distance will be:
 
   $$d_i=\vec{y}_i-m(t_i, \theta)$$
 
   Where $d_i$ is any type of distance.
-  Now the point-wise distance between the model and the observed labels is computed.
+  The point-wise distance between the model and the observed labels is computed.
   A common distance measure is the Euclidean one:
 
   \begin{align*}
@@ -45,46 +85,16 @@ This happens a lot in complex systems, where some variables are not observed.
                   &=\sqrt{\sum_{i=1}^{K} \sum_{j=1}^{N} \left(y_{ij}-m_j\left(t_i, \theta\right)\right)^2}
   \end{align*}
 
-  Sometimes a weight is added so to scale the components of the output of the model as to make them more comparable and to make the variables unit of measurement agnostic, unbiasing the results.
-
   \subsection{Weights}
-  A weight is a scalar that multiplies the component in the distance.
-  So it is a multiplicative factors that allows to transform the distance.
+  A weight can be added to scale the components of the output of the model as to make them more comparable and to make the variables unit of measurement agnostic, unbiasing the results.
+  A weight is a scalar that multiplies the component in the measure of distance transforming it as a multiplicative factor.
   For example in the least square algorithm the distance is computed as:
 
   $$d_\varepsilon=\sqrt{\sum \sum W_{ij}\left(y_{ij}-m_j\left(t_i, \theta\right)\right)}$$
 
-  \subsection{Objective}
-  The objective of an optimization problem is to minimize or maximizing a function:
-
-  $$\min f(x), x \in \mathbb{R}^n$$
 
   \subsection{Observations}
-  When minimize the zero of the function is not the final objective, because if the residual error is zero, the data is being overfitted.
+  When minimizing the zero of the function is not the final objective, because if the residual error is zero, the data is being overfitted.
   Furthermore a great attention has to be posed to the construction of the model.
   During optimization $\theta$, the space of the parameters is being manipulated, modifying the output in the space of observations.
   In this way abstract values are being linked to observations.
-
-
-\section{Definition of a minimum}
-A point $x^*$ is called a minimum if:
-
-$$\exists \varepsilon > 0 : \forall x : || x- x^* || < \varepsilon\Rightarrow f(x) \geq f(x^*)$$
-
-Respectively, for the maximum:
-
-$$f(x) \leq f(x^*)$$
-
-A minimum is called global if:
-
-$$\forall x \in \mathbb{R}^n$$
-
-Or, in this domain:
-
-$$f(x) \geq f(x^*)$$
-
-In general it is not easy to compute the global minimum or maximum, especially if there are a lot of dimensions.
-To find minima or maxima, $f'(x)=0$ should be imposed.
-A stationary point can be defined as:
-
-$$\bar{x} \text{ s.t.} f'(\bar{x})=0$$

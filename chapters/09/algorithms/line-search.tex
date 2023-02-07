@@ -21,7 +21,7 @@
 
 \Output: the minimized function\;
 
-\While{$||\nabla f(x_k)||>0$}{
+\While{$||\nabla f(x_k)||>\epsilon$}{
 	$p_k = -(\nabla^2 f(x_k))^{-1}\nabla f(x_k)$\;
 	select $\alpha_k$\;
 	$x_{k+1} = x_k+\alpha_kp_k = x_k-\alpha_k(\nabla^2f(x_k))^{-1}\nabla f(x_k)$\;

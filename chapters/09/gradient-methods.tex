@@ -10,11 +10,11 @@ Integrating constraints the problem becomes:
 
 $$\begin{cases}\max f(x) &  \\ g_i(x)=0, & i \in \mathcal{I} \\ x \in \mathbb{R}^N &\end{cases}$$
 
-Let $\mathcal{I}= 1,...,m$.
+Where $\mathcal{I}= 1,...,m$.
 The traditional way to solve this problem is to translate this system to another function.
-The Lagrangian function is used to take into account the constraints.
 
   \subsection{Lagrangian function}
+  The Lagrangian function is used to take into account the constraints.
   A Lagrangian function is defined as the function:
 
   $$L: \mathbb{R}^n \times \mathbb{R}^m \rightarrow \mathbb{R}$$
@@ -24,8 +24,8 @@ The Lagrangian function is used to take into account the constraints.
   $$L(x)= f(x) + \lambda g(x) = f(x) + \sum_{j=1}^m \lambda_j g_j(x)$$
 
   \subsection{Lagrangian Multipliers Theorem}
-  If $x^*$ is a stationary point for a Lagrangian function, then $\exists \lambda^*$ such that $x^* \lambda^*$ is a stationary point for $L$.
-  This is a necessary condition that increases the dimensionality of the problem to $\mathbb{R}^N \rightarrow \mathbb{R}^N \times \mathbb{R}^m$, but it allows to search solutions using the stationary points.
+  If $x^*$ is a stationary point for a Lagrangian function, then $\exists \lambda^*$ such that $(x^*, \lambda^*)$ is a stationary point for $L$.
+  This is a necessary condition that increases the dimensionality of the problem from $\mathbb{R}^N$ to $\mathbb{R}^N \times \mathbb{R}^m$, but it allows to search solutions using the stationary points.
   This can be generalized to $g_i(x)\leq 0$ constraints.
   Stationary points are not necessarily minima and maxima.
   This is enforced by checking through second derivations or evaluating the function in other points.
@@ -54,15 +54,16 @@ The Lagrangian function is used to take into account the constraints.
 
     And the Eggholder function:
 
-    $$f(x, y)=-(y+47) \sin \left(\sqrt{\left.\mid \frac{x}{2}+(y+47)\right|}-\right. x \cdot \sin \left(\sqrt{\left.\mid x-(y+47\right)|}\right)$$
+    $$f(x, y)=-(y+47) \sin \left(\sqrt{\biggr\vert \frac{x}{2}+(y+47)\biggr\vert}-\right. x \cdot \sin \left(\sqrt{| x-(y+47)|}\right)$$
 
-      Which are used to test optimization algorithms.
-      Solving analytically these two problems is hard, so a numerical solution has to be employed.
+    Which are used to test optimization algorithms.
+    Solving analytically these two problems is hard, so a numerical solution has to be employed.
 
   \subsection{Limitations of gradient descent methods}
   One of the major limitations of these algorithms is that there is no guarantee to reach the global minimum.
   Furthermore it could be the case that variables cannot be optimized together, so there is a need to make a trade-off between them.
-  Finally gradient methods cannot be applied to stochastic simulations as their functions are not continuous.
+  Moreover gradient methods cannot be applied to stochastic simulations as their functions are not continuous.
+
 
   \begin{figure}[H]
     \centering
@@ -95,11 +96,11 @@ Focussing on the first terms:
 
 $$f(x)=f\left(x_0\right)+f^{\prime}\left(x_0\right)\left(x-x_0\right)+R_2(x)=0$$
 
-$$f^{\prime}\left(x_0\right)= \frac{f(x)-f(x_0)}{x-x_0}+\left(\frac{R_2(x)}{(x-x_0)}\right)=\frac{f(x)-f\left(x_0\right)}{x-x_0}+R_1(x)$$
+$$f^{\prime}\left(x_0\right)= \frac{f(x)-f(x_0)}{x-x_0}+\left(\frac{R_2(x)}{(x-x_0)}\right)\approx\frac{f(x)-f\left(x_0\right)}{x-x_0}+R_1(x)$$
 
 This trick can be used for any $N>1$.
 Now let $f: \mathbb{R}^N \rightarrow \mathbb{R}$ and $e_i=(0, \ldots, 0,1,0,\ldots,0)$.
-Consider $x_1 x+\varepsilon e_i, x-\varepsilon e_i$ so that the gradient is being explored in one direction:
+Consider $x_1, x+\varepsilon \ell_i, x-\varepsilon \ell_i$ so that the gradient is being explored in one direction:
 
 \begin{align*}
   f\left(x+\varepsilon e_i\right)&=f(x)+\varepsilon \frac{\partial f}{\partial x_i}(x)+\frac{1}{2} \varepsilon^2 \frac{\partial^2 f}{\partial x_i{ }^2}(x)+R_3(x) \\
@@ -110,18 +111,16 @@ Consider $x_1 x+\varepsilon e_i, x-\varepsilon e_i$ so that the gradient is bein
 
 This is an approximation of the first derivative with improved accuracy.
 This applies to only one derivative, so it has to be performed at least twice as $2$ function evaluation are needed for each $i\rightarrow 2W$.
-In order to obtain a decent gradient, a lot of computations are required, but these are fust as they have a low number of iterations.
+In order to obtain a decent gradient, a lot of computations are required, but these are fast as they have a low number of iterations.
 The algorithm converges when $\Delta f = 0$.
 
   \subsection{Vanishing gradient}
   There might be points where the gradient vanishes which are not the final destination.
   Gradient methods may tend to overfit, but they are effective.
   The main issue is that since the gradient is approximated, it cannot be trusted everywhere.
-Gradient methods can be applied to two different categories of problems:
 
 \section{Line search}
 The line search is a class of algorithms that follow a direction along the gradient.
-
 
   \subsection{Newton's direction}
   Considering Taylor's formula and letting $x_k$ be the starting point, $\alpha \in \mathbb{R}^+$ the step length and $p$ the direction such that ($x_k, p \in R^n$).
@@ -135,15 +134,29 @@ The line search is a class of algorithms that follow a direction along the gradi
   f(x_n+p)=f(x_n) + p f'(x_n) + \frac{p^2}{2} f''(x_n) = m_k(p)
   $$
 
-  Now instead of $f$ the simple polynomial $m_k(p)$ is minimized.
-  From this equation the direction $p = -\frac{f'(x_k)}{f''(x_k)}$ is obtained.
-  This is Newton direction, which is the best direction to move the gradient.
-  When $n>1$, $p = -(\nabla^2 f(x_k))^{-1}\nabla f(x_k)$.
+  Now instead of $f$ the simple polynomial $m_k(p)$ is minimized:
+
+  $$\frac{d}{dp}m_k(p) = f'(x_n) + pf''(x_n) = 0$$
+
+  From this equation the direction is:
+
+  $$p = -\frac{f'(x_k)}{f''(x_k)}$$
+
+  Or the Newton direction, which is the best direction to move the gradient.
+  When $n>1$:
+
+  $$p = -(\nabla^2 f(x_k))^{-1}\nabla f(x_k)$$
+
+  Where:
+
+  $$\nabla^2 f(x) = \left[\frac{\partial}{\partial x_i}\left(\frac{\partial}{\partial x_j}f(x)\right)\right]_{i,j}$$
+
+  Is the Hessian matrix.
   Finding the inverse of a matrix is not straightforward, so next algorithm will try to approximate it.
   The second derivative progressively shrinks when the algorithm approaches convergence to reduce the step size.
 
-  \subsection{Line search algorithm for function minimization}
-  An algorithm for line search for function minimization can be found in \ref{algo:line-search}.
+  \subsubsection{Algorithm}
+  An algorithm for line search with Newton's direction for function minimization can be found in \ref{algo:line-search}.
 
   \input{chapters/09/algorithms/line-search}
 
@@ -163,15 +176,11 @@ The line search is a class of algorithms that follow a direction along the gradi
   The Hessian where will not be computed.
   So the quasi-Newton direction will be:
 
-  The fact that the second derivative progressively shrinks tells us that
-  we need to reduce the step, but in this case we are not taking this into
-  account. Of course we also have $\alpha$, we should look at Armijo
-  condition and change it.
-  Take into account that each time that we are performing operation on a
-  number we lose precision.
+  $$p_{k+1} = -B_{k+1}^{-1}\nabla f_{k+1}$$
 
-  $$P_{k+1}=- \alpha B_{k+1}^{-1} \nabla f(x_k+1)$$
-
+  The progressive shrinking of the second derivative indicates that the step needs to be reduced.
+  The step $\alpha$ should be changed according to the Armijio condition.
+  Consider in particular that each time that an operation on a matrix is performed precision is lost.
 
   \subsection{Steepest descent direction}
   In steepest descent the direction chosen is the one that reduces the gradient the most:
@@ -182,22 +191,32 @@ The line search is a class of algorithms that follow a direction along the gradi
   This method converges more slowly with respect to Newton and Quasi Newton direction methods.
 
   \subsection{Selecting $\mathbf{\alpha}$}
-  Ideally $\alpha$ should be defined such that:
+  To determine the step length $\alpha$ consider:
 
-  $$\bar{\alpha}= \arg \min_{\alpha>0} f(x_k+\alpha p)$$
+  $$\phi(\alpha) = f(x_k + \alpha p_k)$$
 
-  This is another optimization problem, which could be avoided by selecting an $\alpha$ such that:
+  The objective is to define $\bar{\alpha}$ such that:
 
-  $$f(x_k+\alpha p) \leq f(x_k) + c_1\alpha \nabla f(x_n)^T p_k, c_1 \in (0,1)$$
+  $$\phi(\bar{\alpha}) = \min\limits_{\alpha>0}\phi(\alpha)$$
 
-  Such that the Armijio condition is satisfied: the reduction should be proportional to $\alpha$ and $\nabla f(x_n)^T p_k$.
+  This is another optimization problem, which could be avoided by selecting an $\alpha$ that satisfies other conditions
 
-  \subsubsection{Convergence of a method}
-  The order of convergence of a method is a constant $\ell$, such that exists the limit:
+    \subsubsection{Armijio condition}
+    The Armijio condition forces a selection of $\alpha$ such that:
+
+    $$f(x_k+\alpha p_k) \leq f(x_k) + c_1\alpha \nabla f(x_n)^T p_k\qquad\qquad c_1 \in ]0,1[$$
+
+    \subsubsection{Curvature condition}
+    The curvature condition forces a selection of $\alpha$ such that:
+
+    $$\nabla f(x_k+\alpha p_k)^Tp_k \ge c_2\nabla^Tf_kp_x\qquad\qquad c_2\in]\epsilon_1, 1[$$
+
+  \subsection{Convergence of a method}
+  The order of convergence of a method is a constant $\ell$, such that if $x^*$ is a solution, the limit:
 
   $$\lim_{k \rightarrow \infty  }\frac{||f(x_{k+1})-f(x^*)||}{||f(x_{k})-f(x^*)||^\ell} = L >0$$
 
-  Where $x^*$ is the solution and the method converges.
+  Exists.
   The new iteration is compared to the old one.
   The limit should go to $0$ and the exponent is the speed at which this happens: the higher $\ell$ the faster the numerator go to zero with the respect to the denominator, so the higher the exponent, the faster the convergence.
   For the methods discussed previously:
@@ -213,37 +232,31 @@ The line search is a class of algorithms that follow a direction along the gradi
 
 \section{Trust region}
 Trust region is a class of algorithms that create an approximation of the problem and they solve it in a small trustable region.
-
-{[}picture{]}
-\noindent
-Imagine that this is a cut function: the starting point $x_k$ is in the middle.
-The main idea of the trust region is that a direction is not followed: the function is approximated  with a simpler function like through Taylor approximation.
-According to how big and reliable the approximation is, a direction is chosen.
-The model can be approximated as:
-
-$$m(x_p+\alpha p)=f(x_k)+\alpha p^T \nabla f(x_k)+ \frac{1}{2} \alpha^2p^T B_k p$$
-
-$$\alpha=1, m_k (p)=f_k+p^T\nabla f_k + \frac{1}{2} p^T B_k p$$
+The objective is to optimize a problem such that close to a starting point $x_k$ the model is close to the function.
 
   \subsection{Trust region steepest descent}
-  In trust region steepest descent a region is defined such that $||p|| < \delta_k,\delta_k>0$.
-  The optimization problem will be solved in this region.
-  $B_k$ can be the Hessian matrix or an approximation, but it can also be ignored.
-  Finding a minimum for $m_k(p)=f_k+p^T\nabla f_k$ means that the objective is:
+  Let now $f_k = f(x_k)$.
+  The model can be approximated through a Taylor expansion:
 
-  $$\min_p m_k(p)= \min_p (f_k+p^T\nabla f_k)$$
+  $$m(x_p+\alpha p)=f(x_k)+\alpha p^T \nabla f(x_k)+ \frac{1}{2} \alpha^2p^T B_k p$$
 
-  $f_k$ is a constant, so a direction for which $\min_p p^T\nabla f_k$ is minimum.
-  The problem can be re-written as:
+  Where $B_k$ can be the Hessian matrix or its approximation.
+  This problem can be solved in a region such that:
 
-  $$p^T\nabla f_k = ||p|| ||\nabla f_k|| \cos \theta$$
+  $$||p||_2<\delta_k\qquad\qquad \delta_k > 0$$
 
-  Now the procedure is to minimize for $p$ such that $\cos \theta = -1$ and $||p||=\delta_k$,
-  where $||p|| \leq \delta_k$ is the radius of the trust region.
+  Now assume for simplicity that $\alpha = 1$ and that $B_k = 0$.
+  The model of the function will be now:
 
-  $$\min_p p^T\nabla f_k = -\delta_k || \nabla f_k ||$$
+  $$m_k(p) = f_k + p^T\nabla f_k$$
 
-  $$p = - \delta_k \frac{\nabla f_k}{||\nabla f_k||}$$
+  To minimize this, since $f_k$ is a constant there is a need to work only on the second term:
+
+  $$p^T\nabla f_k = ||p||\cdot||\nabla f_k||\cdot \cos\theta$$
+
+  The minimum is reached when $\cos\theta = -1$ and $||p|| = \delta_k$, so that $\bar{p}$:
+
+  $$\bar{p}^T\nabla f_k = -\delta_k||\nabla f_k||\Rightarrow \bar{p} = -\delta_k\frac{\nabla f_k}{||\nabla f_k||}$$
 
   This result is exactly the equation from steepest descent.
   A condition on the region with $\delta_k$ is being applied.
@@ -255,15 +268,16 @@ $$\alpha=1, m_k (p)=f_k+p^T\nabla f_k + \frac{1}{2} p^T B_k p$$
 
   $$\rho_k = \frac{f(x_k)-f(x_k+p)}{m(x_k)-m(x_k+p)}$$
 
-  By construction $m(x_k+p) \leq m(x_k)$.
+  By definition $m(x_k+p) \leq m(x_k)$, so the denominator is always $>0$.
 
   \begin{multicols}{2}
     \begin{itemize}
       \item If $\rho_k < 0$, reject $p$, as the real problem is not being improved.
-      \item If $\rho_k \simeq 1$ a maybe longer step can be considered.
+        $\delta_k$ should be reduced, typically by $\frac{1}{4} \delta_k$.
+      \item The closer $\rho_k$ is to $1$ the closer the model $m_k$ to $f$, so bigger steps can be taken increasing $\delta_k$.
     \end{itemize}
   \end{multicols}
-  Usually take $\delta_k = \frac{1}{4} \delta_k$
+
   The value of $\delta$ can be tuned according to the needs of the problem.
   The approach is similar to  the RK method.
   A grey area  between $0$ and $1$ is found, so a threshold is defined such that $\rho_k < \eta$ and$\rho_k > \eta$.

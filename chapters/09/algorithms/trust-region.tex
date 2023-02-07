@@ -17,23 +17,17 @@
 \caption{\protect\TitleFunction{}}
 \label{algo:trust-region}
 
-\Input: the function $f$ to be minimized and $x_k$ starting point, $\delta$ and $\eta$ parameters\;
+\Input: the function $f$ to be minimized and $x_k$ starting point, $\hat{\delta}$ the maximum accepted region, the starting $\delta\in ]0, \hat{\delta}[$ and $\eta\in\left[0, \frac{1}{4}\right]$ the minimum actual reduction for which the direction is accepted.\;
 
 \Output: the minimized function\;
 
-$\delta>0$\;
-$\delta_0\in]0,\delta[$\;
-$\eta \in\biggr]0,\frac{1}{4}\biggr[$\;
-$k = 0$\;
-$\epsilon < 0$\;
-
-\Repeat{$||\nabla f(x_k)||<0$}{
-	obtain $p_k$ such that $p_k=\arg\min\limits_{p}m(x_k+p)$\;
-	compute $p_k$\;
+\Repeat{$||\nabla f(x_k)||<\epsilon$}{
+	obtain $p_k$ such that $p_k=\arg\min\limits_{\substack{p\in\mathbb{R}^n\\||p||\le\delta_k}}m(x_k+p)$\;
+	compute $\rho_k$\;
 	\If{$\rho_k<\frac{1}{4}$}{
 		$\delta_{k+1} = \frac{1}{4}\delta_k$\;
 	}
-	\ElseIf{$\rho_k < \frac{3}{4}\land||p_k||=\delta_k$}{
+	\ElseIf{$\rho_k > \frac{3}{4}\land||p_k||=\delta_k$}{
 		$\delta_{k+1} = \min(2\delta_k, \hat{\delta})$\;
 	}
 	\Else{
