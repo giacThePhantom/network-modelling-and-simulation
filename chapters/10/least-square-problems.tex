@@ -2,60 +2,73 @@
 \chapter{Least squares problems}
 
 \section{Introduction}
-If $m$ is the model, the distance between model output and data is:
+Let $\{y_i\}_{i = 1, \dots, n}$ be the observed data and $m(t_i, \vec{\theta})_{i = 1, \dots, n}$ be the corresponding model predition.
+Then the objective function is defined as:
 
-$$m_j(t_i,(x_0,t_0), \theta) = m_{ij}(\theta) - \hat{y}_{ij}, \text{for } i,j$$
+$$f(\vec{\theta}) = \frac{1}{2}\sum\limits_{j = 1}^nr_j(\vec{\theta}) = \frac{1}{2}||r(\vec{\theta})||_2^2$$
 
-$r_{ij}(\theta)$ is called residual and it is shaped as a vector, such that:
+Where:
 
-$$J_k=J(\theta_k)\left[\frac{\partial r_I}{\partial\theta_i}\right], i=1, ...,n, I=1,...n$$
+\begin{multicols}{2}
+  \begin{itemize}
+    \item $r_j(\vec{\theta}) = y_j-m(t_j \vec{\theta})$.
+    \item $r(\vec{\theta}) = (r_1(\vec{\theta}), \dots, r_n(\vec{\theta}))^T$ is called the residual.
+  \end{itemize}
+\end{multicols}
 
-Since the time points are given by the data, everything only depends on the choice of parameters $\theta$.
-The residual according to $\theta$ can be minimized, so that the function to minimize is:
+In general the residual is a matrix such that:
 
-$$f(\theta)=\frac{1}{2}\sum^m_{j=1}r_j^2(\theta)$$
+$$r(\vec{\theta}) = [r_{ij}(\vec{\theta})]_{\substack{i = i, \dots, n\\j = 1, \dots, m}}$$
 
-This will hardly go to zero, as the observations are affected by noise.
+Where:
 
-  \subsection{Effect of parameters on the distance}
-  From the distance of a single point the effect of each parameter on the distance can be explored looking at the derivative.
-  Consider that the gradient will tell the relationship between model parameters and data:
+\begin{multicols}{2}
+  \begin{itemize}
+    \item $i$ iterates over $n$ residuals.
+    \item $j$ iterates over $m$ observations.
+  \end{itemize}
+\end{multicols}
 
-  $$\nabla f(\theta)=\sum^m_{j=1}r_j(\theta)\nabla r_j(\theta)= J(\theta)^Tr(\theta)$$
+The matrix can be reshaped into a vector, considering a vector of residuals.
+Defining:
 
-  The matrix notation is a more convenient way to express this gradient.
-  While solving least squares problems Taylor approximation is always exploited.
-  Consider the Hessian matrix:
+$$J_k=J(\theta_k)\left[\frac{\partial r_I}{\partial\theta_i}\right]_{\substack{i=1, ...,n\\ I=1,...n}}$$
 
-  $$\nabla^2 f(\theta)=J^T(\theta)J(\theta)+ \sum^m_{j=1}r_j(\theta) \nabla^2 r_j(\theta)$$
+So that:
 
-  $J^T(\theta)J(\theta)$ can be used as an approximation for $B(\theta)$ of the gradient.
+\begin{align*}
+  f(\vec{\theta}) &= \frac{1}{2}||r(\vec{\theta})||_2^2 = \frac{1}{2}\sum\limits_{j=1}^nr_j^2(\vec{\theta})\\
+  \nabla f(\vec{\theta}) &= \sum\limits_{j=1}^nr_j\nabla r_j(\vec{\theta}) = J(\vec{\theta})^Tr(\vec{\theta})\\
+  \nabla^2 f(\vec{\theta}) &= J^T(\vec{\theta})J(\vec{\theta}) + \sum\limits_{j=1}^nr_j\nabla^2 r_j(\vec{\theta})
+\end{align*}
+
+Where $J^T(\vec{\theta})J(\vec{\theta})$ is easy to compute as it is known without new derivative computations and it can be used to approximate $\nabla^2f(\vec{\theta})$.
 
   \subsection{Linear problem}
+  The linear problem is the simplest case.
+  Consider to describe a variable $y = A_{\vec{\theta}}$, where $A$ is a matrix, $\vec{\theta}$ is the vector of parameters and $\bar{y}$ the observations.
+  The residuals can be defined as:
 
-  If the problem is linear:
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item $r(\vec{\theta})=A_{\vec{\theta}}-\bar{y}$.
+      \item $f(\vec{\theta})= ||A_{\vec{\theta}}-\bar{y}||^2$.
+      \item $\nabla f(\theta)=A^T(A_{\vec{\theta}}-\bar{y})$.
+      \item $\nabla^2 f = A^TA$.
+    \end{itemize}
+  \end{multicols}
 
-  $$r(\theta)=A(\theta)-y$$
+  If $f$ is convex then:
 
-  The objective function
-
-  $$f(\theta)=\frac{1}{2} || A\theta-y||^2$$
-
-  And
-
-  $$\nabla f(\theta)=A^T(A\theta-y), \nabla^2 f(\theta)=A^TA$$
-
-  If $f$ is convex:
-
-  $$\Rightarrow \exists \theta^* s.t. \nabla f(\theta^*)=0 - A^TA\theta^*=A^Ty$$
+  $$\exists \theta^* \text{such that} \nabla f(\vec{\theta}^*)=0 \Leftrightarrow A^TA_{\vec{\theta}^*}=A^T\bar{y}$$
 
   Reaching a normal equation with a  linear system.
 
-  \subsection{General functions}
-  With general functions, this is not so straightforward, so the problem will be approximated with a solvable linear one.
+  \subsection{Non linear least squares problem}
+  For non-linear least square problem the first approach is a modified line-search Newton method.
   The problem of quantifying the distance between model and data can be formalized as:
 
-  $$r_i = m_i(t,\theta) - y_0 \\ f(\theta)= \frac{1}{2} \sum^m_{j=1} r_j^2 (\theta) \\ \nabla f(\theta) = J(\theta)^{T} r (\theta) \\ \nabla f(\theta) = J(\theta)^{T} J (\theta) + \sum^m_{j=1} r_j \theta \nabla^2 r_3 \theta$$
+  $$f(\theta)= \frac{1}{2} \sum^m_{j=1} r_j^2 (\theta) \\ \nabla f(\theta) = J(\theta)^{T} r (\theta) \\ \nabla f(\theta) = J(\theta)^{T} J (\theta) + \sum^m_{j=1} r_j \theta \nabla^2 r_3 \theta$$
 
   The sum can be ignored as:
 
@@ -77,17 +90,17 @@ This will hardly go to zero, as the observations are affected by noise.
   This is the normal equation for a normal least squares problem.
   Under certain hypotheses the method converges quadratically.
 
-  \subsection{Summary}
-  Recalling that the Newton method is quadratic convergent, the matrix is not singular.
-  The system should be solved starting with a problem in the form of sum of squares.
-  Thanks to this, the problem can be rewritten in a simpler way and an approximation can be performed, leading to solving a linear system at each iteration.
-  This approximation guides  rapidly to a solution.
-  Linear search is being applied, by defining a direction and solving a new problem at each iteration.
-  The biggest issue could be the non invertible matrix, but this can be solved.
-
+    \subsubsection{Summary}
+    Recalling that the Newton method is quadratic convergent, the matrix is not singular.
+    The system should be solved starting with a problem in the form of sum of squares.
+    Thanks to this, the problem can be rewritten in a simpler way and an approximation can be performed, leading to solving a linear system at each iteration.
+    This approximation guides  rapidly to a solution.
+    Linear search is being applied, by defining a direction and solving a new problem at each iteration.
+    The biggest issue could be the non invertible matrix, but this can be solved.
+    It should be noted that the approximation of the second order derivative could cause a over-estimation of the term.
 
 \section{The Levenberg-Marquardt method}
-In the Levenberg-Marquardt method at arch iteration the problem to be solved is:
+In the Levenberg-Marquardt method at each iteration the problem to be solved is:
 
 $$\min_{||p||\leq\delta_k} \frac{1}{2} ||J_kp-r_k||^2$$
 
