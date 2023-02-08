@@ -12,7 +12,7 @@
 \SetKwData{Item}{item}
 \SetKwFunction{Min}{min}
 \SetKwFunction{Partitioning}{partitioning}
-\SetKwFunction{TitleFunction}{Gauss Newton}
+\SetKwFunction{TitleFunction}{Multi start approach for Gauss-Newton}
 
 \caption{\protect\TitleFunction{}}
 \label{algo:gauss-newton}
@@ -22,13 +22,14 @@
 \Output: the optimal vector $\Theta$\;
 
 \ForEach{$i = 1,\dots,N$}{
-	\Repeat{$\epsilon<\bar{\epsilon}$}{
+	\Repeat{$\epsilon<\delta$}{
 		compute $q$ such that $\bar{J}^i\bar{J}q = -\bar{J}r(\theta^i)$\;
 		$\vartheta = \theta^i+q$\;
-		$\epsilon = \biggr\vert\biggr\vert \frac{\theta^-\vartheta}{\theta}\biggr\vert\biggr\vert $, the relative increase\;
+		$\epsilon = \biggr\vert\biggr\vert \frac{\theta^-\vartheta}{\theta}\biggr\vert\biggr\vert $, the relative increase or $\epsilon = ||\bar{J}(\vartheta)$\;
 		$\theta^i = \vartheta$\;
 	}
-	\Return $\alpha^i$\;
+	store $\theta_i$\;
 }
+\Return $\theta_i$ such that $r(\theta^i = \min\{||r(\theta^1)||, \dots, ||r(\theta^N)\})$\;
 
 \end{algorithm}

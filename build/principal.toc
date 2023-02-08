@@ -428,50 +428,53 @@
 \contentsline {subsection}{\numberline {10.1.2}Non linear least squares problem}{156}{subsection.10.1.2}%
 \contentsline {subsubsection}{\numberline {10.1.2.1}Summary}{157}{subsubsection.10.1.2.1}%
 \contentsline {section}{\numberline {10.2}The Levenberg-Marquardt method}{157}{section.10.2}%
-\contentsline {subsection}{\numberline {10.2.1}Solving a problem with bounds}{157}{subsection.10.2.1}%
-\contentsline {subsection}{\numberline {10.2.2}Solving global minimum problem}{157}{subsection.10.2.2}%
+\contentsline {subsection}{\numberline {10.2.1}Bounds}{157}{subsection.10.2.1}%
+\contentsline {subsection}{\numberline {10.2.2}Solving global minimum problem}{158}{subsection.10.2.2}%
 \contentsline {section}{\numberline {10.3}Gauss-Newton method}{158}{section.10.3}%
-\contentsline {subsection}{\numberline {10.3.1}Detecting if a minimum is global}{158}{subsection.10.3.1}%
-\contentsline {section}{\numberline {10.4}Matlab}{158}{section.10.4}%
-\contentsline {subsection}{\numberline {10.4.1}Quantifying the fit}{158}{subsection.10.4.1}%
-\contentsline {subsection}{\numberline {10.4.2}Optimizing}{159}{subsection.10.4.2}%
-\contentsline {subsection}{\numberline {10.4.3}Matlab multi-start}{159}{subsection.10.4.3}%
-\contentsline {chapter}{\numberline {11}Stochastic methods for parameter estimation}{160}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Introduction}{160}{section.11.1}%
-\contentsline {section}{\numberline {11.2}Markov Chain Monte Carlo (MCMC)}{161}{section.11.2}%
-\contentsline {subsection}{\numberline {11.2.1}Markov chain}{161}{subsection.11.2.1}%
-\contentsline {subsubsection}{\numberline {11.2.1.1}Homogeneity}{161}{subsubsection.11.2.1.1}%
-\contentsline {subsection}{\numberline {11.2.2}Example}{161}{subsection.11.2.2}%
-\contentsline {subsection}{\numberline {11.2.3}Invariant distribution}{162}{subsection.11.2.3}%
-\contentsline {subsection}{\numberline {11.2.4}Irreducible matrices}{162}{subsection.11.2.4}%
-\contentsline {subsection}{\numberline {11.2.5}Monte Carlo sampling}{162}{subsection.11.2.5}%
-\contentsline {section}{\numberline {11.3}Sampling a distribution}{163}{section.11.3}%
-\contentsline {subsection}{\numberline {11.3.1}Rejection sampling algorithm}{163}{subsection.11.3.1}%
-\contentsline {section}{\numberline {11.4}Metropolis Hastings}{163}{section.11.4}%
-\contentsline {subsection}{\numberline {11.4.1}Algorithm}{164}{subsection.11.4.1}%
-\contentsline {subsection}{\numberline {11.4.2}Visualization of MCMC}{164}{subsection.11.4.2}%
-\contentsline {section}{\numberline {11.5}How to link data and MH}{165}{section.11.5}%
-\contentsline {section}{\numberline {11.6}Random walk MCMC}{166}{section.11.6}%
-\contentsline {subsection}{\numberline {11.6.1}Algorithm RW-MCMC ( C known)}{166}{subsection.11.6.1}%
-\contentsline {subsection}{\numberline {11.6.2}Discussion}{166}{subsection.11.6.2}%
-\contentsline {subsection}{\numberline {11.6.3}Diagnostics}{167}{subsection.11.6.3}%
-\contentsline {subsubsection}{\numberline {11.6.3.1}Sample split}{168}{subsubsection.11.6.3.1}%
-\contentsline {subsubsection}{\numberline {11.6.3.2}Conclusions}{168}{subsubsection.11.6.3.2}%
-\contentsline {chapter}{\numberline {12}Heuristics and the genetic algorithm}{170}{chapter.12}%
-\contentsline {section}{\numberline {12.1}Introduction}{170}{section.12.1}%
-\contentsline {subsection}{\numberline {12.1.1}An example}{170}{subsection.12.1.1}%
-\contentsline {subsection}{\numberline {12.1.2}Famous heuristic algorithms}{170}{subsection.12.1.2}%
-\contentsline {subsection}{\numberline {12.1.3}Evolution strategy and population}{170}{subsection.12.1.3}%
-\contentsline {section}{\numberline {12.2}The genetic algorithm}{171}{section.12.2}%
-\contentsline {subsection}{\numberline {12.2.1}Outline of a genetic algorithm}{171}{subsection.12.2.1}%
-\contentsline {subsection}{\numberline {12.2.2}Chromosome encoding}{171}{subsection.12.2.2}%
-\contentsline {subsection}{\numberline {12.2.3}Generation of an initial population}{171}{subsection.12.2.3}%
-\contentsline {subsection}{\numberline {12.2.4}Fitness evaluation}{171}{subsection.12.2.4}%
-\contentsline {subsection}{\numberline {12.2.5}Parent selection}{171}{subsection.12.2.5}%
-\contentsline {subsection}{\numberline {12.2.6}Reproduction}{172}{subsection.12.2.6}%
-\contentsline {subsection}{\numberline {12.2.7}Mutation}{172}{subsection.12.2.7}%
-\contentsline {subsection}{\numberline {12.2.8}Algorithm}{172}{subsection.12.2.8}%
-\contentsline {subsection}{\numberline {12.2.9}Discussion}{173}{subsection.12.2.9}%
-\contentsline {subsection}{\numberline {12.2.10}Conclusion}{173}{subsection.12.2.10}%
-\contentsline {subsubsection}{\numberline {12.2.10.1}Cons}{173}{subsubsection.12.2.10.1}%
-\contentsline {subsubsection}{\numberline {12.2.10.2}Pros}{174}{subsubsection.12.2.10.2}%
+\contentsline {subsection}{\numberline {10.3.1}Determining the initial points}{158}{subsection.10.3.1}%
+\contentsline {subsubsection}{\numberline {10.3.1.1}Latin hypercube}{159}{subsubsection.10.3.1.1}%
+\contentsline {subsubsection}{\numberline {10.3.1.2}Orthogonal cube}{159}{subsubsection.10.3.1.2}%
+\contentsline {subsection}{\numberline {10.3.2}Termination criteria}{159}{subsection.10.3.2}%
+\contentsline {section}{\numberline {10.4}Matlab}{159}{section.10.4}%
+\contentsline {subsection}{\numberline {10.4.1}Quantifying the fit}{159}{subsection.10.4.1}%
+\contentsline {subsection}{\numberline {10.4.2}Optimizing}{160}{subsection.10.4.2}%
+\contentsline {subsection}{\numberline {10.4.3}Matlab multi-start}{160}{subsection.10.4.3}%
+\contentsline {chapter}{\numberline {11}Stochastic methods for parameter estimation}{161}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Introduction}{161}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Markov Chain Monte Carlo (MCMC)}{162}{section.11.2}%
+\contentsline {subsection}{\numberline {11.2.1}Markov chain}{162}{subsection.11.2.1}%
+\contentsline {subsubsection}{\numberline {11.2.1.1}Homogeneity}{162}{subsubsection.11.2.1.1}%
+\contentsline {subsection}{\numberline {11.2.2}Example}{162}{subsection.11.2.2}%
+\contentsline {subsection}{\numberline {11.2.3}Invariant distribution}{163}{subsection.11.2.3}%
+\contentsline {subsection}{\numberline {11.2.4}Irreducible matrices}{163}{subsection.11.2.4}%
+\contentsline {subsection}{\numberline {11.2.5}Monte Carlo sampling}{163}{subsection.11.2.5}%
+\contentsline {section}{\numberline {11.3}Sampling a distribution}{164}{section.11.3}%
+\contentsline {subsection}{\numberline {11.3.1}Rejection sampling algorithm}{164}{subsection.11.3.1}%
+\contentsline {section}{\numberline {11.4}Metropolis Hastings}{164}{section.11.4}%
+\contentsline {subsection}{\numberline {11.4.1}Algorithm}{165}{subsection.11.4.1}%
+\contentsline {subsection}{\numberline {11.4.2}Visualization of MCMC}{165}{subsection.11.4.2}%
+\contentsline {section}{\numberline {11.5}How to link data and MH}{166}{section.11.5}%
+\contentsline {section}{\numberline {11.6}Random walk MCMC}{167}{section.11.6}%
+\contentsline {subsection}{\numberline {11.6.1}Algorithm RW-MCMC ( C known)}{167}{subsection.11.6.1}%
+\contentsline {subsection}{\numberline {11.6.2}Discussion}{167}{subsection.11.6.2}%
+\contentsline {subsection}{\numberline {11.6.3}Diagnostics}{168}{subsection.11.6.3}%
+\contentsline {subsubsection}{\numberline {11.6.3.1}Sample split}{169}{subsubsection.11.6.3.1}%
+\contentsline {subsubsection}{\numberline {11.6.3.2}Conclusions}{169}{subsubsection.11.6.3.2}%
+\contentsline {chapter}{\numberline {12}Heuristics and the genetic algorithm}{171}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Introduction}{171}{section.12.1}%
+\contentsline {subsection}{\numberline {12.1.1}An example}{171}{subsection.12.1.1}%
+\contentsline {subsection}{\numberline {12.1.2}Famous heuristic algorithms}{171}{subsection.12.1.2}%
+\contentsline {subsection}{\numberline {12.1.3}Evolution strategy and population}{171}{subsection.12.1.3}%
+\contentsline {section}{\numberline {12.2}The genetic algorithm}{172}{section.12.2}%
+\contentsline {subsection}{\numberline {12.2.1}Outline of a genetic algorithm}{172}{subsection.12.2.1}%
+\contentsline {subsection}{\numberline {12.2.2}Chromosome encoding}{172}{subsection.12.2.2}%
+\contentsline {subsection}{\numberline {12.2.3}Generation of an initial population}{172}{subsection.12.2.3}%
+\contentsline {subsection}{\numberline {12.2.4}Fitness evaluation}{172}{subsection.12.2.4}%
+\contentsline {subsection}{\numberline {12.2.5}Parent selection}{172}{subsection.12.2.5}%
+\contentsline {subsection}{\numberline {12.2.6}Reproduction}{173}{subsection.12.2.6}%
+\contentsline {subsection}{\numberline {12.2.7}Mutation}{173}{subsection.12.2.7}%
+\contentsline {subsection}{\numberline {12.2.8}Algorithm}{173}{subsection.12.2.8}%
+\contentsline {subsection}{\numberline {12.2.9}Discussion}{174}{subsection.12.2.9}%
+\contentsline {subsection}{\numberline {12.2.10}Conclusion}{174}{subsection.12.2.10}%
+\contentsline {subsubsection}{\numberline {12.2.10.1}Cons}{174}{subsubsection.12.2.10.1}%
+\contentsline {subsubsection}{\numberline {12.2.10.2}Pros}{175}{subsubsection.12.2.10.2}%
