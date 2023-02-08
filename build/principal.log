@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.19)  8 FEB 2023 18:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.19)  8 FEB 2023 19:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1114,18 +1114,14 @@ Chapter 12.
 [171
 
 ] [172]
-Underfull \hbox (badness 5036) in paragraph at lines 100--101
-[]\T1/cmr/m/n/10 Select the small-est k such that
- []
-
 <chapters/12/images//ga_process.png, id=3533, 694.595pt x 366.36874pt>
 File: chapters/12/images//ga_process.png Graphic file (type png)
 <use chapters/12/images//ga_process.png>
 Package pdftex.def Info: chapters/12/images//ga_process.png  used on input line
- 123.
+ 121.
 (pdftex.def)             Requested size: 216.81pt x 114.35577pt.
-(./chapters/12/algorithms/ga.tex) [173 <./chapters/12/images//ga_process.png>])
-[174] [175] (./build/principal.aux)
+ (./chapters/12/algorithms/ga.tex) [173 <./chapters/12/images//ga_process.png>]
+) [174] [175] (./build/principal.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1171,7 +1167,7 @@ pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share
 ts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public
 /cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1
 000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on ./build/principal.pdf (176 pages, 4778301 bytes).
+Output written on ./build/principal.pdf (176 pages, 4778470 bytes).
 PDF statistics:
  4112 PDF objects out of 4296 (max. 8388607)
  3793 compressed objects within 38 object streams

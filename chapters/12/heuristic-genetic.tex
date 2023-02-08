@@ -80,31 +80,29 @@ External variation is introduced through mutations.
   \end{multicols}
 
   \subsection{Fitness evaluation}
-  The objective function for the current population could be picked from known functions like the sum of squares, the likelihood or more general formulations.
+  The objective function for the current population could be picked from known functions like the sum of squares, the likelihood or more general formulations in the form of:
+
+  $$\theta^i \mapsto f^i = f(\theta^i)\qquad\qquad i = 1, \dots, N$$
+
   As long as there is a connection between the fitness number and candidate selection, the function is fine.
   MCMC, for example, was using one candidate at a time at each iteration, while gradient methods were computing the gradient using information from integration.
   In this case, the size of the population will determine the number of calls.
 
   \subsection{Parent selection}
-  The parents can be selected through:
+  The parents can be selected through a threshold based selection (selecting the best $k$ parameters) or through a random based selection.
+  The random based selection, as an example is similar to Gillespie, where fitness is used instead of propensity:
 
   \begin{multicols}{2}
-    \begin{itemize}
-      \item Threshold based selection: select best $k$ parameters.
-      \item Random based selection.
-        As an example similar to Gillespie, where fitness is used instead of propensity:
-
         \begin{enumerate}
           \item From \(f^1,\dots,f^N\) compute \(\sum^N_{i=1}f_i=f_0\).
           \item Generate the random number \(j \sim \mathcal{U}(0,1)\).
           \item Select the smallest k such that \(\sum^k_{i=1}f_i>jf_0\).
           \item Clone \(\theta^k\) in an intermediate population.
         \end{enumerate}
-
-      \item ``Roulette selection'': the area of a circle is covered by each chromosome fitness proportionally.
-        The idea is to spin the wheel and select the chromosome where it stops.
-    \end{itemize}
   \end{multicols}
+
+  Another way to select the parents is through ``Roulette selection'': the area of a circle is covered by each chromosome fitness proportionally.
+  The idea is to spin the wheel and select the chromosome where it stops.
 
   \subsection{Reproduction}
   From the intermediate population two individuals \(u,v\) are randomly selected and a gene for cross over \(t\).
@@ -139,12 +137,12 @@ External variation is introduced through mutations.
 
   \subsection{Conclusion}
 
-    \subsubsection{Cons}
-    The genetic algorithm il computationally demanding, as for $N$ times the likelihood,cost or fitness is computed just for selecting new parents.
+    \subsubsection{Disadvantages}
+    The genetic algorithm is computationally demanding, as for $N$ times the likelihood,cost or fitness is computed just for selecting new parents.
     Next, a direction is not chosen directly: the reduction of the fitness function is not driven by the dimension of the population.
     Close to the optimum this algorithm converges slowly.
 
-    \subsubsection{Pros}
+    \subsubsection{Advantages}
     In the genetic algorithm each one of the computations can be parallelized.
     It is very general and obtains good results.
     \(f\) can vary sometimes; the algorithm can use an objective function without the constraints, that can be added as penalties after some generations.

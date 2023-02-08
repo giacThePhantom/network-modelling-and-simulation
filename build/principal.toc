@@ -476,5 +476,5 @@
 \contentsline {subsection}{\numberline {12.2.8}Algorithm}{173}{subsection.12.2.8}%
 \contentsline {subsection}{\numberline {12.2.9}Discussion}{174}{subsection.12.2.9}%
 \contentsline {subsection}{\numberline {12.2.10}Conclusion}{174}{subsection.12.2.10}%
-\contentsline {subsubsection}{\numberline {12.2.10.1}Cons}{174}{subsubsection.12.2.10.1}%
-\contentsline {subsubsection}{\numberline {12.2.10.2}Pros}{175}{subsubsection.12.2.10.2}%
+\contentsline {subsubsection}{\numberline {12.2.10.1}Disadvantages}{174}{subsubsection.12.2.10.1}%
+\contentsline {subsubsection}{\numberline {12.2.10.2}Advantages}{175}{subsubsection.12.2.10.2}%
