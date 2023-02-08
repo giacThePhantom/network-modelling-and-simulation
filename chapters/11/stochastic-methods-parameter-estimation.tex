@@ -2,7 +2,7 @@
 \chapter{Stochastic methods for parameter estimation}
 
 \section{Introduction}
-Stochastic methods are often used when we cannot compute the gradient.
+Stochastic methods are often used when the gradient cannot be computed.
 With the same parameters, stochastic methods can produce dramatically different results, as it can be seen in figure \ref{fig:res}.
 
 \begin{figure}[H]
@@ -34,9 +34,9 @@ Let $p(x)$ be the probability distribution of $x$.
     So that the transition matrix is constant.
 
   \subsection{Example}
-  Let $3$ states as in figure \ref{fig:MCMCexmple}.
+  Let $3$ states as in figure \ref{fig:MCMCexample}.
 
-  \begin{figure}
+  \begin{figure}[H]
     \centering
     \includegraphics[width=0.3\textwidth]{mcmc.png}
     \caption{MCMC example}
@@ -98,12 +98,10 @@ Let $p(x)$ be the probability distribution of $x$.
 Let $p$ be a known probability distribution up to a proportionality constant.
 It is usually preferred to sample from a well-known distribution, like for example the one in \ref{fig:bimodal}.
 
-$$q(x)\text{ such that }\exists M>0$$
-
-$$p(x) \leq M q(x)$$
+$$q(x)\text{ such that }\exists M>0: \qquad p(x) \leq M q(x)$$
 
 
-\begin{figure}
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.3\textwidth]{distribution.png}
   \caption{Example: bimodal distribution}
@@ -123,12 +121,12 @@ Each time information about $p$ are collected from $q$.
   A known distribution $p$ is being used, then gradually what is known about it is removed in the following iterations.
 
 \section{Metropolis Hastings}
-Let $X$ be the current point, $q$ the proposal distribution and $p$ the target distribution.
+Let $X$ be the current state vector, $q$ the proposal distribution, $p$ the target distribution.
 $p$ can be an unnormalized density ($\int p > 1 \text{ but} \int p < \infty)$.
 Ideally $p$ should be known, but if it is not the procedure still works.
 Let $h$ be the non negative and positive integral of the normalized density distribution.
 The trick of MH is to avoid relying on the probability: a function is used instead.
-Let $x*+^*$ be the new candidate point, then the metropolis ratio is defined as:
+Let $x^*$ be the new candidate point, then the metropolis ratio is defined as:
 
 $$r_M(x,x^*)=\frac{h(x^*)}{h(x)}$$
 
@@ -151,7 +149,6 @@ The choices is being weighted to the likeliness.
   MATLAB plot:
 
   \begin{itemize}
-  \tightlist
   \item
     right: histogram with the known distribution
   \item
@@ -227,8 +224,8 @@ The choices is being weighted to the likeliness.
   \end{itemize}
 
 
-\section{How to link data and MH}
-In least square methods, the function that was used was:
+\section{How to link data and Metropolis-Hasings}
+In least square methods, the function used to link data and prediction that was used was:
 
 $$f(\theta)=\frac{1}{2}\sum^m_{j=1}r^2_j(\theta)=\frac{1}{2}\sum^m_{j=1}(y_j-m_j(t_i,\theta))^2$$
 
@@ -239,11 +236,11 @@ $$f_w(\theta)=\frac{1}{2}\sum^m_{j=1} \frac{r^2_j(\theta)}{\vartheta_j^2}$$
 $\vartheta_j$ can be, for example, the standard deviation of that measured point.
 Let $Y$ be the vector of observations, a function that can be used to link the parameters and the output can be the non negative:
 
-$$L(\theta|Y)=\exp(-f_w(\theta)) \geq 0$$
+$$L(\theta|Y)=e^{-f_w(\theta)} \geq 0$$
 
 This can be used as the $h$ in the MH algorithm, so that the Metropolis ratio:
 
-$$r_H(\theta^*,\theta)=\frac{L(\theta^*)}{L(\theta)}=\frac{e^{-f_w(\theta^*)}}{e^{-f_w(\theta)}}=\exp(-f_w(\theta^*)+-f_w(\theta))$$
+$$r_H(\theta^*,\theta)=\frac{L(\theta^*)}{L(\theta)}=\frac{e^{-f_w(\theta^*)}}{e^{-f_w(\theta)}}=e^{-f_w(\theta^*)+-f_w(\theta)}$$
 
 Since $f_w(\theta)\geq0$, if $f_w(\theta^*) > f_w(\theta) \Rightarrow r_H>1$ , the number is accepted, otherwise it is accepted according to a certain probability.
 This function can be used to link new parameters with data.
@@ -251,6 +248,7 @@ Another example of this type of function is the log-likelihood, considering:
 
 $$f_w(\theta^*)\qquad\land\qquad f_w(\theta)$$
 
+So that $f_w(\cdot)$ is the $h$ of the Metropolis-Hastings algorithm.
 
 \section{Random walk MCMC}
 Assume that $\theta^*$ is sampled from:
@@ -263,7 +261,7 @@ If the candidate is accepted, the evaluation is restarted from it.
 This allows to collect informations about the shape of the target distribution.
 
 
-  \subsection{Algorithm RW-MCMC ( C known)}
+  \subsection{Algorithm RW-MCMC (C known)}
   An implementation of the RW-MCMC is oulined in algorithm \ref{algo:rw-mcmc}.
 
   \input{chapters/11/algorithms/rw-mcmc}
@@ -292,7 +290,7 @@ This allows to collect informations about the shape of the target distribution.
       \item Burn-time.
       \item Diagnostics are heuristics.
     \end{itemize}
-  \end{multicols}]
+  \end{multicols}
 
   \subsection{Diagnostics}
   Diagnostics are used to checked the goodness of the parameters and whether the iterations have finished.

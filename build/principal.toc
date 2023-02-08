@@ -450,16 +450,16 @@
 \contentsline {subsection}{\numberline {11.2.5}Monte Carlo sampling}{163}{subsection.11.2.5}%
 \contentsline {section}{\numberline {11.3}Sampling a distribution}{164}{section.11.3}%
 \contentsline {subsection}{\numberline {11.3.1}Rejection sampling algorithm}{164}{subsection.11.3.1}%
-\contentsline {section}{\numberline {11.4}Metropolis Hastings}{164}{section.11.4}%
+\contentsline {section}{\numberline {11.4}Metropolis Hastings}{165}{section.11.4}%
 \contentsline {subsection}{\numberline {11.4.1}Algorithm}{165}{subsection.11.4.1}%
 \contentsline {subsection}{\numberline {11.4.2}Visualization of MCMC}{165}{subsection.11.4.2}%
-\contentsline {section}{\numberline {11.5}How to link data and MH}{166}{section.11.5}%
+\contentsline {section}{\numberline {11.5}How to link data and Metropolis-Hasings}{166}{section.11.5}%
 \contentsline {section}{\numberline {11.6}Random walk MCMC}{167}{section.11.6}%
-\contentsline {subsection}{\numberline {11.6.1}Algorithm RW-MCMC ( C known)}{167}{subsection.11.6.1}%
-\contentsline {subsection}{\numberline {11.6.2}Discussion}{167}{subsection.11.6.2}%
+\contentsline {subsection}{\numberline {11.6.1}Algorithm RW-MCMC (C known)}{167}{subsection.11.6.1}%
+\contentsline {subsection}{\numberline {11.6.2}Discussion}{168}{subsection.11.6.2}%
 \contentsline {subsection}{\numberline {11.6.3}Diagnostics}{168}{subsection.11.6.3}%
-\contentsline {subsubsection}{\numberline {11.6.3.1}Sample split}{169}{subsubsection.11.6.3.1}%
-\contentsline {subsubsection}{\numberline {11.6.3.2}Conclusions}{169}{subsubsection.11.6.3.2}%
+\contentsline {subsubsection}{\numberline {11.6.3.1}Sample split}{170}{subsubsection.11.6.3.1}%
+\contentsline {subsubsection}{\numberline {11.6.3.2}Conclusions}{170}{subsubsection.11.6.3.2}%
 \contentsline {chapter}{\numberline {12}Heuristics and the genetic algorithm}{171}{chapter.12}%
 \contentsline {section}{\numberline {12.1}Introduction}{171}{section.12.1}%
 \contentsline {subsection}{\numberline {12.1.1}An example}{171}{subsection.12.1.1}%

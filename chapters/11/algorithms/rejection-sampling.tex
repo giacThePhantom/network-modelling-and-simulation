@@ -17,15 +17,19 @@
 \caption{\protect\TitleFunction{}}
 \label{algo:rejection-sampling}
 
-\Input: $M$, $p(x)$ and $q(x)$\;
+\Input: $M$, $p(x)$ and $q(x)$, $N$ the number of numbers to be sampled\;
 
-\Output: a random variable distributed according to $p$\;
+\Output: a vector of random numbers distributed according to $p$\;
 
 $i = 1$\;
-\Repeat{}{
+\Repeat{$i = N$}{
 	sample $x^{(i)}\sim q$, $u\sim norm(0,1)$\;
-	\If{$u>\frac{p(x^{(i)})}{Mq(X^i)}$}{
+	\If{$u<\frac{p(x^{(i)})}{Mq(X^i)}$}{
+		accept and store $x^{(i)}$\;
 		$i = i + 1$\;
+	}
+	\Else{
+		reject $x^{(i)}$\;
 	}
 }
 

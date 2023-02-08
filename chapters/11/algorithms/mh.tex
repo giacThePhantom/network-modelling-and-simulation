@@ -22,10 +22,10 @@
 
 \Output: a random variable distributed according to $p$\;
 
-guess $x^{(i)}$\;
+guess $x^{(0)}$\;
 
 \ForEach{$i = 0,\dots, N-1$}{
-	sample $s^*\sim q(\cdot|x^{(i)})$ and $u\sim norm(0,1)$\;
+	sample $x^{(*)}\sim q(\cdot|x^{(i)})$ and $u\sim norm(0,1)$\;
 	\If{$u<\min\{1, r_H(x,x^*)\}$}{
 		$x^{(i+1)} = x^{(*)}$\;
 	}
