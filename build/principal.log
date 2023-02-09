@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.15)  9 FEB 2023 03:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.15)  9 FEB 2023 04:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1046,23 +1046,23 @@ e 106.
 (pdftex.def)             Requested size: 130.08731pt x 119.11353pt.
  (./chapters/11/algorithms/rejection-sampling.tex) [164 <./chapters/11/images/d
 istribution.png>] (./chapters/11/algorithms/mh.tex)
-Underfull \hbox (badness 10000) in paragraph at lines 158--174
+Underfull \hbox (badness 10000) in paragraph at lines 158--172
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 158--174
+Underfull \hbox (badness 10000) in paragraph at lines 158--172
 
  []
 
 [165]
-Overfull \hbox (7.52618pt too wide) in paragraph at lines 175--182
+Overfull \hbox (7.52618pt too wide) in paragraph at lines 173--180
 [][]$\T1/cmtt/m/n/10 http : / / chi-[]feng . github . io / mcmc-[]demo / app . 
 html ? algorithm = RandomWalkMH & target = banana$[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 175--182
+Underfull \hbox (badness 10000) in paragraph at lines 173--180
 
  []
 
@@ -1070,21 +1070,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 175--182
 <chapters/11/images/diag_1.png, id=3494, 461.725pt x 494.84875pt>
 File: chapters/11/images/diag_1.png Graphic file (type png)
 <use chapters/11/images/diag_1.png>
-Package pdftex.def Info: chapters/11/images/diag_1.png  used on input line 309.
+Package pdftex.def Info: chapters/11/images/diag_1.png  used on input line 307.
 
 (pdftex.def)             Requested size: 216.81pt x 232.35997pt.
  [168]
 <chapters/11/images/diag_2.png, id=3502, 527.9725pt x 594.22pt>
 File: chapters/11/images/diag_2.png Graphic file (type png)
 <use chapters/11/images/diag_2.png>
-Package pdftex.def Info: chapters/11/images/diag_2.png  used on input line 318.
+Package pdftex.def Info: chapters/11/images/diag_2.png  used on input line 316.
 
 (pdftex.def)             Requested size: 216.81pt x 244.01259pt.
  [169 <./chapters/11/images/diag_1.png> <./chapters/11/images/diag_2.png>]
 <chapters/11/images/diag_3.png, id=3511, 461.725pt x 494.84875pt>
 File: chapters/11/images/diag_3.png Graphic file (type png)
 <use chapters/11/images/diag_3.png>
-Package pdftex.def Info: chapters/11/images/diag_3.png  used on input line 330.
+Package pdftex.def Info: chapters/11/images/diag_3.png  used on input line 328.
 
 (pdftex.def)             Requested size: 216.81pt x 232.35997pt.
 )
@@ -1102,12 +1102,12 @@ Package pdftex.def Info: chapters/12/images//ga_process.png  used on input line
  (./chapters/12/algorithms/ga.tex) [173 <./chapters/12/images//ga_process.png>]
 ) [174] [175] (./build/principal.aux)
 Package rerunfilecheck Info: File `principal.out' has not changed.
-(rerunfilecheck)             Checksum: B4090BEB4F3B3467664A3C4798BBFD12;41176.
+(rerunfilecheck)             Checksum: 40D72381E4CA065300B1C5AE2B735C69;41181.
  ) 
 Here is how much of TeX's memory you used:
  19261 strings out of 478238
  313214 string characters out of 5850455
- 608405 words of memory out of 5000000
+ 608407 words of memory out of 5000000
  35097 multiletter control sequences out of 15000+600000
  496213 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1140,7 +1140,7 @@ pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share
 ts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public
 /cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1
 000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on ./build/principal.pdf (176 pages, 4778102 bytes).
+Output written on ./build/principal.pdf (176 pages, 4778119 bytes).
 PDF statistics:
  4115 PDF objects out of 4296 (max. 8388607)
  3796 compressed objects within 38 object streams

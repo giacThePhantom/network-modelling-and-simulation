@@ -8,8 +8,8 @@ With the same parameters, stochastic methods can produce dramatically different 
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{stoch_LV.png}
-  \caption{Lotka-Volterra stochastic simulation results. In B we witness
-  preys and predators extinction, it is the output of a simulation
+  \caption{Lotka-Volterra stochastic simulation results. In B
+  preys and predators extinction is witnessed, it is the output of a simulation
   performed with the same model and parameters as A.}
 \label{fig:res}
 \end{figure}
@@ -30,7 +30,7 @@ Let $p(x)$ be the probability distribution of $x$.
   $$p(x^{(i)}|x^{(i-1)},\dots,x^{(1)})=T(x^{(i)}|x^{(i-1)})$$
 
     \subsubsection{Homogeneity}
-    A Markov chain is homogenous if $T(x^{(i)})x^{(i-1)}=T$,
+    A Markov chain is homogeneous if $T(x^{(i)})x^{(i-1)}=T$,
     So that the transition matrix is constant.
 
   \subsection{Example}
@@ -58,7 +58,7 @@ Let $p(x)$ be the probability distribution of $x$.
   Iterating enough time a fixed distribution will be reached.
 
   \subsection{Invariant distribution}
-  The invariant distribution if a fixed distribution reached after enough Monte Carlo iterations.
+  The invariant distribution is a fixed distribution reached after enough Monte Carlo iterations.
   The objective is to build a Markov chain whose invariant distribution is the distribution of the unknown parameters.
   For example, in the previous example, the invariant distribution will be:
 
@@ -130,7 +130,7 @@ Let $x^*$ be the new candidate point, then the metropolis ratio is defined as:
 
 $$r_M(x,x^*)=\frac{h(x^*)}{h(x)}$$
 
-And the Hasting ratio:
+And the Hastings ratio:
 
 $$r_H(x,x^*)=\frac{h(x^*)\cdot q(x^*|x)}{h(x)\cdot q(x|x^*)}$$
 
@@ -138,7 +138,7 @@ From the distribution, the objective is to measure how likely the previous value
 The choices is being weighted to the likeliness.
 
   \subsection{Algorithm}
-  An implementation of the Metropolis Hastings method is outlined in algorithm \ref{algo:mh}
+  An implementation of the Metropolis Hastings method is outlined in algorithm \ref{algo:mh}.
 
   \input{chapters/11/algorithms/mh}
 
@@ -148,25 +148,23 @@ The choices is being weighted to the likeliness.
   \subsection{Visualization of MCMC}
   MATLAB plot:
 
-  \begin{itemize}
-  \item
-    right: histogram with the known distribution
-  \item
-    left: MCMC oscillating between 0 and 10, recapitulates the
-    distribution
-  \end{itemize}
-  \noindent
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item Right: histogram with the known distribution.
+      \item Left: MCMC oscillating between 0 and 10, recapitulates the distribution.
+    \end{itemize}
+  \end{multicols}
+
   The procedure is really fast, takes less than a second. If instead of
   extracting u and v from random distribution with an index, the result is
-  the same → ``thanks MATLAB, it is not necessary to prelocate anymore''
+  the same → ``thanks MATLAB, it is not necessary to prelocate any more''
   \\
   \\
   \noindent
-  If we employ a Gaussian distribution, the result is still good but not
-  as accurate as the previous one. We are adding complexity by introducing
-  the variance; by choosing a different value we can improve the result.
-  Pay attention to the fact that if we sample from a narrow distribution,
-  we risk focusing only on one of the two points.
+  If a Gaussian distribution is employed , the result is still good but not
+  as accurate as the previous one. Complexity is added by introducing
+  the variance; by choosing a different value the result can be improved.
+  Pay attention to the fact that if sampling from a narrow distribution,the risk is to focus only on one of the two points.
   \\
   \\
   \noindent
@@ -224,7 +222,7 @@ The choices is being weighted to the likeliness.
   \end{itemize}
 
 
-\section{How to link data and Metropolis-Hasings}
+\section{How to link data and Metropolis-Hastings}
 In least square methods, the function used to link data and prediction that was used was:
 
 $$f(\theta)=\frac{1}{2}\sum^m_{j=1}r^2_j(\theta)=\frac{1}{2}\sum^m_{j=1}(y_j-m_j(t_i,\theta))^2$$
@@ -262,12 +260,12 @@ This allows to collect informations about the shape of the target distribution.
 
 
   \subsection{Algorithm RW-MCMC (C known)}
-  An implementation of the RW-MCMC is oulined in algorithm \ref{algo:rw-mcmc}.
+  An implementation of the RW-MCMC is outlined in algorithm \ref{algo:rw-mcmc}.
 
   \input{chapters/11/algorithms/rw-mcmc}
 
   \subsection{Discussion}
-  To reach a satisfactory convergence a good accept-reject tradeoff should be obtained.
+  To reach a satisfactory convergence a good accept-reject trade-off should be obtained.
   The advantages of RW-MCMC are:
 
   \begin{multicols}{2}

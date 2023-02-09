@@ -453,7 +453,7 @@
 \contentsline {section}{\numberline {11.4}Metropolis Hastings}{165}{section.11.4}%
 \contentsline {subsection}{\numberline {11.4.1}Algorithm}{165}{subsection.11.4.1}%
 \contentsline {subsection}{\numberline {11.4.2}Visualization of MCMC}{165}{subsection.11.4.2}%
-\contentsline {section}{\numberline {11.5}How to link data and Metropolis-Hasings}{166}{section.11.5}%
+\contentsline {section}{\numberline {11.5}How to link data and Metropolis-Hastings}{166}{section.11.5}%
 \contentsline {section}{\numberline {11.6}Random walk MCMC}{167}{section.11.6}%
 \contentsline {subsection}{\numberline {11.6.1}Algorithm RW-MCMC (C known)}{167}{subsection.11.6.1}%
 \contentsline {subsection}{\numberline {11.6.2}Discussion}{168}{subsection.11.6.2}%
