@@ -376,7 +376,7 @@
 \contentsline {section}{\numberline {6.5}Hybrid simulation with stiffness}{132}{section.6.5}%
 \contentsline {subsection}{\numberline {6.5.1}Formulation of reactions with stiffness}{132}{subsection.6.5.1}%
 \contentsline {subsubsection}{\numberline {6.5.1.1}Quasi-steady state assumption}{133}{subsubsection.6.5.1.1}%
-\contentsline {subsubsection}{\numberline {6.5.1.2}Partial equilibrium assumption}{134}{subsubsection.6.5.1.2}%
+\contentsline {subsubsection}{\numberline {6.5.1.2}Partial equilibrium assumption}{133}{subsubsection.6.5.1.2}%
 \contentsline {subsection}{\numberline {6.5.2}Slow-scale stochastic simulation algorithm}{134}{subsection.6.5.2}%
 \contentsline {subsubsection}{\numberline {6.5.2.1}Algorithm}{134}{subsubsection.6.5.2.1}%
 \contentsline {subsection}{\numberline {6.5.3}Nested stochastic simulation algorithm}{135}{subsection.6.5.3}%

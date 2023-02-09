@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.19)  9 FEB 2023 01:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.11.15)  9 FEB 2023 03:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -584,14 +584,7 @@ File: l3backend-pdftex.def 2022-04-14 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count322
 \l__pdf_internal_box=\box113
 )
-(./build/principal.aux
-
-LaTeX Warning: Label `tab:chem-odes' multiply defined.
-
-
-LaTeX Warning: Label `algo:two-class-reaction-partitioning' multiply defined.
-
-)
+(./build/principal.aux)
 \openout1 = `principal.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 14.
@@ -916,24 +909,15 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Chapter 5.
 [108
 
-]
-
-LaTeX Warning: Reference `tab:chem-rates' on page 109 undefined on input line 5
-2.
-
-[109] [110] (./chapters/05/algorithms/forward-euler.tex) [111]
+] [109] [110] (./chapters/05/algorithms/forward-euler.tex) [111]
 (./chapters/05/algorithms/backward-euler.tex) [112]
-(./chapters/05/algorithms/heun.tex) [113]
-
-LaTeX Warning: Reference `tab:rk-order' on page 114 undefined on input line 272
-.
-
-[114] (./chapters/05/algorithms/rk4.tex) [115]
-(./chapters/05/algorithms/midpoint.tex) (./chapters/05/algorithms/s1-method.tex
-) [116] [117] [118] (./chapters/05/algorithms/rk45.tex) [119] [120])
+(./chapters/05/algorithms/heun.tex) [113] [114]
+(./chapters/05/algorithms/rk4.tex) [115] (./chapters/05/algorithms/midpoint.tex
+) (./chapters/05/algorithms/s1-method.tex) [116] [117] [118]
+(./chapters/05/algorithms/rk45.tex) [119] [120])
 (./chapters/06/hybrid_simulations.tex [121]
 Chapter 6.
-<chapters/06/images//regions.png, id=2980, 553.06625pt x 425.59pt>
+<chapters/06/images//regions.png, id=2982, 553.06625pt x 425.59pt>
 File: chapters/06/images//regions.png Graphic file (type png)
 <use chapters/06/images//regions.png>
 Package pdftex.def Info: chapters/06/images//regions.png  used on input line 22
@@ -949,12 +933,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 16--16
 ioning with fixed point
  []
 
-) [125]
-
-LaTeX Warning: Reference `algo:four-class-reaction' on page 126 undefined on in
-put line 115.
-
-(./chapters/06/algorithms/four-class-reaction.tex)
+) [125] (./chapters/06/algorithms/four-class-reaction.tex)
 (./chapters/06/algorithms/four-class-hybrid-simulation.tex) [126] [127]
 (./chapters/06/algorithms/two-class-hybrid-exact-slow.tex
 Underfull \hbox (badness 10000) in paragraph at lines 17--17
@@ -971,28 +950,28 @@ Chapter 7.
 [138
 
 ]
-<chapters/07/images//scheme_model.png, id=3235, 503.8825pt x 422.57875pt>
+<chapters/07/images//scheme_model.png, id=3238, 503.8825pt x 422.57875pt>
 File: chapters/07/images//scheme_model.png Graphic file (type png)
 <use chapters/07/images//scheme_model.png>
 Package pdftex.def Info: chapters/07/images//scheme_model.png  used on input li
 ne 79.
 (pdftex.def)             Requested size: 260.17464pt x 218.19469pt.
  [139]
-<chapters/07/images//validation.png, id=3240, 691.58376pt x 319.1925pt>
+<chapters/07/images//validation.png, id=3243, 691.58376pt x 319.1925pt>
 File: chapters/07/images//validation.png Graphic file (type png)
 <use chapters/07/images//validation.png>
 Package pdftex.def Info: chapters/07/images//validation.png  used on input line
  100.
 (pdftex.def)             Requested size: 303.53267pt x 140.09445pt.
  [140 <./chapters/07/images//scheme_model.png>]
-<chapters/07/images//workflow.png, id=3247, 286.06876pt x 621.32124pt>
+<chapters/07/images//workflow.png, id=3250, 286.06876pt x 621.32124pt>
 File: chapters/07/images//workflow.png Graphic file (type png)
 <use chapters/07/images//workflow.png>
 Package pdftex.def Info: chapters/07/images//workflow.png  used on input line 1
 33.
 (pdftex.def)             Requested size: 130.08731pt x 282.54044pt.
  [141 <./chapters/07/images//validation.png>]
-<chapters/07/images//volterra.png, id=3257, 761.84625pt x 301.125pt>
+<chapters/07/images//volterra.png, id=3260, 761.84625pt x 301.125pt>
 File: chapters/07/images//volterra.png Graphic file (type png)
 <use chapters/07/images//volterra.png>
 Package pdftex.def Info: chapters/07/images//volterra.png  used on input line 1
@@ -1008,7 +987,7 @@ Chapter 9.
 [147
 
 ]
-<chapters/09/images/example.png, id=3287, 1057.9525pt x 449.68pt>
+<chapters/09/images/example.png, id=3290, 1057.9525pt x 449.68pt>
 File: chapters/09/images/example.png Graphic file (type png)
 <use chapters/09/images/example.png>
 Package pdftex.def Info: chapters/09/images/example.png  used on input line 70.
@@ -1034,7 +1013,7 @@ Chapter 10.
 [155
 
 ] [156] [157] (./chapters/10/algorithms/gauss-newton.tex) [158] [159]
-<chapters/10/images//multistep.png, id=3393, 390.45876pt x 328.22626pt>
+<chapters/10/images//multistep.png, id=3396, 390.45876pt x 328.22626pt>
 File: chapters/10/images//multistep.png Graphic file (type png)
 <use chapters/10/images//multistep.png>
 Package pdftex.def Info: chapters/10/images//multistep.png  used on input line 
@@ -1044,7 +1023,7 @@ Package pdftex.def Info: chapters/10/images//multistep.png  used on input line
 (./chapters/11/stochastic-methods-parameter-estimation.tex [160 <./chapters/10/
 images//multistep.png>]
 Chapter 11.
-<chapters/11/images/stoch_LV.png, id=3401, 768.8725pt x 311.1625pt>
+<chapters/11/images/stoch_LV.png, id=3404, 768.8725pt x 311.1625pt>
 File: chapters/11/images/stoch_LV.png Graphic file (type png)
 <use chapters/11/images/stoch_LV.png>
 Package pdftex.def Info: chapters/11/images/stoch_LV.png  used on input line 10
@@ -1053,13 +1032,13 @@ Package pdftex.def Info: chapters/11/images/stoch_LV.png  used on input line 10
 [161
 
  <./chapters/11/images/stoch_LV.png>]
-<chapters/11/images/mcmc.png, id=3409, 340.27126pt x 242.9075pt>
+<chapters/11/images/mcmc.png, id=3412, 340.27126pt x 242.9075pt>
 File: chapters/11/images/mcmc.png Graphic file (type png)
 <use chapters/11/images/mcmc.png>
 Package pdftex.def Info: chapters/11/images/mcmc.png  used on input line 41.
 (pdftex.def)             Requested size: 130.08731pt x 92.86548pt.
  [162 <./chapters/11/images/mcmc.png>] [163]
-<chapters/11/images/distribution.png, id=3423, 416.55624pt x 381.425pt>
+<chapters/11/images/distribution.png, id=3426, 416.55624pt x 381.425pt>
 File: chapters/11/images/distribution.png Graphic file (type png)
 <use chapters/11/images/distribution.png>
 Package pdftex.def Info: chapters/11/images/distribution.png  used on input lin
@@ -1088,21 +1067,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 175--182
  []
 
 [166] (./chapters/11/algorithms/rw-mcmc.tex) [167]
-<chapters/11/images/diag_1.png, id=3491, 461.725pt x 494.84875pt>
+<chapters/11/images/diag_1.png, id=3494, 461.725pt x 494.84875pt>
 File: chapters/11/images/diag_1.png Graphic file (type png)
 <use chapters/11/images/diag_1.png>
 Package pdftex.def Info: chapters/11/images/diag_1.png  used on input line 309.
 
 (pdftex.def)             Requested size: 216.81pt x 232.35997pt.
  [168]
-<chapters/11/images/diag_2.png, id=3499, 527.9725pt x 594.22pt>
+<chapters/11/images/diag_2.png, id=3502, 527.9725pt x 594.22pt>
 File: chapters/11/images/diag_2.png Graphic file (type png)
 <use chapters/11/images/diag_2.png>
 Package pdftex.def Info: chapters/11/images/diag_2.png  used on input line 318.
 
 (pdftex.def)             Requested size: 216.81pt x 244.01259pt.
  [169 <./chapters/11/images/diag_1.png> <./chapters/11/images/diag_2.png>]
-<chapters/11/images/diag_3.png, id=3508, 461.725pt x 494.84875pt>
+<chapters/11/images/diag_3.png, id=3511, 461.725pt x 494.84875pt>
 File: chapters/11/images/diag_3.png Graphic file (type png)
 <use chapters/11/images/diag_3.png>
 Package pdftex.def Info: chapters/11/images/diag_3.png  used on input line 330.
@@ -1114,7 +1093,7 @@ Chapter 12.
 [171
 
 ] [172]
-<chapters/12/images//ga_process.png, id=3533, 694.595pt x 366.36874pt>
+<chapters/12/images//ga_process.png, id=3536, 694.595pt x 366.36874pt>
 File: chapters/12/images//ga_process.png Graphic file (type png)
 <use chapters/12/images//ga_process.png>
 Package pdftex.def Info: chapters/12/images//ga_process.png  used on input line
@@ -1122,20 +1101,14 @@ Package pdftex.def Info: chapters/12/images//ga_process.png  used on input line
 (pdftex.def)             Requested size: 216.81pt x 114.35577pt.
  (./chapters/12/algorithms/ga.tex) [173 <./chapters/12/images//ga_process.png>]
 ) [174] [175] (./build/principal.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `principal.out' has not changed.
 (rerunfilecheck)             Checksum: B4090BEB4F3B3467664A3C4798BBFD12;41176.
  ) 
 Here is how much of TeX's memory you used:
- 19262 strings out of 478238
- 313215 string characters out of 5850455
- 608317 words of memory out of 5000000
- 35098 multiletter control sequences out of 15000+600000
+ 19261 strings out of 478238
+ 313214 string characters out of 5850455
+ 608405 words of memory out of 5000000
+ 35097 multiletter control sequences out of 15000+600000
  496213 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  65i,27n,66p,769b,873s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1167,10 +1140,10 @@ pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share
 ts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public
 /cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1
 000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on ./build/principal.pdf (176 pages, 4778108 bytes).
+Output written on ./build/principal.pdf (176 pages, 4778102 bytes).
 PDF statistics:
- 4112 PDF objects out of 4296 (max. 8388607)
- 3793 compressed objects within 38 object streams
+ 4115 PDF objects out of 4296 (max. 8388607)
+ 3796 compressed objects within 38 object streams
  1898 named destinations out of 2073 (max. 500000)
  1976 words of extra memory for PDF output out of 10000 (max. 10000000)
 

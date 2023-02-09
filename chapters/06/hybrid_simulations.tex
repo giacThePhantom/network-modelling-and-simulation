@@ -51,11 +51,11 @@ Threshold variables demarcate the different partitions and they are model depend
   Hybrid simulation approaches try to solve this problem by dividing the system into parts that fit with the regions described which are then simulated by ad hoc simulation methods to provide the best compromise between accuracy and runtime.
 
 \section{Reaction-based system partitioning}
-The reaction based system partitioning partitions the system into subnetwork that reaquire to be simulated by the same strategy.
+The reaction based system partitioning partitions the system into subnetwork that require to be simulated by the same strategy.
 The reaction are divided into $\mathcal{R}^s$ and $\mathcal{R}^f$ of slow and fast reactions.
 Fast reaction have high propensities and can be simulated by CLE or deterministic simulation while slow one have low propensities.
 When deterministic simulation is employed a preliminary step is required to transform the set of reactions in ODEs.
-Slow reactions require a more accurate stochastic simulation approache.
+Slow reactions require a more accurate stochastic simulation approach.
 
   \subsection{Classifying fast reactions}
   Reactions can be fast when it occurs many times in a small time interval and the effect of each reaction on the number of reactants and products is small, so quantitatively:
@@ -70,7 +70,7 @@ Slow reactions require a more accurate stochastic simulation approache.
 Usually for practical models $\theta = 10$ and $\lambda = 100$.
 
   \subsection{Partitioning algorithm}
-  An implementation of this reaction-based partitioning can be found in algorithm \ref{algo:two-class-reaction-partitioning}
+  An implementation of this reaction-based partitioning can be found in algorithm \ref{algo:two-class-reaction-partitioning}.
 
   \input{chapters/06/algorithms/two-class-reaction-partitioning}
 
@@ -112,7 +112,7 @@ Usually for practical models $\theta = 10$ and $\lambda = 100$.
   \end{itemize}
 
     \subsubsection{Algorithm}
-    An implementation of the four class reaction based partitioning is outlined in algorithm \ref{algo:four-class-reaction}, introducing $\theta$ to implement the $\gg$ constraint
+    An implementation of the four class reaction based partitioning is outlined in algorithm \ref{algo:four-class-reaction-partitioning}, introducing $\theta$ to implement the $\gg$ constraint.
 
     \input{chapters/06/algorithms/four-class-reaction}
 
@@ -161,7 +161,7 @@ Since the approximation is difficult to obtain many hybrid algorithm implement a
     The computation of the firing time of the next slow reaction will be not exact because it depends on the order of the numerical method used to solve the initial value problem.
 
     \subsubsection{Algorithm}
-    A two class hybrid strategy with exact simulation of slow reactions is outlined in algorithm \ref{algo:two-class-hybrid-exact-slow}
+    A two class hybrid strategy with exact simulation of slow reactions is outlined in algorithm \ref{algo:two-class-hybrid-exact-slow}.
 
     \input{chapters/06/algorithms/two-class-hybrid-exact-slow}
 
@@ -282,10 +282,12 @@ Under stiffness the behaviour of species at equilibrium is averaging and the dyn
 
   Now summing both sides over all possible value of $\vec{x}^f$ and noting that:
 
-  \begin{itemize}
-    \item $\sum\limits_{x^f}\mathbb{P}\{\vec{x}^f|\vec{x}^s\} = 1$\;
-    \item $\sum\limits_{x^f}\frac{d\mathbb{P}\{\vec{x}^f|\vec{x}^s\}}{dt} = \frac{d\sum\limits_{x^f}\mathbb{P}\{\vec{x}^f|\vec{x}^s\}}{dt}=0$\;
-  \end{itemize}
+  \begin{multicols}{2}
+    \begin{itemize}
+      \item $\sum\limits_{x^f}\mathbb{P}\{\vec{x}^f|\vec{x}^s\} = 1$\;
+      \item $\sum\limits_{x^f}\frac{d\mathbb{P}\{\vec{x}^f|\vec{x}^s\}}{dt} = \frac{d\sum\limits_{x^f}\mathbb{P}\{\vec{x}^f|\vec{x}^s\}}{dt}=0$\;
+    \end{itemize}
+  \end{multicols}
 
   $$\frac{d\mathbb{P}\{\vec{x}^s,t\}}{dt} = \sum\limits_{j=1}^(\hat{a}_j(\vec{x}^s-\vec{v}_j^s)\mathbb{P}\{\vec{x}^s-\vec{v}_j^s, t\})-\mathbb{P}\{\vec{x}^s,t\}\sum\limits_{j=1}^M\hat{a}_j(\vec{x}^s)$$
 
@@ -310,7 +312,7 @@ Under stiffness the behaviour of species at equilibrium is averaging and the dyn
 
     \begin{multicols}{2}
       \begin{itemize}
-        \item The dynamics of the state $X^f$ conditional on $X^s$ is Markovian: $\mathbb{P}\{\vec{x}^f||vec{x}^s,t\}$ satisfies the CME equation.
+        \item The dynamics of the state $X^f$ conditional on $X^s$ is Markovian: $\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}$ satisfies the CME equation.
         \item The net change $\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}$ is approximately zero: $\frac{d\mathbb{P}\{\vec{x}^f|\vec{x}^s,t\}}{dt} = 0$.
       \end{itemize}
     \end{multicols}
@@ -350,7 +352,7 @@ Under stiffness the behaviour of species at equilibrium is averaging and the dyn
   It supposes to be able to generate value for fast species state $X^f$ and to compute $\hat{a}_j$ assuming that there exists an explicit formula for $\mathbb{P}\{\vec{x}^f|\vec{x}^s\}$ or $\mathbb{R}\{\vec{x}^f(\infty)\}$.
   For each slow reaction where the sum over all possible values of $X^f$ given its stationary distribution is:
 
-  $$\hat{a}_j(\vec{x}^s)\approx a_j*\langle X^f\rangle, \vec{x}^s$$
+  $$\hat{a}_j(\vec{x}^s)\approx a_j(\langle X^f\rangle, \vec{x}^s)$$
 
   This approximation is exact it the propensity is linear with respect to fast species.
 

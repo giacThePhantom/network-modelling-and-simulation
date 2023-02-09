@@ -6,7 +6,7 @@ When the last noise term of equation:
 
 $$X(t+\tau)\approx \vec{x}+\sum\limits_{j=1}^Ma_j(\vec{x})\vec{v}_j\tau + \sum\limits_{j=1}^M\sqrt{a_j(\vec{x})\tau}norm(0,1)\vec{v}_j$$
 
-Becomes negligibly small compared with the second done, a deterministic way to computing the dynamics of a system can be applied.
+Becomes negligibly small compared with the second one, a deterministic way to computing the dynamics of a system can be applied.
 This happens in the limiting case $a_j(\vec{x})\tau\rightarrow\infty$ and the deterministic simulation produces an average behaviour of the system close to the one obtained by averaging an infinite number of stochastic simulations of the system starting from the same initial state.
 Deterministic simulation are faster than exact stochastic ones because reaction events are executed as the simultaneous application of a set of reactions.
 A single run is sufficient because stochasticity of the system is not considered any more.
@@ -27,7 +27,7 @@ Ordinary differential equations can be used to simulate a biochemical system tha
     In the cases where molecule abundance is low, its changes will have to be treated like discrete steps in population size and stochastic simulation should be preferred.
 
   \subsection{Law of mass action}
-  When the two hypothesis are satisfied, a biochemical reaction system can be translated inot a set of ODEs by the law of mass action.
+  When the two hypothesis are satisfied, a biochemical reaction system can be translated into a set of ODEs by the law of mass action.
   The law of mass action states that the deterministic rate of a chemical reaction is proportional to the product of the concentrations of its reactants.
   Now let $[A] = \frac{\# A}{N_AV}$ be the molar concentration of species $A$ in a chemical volume $V$ and $N_A$ Avogadro's number.
   Some example of conversion of chemical reactions into ODEs are outlined in table \ref{tab:chem-odes}.
@@ -65,7 +65,7 @@ Ordinary differential equations can be used to simulate a biochemical system tha
       \hline
     \end{tabular}
     \caption{Conversion of biochemical reactions into ODEs}
-    \label{tab:chem-odes}
+    \label{tab:chem-rates}
   \end{table}
 
   \subsection{Building the set of ODEs}
@@ -80,7 +80,7 @@ Ordinary differential equations can be used to simulate a biochemical system tha
   Where $Order_j$ is the order of reaction $R_j$.
   The set of ODEs modelling the evolution of the species is:
 
-  $$\frac{d[S_i]}{dt} = \sum\limits-{j=1}^M\left(k_j\vec{v}_{ji}\prod\limits_{l=1}^N[S_l]^{\vec{v}_{jl}}\right), \forall i = 1, \dots, N$$
+  $$\frac{d[S_i]}{dt} = \sum\limits_{j=1}^M\left(k_j\vec{v}_{ji}\prod\limits_{l=1}^N[S_l]^{\vec{v}_{jl}}\right), \forall i = 1, \dots, N$$
 
   Other methods can be used to approach this translation like the Michaelis-Menten kinetics or the Hill kinetics.
   The former can be used to quantify cooperative binding, the phenomena of binding of a ligand to a macromolecule enhancing when another molecule is attached to the same macro-one.
@@ -96,7 +96,7 @@ Ordinary differential equations can be used to simulate a biochemical system tha
 
   Describing the process more accurately.
   The translation to a set of ODE of the reaction requires the definition of four differential equation, where also $[E]$ and $[EA]$ are considered.
-  The MM kinetics allow to simplify the model by reducing the number of equation, so the equation i stranslated into two odes considering the variation of concentration of $A$ and $B$:
+  The MM kinetics allow to simplify the model by reducing the number of equation, so the equation is translated into two odes considering the variation of concentration of $A$ and $B$:
 
   $$\frac{d[A]}{dt} = -\frac{d[B]}{dt} = -V_{MAX}\frac{[A]}{K_M + [A]}$$
 
@@ -189,7 +189,7 @@ Even when an exact solution if found, the dynamics of the biochemical system is 
 
 
 \section{Improving the accuracy of numerical methods}
-The accuracy of the computation depends on the discretization stepsize and on the properites of the numerical method.
+The accuracy of the computation depends on the discretization stepsize and on the properties of the numerical method.
 The general form of one step for an explicit method is:
 
 $$[X_{n+1}] = [X_n] +h\mathbb{F}(t_n, [X_n], \vec{F}(t_n, [X_n])lh) + h\epsilon_{n+1}(h)$$
@@ -209,13 +209,13 @@ Where:
 A global truncation error is required to evaluate the accuracy of a numerical method.
 
   \subsection{Global truncation error}
-  Consider a numerical method with local truncation error $e_{n+1}(h)$.
+  Consider a numerical method with local truncation error $\epsilon_{n+1}(h)$.
   The global truncation error is:
 
   $$\epsilon(h) = \max|\epsilon_{n+1}(h)|, n = 0, \dots, N_h$$
 
   \subsection{Consistency of a numerical method}
-  A numerical method with global truncation error $\epsilon(h)$is consiste with the initial value problem if:
+  A numerical method with global truncation error $\epsilon(h)$ is consistent with the initial value problem if:
 
   $$\lim\limits_{h\rightarrow 0}\epsilon(h) = 0$$
 
@@ -264,12 +264,12 @@ A global truncation error is required to evaluate the accuracy of a numerical me
 
   $$\mathbb{F}(t_n, [X_n], h;\vec{F}) = \sum\limits_{i=1}^s b_iK_i$$
 
-  $$K_i = \vec{F}(t_n + c_ih, [X_n] + h\sum\limits_{j=1}^sa_{ij}K_j)$$
+  $$K_i = \vec{F}\left(t_n + c_ih, [X_n] + h\sum\limits_{j=1}^sa_{ij}K_j\right)$$
 
   Whit $s$ being the number of stages of the method and $a_{ij}$, $b_i$ and $c_i$ are suitable numbers that characterize the RK method.
   These method can be explicit or implicit depending on the values of $a_{ij}$.
   The Heun method is an explicit RK method, because $a_{12}$ and $a_{22}$ are zeros.
-  The number of stages and the order of the methods are related: the minimum number $s_{\min}$ required to get an explicit RK method of corresponding order is described in table \ref{tab:rk-order}
+  The number of stages and the order of the methods are related: the minimum number $s_{\min}$ required to get an explicit RK method of corresponding order is described in table \ref{tab:rk-order}.
 
   \begin{table}[H]
     \centering
@@ -279,7 +279,7 @@ A global truncation error is required to evaluate the accuracy of a numerical me
       $s_{min}$ & $1$ & $2$ & $3$ & $4$ & $6$ & $7$ & $9$ & $11$\\
     \end{tabular}
     \caption{RK order and $s_{min}$ relationship}
-    \label{tag:rk-order}
+    \label{tab:rk-order}
   \end{table}
 
   $4$ is the maximum number of stages for which the order is not less than $s_{\min}$.
@@ -304,7 +304,7 @@ A global truncation error is required to evaluate the accuracy of a numerical me
     This is called RK4 and is one of the most used numerical methods for deterministic simulations.
 
       \paragraph{Algorithm}
-      An implementation of the RK4 method can be found at algorithm \ref{algo:rk4}
+      An implementation of the RK4 method can be found at algorithm \ref{algo:rk4}.
 
       \input{chapters/05/algorithms/rk4}
 
@@ -339,7 +339,7 @@ Thy can be implicit or implicit and have an order of accuracy.
     The length of the time series of states that needs to be stored  depends on the update formula and increases with the order.
 
       \paragraph{Algorithm}
-      An implementation of the midpoint method can be found in \ref{algo:midpoint}
+      An implementation of the midpoint method can be found in \ref{algo:midpoint}.
 
       \input{chapters/05/algorithms/midpoint}
 
@@ -352,7 +352,7 @@ Thy can be implicit or implicit and have an order of accuracy.
     $$[X_{n+1}] = [X_{n-1}] + \frac{h}{3}[\vec{F}(t_{n-1}, [X_{n-1}]) + 4\vec{F}(t_n, [X_n]) + \vec{F}(t_{n+1}, [X_{n+1}])]$$
 
     \subsubsection{General linear multistep algorithm}
-    An implementation of a generic $(s+1)$-step method that requires a preliminary phase where a one-step method is used to compute the first $s$ step of the simulation can be found in algorithm \ref{algo:s1-method}
+    An implementation of a generic $(s+1)$-step method that requires a preliminary phase where a one-step method is used to compute the first $s$ step of the simulation can be found in algorithm \ref{algo:s1-method}.
 
     \input{chapters/05/algorithms/s1-method}
 
@@ -405,7 +405,7 @@ Here one step methods are considered, particularly RK schemes.
   \end{multicols}
 
   In both cases the error estimator computes a posteriori, after the simulation step.
-  The first case a considerable increase of computational error is required, while the second do not by using two different RK methods with $s$ stages of order $p$ and $p+1$, which share the same set of values.
+  The first case a considerable increase of computational cost is required, while the second do not by using two different RK methods with $s$ stages of order $p$ and $p+1$, which share the same set of values.
 
   \subsection{Runge-Kutta Fehlberg}
   The Runge-Kutta Fehlberg method of fourth order, or RK45 method updates the system as:
@@ -443,7 +443,7 @@ Here one step methods are considered, particularly RK schemes.
   This is derived from $\sigma = \left(\frac{\epsilon_t}{\Delta_{n+1}}\right)^{\frac{1}{p}}$, defining how to update $h$ for an adaptive one step method of order $p$.
 
     \subsubsection{Algorithm}
-    An implementation of the RK45 method can be found at algorithm \ref{algo:rk45}
+    An implementation of the RK45 method can be found at algorithm \ref{algo:rk45}.
 
     \input{chapters/05/algorithms/rk45}
 
@@ -470,9 +470,9 @@ However there are some specific conditions in which deterministic simulation fai
   Even when the two hypothesis are satisfied some properties are impossible to observed.
 
   \subsection{Multistability}
-  One of them is multistability: this is never observed by an averaged dynamics of the system because the deterministi simulation computes the same averaged dynamics when starting from the same initial state.
+  One of them is multistability: this is never observed by an averaged dynamics of the system because the deterministic simulation computes the same averaged dynamics when starting from the same initial state.
 
   \subsection{Steady state}
   Another condition that lead to important differences arises when the biochemical system is simulated from a steady state, a solution of the set of ODEs when all derivative are set to $0$.
   This makes the averaged dynamics stationary.
-  The asyncronous application of reaction firing in stochastic simulation could cause an exit from the equilibrium leading to non-stationary dynamics.
+  The asynchronous application of reaction firing in stochastic simulation could cause an exit from the equilibrium leading to non-stationary dynamics.
