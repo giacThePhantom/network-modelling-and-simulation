@@ -1,5 +1,5 @@
 \graphicspath{{chapters/03/images/}}
-\chapter{Implementation of the Stochastic Simulation Algorithms}
+\chapter{Implementation of Stochastic Simulation Algorithms}
 
 \section{Introduction}
 
@@ -117,8 +117,8 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
 
   \input{chapters/03/algorithms/dm}
 
-  Lines $10$-$12$ implement the sampling of the joint reaction probability density function of the next reaction firing and its firign time.
-  The simulation needs two random number, the first is used to select the next reaction firing with probability $\frac{a_\mu}{a_0}$, while the second for the firing tiem.
+  Lines $10$-$12$ implement the sampling of the joint reaction probability density function of the next reaction firing and its firing time.
+  The simulation needs two random number, the first is used to select the next reaction firing with probability $\frac{a_\mu}{a_0}$, while the second for the firing time.
   The state is then advanced to the new one and the time is moved to $t+\tau$.
 
     \subsubsection{Time complexity}
@@ -197,7 +197,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
     This will be a static structure independent on the time evolution of the system and will be stored with a cost $O(M^2)$.
     The computation of propensity of all the reaction is performed only at the beginning of the simulation.
     For each iteration the selection is the same as in DM, then the new propensity for each reaction $R_j\in Dependents(R_\mu)$ is computed.
-    The algorithm is presented in \ref{algo:edm}.
+    The procedure is presented in algorithm \ref{algo:edm}.
 
     \input{chapters/03/algorithms/edm}
 
@@ -341,7 +341,7 @@ Let $a_0$ be the sum of all propensities in the system, then the algorithm works
       Then the search selects the left branch if the value is less than the one stored in the left child of the node, otherwise the search chooses the right branch.
       If the right branch is selected the search value is subtracted by the value stored in the current node.
       This proceeds recursively until it reaches a leaf and the reaction stored in that leaf is returned with the correct probability $\frac{a_\mu}{a_0}$.
-      This procedure is outlined in \ref{algo:search-tree}.
+      This procedure is outlined in algorithm \ref{algo:search-tree}.
 
       \input{chapters/03/algorithms/tree-search}
 
@@ -824,7 +824,7 @@ The next reaction method NRM improves FRM:
 \end{multicols}
 
   \subsection{Absolute tentative time}
-  Let $\tau_j$ be the tentative time to the firing of $R_j$ with pdf $p(\tau_j|vec{x},t) = a_je^{-a_j\tau_j}$.
+  Let $\tau_j$ be the tentative time to the firing of $R_j$ with pdf $p(\tau_j|\vec{x},t) = a_je^{-a_j\tau_j}$.
   Let $\tau_m = \min\limits_{k=1}^M\tau_j$.
   The residual $\tau_j-\tau_m$ is transformed for all $j\neq\mu$ to compute the new tentative time for $R_j$.
 
@@ -840,7 +840,7 @@ The next reaction method NRM improves FRM:
     Expanding the left-hand side:
 
     \begin{align*}
-      \mathbb{P}\{X>s|X>t\} &= \frac{\mathbb{P}\{X>s\land X>t\}}{\mathbb{P}\{X>t\}} = \frac{\mathbb{P}\{X>s\}}{\mathbb{P}\{X>t\}} = \frac{1-\mathbb{P}\{X|le s\}}{1-\mathbb{P}\{X\le t\}} =\\
+      \mathbb{P}\{X>s|X>t\} &= \frac{\mathbb{P}\{X>s\land X>t\}}{\mathbb{P}\{X>t\}} = \frac{\mathbb{P}\{X>s\}}{\mathbb{P}\{X>t\}} = \frac{1-\mathbb{P}\{X\le s\}}{1-\mathbb{P}\{X\le t\}} =\\
                             &=\frac{1-\int_{-\infty}^sf(x)dx}{1-\int_{-\infty}^tf(x)dx} = \frac{1-\int_0^s\lambda e^{-\lambda x}dx}{1-\int_0^t\lambda e^{-\lambda x}dx} = \frac{e^{-\lambda s}}{e^{-\lambda t}}=\\
                             &=e^{-\lambda(s-t)}
     \end{align*}
@@ -935,7 +935,7 @@ The next reaction method NRM improves FRM:
       \paragraph{Time complexity}
       The computation cost of NRM scales as the logarithm of $M$.
       For each simulation step, the extraction of the smallest time, advancing the simulation to the new time and updating the state are constant.
-      The update cost in the for dominates the total cost.
+      The update cost in the heap for the time dominates the total cost.
       It iterates over all the dependent reaction to calculate their new times and perform the heap update, for one reaction this costs $O(\log(M))$.
       Let $D$ be the average number of reaction that are dependent on the reaction firing, then the total cost of update is $O(D\log(M))$.
       If $D$ is small and is bounded by a constant, then the total cost is $O(\log(M))$.
@@ -1015,16 +1015,16 @@ The next reaction method NRM improves FRM:
     $C_j(t)$ is represented in MNRM in term of $Y_j(t)$.
     It can be noted how:
 
-    $$C_j(t) = Y_j\left(int_0^t a_j(X(s))ds\right)$$
+    $$C_j(t) = Y_j\left(\int_0^t a_j(X(s))ds\right)$$
 
     Or the random time change RTC representation.
 
     \subsubsection{Internal time}
-    The internal time $I_j$ of $Y)k$ associated with $R_j$ is:
+    The internal time $I_j$ of $Y_k$ associated with $R_j$ is:
 
     $$I_j(t) = \int_0^ta_j(X(s))ds$$
 
-    $I_j(t)$ given $t$ shows the amount of time that $Y_j$ passed before it expires due to the firing of $R_j$.
+    $I_j(t)$ given $t$ shows the amount of time that $Y_k$ passed before it expires due to the firing of $R_j$.
     Each reaction can be seen as carrying its own internal clock, with a rate given by the integration of the propensity.
     There are $M+1$ time frames in which the first is the physical time $t$ and the last $M$ are for $M$ Poisson processes $Y_j$.
     The internal time is a dimensionless quantity.
@@ -1059,7 +1059,7 @@ The next reaction method NRM improves FRM:
 
       Let $a_j^{new}$ be the new propensity and $\tau_j^{new}$ be the new tentative time to firing $R_j$ after the firing of $R_\mu$.
       $a_j^{new}\tau_j^{new}$ is the remaining amount of internal time to the next firing of $Y_j$.
-      Because the processes are independent, the next internal event time $P_j$ of $Y)j$ does not change:
+      Because the processes are independent, the next internal event time $P_j$ of $Y_j$ does not change:
 
       $$P_j = I_j(t+\tau_\mu) + a_j^{new}\tau_j^{new} = I_j(t) + a_j\tau_\mu + a_j^{new}\tau_j^{new}$$
 
@@ -1099,7 +1099,7 @@ Because of this it is useful for reaction in which propensities are complex.
 
   Where $\delta_i$ is the parameter called fluctuation rate.
   A good choice for real biological model is from $10$ to $20\%$ of current population of species.
-  Considering abstraction interpretation terminology, $X(t)$ is called the concrete state, while $[\underline{X},\overline{X}]$ is the abstract stae.
+  Considering abstraction interpretation terminology, $X(t)$ is called the concrete state, while $[\underline{X},\overline{X}]$ is the abstract state.
   For each species holds:
 
   $$\underline{X}\le X(t)\le \overline{X}$$
@@ -1109,7 +1109,7 @@ Because of this it is useful for reaction in which propensities are complex.
   The bounds are derived by minimizing and maximizing $a_j$ over the fluctuation interval.
   For the standard mass action or Michaelis-Menten kinetics, $a_j$ is a monotonic function of the state $X$, so that $\underline{a_j} = a_j(\underline{X})$ and $\overline{a_j} = a_j(\overline{X})$.
   If it is non-monotonic, a numerical optimization technique or interval analysis can be applied to recover the bounds.
-  The exact bounds are not needed as the tight bounds of $a_j$ over the fluctuation interval are suffucuent.
+  The exact bounds are not needed as the tight bounds of $a_j$ over the fluctuation interval are sufficient.
 
   \subsection{Selection of the next reaction}
   The selection of the next reaction has two steps:
@@ -1307,7 +1307,7 @@ Because of this it is useful for reaction in which propensities are complex.
         If the test fails both $R_\mu$ and $G_\alpha$ are rejected.
 
       \paragraph{Firing time}
-      The firing time is generated by sampling $erlang{k,p_0}$, but the number of trials $k$ counts only the second rejection test.
+      The firing time is generated by sampling $erlang(k,p_0)$, but the number of trials $k$ counts only the second rejection test.
 
       \paragraph{Algorithm}
       An implementation of RSSA with composition-rejection search can be found in algorithm \ref{algo:rssa-cr}.
@@ -1332,7 +1332,7 @@ Because of this it is useful for reaction in which propensities are complex.
       For each loop an element of $Greater$ and an element of $Smaller$ are selected.
       The element from $Greater$ transfer a part of its value to the smaller one from $Smaller$ to make it average.
       This step implies that for $l\in Smaller$ such that $Q_l<1$ there is no alias.
-      This is repeated until all elements in $Smaller are processed$.
+      This is repeated until all elements in $Smaller$ are processed.
       To show that it will never reach a deadlock consider the invariant of the while loop, the sum of element in $Greater$ and $Smaller$ is:
 
       $$Total = \sum\limits_{j=1}^MQ_j = M$$

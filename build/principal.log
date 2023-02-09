@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.19)  8 FEB 2023 19:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.19)  9 FEB 2023 01:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -909,10 +909,10 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 535.
 
-[101] (./chapters/04/algorithms/k-alpha-leaping.tex) [102] [103]
-(./chapters/04/algorithms/k-leaping.tex [104]) [105]
-(./chapters/04/algorithms/cle.tex))
-(./chapters/05/deterministic_simulations.tex [106] [107]
+[101] (./chapters/04/algorithms/k-alpha-leaping.tex) [102] [103] [104]
+(./chapters/04/algorithms/k-leaping.tex) [105]
+(./chapters/04/algorithms/cle.tex) [106])
+(./chapters/05/deterministic_simulations.tex [107]
 Chapter 5.
 [108
 
@@ -1129,12 +1129,12 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `principal.out' has not changed.
-(rerunfilecheck)             Checksum: 15786F9ECE4F5C53E7D776A02C346A16;41199.
+(rerunfilecheck)             Checksum: B4090BEB4F3B3467664A3C4798BBFD12;41176.
  ) 
 Here is how much of TeX's memory you used:
  19262 strings out of 478238
  313215 string characters out of 5850455
- 607333 words of memory out of 5000000
+ 608317 words of memory out of 5000000
  35098 multiletter control sequences out of 15000+600000
  496213 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1167,7 +1167,7 @@ pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share
 ts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf-dist/fonts/type1/public
 /cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1
 000.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on ./build/principal.pdf (176 pages, 4778470 bytes).
+Output written on ./build/principal.pdf (176 pages, 4778108 bytes).
 PDF statistics:
  4112 PDF objects out of 4296 (max. 8388607)
  3793 compressed objects within 38 object streams

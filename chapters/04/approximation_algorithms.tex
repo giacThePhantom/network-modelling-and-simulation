@@ -66,7 +66,7 @@ PW-DMC attempts to equalize the propensities of reactions so that a larger incre
     \end{itemize}
   \end{multicols}
 
-    \subsubsection{Selection of the reactoin}
+    \subsubsection{Selection of the reaction}
     $R_\mu$ is selected with probability $\frac{a_\mu^w}{a_0^\mu}$, where $a_0^\mu = \sum\limits_{j=1}^Ma_j^w$.
     This can be done by linearly accumulating $a_\mu^w$ as:
 
@@ -81,7 +81,7 @@ PW-DMC attempts to equalize the propensities of reactions so that a larger incre
     $$\tau = \frac{1}{a_0^w}\ln\left(\frac{1}{r_2}\right)$$
 
     Where $r_2\sim norm(0,1)$.
-    Then the state at time $t+\tau$ is updated assuming there are $w_\mu$ consecutive firings of $R_\mu$ in $[t,t+\tau[$ ant the state at time $t+\tau$ is updated as:
+    Then the state at time $t+\tau$ is updated assuming there are $w_\mu$ consecutive firings of $R_\mu$ in $[t,t+\tau[$ and the state at time $t+\tau$ is updated as:
 
     $$X(t+\tau) = X(t) + w_\mu\vec{v}_\mu$$
 
@@ -93,7 +93,7 @@ PW-DMC attempts to equalize the propensities of reactions so that a larger incre
   Each time $R_j$ is selected it fires $w_j$ times.
   The change of each species $S_i$ in $R_j$ is $w_j$, the fluctuation of the population is thus $\frac{w_j}{X}$.
   This ratio must be less than a predefined tolerance $\epsilon$ to ensure the statistical uncertainty of the estimation of $X_i$.
-  Moreover the ration would be negligibly small when the population of species is large, and the chosen weight does not affect the simulation result.
+  Moreover the ratio would be negligibly small when the population of species is large, and the chosen weight does not affect the simulation result.
   However the weight introduces an approximation to the temporal dynamics when the population of species is low and in this case $w_j$ must be adjusted to maintain $w_j< \epsilon X_i$.
 
   \subsection{Algorithm}
@@ -162,7 +162,7 @@ It accepts a candidate reaction without validation if its acceptance probability
 
       $$\frac{(1-\delta_i)(1-\delta_k)}{(1+\delta_i)(1+\delta_k)}\ge \alpha$$
 
-      Which is a quadratic equation of two independent variables, which can be splitted in to part so that:
+      Which is a quadratic equation of two independent variables, which can be split in to part so that:
 
       $$\frac{1-\delta_i}{1+\delta_i}\ge\sqrt{\alpha}\land\frac{1-\delta_k}{1+\delta_k}\ge\sqrt{\alpha}$$
 
@@ -196,7 +196,7 @@ It accepts a candidate reaction without validation if its acceptance probability
   \input{chapters/04/algorithms/ba-rssa}
 
   \subsection{Discussion}
-  When $\alpha = 1$ return to the exact case.
+  When $\alpha = 1$ the algorithm returns to the exact case.
 
     \subsubsection{Time complexity}
     BA-RSSA reduces the selection cost for the next reaction firing and avoids a large number of the propensity updates.
@@ -335,10 +335,10 @@ The simulation then leaps form one interval to the next with many reaction firin
       $$\sigma^2_j(\vec{x}) = \sum\limits_{l=1}^Mf_{jl}^2(\vec{x})a_l(\vec{x}) = \sum\limits_{l=1}^M\sum\limits-{i=1}^N\left(\frac{da_j(\vec{x})}{dX_i}\vec{v}_{li}\right)^2a_l(\vec{x})$$
 
       \paragraph{Bounding changes in species population}
-      The bounding changes in propensities is refined in this method: although $a_0(\vec{x})$ i does limit the change in propensity, it might produce less accurate $\tau$.
+      The bounding changes in propensities is refined in this method: although $a_0(\vec{x})$ does limit the change in propensity, it might produce less accurate $\tau$.
       Moreover the need to evaluate $M^2$ partial derivative is removed.
       The $\tau$-selection bounds the change in propensity $\Delta a_j(\vec{x})$ of each $R_j$ by its current $a_j(\vec{x})$ instead of the total.
-      The condition $|\Delta a_j(\vec{x})|\le \epsilon a_j(\vec{x})$ when $a_j$ approaches $0$, forces the leap time to ve zero, halting the simulation.
+      The condition $|\Delta a_j(\vec{x})|\le \epsilon a_j(\vec{x})$ when $a_j$ approaches $0$, forces the leap time to be zero, halting the simulation.
       A minimum amount of changes in propensity of each reaction is enforced, observing that propensity changes only by discrete amounts.
       For $R_j$ the minimum amount of change can be selected to be rate constant $c_j$, so the leap condition is written as:
 
@@ -413,11 +413,11 @@ The simulation then leaps form one interval to the next with many reaction firin
   \subsection{Switching to exact simulation}
   If $\tau$ is smaller than a few multiple of $\frac{1}{a_0(\vec{x})}$, the expected time to the firing of the next reaction in the exact simulation, it is likely that only some of the $k_j$ are $1$, while the others are $0$.
   This method than gains little over the exact strategy, so it is better to use exact SSA.
-  TO handle this case let $k$ be an integer denoting a multiplicative factor of the expected time to the firing of a reaction and $p$ the number of exact SSA steps performed.
+  To handle this case let $k$ be an integer denoting a multiplicative factor of the expected time to the firing of a reaction and $p$ the number of exact SSA steps performed.
   $\frac{k}{a_0(\vec{x})}$ is defined as threshold for switching to exact SSA, performing $p$ exact steps if $\tau$ is smaller than the threshold before trying a new leap.
 
   \subsection{The $\mathbf{\tau}$-leaping algorithm}
-  An implementation of the $\tau$-leaping method can be found in algorithm \ref{algo:tau-leaping}
+  An implementation of the $\tau$-leaping method can be found in algorithm \ref{algo:tau-leaping}.
 
   \input{chapters/04/algorithms/tau-leaping}
 
@@ -457,7 +457,7 @@ The simulation then leaps form one interval to the next with many reaction firin
 
       Because at most one reaction in $\mathcal{R}^c$ is allowed to fire in the leap so that the population of their species never becomes negative.
 
-      \paragraph{algorithm}
+      \paragraph{Algorithm}
       The modified $t$-leaping method is outlined in algorithm \ref{algo:modified-tau-leap}.
 
       \input{chapters/04/algorithms/modified-tau-leap}
@@ -467,7 +467,7 @@ The simulation then leaps form one interval to the next with many reaction firin
       If $n_c\rightarrow\infty$ the modified $\tau$-leaping converges to SSA, while is $n_c=0$ it converges to the original $\tau$-leaping.
 
     \subsubsection{Binomial $\mathbf{\tau}$-leaping}
-    In binomial $\tau$-leaping the Poisson-distributed random number are approximated with a binomial-distributed one.
+    In binomial $\tau$-leaping the Poisson-distributed random numbers are approximated with a binomial-distributed one.
     Let $k_j$ be the number of firing of a reaction given $\tau$ and $L_j$ the maximum number of permitted firings.
     The negative population problem is avoided if $k_j\le L_j$, a requirement that can guaranteed by the binomial distribution.
 
@@ -489,7 +489,7 @@ The simulation then leaps form one interval to the next with many reaction firin
       $$L_j = \min\limits_{S_i\in reactants(R_j)}\left[\frac{\tilde{X}_i}{v_{ji}^-}\right]$$
 
       \paragraph{Algorithm}
-      An implementation of the binomial $\tau$-leaping method is outlined in algorithm \ref{algo:binomial-tau-leaping}
+      An implementation of the binomial $\tau$-leaping method is outlined in algorithm \ref{algo:binomial-tau-leaping}.
 
       \input{chapters/04/algorithms/binomial-tau-leap}
 
@@ -528,7 +528,7 @@ The simulation then leaps form one interval to the next with many reaction firin
 
       \paragraph{Discussion}
       Since $\tau$ is fixed it is a time-stepping algorithm.
-      The grate efficiency is achieved from being able to choose a large leap for each leap.
+      The greater efficiency is achieved from being able to choose a large leap for each leap.
       This tends to dampen fluctuation of species.
       To solve this downshifting could be employed: the $\tau$ leap is interfaced with a sequence of smaller steps simulated using SSA to retain the damped fluctuation while still  achieving the computational efficiency of the implicit approach.
 
@@ -608,10 +608,10 @@ The number of firings $k_j$ for $R_j$, $j\neq\alpha$ in the time interval still 
                                &= K\left(\frac{\sigma_j^2(\vec{x})}{a_0(\vec{x})}-\frac{\mu_j^2(\vec{x})}{a_0^2(\vec{x})}\right)
     \end{align*}
 
-    Where $\mu_j(\vec{x}$ and $\sigma_j^2$ are defined as in the preleap selection for the $\tau$-leaping method.
-    The largest $K$ is then;
+    Where $\mu_j(\vec{x})$ and $\sigma_j^2$ are defined as in the preleap selection for the $\tau$-leaping method.
+    The largest $K$ is then:
 
-    $$K = \left[a_0(\vec{x})\min\limits_{k=1}^M\left(\frac{\epsilon a_0(\vec{x})}{2|\mu_j(\vec{x})|}, \frac{(\epsilon a_0(\vec{x}))^2}{4(\sigma_j^2(\vec{x})-\frac{\mu_j^2(\vec{x})}{a_0(\vec{x})})}\right)\right]$$
+    $$K = \left[a_0(\vec{x})\min\limits_{k=1}^M\left(\frac{\epsilon a_0(\vec{x})}{2|\mu_j(\vec{x})|}, \frac{(\epsilon a_0(\vec{x}))^2}{4\left(\sigma_j^2(\vec{x})-\frac{\mu_j^2(\vec{x})}{a_0(\vec{x})}\right)}\right)\right]$$
 
     Where $[-]$ is the truncation operator.
 

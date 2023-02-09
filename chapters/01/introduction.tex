@@ -114,7 +114,7 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
 
   \subsection{Molecular dynamics}
   Molecular dynamics deals with the microscopic level.
-  In this type of simulation the structures, positions velocities and possible collisions of all molecules in the system are kept track of.
+  In this type of simulation the structures, positions, velocities and possible collisions of all molecules in the system are kept track of.
   Movement and reactions are governed by physical forces.
   A molecular dynamics simulation requires a very detailed knowledge of molecules in both time and space and requires a lot of computational power.
   Because of this it is used to simulate the system at the level of nanoscale of time and space.
@@ -166,7 +166,7 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
       \item A set of $n$ regulatory components $\mathcal{G} = \{g_1, \dots, g_n\}$, with each $g_i$ associated with an integer value bounded by $\{0, \dots, \max_i\}$.
         This defines a discrete mapping of the range of the component functional level.
         The state space $\mathcal{S}$ is the Cartesian product $\prod\limits_{i=1}^n\{0, \max_i\}$.
-        A model state is a vector $g = (g_1, \dots, g_n)$.
+        The model state is a vector $g = (g_1, \dots, g_n)$.
       \item For each $g_i$ a discrete function $\mathcal{K}_i$ defines its values depending on the state: $\mathcal{K}_i:\mathcal{S}\rightarrow\{0, \dots,\max_i\}$.
         The transition function $\mathcal{K}:\mathcal{S}\rightarrow\mathcal{S}$ defines the model behaviour and the underlying regulatory graph as $\mathcal{K}(g) = (\mathcal{K}_1(g), \dots, \mathcal{K}_n(g))$.
         In some cases a regulatory component may operate at different levels on distinct targets and requires multiple values whose maximum is greater than $1$.
@@ -180,7 +180,7 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
     Several sets of logical rules can be compliant with a regulatory graph, which therefore defines a family of logical models.
 
     \subsubsection{Functional interaction}
-    A functional interaction from $g_j$ to $g_i$, or $(g_j, g_i)\in \mathcal{R}$ if and only if there exists a pair of neighbouring states that only differ on the value of $g_j$ and for which $\mathcal{K}_i$ takes a different value.: a variation of $g_j$ has an effect on $g_I$.
+    A functional interaction from $g_j$ to $g_i$, or $(g_j, g_i)\in \mathcal{R}$ if and only if there exists a pair of neighbouring states that only differ on the value of $g_j$ and for which $\mathcal{K}_i$ takes a different value.: a variation of $g_j$ has an effect on $g_i$.
     Formally, assume that $g_j$ is a boolean variable, $(g_i, g_j)\in\mathcal{R}$ if an only if there exist:
 
     $$g = (g_1, \dots, g_{j-1}, 1, g_{j+1}, \dots, g_n)$$
@@ -199,7 +199,7 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
     \subsubsection{State transition graphs}
     State transition graphs or STG represents model dynamics.
     Nodes denote states, while directed edges state transitions.
-    Since the number of states is finite, model simulation end up in a stable state or a cyclic trajectory.
+    Since the number of states is finite, model simulation ends up in a stable state or a cyclic trajectory.
     These are called attractors and are defined as terminal strongly connected components SCC of the STG, the maximal sets of mutually exclusive reachable states, with no transitions leaving the set.
     The set of states from which trajectories lead exclusively to an attractor is called its strict basin of attraction.
     They are relevant since they define the reachable attractors depending on the initial state.
@@ -211,12 +211,12 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
     According to the synchronous method, all the variable updates are performed synchronously.
     The resulting deterministic dynamics defines at each time step $t$ the successor state of $g(t)$:
 
-    $$g(t+1) = (g_i(t) + sing(\mathcal{K}_i(g(t))-g_i(t)))_{i=1, \dots, n}$$
+    $$g(t+1) = (g_i(t) + sign(\mathcal{K}_i(g(t))-g_i(t)))_{i=1, \dots, n}$$
 
     Where:
 
 
-    $$sign(p) = \begin{cases} 1 & p>0\\ -1 p<0\\ 0 & otherwise\end{cases}$$
+    $$sign(p) = \begin{cases} 1 & p>0\\ -1 & p<0\\ 0 & otherwise\end{cases}$$
 
     A successor state is defined by increasing or decreasing $1$ all the variables whose current value differ form the values specified by their logical function.
     This yields exactly one transition toward a successor state, which can be $g$ itself.
@@ -227,7 +227,7 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
 
     $$g_i(t+1) = g_i(t) + sign(\mathcal{K}_i(g(t))-g_i(t))$$
 
-    $$g_j(t+1) = g_j(t)\forall j\neq i$$
+    $$g_j(t+1) = g_j(t)\qquad\forall j\neq i$$
 
     According to this definition a stable state has no successors.
 
@@ -248,7 +248,7 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
   \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{petri_nets.png}
-    \caption{PetriNets\_SimaoEtAl.pdf}
+    \caption{An example of a Petri Net}
     \label{fig:petri}
   \end{figure}
 
@@ -263,7 +263,7 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
   \begin{multicols}{2}
     \begin{enumerate}
         \item Panel (a) shows the initial marking before firing the enable transition t.
-        \item Panel (b) shows the marking after transition labeled reaction 1 fires.
+        \item Panel (b) shows the marking after transition labelled reaction 1 fires.
           Places: hydrogen, oxygen and water.
           The stoichiometry of the reaction can be represented through the numbers on the edges and the numbers on the tokens.
     \end{enumerate}
@@ -272,7 +272,7 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
   \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{example_petri.png}
-    \caption{Review\_ModelingComplexBiologicalSystems.pdf}
+    \caption{Transition in a Petri net}
     \label{fig:expetri}
   \end{figure}
 
@@ -314,7 +314,7 @@ To cope with the inherent multi-physics and multi-scale natures of biochemical r
   Equation-based approaches represent the system as a set of ordinary differential equations ODE.
   For example the mass action model:
 
-  \(A+E \underset{k_2}{\overset{k_1}{\rightleftharpoons}}A \mid E \stackrel{k_3}{\longrightarrow}B+E\)
+  $$A+E \underset{k_2}{\overset{k_1}{\rightleftharpoons}}A \mid E \stackrel{k_3}{\longrightarrow}B+E$$
 
   \subsection{Simulation algorithms}
   For a simulation to be computed the necessary data are:
